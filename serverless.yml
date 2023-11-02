@@ -1,0 +1,35 @@
+
+service: microservice-openweather-nodejs-jest-aws
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: us-east-1
+  memorySize: 512
+  timeout: 10
+  environment: ${file(./serverless-ssm.yml)}
+
+plugins:
+  - serverless-offline-ssm
+  - serverless-offline
+
+functions:
+  getClimateForecast:
+    handler: src/controllers/climate-forecast/get.handler
+    events:
+      - http:
+          path: /v1/climate-forecast/list
+          method: get
+          private: false
+          
+custom:
+  serverless-offline:
+    httpPort: 4000
+    lambdaPort: 4002
+  serverless-offline-ssm:
+    stages:
+      - dev
+    ssm: ${file(./serverless-ssm.yml)}

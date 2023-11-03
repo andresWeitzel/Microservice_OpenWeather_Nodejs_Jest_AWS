@@ -1,2 +1,4 @@
-https://openweathermap.org/api/forecast30
-https://home.openweathermap.org/api_keys
+### Doc
+* [weather-conditions](https://openweathermap.org/weather-conditions)
+* [Api keys](https://home.openweathermap.org/api_keys)
+

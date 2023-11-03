@@ -17,11 +17,11 @@ plugins:
   - serverless-offline
 
 functions:
-  getClimateForecast:
-    handler: src/controllers/climate-forecast/get.handler
+  getWeatherCondition:
+    handler: src/controllers/weather-condition/get.handler
     events:
       - http:
-          path: /v1/climate-forecast/list
+          path: /v1/weather-condition/country/{country}
           method: get
           private: false
           

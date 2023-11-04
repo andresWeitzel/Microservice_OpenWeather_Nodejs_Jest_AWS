@@ -15,7 +15,9 @@ let msgLog;
  */
 const sendGetRequest = async (url, data, config) => {
   try {
-    if (data == (null || undefined)) {
+    if (data == (null || undefined) && config == (null || undefined)) {
+      axiosResponse = await axios.get(url);
+    } else if (data == (null || undefined)) {
       axiosResponse = await axios.get(url, config);
     } else {
       axiosResponse = await axios.get(url, data, config);
@@ -23,7 +25,6 @@ const sendGetRequest = async (url, data, config) => {
     axiosData = axiosResponse != null ? axiosResponse.data : null;
 
     return axiosData;
-    
   } catch (error) {
     msgResponse = "ERROR in sendGetRequest() helper function.";
     msgLog = msgResponse + `Caused by ${error}`;
@@ -33,5 +34,5 @@ const sendGetRequest = async (url, data, config) => {
 };
 
 module.exports = {
-    sendGetRequest
-}
+  sendGetRequest,
+};

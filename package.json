@@ -10,12 +10,16 @@
     "format-prettier": "prettier --write \"{src,test}/**/*.{js,ts}\"",
     "check": "remark . --quiet --frail",
     "format-remark": "remark . --quiet --frail --output",
-    "format-md": "remark . --output"
+    "format-md": "remark . --output",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.0.1",
     "remark-cli": "^11.0.0",
     "remark-lint-emphasis-marker": "^3.1.2",

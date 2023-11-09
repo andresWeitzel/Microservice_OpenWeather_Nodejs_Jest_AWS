@@ -29,7 +29,7 @@ const sendGetRequest = async (url, data, config) => {
     msgResponse = "ERROR in sendGetRequest() helper function.";
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return null;
+    return msgResponse;
   }
 };
 

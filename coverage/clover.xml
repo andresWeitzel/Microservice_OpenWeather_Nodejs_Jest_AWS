@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699482808552" clover="3.2.0">
-  <project timestamp="1699482808552" name="All files">
-    <metrics statements="24" coveredstatements="15" conditionals="14" coveredconditionals="8" methods="2" coveredmethods="2" elements="40" coveredelements="25" complexity="0" loc="24" ncloc="24" packages="3" files="3" classes="3"/>
+<coverage generated="1699669546897" clover="3.2.0">
+  <project timestamp="1699669546897" name="All files">
+    <metrics statements="24" coveredstatements="21" conditionals="14" coveredconditionals="13" methods="2" coveredmethods="2" elements="40" coveredelements="36" complexity="0" loc="24" ncloc="24" packages="3" files="3" classes="3"/>
     <package name="axios.request">
-      <metrics statements="15" coveredstatements="9" conditionals="14" coveredconditionals="8" methods="1" coveredmethods="1"/>
+      <metrics statements="15" coveredstatements="15" conditionals="14" coveredconditionals="13" methods="1" coveredmethods="1"/>
       <file name="get.js" path="C:\Users\andre\OneDrive\Escritorio\LenguajesProgramacion\Serverless\Microservice_OpenWeather_Nodejs_Jest_AWS\src\helpers\axios\request\get.js">
-        <metrics statements="15" coveredstatements="9" conditionals="14" coveredconditionals="8" methods="1" coveredmethods="1"/>
+        <metrics statements="15" coveredstatements="15" conditionals="14" coveredconditionals="13" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="cond" truecount="4" falsecount="4"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="1" type="cond" truecount="3" falsecount="1"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="25" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="8" type="cond" truecount="8" falsecount="0"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="20" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="25" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+        <line num="31" count="4" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
       </file>
     </package>

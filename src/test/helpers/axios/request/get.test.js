@@ -2,6 +2,8 @@
 //Helpers
 const { sendGetRequest } = require("../../../../helpers/axios/request/get");
 //const
+const FIRST_ARGUMENT_TYPE_NUMERIC = 12;
+const SECOND_ARGUMENT_TYPE_NUMERIC = 112;
 const ERROR_MESSAGE = "error";
 const INVALID_URL = "hff://zzz.com.ar";
 const GOOGLE_URL = "https://www.google.com/";
@@ -13,7 +15,8 @@ const AXIOS_CONFIG = {
 //vars
 let msg;
 describe("- sendGetRequestTest helper (Unit Test)", () => {
-  describe("- Check arguments", () => {
+  //--Start first suite --
+  describe("- 1) Check cases for each argument.", () => {
     msg = "- Should return an object or string for an http request.";
     it(msg, async () => {
       let axiosResponse = await sendGetRequest(GOOGLE_URL, AXIOS_CONFIG);
@@ -23,7 +26,7 @@ describe("- sendGetRequestTest helper (Unit Test)", () => {
     });
 
     msg =
-      "- Should return an object or string if only the url is passed to the function";
+      " Should return an object or string if only the url is passed to the function";
     it(msg, async () => {
       let axiosResponse = await sendGetRequest(GOOGLE_URL, null);
       await expect(
@@ -49,13 +52,56 @@ describe("- sendGetRequestTest helper (Unit Test)", () => {
       ).toBe(true);
     });
   });
+  //--Start second suite --
+  describe("- 2) Check data types of arguments.", () => {
+    msg =
+      "- Should return an object or string if you pass the data  argument with numeric type value.";
+    test(msg, async () => {
+      let axiosResponse = await sendGetRequest(
+        GOOGLE_URL,
+        FIRST_ARGUMENT_TYPE_NUMERIC,
+        AXIOS_CONFIG
+      );
+      await expect(
+        typeof axiosResponse == "string" || typeof axiosResponse == "object"
+      ).toBe(true);
+    });
 
-  describe("- Check errors", () => {
+    msg =
+      "- Should return an object or string if you pass the config  argument with numeric type value";
+    test(msg, async () => {
+      let axiosResponse = await sendGetRequest(
+        GOOGLE_URL,
+        null,
+        SECOND_ARGUMENT_TYPE_NUMERIC
+      );
+      await expect(
+        typeof axiosResponse == "string" || typeof axiosResponse == "object"
+      ).toBe(true);
+    });
+
+    msg =
+      "- Should return an object or string if you pass the config and data arguments with numeric type value";
+    test(msg, async () => {
+      let axiosResponse = await sendGetRequest(
+        GOOGLE_URL,
+        FIRST_ARGUMENT_TYPE_NUMERIC,
+        SECOND_ARGUMENT_TYPE_NUMERIC
+      );
+      await expect(
+        typeof axiosResponse == "string" || typeof axiosResponse == "object"
+      ).toBe(true);
+    });
+  });
+  //--Start third suite --
+  describe("- 3) Check cases for errors.", () => {
     msg =
       "- Should return a string value with the message of the treated error if no argument is passed to the function";
     it(msg, async () => {
       let axiosResponse = await sendGetRequest();
       await expect(typeof axiosResponse == "string").toBe(true);
+      axiosResponse = axiosResponse.toLowerCase();
+      await expect(axiosResponse).toMatch(ERROR_MESSAGE);
     });
 
     msg =

@@ -26,7 +26,7 @@ describe("- sendGetRequestTest helper (Unit Test)", () => {
     });
 
     msg =
-      " Should return an object or string if only the url is passed to the function";
+      "- Should return an object or string if only the url is passed to the function";
     it(msg, async () => {
       let axiosResponse = await sendGetRequest(GOOGLE_URL, null);
       await expect(

@@ -15,8 +15,8 @@ const AXIOS_CONFIG = {
 //vars
 let msg;
 describe("- sendGetRequestTest helper (Unit Test)", () => {
-  //--Start first suite --
-  describe("- 1) Check cases for each argument.", () => {
+  //-Start first suite -
+  describe("- Check cases for each argument.", () => {
     msg = "- Should return an object or string for an http request.";
     it(msg, async () => {
       let axiosResponse = await sendGetRequest(GOOGLE_URL, AXIOS_CONFIG);
@@ -52,8 +52,8 @@ describe("- sendGetRequestTest helper (Unit Test)", () => {
       ).toBe(true);
     });
   });
-  //--Start second suite --
-  describe("- 2) Check data types of arguments.", () => {
+  //-Start second suite -
+  describe("- Check data types of arguments.", () => {
     msg =
       "- Should return an object or string if you pass the data  argument with numeric type value.";
     test(msg, async () => {
@@ -93,8 +93,8 @@ describe("- sendGetRequestTest helper (Unit Test)", () => {
       ).toBe(true);
     });
   });
-  //--Start third suite --
-  describe("- 3) Check cases for errors.", () => {
+  //-Start third suite -
+  describe("- Check cases for errors.", () => {
     msg =
       "- Should return a string value with the message of the treated error if no argument is passed to the function";
     it(msg, async () => {

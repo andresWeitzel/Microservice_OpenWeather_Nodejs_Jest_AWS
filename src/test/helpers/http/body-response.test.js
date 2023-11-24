@@ -15,7 +15,7 @@ const MOCK_OBJECT = {};
 let msg;
 let bodyResponseResult;
 
-describe("- bodyResponse helper (Unit Test)", () => {
+describe("- bodyResponse helper (Unit bodyResponseResult)", () => {
   //--Start first suite --
   describe("- Check cases for each argument.", () => {
     msg = "- Should return an object passing values to all parameters.";
@@ -73,16 +73,16 @@ describe("- bodyResponse helper (Unit Test)", () => {
       expect(typeof bodyResponseResult.body == "string").toBe(true);
     });
 
-    msg = "- Should return a object if no parameters are passed.";
+    msg = "- Should return an object if no parameters are passed.";
 
     it(msg, async () => {
       bodyResponseResult = await bodyResponse();
 
-      expect(typeof test == "object").toBe(true);
+      expect(typeof bodyResponseResult == "object").toBe(true);
     });
 
     msg =
-      "- Should return a object with the value undefined for statusCode and body if no parameters are passed.";
+      "- Should return an object with the value undefined for statusCode and '{}' for body if no parameters are passed.";
 
     it(msg, async () => {
       bodyResponseResult = await bodyResponse();
@@ -91,37 +91,42 @@ describe("- bodyResponse helper (Unit Test)", () => {
 
       expect(bodyResponseResult.statusCode == undefined).toBe(true);
 
-      expect(bodyResponseResult.body == undefined).toBe(true);
+      expect(bodyResponseResult.body == "{}").toBe(true);
+    });
+
+    msg =
+      "Should return an object with the value null for statusCode if null is passed as a parameter for statusCode argument.";
+
+    it(msg, async () => {
+      bodyResponseResult = await bodyResponse(null);
+
+      expect(typeof bodyResponseResult == "object").toBe(true);
+
+      expect(bodyResponseResult.statusCode == null).toBe(true);
+    });
+
+    msg =
+      "Should return an object with string format for body if null is passed as a parameter for message argument.";
+
+    it(msg, async () => {
+      bodyResponseResult = await bodyResponse(BAD_REQUEST_CODE, null);
+
+      console.log(typeof bodyResponseResult.body);
+
+      expect(typeof bodyResponseResult == "object").toBe(true);
+
+      expect(typeof bodyResponseResult.body == "string").toBe(true);
+    });
+
+    msg =
+      "Should return an object with the value undefined for statusCode if a value is not passed as a parameter for statusCode argument.";
+
+    it(msg, async () => {
+      bodyResponseResult = await bodyResponse();
+
+      expect(typeof bodyResponseResult == "object").toBe(true);
+
+      expect(bodyResponseResult.statusCode == undefined).toBe(true);
     });
   });
 });
-
-// describe("- response function (Unit Test)", () => {
-//   describe("1) Check cases for arguments", () => {
-//     let msg;
-
-//     msg =
-//       "Should return an object with the value null for statusCode if null is passed as a parameter for statusCode argument.";
-
-//     it(msg, () => {
-//       let test = response(null, BAD_REQUEST_CODE_MESSAGE);
-
-//       expect(typeof test == "object").toBe(true);
-
-//       expect(test.statusCode == null).toBe(true);
-//     });
-
-//     msg =
-//       "Should return an object with the value null with string format for body if null is passed as a parameter for message argument.";
-
-//     it(msg, () => {
-//       let test = response(BAD_REQUEST_CODE, null);
-
-//       console.log(test);
-
-//       expect(typeof test == "object").toBe(true);
-
-//       expect(test.body == "null").toBe(true);
-//     });
-//   });
-// });

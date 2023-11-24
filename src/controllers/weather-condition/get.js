@@ -34,8 +34,10 @@ module.exports.handler = async (event) => {
     if (axiosResponse != (null && undefined)) {
       return await bodyResponse(OK_CODE, axiosResponse);
     }
-    return await bodyResponse(BAD_REQUEST_CODE, `Data could not be obtained by country ${countryParam}`);
-
+    return await bodyResponse(
+      BAD_REQUEST_CODE,
+      `Data could not be obtained by country ${countryParam}`
+    );
   } catch (error) {
     console.log(error);
   }

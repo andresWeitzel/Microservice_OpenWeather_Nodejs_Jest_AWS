@@ -1,0 +1,46 @@
+{
+    "coord": {
+        "lon": 10.5,
+        "lat": 51.5
+    },
+    "weather": [
+        {
+            "id": 804,
+            "main": "Clouds",
+            "description": "overcast clouds",
+            "icon": "04n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 274.44,
+        "feels_like": 268.11,
+        "temp_min": 273.11,
+        "temp_max": 276.75,
+        "pressure": 1001,
+        "humidity": 81,
+        "sea_level": 1001,
+        "grnd_level": 964
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 9.11,
+        "deg": 307,
+        "gust": 14.93
+    },
+    "clouds": {
+        "all": 100
+    },
+    "dt": 1700857929,
+    "sys": {
+        "type": 2,
+        "id": 197911,
+        "country": "DE",
+        "sunrise": 1700808620,
+        "sunset": 1700839149
+    },
+    "timezone": 3600,
+    "id": 2921044,
+    "name": "Germany",
+    "cod": 200
+}

@@ -9,14 +9,15 @@ const API_WEATHER_URL_BASE = process.env.API_WEATHER_URL_BASE;
 const API_KEY = process.env.API_KEY;
 const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
-//vars
-let filePathWeatherCondition =
+const INTERNAL_SERVER_ERROR = statusCode.INTERNAL_SERVER_ERROR;
+const FILE_PATH_WEATHER_CONDITION =
   "../../../data/json/weather-condition/weather-condition-data.json";
+//vars
 let eventPathParams;
 let countryParam;
 let axiosConfig;
 let axiosResponse;
-let jsonData;
+let jsonResponse;
 
 module.exports.handler = async (event) => {
   try {
@@ -42,7 +43,11 @@ module.exports.handler = async (event) => {
       );
     }
 
-    jsonData = await createJson(filePathWeatherCondition, axiosResponse);
+    jsonResponse = await createJson(FILE_PATH_WEATHER_CONDITION, axiosResponse);
+
+    if (typeof jsonResponse === "string") {
+      return await bodyResponse(INTERNAL_SERVER_ERROR, jsonResponse);
+    }
 
     return await bodyResponse(OK_CODE, axiosResponse);
   } catch (error) {

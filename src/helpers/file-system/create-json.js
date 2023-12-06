@@ -1,6 +1,6 @@
 //External
 let path = require("path");
-let fs = require("fs");
+let fs = require('fs/promises');
 //vars
 let msgResponse;
 let msgLog;
@@ -13,7 +13,7 @@ let msgLog;
  */
 const createJson = async (filePath, data) => {
   try {
-    fs.writeFile(
+    await fs.writeFile(
       path.join(__dirname + filePath),
       JSON.stringify(data, null, 4),
       (err) => {

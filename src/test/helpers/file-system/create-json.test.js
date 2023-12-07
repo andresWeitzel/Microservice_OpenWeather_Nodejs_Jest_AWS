@@ -12,25 +12,26 @@ let jsonMock = {
   test02: "test02",
   test03: "test03",
   test04: "test04",
+  time: null,
 };
 
 describe("- createJson helper (Unit Test)", () => {
   //-Start first suite -
   describe("- Check cases for each argument.", () => {
     msg =
-      "- Should not return anything if the json file has been created correctly";
+      "- Should not return anything if all valid arguments are passed and the json file has been created correctly";
     it(msg, async () => {
+      let dateLocale = new Date().toLocaleString("en-US", {timeZone: "America/Argentina/Buenos_Aires"});
+      jsonMock.time = dateLocale;
       jsonResponse = await createJson(FILE_PATH_WEATHER_CONDITION, jsonMock);
       await expect(typeof jsonResponse == "undefined").toBe(true);
     });
 
-    // msg =
-    //   "- Should return an object or string if only the url is passed to the function";
-    // it(msg, async () => {
-    //   let jsonResponse = await sendGetRequest(GOOGLE_URL, null);
-    //   await expect(
-    //     typeof jsonResponse == "string" || typeof jsonResponse == "object"
-    //   ).toBe(true);
-    // });
+    msg =
+    "- Should not create the json file correctly if no arguments are passed";
+  it(msg, async () => {
+    jsonResponse = await createJson();
+    await expect(typeof jsonResponse == "undefined").toBe(true);
+  });
   });
 });

@@ -97,10 +97,11 @@ describe("- sendGetRequestTest helper (Unit Test)", () => {
   });
   //-Start third suite -
   describe("3) Check cases for errors.", () => {
-    msg = "Should return a string value if an error is passed";
+    msg = "Should return a string value if a new Error is passed";
     it(msg, async () => {
-      axiosResponse = await sendGetRequest(new Error());
-      await expect(() => axiosResponse).not.toThrow(Error);
+      await expect(async () => await sendGetRequest(new Error())).not.toThrow(
+        Error
+      );
     });
 
     msg =
@@ -124,8 +125,8 @@ describe("- sendGetRequestTest helper (Unit Test)", () => {
     msg =
       "It should not return the error thrown if no argument is passed to the function. But a string with a treated error";
     it(msg, async () => {
+      await expect(async () => await sendGetRequest()).not.toThrow(Error);
       axiosResponse = await sendGetRequest();
-      await expect(() => axiosResponse).not.toThrow(Error);
       await expect(typeof axiosResponse == "string").toBe(true);
       axiosResponse = axiosResponse.toLowerCase();
       await expect(axiosResponse).toMatch(ERROR_MESSAGE);

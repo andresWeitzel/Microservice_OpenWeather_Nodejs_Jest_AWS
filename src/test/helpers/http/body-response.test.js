@@ -2,21 +2,19 @@
 const {
   statusCode,
   statusCodeDetails,
-} = require("../../../helpers/enums/http/status-code");
+} = require("../../../enums/http/status-code");
 //Helpers
 const { bodyResponse } = require("../../../helpers/http/body-response");
-//const
+//Const
 const OK_CODE = statusCode.OK;
 const OK_CODE_DETAILS = statusCodeDetails.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
 const BAD_REQUEST_CODE_DETAILS = statusCodeDetails.BAD_REQUEST_CODE_DETAILS;
-const MOCK_OBJECT = {};
 //Vars
 let msg;
 let bodyResponseResult;
 
-describe("- bodyResponse helper (Unit bodyResponseResult)", () => {
-  //--Start first suite --
+describe("- bodyResponse helper (Unit Test)", () => {
   describe("1) Check cases for each argument.", () => {
     msg = "Should return an object passing values to all parameters.";
     it(msg, async () => {
@@ -110,8 +108,6 @@ describe("- bodyResponse helper (Unit bodyResponseResult)", () => {
 
     it(msg, async () => {
       bodyResponseResult = await bodyResponse(BAD_REQUEST_CODE, null);
-
-      console.log(typeof bodyResponseResult.body);
 
       expect(typeof bodyResponseResult == "object").toBe(true);
 

@@ -3,8 +3,7 @@ const { getLocaleTimeZone } = require("../../../helpers/dates/locale-timezone");
 //External
 const { createJson } = require("../../../helpers/file-system/create-json");
 //Const
-const FILE_PATH_WEATHER_CONDITION =
-  "../../../test/helpers/file-system/data/json/weather-condition/weather-condition-data.json";
+const FILE_PATH_WEATHER_CONDITION =  '../../../test/helpers/file-system/data/json/weather-condition/weather-condition-data.json'
 //Vars
 let dateLocale;
 let msg;
@@ -18,7 +17,6 @@ let jsonMock = {
 };
 
 describe("- createJson helper (Unit Test)", () => {
-  //-Start first suite -
   describe("1) Check cases for arguments.", () => {
     msg =
       "Should not return anything if all valid arguments are passed and the json file has been created correctly";
@@ -39,6 +37,22 @@ describe("- createJson helper (Unit Test)", () => {
       await expect(typeof jsonResponse == "string").toBe(true);
     });
 
+    msg =
+      "Should not create the json file correctly if undefined is passed and return a string type";
+    it(msg, async () => {
+      jsonResponse = await createJson(undefined);
+      await expect(typeof jsonResponse == "string").toBe(true);
+    });
+
+    msg =
+      "Should not create the json file correctly if null is passed and return a string type";
+    it(msg, async () => {
+      jsonResponse = await createJson(null);
+      await expect(typeof jsonResponse == "string").toBe(true);
+    });
+  });
+
+  describe("2) Check cases for return.", () => {
     msg =
       "Should return a string type with the message 'Unable to create json file. ERROR in createJson() helper function.' if no argument are passed";
     it(msg, async () => {

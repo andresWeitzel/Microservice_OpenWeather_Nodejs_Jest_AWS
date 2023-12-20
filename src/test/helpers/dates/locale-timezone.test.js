@@ -48,17 +48,25 @@ describe("- getLocaleTimeZone helper (Unit Test)", () => {
         getLocaleTimeZoneResult,
         characters
       );
-
+      console.log('number'+numberCharactersMatch);
       await expect(numberCharactersMatch == totalCharacters).toBe(true);
     });
   });
 
-  // describe("3) Check cases for error.", () => {
-  //   msg =
-  //   "Should return a string type with the message 'ERROR in getLocaleTimeZone() helper function.' if new Error() are passed";
-  //   it(msg, async () => {
-  //     getLocaleTimeZoneResult = null;
-  //     await expect( await getLocaleTimeZone(new Error()) == 'ERROR in getLocaleTimeZone() helper function.').toBe(true);
-  //   });
-  // });
+  describe("3) Check cases for error.", () => {
+    msg = "Should return a string value if a new Error is passed";
+    it(msg, async () => {
+      await expect(async () => await getLocaleTimeZone(new Error())).not.toThrow(
+        Error
+      );
+    });
+    msg =
+    "Should return a string type with the message 'ERROR in getLocaleTimeZone() helper function.' if a new Error() are passed";
+    it(msg, async () => {
+      getLocaleTimeZoneResult = await getLocaleTimeZone(new Error());
+      // console.log(getLocaleTimeZoneResult);
+      // console.log(typeof getLocaleTimeZoneResult);
+      await expect( getLocaleTimeZoneResult == 'ERROR in getLocaleTimeZone() helper function.').toBe(true);
+    });
+  });
 });

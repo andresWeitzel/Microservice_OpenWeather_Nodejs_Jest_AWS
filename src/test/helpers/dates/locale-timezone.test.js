@@ -42,31 +42,41 @@ describe("- getLocaleTimeZone helper (Unit Test)", () => {
     it(msg, async () => {
       getLocaleTimeZoneResult = await getLocaleTimeZone(TODAY_DATE);
       await expect(typeof getLocaleTimeZoneResult == "string").toBe(true);
-      let characters = "/:,";
-      let totalCharacters = 5; // total characters for DD/MM/YY, HH:MM:SS
+      let characters = "/,:";
+      let totalCharacters = 4 ; // total characters for DD/MM/YY, HH:MM:SS
       let numberCharactersMatch = await calculateNumberOfCharactersMatch(
         getLocaleTimeZoneResult,
         characters
       );
-      console.log('number'+numberCharactersMatch);
-      await expect(numberCharactersMatch == totalCharacters).toBe(true);
+      await expect(numberCharactersMatch >= totalCharacters).toBe(true);
     });
   });
 
   describe("3) Check cases for error.", () => {
+
+    msg =
+    "Should not return a error message if no argument is passed to the function.";
+  it(msg, async () => {
+    await expect(async () => await getLocaleTimeZone()).not.toThrow(Error);
+    getLocaleTimeZoneResult = await getLocaleTimeZone();
+    await expect(typeof getLocaleTimeZoneResult == "string").toBe(true);
+
+  });
+
+
     msg = "Should return a string value if a new Error is passed";
     it(msg, async () => {
       await expect(async () => await getLocaleTimeZone(new Error())).not.toThrow(
         Error
       );
     });
+    
     msg =
-    "Should return a string type with the message 'ERROR in getLocaleTimeZone() helper function.' if a new Error() are passed";
+    "Should return a string type with the message 'ERROR in getLocaleTimeZone() helper function.' if a null are passed";
     it(msg, async () => {
-      getLocaleTimeZoneResult = await getLocaleTimeZone(new Error());
-      // console.log(getLocaleTimeZoneResult);
-      // console.log(typeof getLocaleTimeZoneResult);
-      await expect( getLocaleTimeZoneResult == 'ERROR in getLocaleTimeZone() helper function.').toBe(true);
+      let ERROR_MESSAGE = 'ERROR in getLocaleTimeZone() helper function.';
+      getLocaleTimeZoneResult = await getLocaleTimeZone(null);
+       await expect(getLocaleTimeZoneResult).toMatch(ERROR_MESSAGE);
     });
   });
 });

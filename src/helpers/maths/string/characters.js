@@ -18,10 +18,9 @@ const calculateNumberOfCharactersMatch = async (
     let charactersArray = [...characters];
 
     let countCharacters = 0;
-    for (let i = 0; i <= stringToCompareArray.length; i++) {
+    for (let i = 0; i <= charactersArray.length; i++) {
       if (stringToCompareArray.indexOf(charactersArray[i])) {
         countCharacters++;
-        console.log(countCharacters);
       }
     }
     return countCharacters;

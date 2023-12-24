@@ -70,14 +70,13 @@ describe("- calculateNumberOfCharactersMatch helper (Unit Test)", () => {
           STRING_MOCK,
           STRING_CHARACTERS_MOCK
         );
-        console.log(calculateCharactersResult);
         await expect(calculateCharactersResult >= 2).toBe(true);
       });
       msg =
-        "Should return a numeric type with a value greater than TWO for the string 'STRING_MOCK_2334' and the character comparison string. 'ASD' .";
+        " .";
       it(msg, async () => {
         const STRING_MOCK = "STRING_MOCK_2334";
-        const STRING_CHARACTERS_MOCK = "Z";
+        const STRING_CHARACTERS_MOCK = "=";
         calculateCharactersResult = await calculateNumberOfCharactersMatch(
           STRING_MOCK,
           STRING_CHARACTERS_MOCK

@@ -1,4 +1,7 @@
 //Vars
+let stringToCompareArray;
+let charactersArray;
+let countCharacters;
 let msgResponse;
 let msgLog;
 
@@ -14,10 +17,13 @@ const calculateNumberOfCharactersMatch = async (
   characters
 ) => {
   try {
-    let stringToCompareArray = [...stringToCompare];
-    let charactersArray = [...characters];
+    stringToCompareArray = null;
+    charactersArray = null;
+    countCharacters = 0;
 
-    let countCharacters = 0;
+    stringToCompareArray = [...stringToCompare];
+    charactersArray = [...characters];
+
     for (let i = 0; i <= charactersArray.length; i++) {
       if (stringToCompareArray.indexOf(charactersArray[i])) {
         countCharacters++;

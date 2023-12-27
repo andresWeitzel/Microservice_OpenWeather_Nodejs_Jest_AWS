@@ -3,16 +3,7 @@
 const {
   calculateNumberOfCharactersMatch,
 } = require("../../../../helpers/maths/string/characters");
-//Enums
-const {
-  statusCode,
-  statusCodeDetails,
-} = require("../../../../enums/http/status-code");
 //Const
-const OK_CODE = statusCode.OK;
-const OK_CODE_DETAILS = statusCodeDetails.OK;
-const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
-const BAD_REQUEST_CODE_DETAILS = statusCodeDetails.BAD_REQUEST_CODE_DETAILS;
 const STRING_MOCK = "STRING_MOCK";
 const STRING_CHARACTERS_MOCK = "STRING_";
 //Vars
@@ -72,17 +63,54 @@ describe("- calculateNumberOfCharactersMatch helper (Unit Test)", () => {
         );
         await expect(calculateCharactersResult >= 2).toBe(true);
       });
+
       msg =
-        " .";
+        "Should return a string type with 'ERROR in calculateNumberOfCharactersMatch() helper function.' value if not passed the correct types for arguments";
       it(msg, async () => {
-        const STRING_MOCK = "STRING_MOCK_2334";
-        const STRING_CHARACTERS_MOCK = "=";
+        const NUMERIC_MOCK = 23;
+        const STRING_CHARACTERS_MOCK = "2";
+        let ERROR_MESSAGE =
+          "ERROR in calculateNumberOfCharactersMatch() helper function.";
+
         calculateCharactersResult = await calculateNumberOfCharactersMatch(
-          STRING_MOCK,
+          NUMERIC_MOCK,
           STRING_CHARACTERS_MOCK
         );
-        console.log(calculateCharactersResult);
-        await expect(calculateCharactersResult == 0).toBe(true);
+        await expect(calculateCharactersResult).toMatch(ERROR_MESSAGE);
+      });
+    });
+
+    describe("3) Check cases for error.", () => {
+      msg =
+        "Should not thrown an Error if a new Error is passed for arguments.";
+      it(msg, async () => {
+        let newError = new Error();
+        calculateCharactersResult = await calculateNumberOfCharactersMatch(
+          newError,
+          newError
+        );
+        await expect(async () => calculateCharactersResult).not.toThrow(Error);
+      });
+
+      msg =
+        "Should not thrown an Error if no arguments is passed to the function.";
+      it(msg, async () => {
+        calculateCharactersResult = await calculateNumberOfCharactersMatch();
+        await expect(async () => calculateCharactersResult).not.toThrow(Error);
+      });
+
+      msg =
+        "Should return a string type with 'ERROR in calculateNumberOfCharactersMatch() helper function.' value if a new Error is passed for arguments.";
+      it(msg, async () => {
+        let newError = new Error();
+        let ERROR_MESSAGE =
+          "ERROR in calculateNumberOfCharactersMatch() helper function.";
+
+        calculateCharactersResult = await calculateNumberOfCharactersMatch(
+          newError,
+          newError
+        );
+        await expect(calculateCharactersResult).toMatch(ERROR_MESSAGE);
       });
     });
   });

@@ -1,3 +1,5 @@
+//Const
+const LOCALE_TIME_ZONE_ERROR = "ERROR in getLocaleTimeZone helper function.";
 //Vars
 let msgResponse;
 let msgLog;
@@ -14,7 +16,7 @@ const getLocaleTimeZone = async (formatZone, timeZone) => {
     dateLocale = new Date().toLocaleString(formatZone, { timeZone: timeZone });
     return dateLocale;
   } catch (error) {
-    msgResponse = "ERROR in getLocaleTimeZone() helper function.";
+    msgResponse = LOCALE_TIME_ZONE_ERROR;
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return msgResponse;

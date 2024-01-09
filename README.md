@@ -102,7 +102,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 
  <br>
 
-| **Technologies** | **Version** | **Purpose** |\
+| **Technologies** | **Version** | **Purpose** |
 | ------------- | ------------- | ------------- |
 | [SDK](https://www.serverless.com/framework/docs/guides/sdk/) | 4.3.2  | Automatic Module Injection for Lambdas |
 | [Serverless Framework Core v3](https://www.serverless.com//blog/serverless-framework-v3-is-live) | 3.23.0 | Core Services AWS |
@@ -117,7 +117,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 | [Postman](https://www.postman.com/downloads/) | 10.11  | http client |
 | [CMD](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd) | 10 | Símbolo del Sistema para linea de comandos |
 | [Git](https://git-scm.com/downloads) | 2.29.1  | Version control |
-| Otros | Otros |
+| Otros | Otros | Otros | 
 
 </br>
 
@@ -129,7 +129,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 
 </br>
 
-| **Extensión** |\
+| **Extensión** |
 | -------------  |
 | Prettier - Code formatter |
 | YAML - Autoformatter .yml |

@@ -1,7 +1,7 @@
 "use strict";
 //helpers
 const { sendGetRequest } = require("../../helpers/axios/request/get");
-const { statusCode } = require("../../helpers/enums/http/status-code");
+const { statusCode } = require("../../enums/http/status-code");
 const { createJson } = require("../../helpers/file-system/create-json");
 const { bodyResponse } = require("../../helpers/http/body-response");
 //const

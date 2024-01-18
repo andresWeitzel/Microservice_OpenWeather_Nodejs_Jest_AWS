@@ -1,6 +1,6 @@
 //External
 let path = require("path");
-let fs = require('fs/promises');
+let fs = require("fs/promises");
 //vars
 let msgResponse;
 let msgLog;
@@ -21,12 +21,12 @@ const createJson = async (filePath, data) => {
           console.log(err);
           return;
         }
-      console.log("File has been created in " + filePath);
+        console.log("File has been created in " + filePath);
       }
     );
-
   } catch (error) {
-    msgResponse = "Unable to create json file. ERROR in createJson() helper function.";
+    msgResponse =
+      "Unable to create json file. ERROR in createJson() helper function.";
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return msgResponse;

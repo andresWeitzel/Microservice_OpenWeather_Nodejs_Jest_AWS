@@ -4,8 +4,8 @@ const {
   calculateNumberOfCharactersMatch,
 } = require("../../../../helpers/maths/string/characters");
 //Const
-const STRING_MOCK = "STRING_MOCK";
-const STRING_CHARACTERS_MOCK = "STRING_";
+const MOCK_STRING_01 = process.env.MOCK_STRING_01;
+const MOCK_STRING_02 = process.env.MOCK_STRING_02;
 //Vars
 let msg;
 let calculateCharactersResult;
@@ -15,8 +15,8 @@ describe("- calculateNumberOfCharactersMatch helper (Unit Test)", () => {
     msg = "Should return a number if passed values to all parameters.";
     it(msg, async () => {
       calculateCharactersResult = await calculateNumberOfCharactersMatch(
-        STRING_MOCK,
-        STRING_CHARACTERS_MOCK
+        MOCK_STRING_01,
+        MOCK_STRING_02
       );
       await expect(typeof calculateCharactersResult == "number").toBe(true);
     });
@@ -24,9 +24,9 @@ describe("- calculateNumberOfCharactersMatch helper (Unit Test)", () => {
     msg = "Should return a number if passed other values.";
     it(msg, async () => {
       calculateCharactersResult = await calculateNumberOfCharactersMatch(
-        STRING_MOCK,
-        STRING_CHARACTERS_MOCK,
-        STRING_CHARACTERS_MOCK
+        MOCK_STRING_01,
+        MOCK_STRING_02,
+        MOCK_STRING_02
       );
       await expect(typeof calculateCharactersResult == "number").toBe(true);
     });
@@ -53,13 +53,13 @@ describe("- calculateNumberOfCharactersMatch helper (Unit Test)", () => {
 
     describe("2) Check cases for return .", () => {
       msg =
-        "Should return a numeric type with a value greater than TWO for the string 'STRING_MOCK_233' and the character comparison string. 'STRING_' .";
+        "Should return a numeric type with a value greater than TWO for the string 'MOCK_STRING_01_233' and the character comparison string. 'STRING_' .";
       it(msg, async () => {
-        const STRING_MOCK = "STRING_MOCK_233";
-        const STRING_CHARACTERS_MOCK = "STRING_";
+        const MOCK_STRING_01 = "MOCK_STRING_01_233";
+        const MOCK_STRING_02 = "STRING_";
         calculateCharactersResult = await calculateNumberOfCharactersMatch(
-          STRING_MOCK,
-          STRING_CHARACTERS_MOCK
+          MOCK_STRING_01,
+          MOCK_STRING_02
         );
         await expect(calculateCharactersResult >= 2).toBe(true);
       });
@@ -68,13 +68,13 @@ describe("- calculateNumberOfCharactersMatch helper (Unit Test)", () => {
         "Should return a string type with 'ERROR in calculateNumberOfCharactersMatch() helper function.' value if not passed the correct types for arguments";
       it(msg, async () => {
         const NUMERIC_MOCK = 23;
-        const STRING_CHARACTERS_MOCK = "2";
+        const MOCK_STRING_02 = "2";
         let ERROR_MESSAGE =
           "ERROR in calculateNumberOfCharactersMatch() helper function.";
 
         calculateCharactersResult = await calculateNumberOfCharactersMatch(
           NUMERIC_MOCK,
-          STRING_CHARACTERS_MOCK
+          MOCK_STRING_02
         );
         await expect(calculateCharactersResult).toMatch(ERROR_MESSAGE);
       });

@@ -17,7 +17,6 @@
 
 Microservice for the integration of the Open Weather API with focus on unit and integration tests implementing Nodejs, Jest, Serverless-framework, aws-lambda, api gateway, git, others.  AWS services are tested locally. The project code and its documentation (less technical doc) have been developed in English.
 
-
 *   [Weather-conditions](https://openweathermap.org/weather-conditions)
 *   [Api keys](https://home.openweathermap.org/api_keys)
 *   [Playlist functionality test](https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y) <a href="https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y" target="_blank"> <img src="https://github.com/andresWeitzel/Microservice_Mercadolibre_Users_AWS/blob/master/doc/assets/social-networks/yt.png" width="5%" height="5%" /> </a>
@@ -65,9 +64,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 
 ### 1.0.0) General description
 
-
 ### 1.0.1) Description Architecture and Operation
-
 
 <br>
 
@@ -117,7 +114,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 | [Postman](https://www.postman.com/downloads/) | 10.11  | http client |
 | [CMD](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd) | 10 | Símbolo del Sistema para linea de comandos |
 | [Git](https://git-scm.com/downloads) | 2.29.1  | Version control |
-| Otros | Otros | Otros | 
+| Otros | Otros | Otros |
 
 </br>
 
@@ -135,7 +132,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 | YAML - Autoformatter .yml |
 | Error Lens - for errors and indent |
 | Tabnine - IA Code |
-| Otros - Otros | 
+| Otros - Otros |
 
 <br>
 
@@ -159,7 +156,6 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 <details>
   <summary>See</summary>
 <br>
-
 
 <br>
 
@@ -229,10 +225,9 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 *   [serverless open api ](https://www.serverless.com/plugins/serverless-openapi-documentation)
 
 #### Jest
-* [Environment vars solution](https://stackoverflow.com/questions/48033841/test-process-env-with-jest)
 
+*   [Environment vars solution](https://stackoverflow.com/questions/48033841/test-process-env-with-jest)
 
 <br>
 
 </details>
-

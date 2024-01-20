@@ -3,17 +3,18 @@ const { getLocaleTimeZone } = require("../../../helpers/dates/locale-timezone");
 //External
 const { createJson } = require("../../../helpers/file-system/create-json");
 //Const
-const FILE_PATH_WEATHER_CONDITION =  '../../../test/helpers/file-system/data/json/weather-condition/weather-condition-data.json'
+const FILE_PATH_WEATHER_CONDITION =
+  "../../../test/helpers/file-system/data/json/weather-condition/weather-condition-data.json";
 //Vars
 let dateLocale;
 let msg;
 let jsonResponse;
 let jsonMock = {
-  test01: "test01",
-  test02: "test02",
-  test03: "test03",
-  test04: "test04",
-  time: null,
+  test01: process.env.MOCK_JSON_TEST_01,
+  test02: process.env.MOCK_JSON_TEST_02,
+  test03: process.env.MOCK_JSON_TEST_03,
+  test04: process.env.MOCK_JSON_TEST_04,
+  time: process.env.MOCK_JSON_TIME,
 };
 
 describe("- createJson helper (Unit Test)", () => {

@@ -2,14 +2,16 @@
 //Helpers
 const { sendGetRequest } = require("../../../../helpers/axios/request/get");
 //const
-const FIRST_ARGUMENT_TYPE_NUMERIC = 12;
-const SECOND_ARGUMENT_TYPE_NUMERIC = 112;
-const ERROR_MESSAGE = "error";
-const INVALID_URL = "hff://zzz.com.ar";
-const GOOGLE_URL = "https://www.google.com/";
+const FIRST_ARGUMENT_TYPE_NUMERIC =
+  process.env.MOCK_FIRST_ARGUMENT_TYPE_NUMERIC;
+const SECOND_ARGUMENT_TYPE_NUMERIC =
+  process.env.MOCK_SECOND_ARGUMENT_TYPE_NUMERIC;
+const ERROR_MESSAGE = process.env.MOCK_ERROR_MESSAGE;
+const INVALID_URL = process.env.MOCK_INVALID_URL;
+const GOOGLE_URL = process.env.MOCK_GOOGLE_URL;
 const AXIOS_CONFIG = {
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": process.env.MOCK_AXIOS_CONTENT_TYPE,
   },
 };
 //vars
@@ -54,7 +56,6 @@ describe("- sendGetRequestTest helper (Unit Test)", () => {
       ).toBe(true);
     });
   });
-  //-Start second suite -
   describe("2) Check data types of arguments.", () => {
     msg =
       "Should return an object or string if you pass the data  argument with numeric type value.";
@@ -95,7 +96,6 @@ describe("- sendGetRequestTest helper (Unit Test)", () => {
       ).toBe(true);
     });
   });
-  //-Start third suite -
   describe("3) Check cases for errors.", () => {
     msg = "Should return a string value if a new Error is passed";
     it(msg, async () => {

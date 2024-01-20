@@ -127,7 +127,9 @@ describe("- bodyResponse helper (Unit Test)", () => {
     describe("2) Check cases for error.", () => {
       msg = "Should return a boolean with value false if a new Error is passed";
       it(msg, async () => {
-        await expect(async() => await bodyResponse(new Error())).not.toThrow(Error);
+        await expect(async () => await bodyResponse(new Error())).not.toThrow(
+          Error
+        );
       });
     });
   });

@@ -2,7 +2,7 @@
 //Helpers
 const {
   calculateNumberOfCharactersMatch,
-} = require("../../../../helpers/maths/string/characters");
+} = require("../../../../../helpers/maths/string/characters");
 //Const
 const MOCK_STRING_01 = process.env.MOCK_STRING_01;
 const MOCK_STRING_02 = process.env.MOCK_STRING_02;

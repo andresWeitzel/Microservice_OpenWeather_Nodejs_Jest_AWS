@@ -18,6 +18,8 @@ const AXIOS_CONFIG = {
 let msg;
 let axiosResponse;
 
+//Updated catch cases
+
 describe("- sendGetRequestTest helper (Unit Test)", () => {
   //-Start first suite -
   describe("1) Check cases for each argument.", () => {

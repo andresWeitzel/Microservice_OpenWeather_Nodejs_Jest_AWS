@@ -1,7 +1,19 @@
-![Index app](./doc/assets/img/weather-data.png)
+![Index app](./doc/assets/img/open-weather.jpg)
 
 <div align="right">
-    <a href="./translation/README.es.md" target="_blank">
+  <img width="25" height="25" src="./doc/assets/icons/devops/png/aws.png" />
+  <img width="25" height="25" src="./doc/assets/icons/aws/png/lambda.png" />
+  <img width="27" height="27" src="./doc/assets/icons/devops/png/postman.png" />
+  <img width="29" height="27" src="./doc/assets/icons/devops/png/git.png" />
+  <img width="28" height="27" src="./doc/assets/icons/aws/png/api-gateway.png" />
+  <img width="23" height="25" src="./doc/assets/icons/aws/png/sqs.png" />
+  <img width="27" height="25" src="./doc/assets/icons/aws/png/parameter-store.png" />
+  <img width="27" height="27" src="./doc/assets/icons/backend/javascript-typescript/png/nodejs.png" />
+</div>
+
+
+<div align="right">
+    <a href="./README.md" target="_blank">
       <img src="./doc/assets/translation/arg-flag.jpg" width="10%" height="10%" />
   </a> 
    <a href="./README.md" target="_blank">
@@ -19,7 +31,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 
 *   [Weather-conditions](https://openweathermap.org/weather-conditions)
 *   [Api keys](https://home.openweathermap.org/api_keys)
-*   [Playlist functionality test](https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y) <a href="https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y" target="_blank"> <img src="https://github.com/andresWeitzel/Microservice_Mercadolibre_Users_AWS/blob/master/doc/assets/social-networks/yt.png" width="5%" height="5%" /> </a>
+*   [Playlist functionality test](https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y) <a href="https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y" target="_blank"> <img src="./doc/assets/social-networks/yt.png" width="5%" height="5%" /> </a>
 
 <br>
 
@@ -79,7 +91,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 <br>
 
 </details>
- <br>
+
 
 ### 1.2) Project setup from scratch [🔝](#index-)
 

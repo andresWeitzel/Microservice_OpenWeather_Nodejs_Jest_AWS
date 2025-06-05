@@ -11,6 +11,7 @@
   <img width="27" height="27" src="./doc/assets/icons/backend/javascript-typescript/png/nodejs.png" />
 </div>
 
+<br>
 
 <div align="right">
     <a href="./README.md" target="_blank">
@@ -20,6 +21,8 @@
       <img src="./doc/assets/translation/eeuu-flag.jpg" width="10%" height="10%" />
   </a>
 </div>
+
+<br>
 
 <div align="center">
 

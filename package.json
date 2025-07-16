@@ -2,11 +2,11 @@
   "name": "microservice_openweather_nodejs_jest_aws",
   "version": "1.0.0",
   "description": "",
-  "main": "handler.js",
+  "main": "src/controllers/weather/get.js",
   "scripts": {
     "serverless-offline": "sls offline start",
     "start": "npm run format-md && npm run serverless-offline",
-    "start:dev": "nodemon -e js,ts,yml,json --exec \"sls offline start\"",
+    "start:dev": "nodemon -e js,ts,yml --exec \"sls offline start\"",
     "format-prettier": "prettier --write \"{src,test}/**/*.{js,ts}\"",
     "check": "remark . --quiet --frail",
     "format-remark": "remark . --quiet --frail --output",
@@ -18,7 +18,8 @@
     "test:dates-helper": "jest --verbose ./test/helpers/dates/*",
     "test:fs-helper": "jest --verbose ./test/helpers/file-system/*",
     "test:http-helper": "jest --verbose ./test/helpers/http/*",
-    "test:maths-helper": "jest --verbose ./test/helpers/maths/*"
+    "test:maths-helper": "jest --verbose ./test/helpers/maths/*",
+    "test:weather-helper": "jest --verbose ./test/helpers/weather/*"
   },
   "keywords": [],
   "author": "",

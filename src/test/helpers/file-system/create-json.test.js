@@ -4,7 +4,7 @@ const { getLocaleTimeZone } = require("../../../helpers/dates/locale-timezone");
 const { createJson } = require("../../../helpers/file-system/create-json");
 //Const
 const FILE_PATH_WEATHER_CONDITION =
-  "../../../test/helpers/file-system/data/json/weather-condition/weather-condition-data.json";
+  "../../../test/helpers/file-system/data/json/weather/weather-data.json";
 //Vars
 let dateLocale;
 let msg;

@@ -386,10 +386,11 @@ If you continue to have issues:
 > **📝 Note**: All endpoints accept both **cities** and **countries** as location parameters. The API uses OpenWeather's geocoding service to resolve any location name to coordinates.
 
 **🔍 Location Search Examples:**
-- **Cities**: `London`, `New York`, `Tokyo`, `Paris`, `Buenos Aires`
-- **Countries**: `Japan`, `Australia`, `Brazil`, `Germany`, `Argentina`
-- **States/Provinces**: `California`, `Ontario`, `Bavaria`
-- **Special cases**: For large countries, the API will return data for the capital or a major city
+
+*   **Cities**: `London`, `New York`, `Tokyo`, `Paris`, `Buenos Aires`
+*   **Countries**: `Japan`, `Australia`, `Brazil`, `Germany`, `Argentina`
+*   **States/Provinces**: `California`, `Ontario`, `Bavaria`
+*   **Special cases**: For large countries, the API will return data for the capital or a major city
 
 **💾 Data Persistence**: After successfully retrieving data from OpenWeather API, the microservice automatically saves the response to JSON files in the `src/data/json/` directory for backup and reference purposes.
 
@@ -856,63 +857,60 @@ The microservice automatically saves API responses to JSON files for backup, deb
 
 #### Storage Locations
 
-```
-src/data/json/
-├── weather/
-│   ├── weather-data.json              # Basic weather data
-│   └── weather-enhanced-data.json     # Enhanced weather data
-├── forecast/
-│   ├── forecast-data.json             # Basic forecast data
-│   └── forecast-enhanced-data.json    # Enhanced forecast data
-├── air-pollution/
-│   ├── air-pollution-data.json        # Basic air pollution data
-│   └── air-pollution-enhanced-data.json  # Enhanced air pollution data
-└── weather-condition/
-    └── (weather condition data)
-```
+    src/data/json/
+    ├── weather/
+    │   ├── weather-data.json              # Basic weather data
+    │   └── weather-enhanced-data.json     # Enhanced weather data
+    ├── forecast/
+    │   ├── forecast-data.json             # Basic forecast data
+    │   └── forecast-enhanced-data.json    # Enhanced forecast data
+    ├── air-pollution/
+    │   ├── air-pollution-data.json        # Basic air pollution data
+    │   └── air-pollution-enhanced-data.json  # Enhanced air pollution data
+    └── weather-condition/
+        └── (weather condition data)
 
 #### How It Works
 
-1. **API Call**: When an endpoint is called, the microservice fetches data from OpenWeather API
-2. **Data Processing**: The response is processed and transformed (if enhanced endpoint)
-3. **Async JSON Storage**: The processed data is automatically saved to the corresponding JSON file **asynchronously** (non-blocking)
-4. **Immediate Response**: The data is returned to the client immediately, without waiting for file write completion
+1.  **API Call**: When an endpoint is called, the microservice fetches data from OpenWeather API
+2.  **Data Processing**: The response is processed and transformed (if enhanced endpoint)
+3.  **Async JSON Storage**: The processed data is automatically saved to the corresponding JSON file **asynchronously** (non-blocking)
+4.  **Immediate Response**: The data is returned to the client immediately, without waiting for file write completion
 
 #### Benefits
 
-- **🔍 Debugging**: Easy access to recent API responses for troubleshooting
-- **📊 Data Analysis**: Historical data for analysis and development
-- **🛡️ Backup**: Local backup of API responses in case of external API issues
-- **⚡ Development**: Faster development and testing with local data access
-- **🚀 Performance**: Reduces API calls through intelligent caching system
+*   **🔍 Debugging**: Easy access to recent API responses for troubleshooting
+*   **📊 Data Analysis**: Historical data for analysis and development
+*   **🛡️ Backup**: Local backup of API responses in case of external API issues
+*   **⚡ Development**: Faster development and testing with local data access
+*   **🚀 Performance**: Reduces API calls through intelligent caching system
 
 #### File Management
 
-- **Automatic Updates**: Files are updated with each successful API call
-- **Overwrite Policy**: Each new request overwrites the previous data
-- **Non-Blocking Writes**: JSON files are written asynchronously to avoid blocking API responses
-- **Error Handling**: If file creation fails, the API still returns data to the client (with warning logs)
-- **Storage Location**: Files are stored in the `src/data/json/` directory structure
-- **Enhanced Endpoints**: All enhanced endpoints now save their transformed data to separate JSON files
+*   **Automatic Updates**: Files are updated with each successful API call
+*   **Overwrite Policy**: Each new request overwrites the previous data
+*   **Non-Blocking Writes**: JSON files are written asynchronously to avoid blocking API responses
+*   **Error Handling**: If file creation fails, the API still returns data to the client (with warning logs)
+*   **Storage Location**: Files are stored in the `src/data/json/` directory structure
+*   **Enhanced Endpoints**: All enhanced endpoints now save their transformed data to separate JSON files
 
 #### Caching System
 
 The microservice implements a **dual-layer caching strategy**:
 
-1. **Memory Cache**: Fast in-memory cache for frequently accessed data
-   - **Duration**: 10 minutes for weather data
-   - **Storage**: RAM-based for ultra-fast access
-   - **Eviction**: Automatic cleanup of expired entries
+1.  **Memory Cache**: Fast in-memory cache for frequently accessed data
+    *   **Duration**: 10 minutes for weather data
+    *   **Storage**: RAM-based for ultra-fast access
+    *   **Eviction**: Automatic cleanup of expired entries
 
-2. **JSON File Storage**: Persistent storage for backup and debugging
-   - **Duration**: Permanent until overwritten
-   - **Storage**: File system for data persistence
-   - **Purpose**: Backup, debugging, and development reference
+2.  **JSON File Storage**: Persistent storage for backup and debugging
+    *   **Duration**: Permanent until overwritten
+    *   **Storage**: File system for data persistence
+    *   **Purpose**: Backup, debugging, and development reference
 
 **Cache Flow:**
-```
-API Request → Check Memory Cache → If not found → Call OpenWeather API → Store in Memory Cache → Save to JSON File (async) → Return Response Immediately
-```
+
+    API Request → Check Memory Cache → If not found → Call OpenWeather API → Store in Memory Cache → Save to JSON File (async) → Return Response Immediately
 
 #### Example File Structure
 

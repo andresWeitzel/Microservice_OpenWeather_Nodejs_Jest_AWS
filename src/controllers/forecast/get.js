@@ -20,8 +20,6 @@ let eventPathParams;
 let countryParam;
 let axiosConfig;
 let axiosResponse;
-let jsonResponse;
-let coordinates;
 
 module.exports.handler = async (event) => {
   try {
@@ -32,10 +30,11 @@ module.exports.handler = async (event) => {
     const cleanedLocation = validateAndCleanLocation(countryParam);
     console.log("Forecast API - Cleaned location:", cleanedLocation);
 
-    // First, we need to get coordinates for the city using geocoding
-    const geocodingURL = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(cleanedLocation)}&limit=1&appid=${API_KEY}`;
+    // Use the same approach as OpenWeather API - direct query with q parameter
+    const forecastURL = `${API_FORECAST_URL_BASE}q=${encodeURIComponent(cleanedLocation)}&appid=${API_KEY}`;
     
-    console.log("Forecast API - Getting coordinates for:", countryParam);
+    console.log("Forecast API - Requesting data for:", cleanedLocation);
+    console.log("Forecast API - URL:", forecastURL);
 
     axiosConfig = {
       headers: {
@@ -43,10 +42,9 @@ module.exports.handler = async (event) => {
       },
     };
 
-    // Get coordinates first
-    const geocodingResponse = await sendGetRequest(geocodingURL, null, axiosConfig);
+    axiosResponse = await sendGetRequest(forecastURL, null, axiosConfig);
 
-    if (!geocodingResponse || !geocodingResponse[0]) {
+    if (axiosResponse == (null || undefined)) {
       const suggestions = getLocationSuggestions(countryParam);
       const suggestionText = suggestions.length > 0 
         ? ` Try using a specific city instead: ${suggestions.join(', ')}`
@@ -54,48 +52,34 @@ module.exports.handler = async (event) => {
       
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        `Could not find coordinates for ${countryParam}.${suggestionText}`
+        `Forecast data could not be obtained for ${countryParam}.${suggestionText}`
       );
     }
 
-    coordinates = geocodingResponse[0];
-    const lat = coordinates.lat;
-    const lon = coordinates.lon;
-
-    // Now get forecast data using coordinates
-    const forecastURL = `${API_FORECAST_URL_BASE}lat=${lat}&lon=${lon}&appid=${API_KEY}`;
-
-    console.log("Forecast API - Requesting data for coordinates:", lat, lon);
-
-    axiosResponse = await sendGetRequest(forecastURL, null, axiosConfig);
-
-    if (axiosResponse == (null || undefined)) {
-      return await bodyResponse(
-        BAD_REQUEST_CODE,
-        `Forecast data could not be obtained for ${countryParam}`
-      );
-    }
-
-    // Add location info to the response
+    // Add location info to the response based on the original request
     const enrichedResponse = {
       ...axiosResponse,
       location: {
-        city: coordinates.name,
-        country: coordinates.country,
-        state: coordinates.state,
+        requestedLocation: countryParam,
+        cleanedLocation: cleanedLocation,
         coordinates: {
-          lat: coordinates.lat,
-          lon: coordinates.lon
+          lat: axiosResponse.city?.coord?.lat,
+          lon: axiosResponse.city?.coord?.lon
         }
       }
     };
 
-    // Save data to JSON file asynchronously (don't wait for it)
-    createJson(FILE_PATH_FORECAST, enrichedResponse).catch(error => {
-      console.log("Warning: Failed to save forecast data to JSON:", error.message);
+    // Return response immediately
+    const response = await bodyResponse(OK_CODE, enrichedResponse);
+
+    // Save data to JSON file asynchronously (fire and forget - don't wait for it)
+    process.nextTick(() => {
+      createJson(FILE_PATH_FORECAST, enrichedResponse).catch(error => {
+        console.log("Warning: Failed to save forecast data to JSON:", error.message);
+      });
     });
 
-    return await bodyResponse(OK_CODE, enrichedResponse);
+    return response;
   } catch (error) {
     console.log("ERROR in forecast handler:", error);
     return await bodyResponse(

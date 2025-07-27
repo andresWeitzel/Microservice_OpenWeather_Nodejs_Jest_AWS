@@ -13,7 +13,7 @@ const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
 const INTERNAL_SERVER_ERROR = statusCode.INTERNAL_SERVER_ERROR;
 const FILE_PATH_WEATHER_CONDITION =
-  "../../../data/json/weather/weather-data.json";
+  "../../../data/json/weather/weather-location-data.json";
 //vars
 let eventPathParams;
 let countryParam;

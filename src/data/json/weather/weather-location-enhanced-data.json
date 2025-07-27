@@ -1,0 +1,58 @@
+{
+    "location": {
+        "city": "Buenos Aires",
+        "country": "AR",
+        "coordinates": {
+            "lon": -58.3772,
+            "lat": -34.6132
+        },
+        "timezone": -10800,
+        "localTime": "2025-07-27T22:20:59.089Z",
+        "isDaytime": false
+    },
+    "temperature": {
+        "kelvin": 283.94,
+        "celsius": 10.79,
+        "fahrenheit": 51.42,
+        "feels_like": {
+            "kelvin": 283.09,
+            "celsius": 9.94,
+            "fahrenheit": 49.89
+        }
+    },
+    "weather": {
+        "condition": "Clouds",
+        "description": "overcast clouds",
+        "icon": "04n",
+        "severity": "light",
+        "recommendation": "Enjoy the weather!"
+    },
+    "atmosphere": {
+        "pressure": 1022,
+        "humidity": 77,
+        "visibility": 10000,
+        "clouds": 100
+    },
+    "wind": {
+        "speed": 0.89,
+        "direction": 90,
+        "gust": 4.02,
+        "description": "Light air"
+    },
+    "sun": {
+        "sunrise": "07:50 AM",
+        "sunset": "06:08 PM",
+        "dayLength": "10h 17m"
+    },
+    "alerts": [],
+    "recommendations": {
+        "clothing": "Light jacket or sweater",
+        "activities": "Outdoor activities suitable",
+        "transport": "Normal transport conditions",
+        "health": "Comfortable conditions for outdoor activities"
+    },
+    "comfort": {
+        "index": 5,
+        "level": "cool"
+    }
+}

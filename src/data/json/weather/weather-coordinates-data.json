@@ -1,0 +1,45 @@
+{
+    "coord": {
+        "lon": -58.3772,
+        "lat": -34.6132
+    },
+    "weather": [
+        {
+            "id": 804,
+            "main": "Clouds",
+            "description": "overcast clouds",
+            "icon": "04n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 284.03,
+        "feels_like": 283.13,
+        "temp_min": 283.03,
+        "temp_max": 285,
+        "pressure": 1022,
+        "humidity": 75,
+        "sea_level": 1022,
+        "grnd_level": 1021
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 4.63,
+        "deg": 150
+    },
+    "clouds": {
+        "all": 100
+    },
+    "dt": 1753653508,
+    "sys": {
+        "type": 2,
+        "id": 2020613,
+        "country": "AR",
+        "sunrise": 1753613455,
+        "sunset": 1753650532
+    },
+    "timezone": -10800,
+    "id": 6693229,
+    "name": "San Nicolas",
+    "cod": 200
+}

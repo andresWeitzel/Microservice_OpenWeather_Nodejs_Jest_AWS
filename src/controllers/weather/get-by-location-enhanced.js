@@ -13,7 +13,7 @@ const API_KEY = process.env.API_KEY;
 const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
 const INTERNAL_SERVER_ERROR = statusCode.INTERNAL_SERVER_ERROR;
-const FILE_PATH_WEATHER_ENHANCED = "../../../data/json/weather/weather-enhanced-data.json";
+const FILE_PATH_WEATHER_ENHANCED = "../../../data/json/weather/weather-location-enhanced-data.json";
 
 //vars
 let eventPathParams;

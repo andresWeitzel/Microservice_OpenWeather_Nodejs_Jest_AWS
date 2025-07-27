@@ -1,0 +1,46 @@
+{
+    "coord": {
+        "lon": -58.3772,
+        "lat": -34.6132
+    },
+    "weather": [
+        {
+            "id": 804,
+            "main": "Clouds",
+            "description": "overcast clouds",
+            "icon": "04n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 283.94,
+        "feels_like": 283.09,
+        "temp_min": 283.03,
+        "temp_max": 284.33,
+        "pressure": 1022,
+        "humidity": 77,
+        "sea_level": 1022,
+        "grnd_level": 1021
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 0.89,
+        "deg": 90,
+        "gust": 4.02
+    },
+    "clouds": {
+        "all": 100
+    },
+    "dt": 1753654156,
+    "sys": {
+        "type": 2,
+        "id": 2020613,
+        "country": "AR",
+        "sunrise": 1753613455,
+        "sunset": 1753650532
+    },
+    "timezone": -10800,
+    "id": 3435910,
+    "name": "Buenos Aires",
+    "cod": 200
+}

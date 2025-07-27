@@ -52,12 +52,13 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 *   [1.1) Project execution.](#11-project-execution-)
 *   [1.2) Project setup from scratch](#12-project-setup-from-scratch-)
     *   [1.2.1) OpenWeather API Configuration](#121-openweather-api-configuration)
-*   [1.2.2) API Key Security Best Practices](#122-api-key-security-best-practices)
-*   [1.2.3) OpenWeather API Endpoints Used](#123-openweather-api-endpoints-used)
-*   [1.2.4) Rate Limits and Pricing](#124-rate-limits-and-pricing)
-*   [1.2.5) Troubleshooting](#125-troubleshooting)
-*   [1.2.6) Additional Resources](#126-additional-resources)
-*   [1.2.7) Support](#127-support)
+*   [1.2.2) Project Configuration File Setup](#122-project-configuration-file-setup)
+*   [1.2.3) API Key Security Best Practices](#123-api-key-security-best-practices)
+*   [1.2.4) OpenWeather API Endpoints Used](#124-openweather-api-endpoints-used)
+*   [1.2.5) Rate Limits and Pricing](#125-rate-limits-and-pricing)
+*   [1.2.6) Troubleshooting](#126-troubleshooting)
+*   [1.2.7) Additional Resources](#127-additional-resources)
+*   [1.2.8) Support](#128-support)
 *   [1.3) Technologies.](#13-technologies-)
 
 ### Sección 2) Endpoints and Examples
@@ -201,7 +202,60 @@ GET http://localhost:4000/v1/weather/country/New%20York
 }
 ````
 
-#### 1.2.2) API Key Security Best Practices
+#### 1.2.2) Project Configuration File Setup
+
+**⚠️ CRITICAL: Create the Configuration File**
+
+Before running the project, you **MUST** create the `serverless-ssm.yml` file in the project root directory. This file contains the environment variables needed for the microservice to function properly.
+
+##### Step 1: Create the Configuration File
+
+1.  **Navigate to Project Root**: Go to the main project directory
+2.  **Create New File**: Create a new file named `serverless-ssm.yml`
+3.  **Add Configuration**: Copy and paste the following content:
+
+```yaml
+# Environment variables for the OpenWeather API microservice
+API_WEATHER_URL_BASE: "https://api.openweathermap.org/data/2.5/weather?q="
+API_KEY: "YOUR_ACTUAL_API_KEY_HERE"
+```
+
+##### Step 2: Update with Your API Key
+
+Replace `"YOUR_ACTUAL_API_KEY_HERE"` with the API key you obtained from OpenWeather:
+
+```yaml
+# Environment variables for the OpenWeather API microservice
+API_WEATHER_URL_BASE: "https://api.openweathermap.org/data/2.5/weather?q="
+API_KEY: "858923c0cff4df1c4415f2493500ad37"  # Replace with your actual API key
+```
+
+##### Step 3: Verify File Location
+
+Ensure the file is in the correct location:
+
+    Microservice_OpenWeather_Nodejs_Jest_AWS/
+    ├── serverless-ssm.yml          # ← This file must exist here
+    ├── package.json
+    ├── serverless.yml
+    ├── src/
+    └── ...
+
+##### Step 4: Security Considerations
+
+*   ✅ **Add to .gitignore** - Ensure `serverless-ssm.yml` is in your `.gitignore` file
+*   ✅ **Keep private** - Never commit this file to version control
+*   ✅ **Backup safely** - Store your API key in a secure location
+*   ❌ **Don't share** - Never share your API key publicly
+*   ❌ **Don't commit** - Avoid accidentally committing to git
+
+**Example .gitignore entry:**
+
+    # Configuration files with sensitive data
+    serverless-ssm.yml
+    *.env
+
+#### 1.2.3) API Key Security Best Practices
 
 *   ✅ **Wait for activation** - New keys take up to 2 hours to activate
 *   ✅ **Keep your API key private** - Never share it publicly
@@ -212,7 +266,7 @@ GET http://localhost:4000/v1/weather/country/New%20York
 *   ❌ **Don't commit to git** - Add config files to .gitignore
 *   ❌ **Don't share in logs** - Avoid logging API keys
 
-#### 1.2.3) OpenWeather API Endpoints Used
+#### 1.2.4) OpenWeather API Endpoints Used
 
 This microservice uses the **Current Weather Data** endpoint:
 
@@ -223,7 +277,7 @@ This microservice uses the **Current Weather Data** endpoint:
     *   `appid`: Your API key
 *   **Response**: JSON with weather data including temperature, humidity, wind, etc.
 
-#### 1.2.4) Rate Limits and Pricing
+#### 1.2.5) Rate Limits and Pricing
 
 | Plan | Calls/Day | Features |
 |------|-----------|----------|
@@ -234,7 +288,7 @@ This microservice uses the **Current Weather Data** endpoint:
 *   **Response Time**: Usually under 200ms
 *   **Data Update**: Every 10 minutes
 
-#### 1.2.5) Troubleshooting
+#### 1.2.6) Troubleshooting
 
 ##### ⚠️ IMPORTANT: API Key Activation Time
 
@@ -303,14 +357,14 @@ Test your API key directly with OpenWeather:
 curl "https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY"
 ```
 
-#### 1.2.6) Additional Resources
+#### 1.2.7) Additional Resources
 
 *   [OpenWeather API Documentation](https://openweathermap.org/api)
 *   [API Key Management](https://home.openweathermap.org/api_keys)
 *   [Weather Conditions Codes](https://openweathermap.org/weather-conditions)
 *   [Support Forum](https://openweathermap.org/forum)
 
-#### 1.2.7) Support
+#### 1.2.8) Support
 
 If you continue to have issues:
 
@@ -397,11 +451,21 @@ If you continue to have issues:
 |-------------|------------|-----------------|--------------|
 | `/v1/weather/location/{location}` | GET | Raw OpenWeather data | Original OpenWeather format |
 | `/v1/weather-enhanced/location/{location}` | GET | **Enhanced weather data** | **Enriched format with conversions, recommendations, and alerts** |
+| `/v1/weather/coordinates/{lat}/{lon}` | GET | **Weather by coordinates** | **Weather data for GPS coordinates** |
+| `/v1/weather/id/{cityId}` | GET | **Weather by city ID** | **Weather data using OpenWeather city ID** |
+| `/v1/weather/zipcode/{zipcode}/{countryCode}` | GET | **Weather by zipcode** | **Weather data for postal code** |
+| `/v1/weather/zipcode/{zipcode}` | GET | **Weather by zipcode (default country)** | **Weather data for postal code** |
+| `/v1/weather/units/{location}/{units}` | GET | **Weather with specific units** | **Weather data in metric/imperial/kelvin** |
+| `/v1/weather/language/{location}/{language}` | GET | **Weather with specific language** | **Weather data in different languages** |
+| `/v1/weather/combined/{location}/{units}/{language}` | GET | **Weather with all parameters** | **Weather data with units and language** |
+| `/v1/weather/combined/{location}` | GET | **Weather with default parameters** | **Weather data with default settings** |
 | `/v1/forecast/location/{location}` | GET | Raw OpenWeather forecast | Original OpenWeather forecast format |
 | `/v1/forecast-enhanced/location/{location}` | GET | **Enhanced forecast data** | **Enriched format with daily summaries, trends, and planning recommendations** |
 | `/v1/air-pollution/location/{location}` | GET | Raw OpenWeather air pollution | Original OpenWeather air pollution format |
 | `/v1/air-pollution-enhanced/location/{location}` | GET | **Enhanced air pollution data** | **Enriched format with health recommendations, alerts, and detailed analysis** |
 | `/health` | GET | **System health check** | **API connectivity, cache status, and system metrics** |
+
+> **🆕 NEW**: We've implemented all OpenWeatherMap weather API variants! See [WEATHER\_ENDPOINTS.md](./WEATHER_ENDPOINTS.md) for complete documentation.
 
 #### Enhanced Weather Features
 
@@ -932,6 +996,75 @@ The microservice implements a **dual-layer caching strategy**:
 > **💡 Note**: The JSON files serve as a local cache and backup system. They are automatically managed by the microservice and should not be manually edited.
 
 > **⚡ Performance Note**: JSON file writes are performed asynchronously to ensure fast API response times. The microservice returns data immediately without waiting for file operations to complete.
+
+</details>
+
+<br>
+
+## Section 2.5) Quick Examples - All Weather Endpoints [🔝](#index-)
+
+<details>
+  <summary>See</summary>
+
+<br>
+
+### 🚀 Quick Test Examples
+
+Test all weather endpoints with these curl commands:
+
+```bash
+# 1. Basic weather by city name
+curl http://localhost:4000/v1/weather/location/London
+
+# 2. Weather by GPS coordinates
+curl http://localhost:4000/v1/weather/coordinates/51.5074/-0.1276
+
+# 3. Weather by city ID (Buenos Aires = 3435910)
+curl http://localhost:4000/v1/weather/id/3435910
+
+# 4. Weather by zipcode with country
+curl http://localhost:4000/v1/weather/zipcode/10001/us
+
+# 5. Weather by zipcode (default country)
+curl http://localhost:4000/v1/weather/zipcode/10001
+
+# 6. Weather with metric units (Celsius)
+curl http://localhost:4000/v1/weather/units/Paris/metric
+
+# 7. Weather with imperial units (Fahrenheit)
+curl http://localhost:4000/v1/weather/units/New%20York/imperial
+
+# 8. Weather in Spanish language
+curl http://localhost:4000/v1/weather/language/Madrid/es
+
+# 9. Weather in French language
+curl http://localhost:4000/v1/weather/language/Paris/fr
+
+# 10. Weather with all parameters combined
+curl http://localhost:4000/v1/weather/combined/Tokyo/metric/es
+
+# 11. Weather with default parameters
+curl http://localhost:4000/v1/weather/combined/London
+```
+
+### 🧪 Automated Testing
+
+Run the automated test script to verify all endpoints:
+
+```bash
+# Make sure the server is running first
+npm start
+
+# In another terminal, run the test script
+node test-weather-endpoints.js
+```
+
+### 📚 Complete Documentation
+
+For detailed information about all weather endpoints, see:
+
+*   [WEATHER\_ENDPOINTS.md](./WEATHER_ENDPOINTS.md) - Complete endpoint documentation
+*   [OpenWeatherMap API Documentation](https://openweathermap.org/api) - Official API reference
 
 </details>
 

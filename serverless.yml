@@ -17,19 +17,83 @@ plugins:
   - serverless-offline
 
 functions:
-  getWeather:
-    handler: src/controllers/weather/get.handler
+  getWeatherByLocation:
+    handler: src/controllers/weather/get-by-location.handler
     events:
       - http:
           path: /v1/weather/location/{location}
           method: get
           private: false
           
-  getEnhancedWeather:
-    handler: src/controllers/weather/enhanced.handler
+  getWeatherByLocationEnhanced:
+    handler: src/controllers/weather/get-by-location-enhanced.handler
     events:
       - http:
           path: /v1/weather-enhanced/location/{location}
+          method: get
+          private: false
+          
+  getWeatherByCoordinates:
+    handler: src/controllers/weather/get-by-coordinates.handler
+    events:
+      - http:
+          path: /v1/weather/coordinates/{lat}/{lon}
+          method: get
+          private: false
+          
+  getWeatherById:
+    handler: src/controllers/weather/get-by-id.handler
+    events:
+      - http:
+          path: /v1/weather/id/{cityId}
+          method: get
+          private: false
+          
+  getWeatherByZipcode:
+    handler: src/controllers/weather/get-by-zipcode.handler
+    events:
+      - http:
+          path: /v1/weather/zipcode/{zipcode}/{countryCode}
+          method: get
+          private: false
+          
+  getWeatherByZipcodeDefault:
+    handler: src/controllers/weather/get-by-zipcode.handler
+    events:
+      - http:
+          path: /v1/weather/zipcode/{zipcode}
+          method: get
+          private: false
+          
+  getWeatherWithUnits:
+    handler: src/controllers/weather/get-with-units.handler
+    events:
+      - http:
+          path: /v1/weather/units/{location}/{units}
+          method: get
+          private: false
+          
+  getWeatherWithLanguage:
+    handler: src/controllers/weather/get-with-language.handler
+    events:
+      - http:
+          path: /v1/weather/language/{location}/{language}
+          method: get
+          private: false
+          
+  getWeatherByCombined:
+    handler: src/controllers/weather/get-by-combined.handler
+    events:
+      - http:
+          path: /v1/weather/combined/{location}/{units}/{language}
+          method: get
+          private: false
+          
+  getWeatherByCombinedOptional:
+    handler: src/controllers/weather/get-by-combined.handler
+    events:
+      - http:
+          path: /v1/weather/combined/{location}
           method: get
           private: false
           

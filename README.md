@@ -1,13 +1,13 @@
-![Index app](./doc/assets/img/open-weather.jpg)
+![Index app](https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/img/open-weather.jpg?v=1)
 
 <div align="right">
-  <img width="25" height="25" src="./doc/assets/icons/devops/png/aws.png" />
-  <img width="25" height="25" src="./doc/assets/icons/aws/png/lambda.png" />
-  <img width="27" height="27" src="./doc/assets/icons/devops/png/postman.png" />
-  <img width="29" height="27" src="./doc/assets/icons/devops/png/git.png" />
-  <img width="28" height="27" src="./doc/assets/icons/aws/png/api-gateway.png" />
-  <img width="27" height="25" src="./doc/assets/icons/aws/png/parameter-store.png" />
-  <img width="27" height="27" src="./doc/assets/icons/backend/javascript-typescript/png/nodejs.png" />
+  <img width="25" height="25" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/devops/png/aws.png?v=1" />
+  <img width="25" height="25" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/aws/png/lambda.png?v=1" />
+  <img width="27" height="27" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/devops/png/postman.png?v=1" />
+  <img width="29" height="27" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/devops/png/git.png?v=1" />
+  <img width="28" height="27" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/aws/png/api-gateway.png?v=1" />
+  <img width="27" height="25" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/aws/png/parameter-store.png?v=1" />
+  <img width="27" height="27" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/backend/javascript-typescript/png/nodejs.png?v=1" />
 </div>
 
 <br>
@@ -16,10 +16,10 @@
 
 <div align="right">
     <a href="./README.md" target="_blank">
-      <img src="./doc/assets/translation/arg-flag.jpg" width="10%" height="10%" />
+      <img src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/translation/arg-flag.jpg?v=1" width="10%" height="10%" />
   </a> 
    <a href="./README.md" target="_blank">
-      <img src="./doc/assets/translation/eeuu-flag.jpg" width="10%" height="10%" />
+      <img src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/translation/eeuu-flag.jpg?v=1" width="10%" height="10%" />
   </a>
 </div>
 
@@ -35,7 +35,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 
 *   [Weather-conditions](https://openweathermap.org/weather-conditions)
 *   [Api keys](https://home.openweathermap.org/api_keys)
-*   [Playlist functionality test](https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y) <a href="https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y" target="_blank"> <img src="./doc/assets/social-networks/yt.png" width="5%" height="5%" /> </a>
+*   [Playlist functionality test](https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y) <a href="https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y" target="_blank"> <img src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/social-networks/yt.png?v=1" width="5%" height="5%" /> </a>
 
 <br>
 

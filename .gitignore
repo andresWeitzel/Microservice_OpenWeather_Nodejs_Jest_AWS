@@ -10,3 +10,7 @@ serverless-ssm.yml
 
 # testing
 coverage
+
+#keys
+.env
+serverless-ssm.yml

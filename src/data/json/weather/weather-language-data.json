@@ -1,0 +1,45 @@
+{
+  "coord": {
+    "lon": 2.3522,
+    "lat": 48.8566
+  },
+  "weather": [
+    {
+      "id": 800,
+      "main": "Clear",
+      "description": "cielo despejado",
+      "icon": "01d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 285.15,
+    "feels_like": 284.25,
+    "temp_min": 283.15,
+    "temp_max": 287.15,
+    "pressure": 1015,
+    "humidity": 70,
+    "sea_level": 1015,
+    "grnd_level": 1014
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 2.1,
+    "deg": 45
+  },
+  "clouds": {
+    "all": 0
+  },
+  "dt": 1753649002,
+  "sys": {
+    "type": 2,
+    "id": 2041230,
+    "country": "FR",
+    "sunrise": 1753613455,
+    "sunset": 1753650532
+  },
+  "timezone": 3600,
+  "id": 2988507,
+  "name": "Paris",
+  "cod": 200
+} 

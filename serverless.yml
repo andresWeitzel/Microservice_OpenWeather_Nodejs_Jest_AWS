@@ -9,7 +9,7 @@ provider:
   stage: dev
   region: us-east-1
   memorySize: 512
-  timeout: 10
+  timeout: 30
   environment: ${file(./serverless-ssm.yml)}
 
 plugins:
@@ -17,11 +17,123 @@ plugins:
   - serverless-offline
 
 functions:
-  getWeatherCondition:
-    handler: src/controllers/weather-condition/get.handler
+  getWeatherByLocation:
+    handler: src/controllers/weather/get-by-location.handler
     events:
       - http:
-          path: /v1/weather-condition/country/{country}
+          path: /v1/weather/location/{location}
+          method: get
+          private: false
+          
+  getWeatherByLocationEnhanced:
+    handler: src/controllers/weather/get-by-location-enhanced.handler
+    events:
+      - http:
+          path: /v1/weather-enhanced/location/{location}
+          method: get
+          private: false
+          
+  getWeatherByCoordinates:
+    handler: src/controllers/weather/get-by-coordinates.handler
+    events:
+      - http:
+          path: /v1/weather/coordinates/{lat}/{lon}
+          method: get
+          private: false
+          
+  getWeatherById:
+    handler: src/controllers/weather/get-by-id.handler
+    events:
+      - http:
+          path: /v1/weather/id/{cityId}
+          method: get
+          private: false
+          
+  getWeatherByZipcode:
+    handler: src/controllers/weather/get-by-zipcode.handler
+    events:
+      - http:
+          path: /v1/weather/zipcode/{zipcode}/{countryCode}
+          method: get
+          private: false
+          
+  getWeatherByZipcodeDefault:
+    handler: src/controllers/weather/get-by-zipcode.handler
+    events:
+      - http:
+          path: /v1/weather/zipcode/{zipcode}
+          method: get
+          private: false
+          
+  getWeatherWithUnits:
+    handler: src/controllers/weather/get-with-units.handler
+    events:
+      - http:
+          path: /v1/weather/units/{location}/{units}
+          method: get
+          private: false
+          
+  getWeatherWithLanguage:
+    handler: src/controllers/weather/get-with-language.handler
+    events:
+      - http:
+          path: /v1/weather/language/{location}/{language}
+          method: get
+          private: false
+          
+  getWeatherByCombined:
+    handler: src/controllers/weather/get-by-combined.handler
+    events:
+      - http:
+          path: /v1/weather/combined/{location}/{units}/{language}
+          method: get
+          private: false
+          
+  getWeatherByCombinedOptional:
+    handler: src/controllers/weather/get-by-combined.handler
+    events:
+      - http:
+          path: /v1/weather/combined/{location}
+          method: get
+          private: false
+          
+  getForecast:
+    handler: src/controllers/forecast/get.handler
+    events:
+      - http:
+          path: /v1/forecast/location/{location}
+          method: get
+          private: false
+          
+  getEnhancedForecast:
+    handler: src/controllers/forecast/enhanced.handler
+    events:
+      - http:
+          path: /v1/forecast-enhanced/location/{location}
+          method: get
+          private: false
+          
+  getAirPollution:
+    handler: src/controllers/air-pollution/get.handler
+    events:
+      - http:
+          path: /v1/air-pollution/location/{location}
+          method: get
+          private: false
+          
+  getEnhancedAirPollution:
+    handler: src/controllers/air-pollution/enhanced.handler
+    events:
+      - http:
+          path: /v1/air-pollution-enhanced/location/{location}
+          method: get
+          private: false
+          
+  healthCheck:
+    handler: src/controllers/health/check.handler
+    events:
+      - http:
+          path: /health
           method: get
           private: false
           

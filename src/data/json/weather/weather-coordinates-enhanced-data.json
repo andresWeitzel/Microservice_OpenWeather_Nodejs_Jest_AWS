@@ -1,42 +1,41 @@
 {
     "location": {
-        "city": "Buenos Aires",
+        "city": "San Nicolas",
         "country": "AR",
         "coordinates": {
             "lon": -58.3772,
             "lat": -34.6132
         },
         "timezone": -10800,
-        "localTime": "2025-08-07T01:22:02.002Z",
+        "localTime": "2025-08-07T01:35:37.738Z",
         "isDaytime": false
     },
     "temperature": {
-        "kelvin": 286.22,
-        "celsius": 13.07,
-        "fahrenheit": 55.53,
+        "kelvin": 285.57,
+        "celsius": 12.42,
+        "fahrenheit": 54.36,
         "feels_like": {
-            "kelvin": 285.57,
-            "celsius": 12.42,
-            "fahrenheit": 54.36
+            "kelvin": 284.88,
+            "celsius": 11.73,
+            "fahrenheit": 53.11
         }
     },
     "weather": {
-        "condition": "Clouds",
-        "description": "overcast clouds",
-        "icon": "04n",
+        "condition": "Clear",
+        "description": "clear sky",
+        "icon": "01n",
         "severity": "light",
         "recommendation": "Enjoy the weather!"
     },
     "atmosphere": {
         "pressure": 1022,
-        "humidity": 76,
+        "humidity": 77,
         "visibility": 10000,
-        "clouds": 100
+        "clouds": 0
     },
     "wind": {
-        "speed": 1.32,
-        "direction": 154,
-        "gust": 1.45,
+        "speed": 0.51,
+        "direction": 0,
         "description": "Light air"
     },
     "sun": {
@@ -52,7 +51,7 @@
         "health": "Comfortable conditions for outdoor activities"
     },
     "comfort": {
-        "index": 5.5,
+        "index": 5,
         "level": "cool"
     }
 }

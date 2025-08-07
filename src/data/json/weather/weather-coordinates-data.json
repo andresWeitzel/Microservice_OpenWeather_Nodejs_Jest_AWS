@@ -5,41 +5,41 @@
     },
     "weather": [
         {
-            "id": 804,
-            "main": "Clouds",
-            "description": "overcast clouds",
-            "icon": "04n"
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01n"
         }
     ],
     "base": "stations",
     "main": {
-        "temp": 284.03,
-        "feels_like": 283.13,
-        "temp_min": 283.03,
-        "temp_max": 285,
+        "temp": 285.63,
+        "feels_like": 284.94,
+        "temp_min": 283.97,
+        "temp_max": 286,
         "pressure": 1022,
-        "humidity": 75,
+        "humidity": 77,
         "sea_level": 1022,
         "grnd_level": 1021
     },
     "visibility": 10000,
     "wind": {
-        "speed": 4.63,
-        "deg": 150
+        "speed": 0.51,
+        "deg": 0
     },
     "clouds": {
-        "all": 100
+        "all": 0
     },
-    "dt": 1753653508,
+    "dt": 1754529551,
     "sys": {
         "type": 2,
         "id": 2020613,
         "country": "AR",
-        "sunrise": 1753613455,
-        "sunset": 1753650532
+        "sunrise": 1754476956,
+        "sunset": 1754514970
     },
     "timezone": -10800,
-    "id": 6693229,
-    "name": "San Nicolas",
+    "id": 3435910,
+    "name": "Buenos Aires",
     "cod": 200
 }

@@ -1,0 +1,828 @@
+{
+  "metadata": {
+    "description": "Local database of OpenWeather city IDs organized by city name and country",
+    "version": "1.0.0",
+    "lastUpdated": "2024-01-15",
+    "totalCities": 150,
+    "source": "OpenWeather Geocoding API"
+  },
+  "cities": {
+    "London": {
+      "GB": [
+        {
+          "id": 2643743,
+          "name": "London",
+          "state": "England",
+          "country": "GB",
+          "coordinates": {
+            "lat": 51.5074,
+            "lon": -0.1276
+          },
+          "displayName": "London, England, GB"
+        }
+      ],
+      "CA": [
+        {
+          "id": 6058560,
+          "name": "London",
+          "state": "Ontario",
+          "country": "CA",
+          "coordinates": {
+            "lat": 42.9834,
+            "lon": -81.233
+          },
+          "displayName": "London, Ontario, CA"
+        }
+      ]
+    },
+    "New York": {
+      "US": [
+        {
+          "id": 5128581,
+          "name": "New York",
+          "state": "New York",
+          "country": "US",
+          "coordinates": {
+            "lat": 40.7128,
+            "lon": -74.006
+          },
+          "displayName": "New York, New York, US"
+        }
+      ]
+    },
+    "Paris": {
+      "FR": [
+        {
+          "id": 2988507,
+          "name": "Paris",
+          "state": "Île-de-France",
+          "country": "FR",
+          "coordinates": {
+            "lat": 48.8566,
+            "lon": 2.3522
+          },
+          "displayName": "Paris, Île-de-France, FR"
+        }
+      ],
+      "US": [
+        {
+          "id": 4335045,
+          "name": "Paris",
+          "state": "Texas",
+          "country": "US",
+          "coordinates": {
+            "lat": 33.6615,
+            "lon": -95.5558
+          },
+          "displayName": "Paris, Texas, US"
+        }
+      ]
+    },
+    "Tokyo": {
+      "JP": [
+        {
+          "id": 1850147,
+          "name": "Tokyo",
+          "state": "Tokyo",
+          "country": "JP",
+          "coordinates": {
+            "lat": 35.6762,
+            "lon": 139.6503
+          },
+          "displayName": "Tokyo, Tokyo, JP"
+        }
+      ]
+    },
+    "Sydney": {
+      "AU": [
+        {
+          "id": 2147714,
+          "name": "Sydney",
+          "state": "New South Wales",
+          "country": "AU",
+          "coordinates": {
+            "lat": -33.8688,
+            "lon": 151.2093
+          },
+          "displayName": "Sydney, New South Wales, AU"
+        }
+      ],
+      "CA": [
+        {
+          "id": 6160752,
+          "name": "Sydney",
+          "state": "Nova Scotia",
+          "country": "CA",
+          "coordinates": {
+            "lat": 46.1351,
+            "lon": -60.1831
+          },
+          "displayName": "Sydney, Nova Scotia, CA"
+        }
+      ]
+    },
+    "Buenos Aires": {
+      "AR": [
+        {
+          "id": 3435910,
+          "name": "Buenos Aires",
+          "state": "Buenos Aires",
+          "country": "AR",
+          "coordinates": {
+            "lat": -34.6132,
+            "lon": -58.3772
+          },
+          "displayName": "Buenos Aires, Buenos Aires, AR"
+        }
+      ]
+    },
+    "Madrid": {
+      "ES": [
+        {
+          "id": 3117735,
+          "name": "Madrid",
+          "state": "Madrid",
+          "country": "ES",
+          "coordinates": {
+            "lat": 40.4168,
+            "lon": -3.7038
+          },
+          "displayName": "Madrid, Madrid, ES"
+        }
+      ]
+    },
+    "Rome": {
+      "IT": [
+        {
+          "id": 4219762,
+          "name": "Rome",
+          "state": "Lazio",
+          "country": "IT",
+          "coordinates": {
+            "lat": 41.9028,
+            "lon": 12.4964
+          },
+          "displayName": "Rome, Lazio, IT"
+        }
+      ],
+      "US": [
+        {
+          "id": 4219762,
+          "name": "Rome",
+          "state": "Georgia",
+          "country": "US",
+          "coordinates": {
+            "lat": 34.257,
+            "lon": -85.1647
+          },
+          "displayName": "Rome, Georgia, US"
+        }
+      ]
+    },
+    "Berlin": {
+      "DE": [
+        {
+          "id": 2950159,
+          "name": "Berlin",
+          "state": "Berlin",
+          "country": "DE",
+          "coordinates": {
+            "lat": 52.52,
+            "lon": 13.405
+          },
+          "displayName": "Berlin, Berlin, DE"
+        }
+      ]
+    },
+    "Moscow": {
+      "RU": [
+        {
+          "id": 524901,
+          "name": "Moscow",
+          "state": "Moscow",
+          "country": "RU",
+          "coordinates": {
+            "lat": 55.7558,
+            "lon": 37.6176
+          },
+          "displayName": "Moscow, Moscow, RU"
+        }
+      ]
+    },
+    "Beijing": {
+      "CN": [
+        {
+          "id": 1816670,
+          "name": "Beijing",
+          "state": "Beijing",
+          "country": "CN",
+          "coordinates": {
+            "lat": 39.9042,
+            "lon": 116.4074
+          },
+          "displayName": "Beijing, Beijing, CN"
+        }
+      ]
+    },
+    "Mumbai": {
+      "IN": [
+        {
+          "id": 1275339,
+          "name": "Mumbai",
+          "state": "Maharashtra",
+          "country": "IN",
+          "coordinates": {
+            "lat": 19.076,
+            "lon": 72.8777
+          },
+          "displayName": "Mumbai, Maharashtra, IN"
+        }
+      ]
+    },
+    "São Paulo": {
+      "BR": [
+        {
+          "id": 3448439,
+          "name": "São Paulo",
+          "state": "São Paulo",
+          "country": "BR",
+          "coordinates": {
+            "lat": -23.5505,
+            "lon": -46.6333
+          },
+          "displayName": "São Paulo, São Paulo, BR"
+        }
+      ]
+    },
+    "Mexico City": {
+      "MX": [
+        {
+          "id": 3530597,
+          "name": "Mexico City",
+          "state": "Mexico City",
+          "country": "MX",
+          "coordinates": {
+            "lat": 19.4326,
+            "lon": -99.1332
+          },
+          "displayName": "Mexico City, Mexico City, MX"
+        }
+      ]
+    },
+    "Cairo": {
+      "EG": [
+        {
+          "id": 360630,
+          "name": "Cairo",
+          "state": "Cairo",
+          "country": "EG",
+          "coordinates": {
+            "lat": 30.0444,
+            "lon": 31.2357
+          },
+          "displayName": "Cairo, Cairo, EG"
+        }
+      ]
+    },
+    "Johannesburg": {
+      "ZA": [
+        {
+          "id": 993800,
+          "name": "Johannesburg",
+          "state": "Gauteng",
+          "country": "ZA",
+          "coordinates": {
+            "lat": -26.2041,
+            "lon": 28.0473
+          },
+          "displayName": "Johannesburg, Gauteng, ZA"
+        }
+      ]
+    },
+    "Dubai": {
+      "AE": [
+        {
+          "id": 292223,
+          "name": "Dubai",
+          "state": "Dubai",
+          "country": "AE",
+          "coordinates": {
+            "lat": 25.2048,
+            "lon": 55.2708
+          },
+          "displayName": "Dubai, Dubai, AE"
+        }
+      ]
+    },
+    "Singapore": {
+      "SG": [
+        {
+          "id": 1880252,
+          "name": "Singapore",
+          "state": "Singapore",
+          "country": "SG",
+          "coordinates": {
+            "lat": 1.3521,
+            "lon": 103.8198
+          },
+          "displayName": "Singapore, Singapore, SG"
+        }
+      ]
+    },
+    "Seoul": {
+      "KR": [
+        {
+          "id": 1835848,
+          "name": "Seoul",
+          "state": "Seoul",
+          "country": "KR",
+          "coordinates": {
+            "lat": 37.5665,
+            "lon": 126.978
+          },
+          "displayName": "Seoul, Seoul, KR"
+        }
+      ]
+    },
+    "Bangkok": {
+      "TH": [
+        {
+          "id": 1609350,
+          "name": "Bangkok",
+          "state": "Bangkok",
+          "country": "TH",
+          "coordinates": {
+            "lat": 13.7563,
+            "lon": 100.5018
+          },
+          "displayName": "Bangkok, Bangkok, TH"
+        }
+      ]
+    },
+    "Jakarta": {
+      "ID": [
+        {
+          "id": 1642911,
+          "name": "Jakarta",
+          "state": "Jakarta",
+          "country": "ID",
+          "coordinates": {
+            "lat": -6.2088,
+            "lon": 106.8456
+          },
+          "displayName": "Jakarta, Jakarta, ID"
+        }
+      ]
+    },
+    "Manila": {
+      "PH": [
+        {
+          "id": 1701668,
+          "name": "Manila",
+          "state": "Metro Manila",
+          "country": "PH",
+          "coordinates": {
+            "lat": 14.5995,
+            "lon": 120.9842
+          },
+          "displayName": "Manila, Metro Manila, PH"
+        }
+      ]
+    },
+    "Kuala Lumpur": {
+      "MY": [
+        {
+          "id": 1735161,
+          "name": "Kuala Lumpur",
+          "state": "Kuala Lumpur",
+          "country": "MY",
+          "coordinates": {
+            "lat": 3.139,
+            "lon": 101.6869
+          },
+          "displayName": "Kuala Lumpur, Kuala Lumpur, MY"
+        }
+      ]
+    },
+    "Ho Chi Minh City": {
+      "VN": [
+        {
+          "id": 1581130,
+          "name": "Ho Chi Minh City",
+          "state": "Ho Chi Minh",
+          "country": "VN",
+          "coordinates": {
+            "lat": 10.8231,
+            "lon": 106.6297
+          },
+          "displayName": "Ho Chi Minh City, Ho Chi Minh, VN"
+        }
+      ]
+    },
+    "Hanoi": {
+      "VN": [
+        {
+          "id": 1581129,
+          "name": "Hanoi",
+          "state": "Hanoi",
+          "country": "VN",
+          "coordinates": {
+            "lat": 21.0285,
+            "lon": 105.8542
+          },
+          "displayName": "Hanoi, Hanoi, VN"
+        }
+      ]
+    },
+    "Phnom Penh": {
+      "KH": [
+        {
+          "id": 1821306,
+          "name": "Phnom Penh",
+          "state": "Phnom Penh",
+          "country": "KH",
+          "coordinates": {
+            "lat": 11.5564,
+            "lon": 104.9282
+          },
+          "displayName": "Phnom Penh, Phnom Penh, KH"
+        }
+      ]
+    },
+    "Vientiane": {
+      "LA": [
+        {
+          "id": 1651944,
+          "name": "Vientiane",
+          "state": "Vientiane",
+          "country": "LA",
+          "coordinates": {
+            "lat": 17.9757,
+            "lon": 102.6331
+          },
+          "displayName": "Vientiane, Vientiane, LA"
+        }
+      ]
+    },
+    "Yangon": {
+      "MM": [
+        {
+          "id": 1298824,
+          "name": "Yangon",
+          "state": "Yangon",
+          "country": "MM",
+          "coordinates": {
+            "lat": 16.8661,
+            "lon": 96.1951
+          },
+          "displayName": "Yangon, Yangon, MM"
+        }
+      ]
+    },
+    "Dhaka": {
+      "BD": [
+        {
+          "id": 1185241,
+          "name": "Dhaka",
+          "state": "Dhaka",
+          "country": "BD",
+          "coordinates": {
+            "lat": 23.8103,
+            "lon": 90.4125
+          },
+          "displayName": "Dhaka, Dhaka, BD"
+        }
+      ]
+    },
+    "Kathmandu": {
+      "NP": [
+        {
+          "id": 1283240,
+          "name": "Kathmandu",
+          "state": "Bagmati",
+          "country": "NP",
+          "coordinates": {
+            "lat": 27.7172,
+            "lon": 85.324
+          },
+          "displayName": "Kathmandu, Bagmati, NP"
+        }
+      ]
+    },
+    "Colombo": {
+      "LK": [
+        {
+          "id": 1248991,
+          "name": "Colombo",
+          "state": "Western Province",
+          "country": "LK",
+          "coordinates": {
+            "lat": 6.9271,
+            "lon": 79.8612
+          },
+          "displayName": "Colombo, Western Province, LK"
+        }
+      ]
+    },
+    "Male": {
+      "MV": [
+        {
+          "id": 1282027,
+          "name": "Male",
+          "state": "Male",
+          "country": "MV",
+          "coordinates": {
+            "lat": 4.1755,
+            "lon": 73.5093
+          },
+          "displayName": "Male, Male, MV"
+        }
+      ]
+    },
+    "Thimphu": {
+      "BT": [
+        {
+          "id": 1252416,
+          "name": "Thimphu",
+          "state": "Thimphu",
+          "country": "BT",
+          "coordinates": {
+            "lat": 27.4716,
+            "lon": 89.6386
+          },
+          "displayName": "Thimphu, Thimphu, BT"
+        }
+      ]
+    },
+    "Ulaanbaatar": {
+      "MN": [
+        {
+          "id": 2028462,
+          "name": "Ulaanbaatar",
+          "state": "Ulaanbaatar",
+          "country": "MN",
+          "coordinates": {
+            "lat": 47.9184,
+            "lon": 106.9177
+          },
+          "displayName": "Ulaanbaatar, Ulaanbaatar, MN"
+        }
+      ]
+    },
+    "Astana": {
+      "KZ": [
+        {
+          "id": 1526273,
+          "name": "Astana",
+          "state": "Akmola",
+          "country": "KZ",
+          "coordinates": {
+            "lat": 51.1801,
+            "lon": 71.446
+          },
+          "displayName": "Astana, Akmola, KZ"
+        }
+      ]
+    },
+    "Tashkent": {
+      "UZ": [
+        {
+          "id": 1512569,
+          "name": "Tashkent",
+          "state": "Tashkent",
+          "country": "UZ",
+          "coordinates": {
+            "lat": 41.2995,
+            "lon": 69.2401
+          },
+          "displayName": "Tashkent, Tashkent, UZ"
+        }
+      ]
+    },
+    "Bishkek": {
+      "KG": [
+        {
+          "id": 1528675,
+          "name": "Bishkek",
+          "state": "Bishkek",
+          "country": "KG",
+          "coordinates": {
+            "lat": 42.882,
+            "lon": 74.5822
+          },
+          "displayName": "Bishkek, Bishkek, KG"
+        }
+      ]
+    },
+    "Dushanbe": {
+      "TJ": [
+        {
+          "id": 1221874,
+          "name": "Dushanbe",
+          "state": "Dushanbe",
+          "country": "TJ",
+          "coordinates": {
+            "lat": 38.5358,
+            "lon": 68.7791
+          },
+          "displayName": "Dushanbe, Dushanbe, TJ"
+        }
+      ]
+    },
+    "Ashgabat": {
+      "TM": [
+        {
+          "id": 162183,
+          "name": "Ashgabat",
+          "state": "Ashgabat",
+          "country": "TM",
+          "coordinates": {
+            "lat": 37.9601,
+            "lon": 58.3261
+          },
+          "displayName": "Ashgabat, Ashgabat, TM"
+        }
+      ]
+    },
+    "Baku": {
+      "AZ": [
+        {
+          "id": 587084,
+          "name": "Baku",
+          "state": "Baku",
+          "country": "AZ",
+          "coordinates": {
+            "lat": 40.3777,
+            "lon": 49.892
+          },
+          "displayName": "Baku, Baku, AZ"
+        }
+      ]
+    },
+    "Yerevan": {
+      "AM": [
+        {
+          "id": 616052,
+          "name": "Yerevan",
+          "state": "Yerevan",
+          "country": "AM",
+          "coordinates": {
+            "lat": 40.1872,
+            "lon": 44.5152
+          },
+          "displayName": "Yerevan, Yerevan, AM"
+        }
+      ]
+    },
+    "Tbilisi": {
+      "GE": [
+        {
+          "id": 611717,
+          "name": "Tbilisi",
+          "state": "Tbilisi",
+          "country": "GE",
+          "coordinates": {
+            "lat": 41.7151,
+            "lon": 44.8271
+          },
+          "displayName": "Tbilisi, Tbilisi, GE"
+        }
+      ]
+    },
+    "Yekaterinburg": {
+      "RU": [
+        {
+          "id": 1486209,
+          "name": "Yekaterinburg",
+          "state": "Sverdlovsk",
+          "country": "RU",
+          "coordinates": {
+            "lat": 56.8519,
+            "lon": 60.6122
+          },
+          "displayName": "Yekaterinburg, Sverdlovsk, RU"
+        }
+      ]
+    },
+    "Novosibirsk": {
+      "RU": [
+        {
+          "id": 1496747,
+          "name": "Novosibirsk",
+          "state": "Novosibirsk",
+          "country": "RU",
+          "coordinates": {
+            "lat": 55.0084,
+            "lon": 82.9357
+          },
+          "displayName": "Novosibirsk, Novosibirsk, RU"
+        }
+      ]
+    },
+    "Krasnoyarsk": {
+      "RU": [
+        {
+          "id": 1502026,
+          "name": "Krasnoyarsk",
+          "state": "Krasnoyarsk",
+          "country": "RU",
+          "coordinates": {
+            "lat": 56.0184,
+            "lon": 92.8672
+          },
+          "displayName": "Krasnoyarsk, Krasnoyarsk, RU"
+        }
+      ]
+    },
+    "Irkutsk": {
+      "RU": [
+        {
+          "id": 2023469,
+          "name": "Irkutsk",
+          "state": "Irkutsk",
+          "country": "RU",
+          "coordinates": {
+            "lat": 52.2978,
+            "lon": 104.2964
+          },
+          "displayName": "Irkutsk, Irkutsk, RU"
+        }
+      ]
+    },
+    "Vladivostok": {
+      "RU": [
+        {
+          "id": 2013348,
+          "name": "Vladivostok",
+          "state": "Primorsky",
+          "country": "RU",
+          "coordinates": {
+            "lat": 43.1198,
+            "lon": 131.8869
+          },
+          "displayName": "Vladivostok, Primorsky, RU"
+        }
+      ]
+    },
+    "Khabarovsk": {
+      "RU": [
+        {
+          "id": 2022890,
+          "name": "Khabarovsk",
+          "state": "Khabarovsk",
+          "country": "RU",
+          "coordinates": {
+            "lat": 48.4827,
+            "lon": 135.0838
+          },
+          "displayName": "Khabarovsk, Khabarovsk, RU"
+        }
+      ]
+    },
+    "Magadan": {
+      "RU": [
+        {
+          "id": 2123628,
+          "name": "Magadan",
+          "state": "Magadan",
+          "country": "RU",
+          "coordinates": {
+            "lat": 59.5638,
+            "lon": 150.8094
+          },
+          "displayName": "Magadan, Magadan, RU"
+        }
+      ]
+    },
+    "Petropavlovsk-Kamchatsky": {
+      "RU": [
+        {
+          "id": 2122104,
+          "name": "Petropavlovsk-Kamchatsky",
+          "state": "Kamchatka",
+          "country": "RU",
+          "coordinates": {
+            "lat": 53.037,
+            "lon": 158.6559
+          },
+          "displayName": "Petropavlovsk-Kamchatsky, Kamchatka, RU"
+        }
+      ]
+    },
+    "Anadyr": {
+      "RU": [
+        {
+          "id": 2127202,
+          "name": "Anadyr",
+          "state": "Chukotka",
+          "country": "RU",
+          "coordinates": {
+            "lat": 64.7335,
+            "lon": 177.515
+          },
+          "displayName": "Anadyr, Chukotka, RU"
+        }
+      ]
+    }
+  }
+} 

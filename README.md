@@ -1,13 +1,13 @@
-![Index app](https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/img/open-weather.jpg?v=1)
+![Index app](./doc/assets/img/open-weather.jpg)
 
 <div align="right">
-  <img width="25" height="25" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/devops/png/aws.png?v=1" />
-  <img width="25" height="25" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/aws/png/lambda.png?v=1" />
-  <img width="27" height="27" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/devops/png/postman.png?v=1" />
-  <img width="29" height="27" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/devops/png/git.png?v=1" />
-  <img width="28" height="27" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/aws/png/api-gateway.png?v=1" />
-  <img width="27" height="25" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/aws/png/parameter-store.png?v=1" />
-  <img width="27" height="27" src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/icons/backend/javascript-typescript/png/nodejs.png?v=1" />
+  <img width="25" height="25" src="./doc/assets/icons/devops/png/aws.png" />
+  <img width="25" height="25" src="./doc/assets/icons/aws/png/lambda.png" />
+  <img width="27" height="27" src="./doc/assets/icons/devops/png/postman.png" />
+  <img width="29" height="27" src="./doc/assets/icons/devops/png/git.png" />
+  <img width="28" height="27" src="./doc/assets/icons/aws/png/api-gateway.png" />
+  <img width="27" height="25" src="./doc/assets/icons/aws/png/parameter-store.png" />
+  <img width="27" height="27" src="./doc/assets/icons/backend/javascript-typescript/png/nodejs.png" />
 </div>
 
 <br>
@@ -16,10 +16,10 @@
 
 <div align="right">
     <a href="./README.md" target="_blank">
-      <img src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/translation/arg-flag.jpg?v=1" width="10%" height="10%" />
+      <img src="./doc/assets/translation/arg-flag.jpg" width="10%" height="10%" />
   </a> 
    <a href="./README.md" target="_blank">
-      <img src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/translation/eeuu-flag.jpg?v=1" width="10%" height="10%" />
+      <img src="./doc/assets/translation/eeuu-flag.jpg" width="10%" height="10%" />
   </a>
 </div>
 
@@ -35,7 +35,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 
 *   [Weather-conditions](https://openweathermap.org/weather-conditions)
 *   [Api keys](https://home.openweathermap.org/api_keys)
-*   [Playlist functionality test](https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y) <a href="https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y" target="_blank"> <img src="https://raw.githubusercontent.com/andresWeitzel/Microservice_OpenWeather_Nodejs_Jest_AWS/master/doc/assets/social-networks/yt.png?v=1" width="5%" height="5%" /> </a>
+*   [Playlist functionality test](https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y) <a href="https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y" target="_blank"> <img src="./doc/assets/social-networks/yt.png" width="5%" height="5%" /> </a>
 
 <br>
 
@@ -452,7 +452,12 @@ If you continue to have issues:
 | `/v1/weather/location/{location}` | GET | Raw OpenWeather data | Original OpenWeather format |
 | `/v1/weather-enhanced/location/{location}` | GET | **Enhanced weather data** | **Enriched format with conversions, recommendations, and alerts** |
 | `/v1/weather/coordinates/{lat}/{lon}` | GET | **Weather by coordinates** | **Weather data for GPS coordinates** |
+| `/v1/weather-enhanced/coordinates/{lat}/{lon}` | GET | **Enhanced weather by coordinates** | **Enhanced weather data for GPS coordinates** |
 | `/v1/weather/id/{cityId}` | GET | **Weather by city ID** | **Weather data using OpenWeather city ID** |
+| `/v1/weather-enhanced/id/{cityId}` | GET | **Enhanced weather by city ID** | **Enhanced weather data using OpenWeather city ID** |
+| `/v1/info/city-ids/{cityName}` | GET | **Search city IDs** | **Find city IDs by name from local database (default limit: 5)** |
+| `/v1/info/city-ids/{cityName}/{countryCode}` | GET | **Search city IDs with country** | **Find city IDs by name and country from local database (default limit: 5)** |
+| `/v1/info/city-ids/{cityName}/{countryCode}/{limit}` | GET | **Search city IDs with limit** | **Find city IDs by name, country and custom limit from local database (1-10)** |
 | `/v1/weather/zipcode/{zipcode}/{countryCode}` | GET | **Weather by zipcode** | **Weather data for postal code** |
 | `/v1/weather/zipcode/{zipcode}` | GET | **Weather by zipcode (default country)** | **Weather data for postal code** |
 | `/v1/weather/units/{location}/{units}` | GET | **Weather with specific units** | **Weather data in metric/imperial/kelvin** |
@@ -463,7 +468,7 @@ If you continue to have issues:
 | `/v1/forecast-enhanced/location/{location}` | GET | **Enhanced forecast data** | **Enriched format with daily summaries, trends, and planning recommendations** |
 | `/v1/air-pollution/location/{location}` | GET | Raw OpenWeather air pollution | Original OpenWeather air pollution format |
 | `/v1/air-pollution-enhanced/location/{location}` | GET | **Enhanced air pollution data** | **Enriched format with health recommendations, alerts, and detailed analysis** |
-| `/health` | GET | **System health check** | **API connectivity, cache status, and system metrics** |
+| `/v1/info/health` | GET | **System health check** | **API connectivity, cache status, and system metrics** |
 
 > **🆕 NEW**: We've implemented all OpenWeatherMap weather API variants! See [WEATHER\_ENDPOINTS.md](./WEATHER_ENDPOINTS.md) for complete documentation.
 
@@ -707,6 +712,207 @@ GET http://localhost:4000/v1/weather-enhanced/location/London
 }
 ```
 
+#### Search City IDs Endpoint
+
+**Request:**
+
+```bash
+GET http://localhost:4000/v1/info/city-ids/London/GB
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "body": {
+    "searchQuery": "London",
+    "countryCode": "GB",
+    "limit": 5,
+    "totalResults": 1,
+    "source": "local_database",
+    "databaseInfo": {
+      "version": "1.0.0",
+      "totalCities": 150,
+      "lastUpdated": "2024-01-15"
+    },
+    "cities": [
+      {
+        "id": 2643743,
+        "name": "London",
+        "state": "England",
+        "country": "GB",
+        "coordinates": {
+          "lat": 51.5074,
+          "lon": -0.1276
+        },
+        "displayName": "London, England, GB"
+      }
+    ]
+  }
+}
+```
+
+**Database Features:**
+
+*   **📊 150+ Cities**: Major cities from around the world
+*   **🌍 Multiple Countries**: Cities with same name in different countries
+*   **⚡ Fast Response**: No external API calls needed
+*   **🔍 Partial Matching**: Find cities with partial name searches
+*   **📅 Always Available**: Works offline, no dependency on external services
+
+#### Enhanced Weather by City ID Endpoint
+
+**Request:**
+
+```bash
+GET http://localhost:4000/v1/weather-enhanced/id/2643743
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "body": {
+    "location": {
+      "city": "London",
+      "country": "GB",
+      "coordinates": {"lon": -0.1276, "lat": 51.5074},
+      "timezone": 0,
+      "localTime": "2024-01-15T14:30:00.000Z",
+      "isDaytime": true
+    },
+    "temperature": {
+      "kelvin": 280.32,
+      "celsius": 7.17,
+      "fahrenheit": 44.91,
+      "feels_like": {
+        "kelvin": 278.15,
+        "celsius": 5.0,
+        "fahrenheit": 41.0
+      }
+    },
+    "weather": {
+      "condition": "Drizzle",
+      "description": "light intensity drizzle",
+      "icon": "09d",
+      "severity": "light",
+      "recommendation": "Bring an umbrella or raincoat"
+    },
+    "atmosphere": {
+      "pressure": 1012,
+      "humidity": 81,
+      "visibility": 10000,
+      "clouds": 90
+    },
+    "wind": {
+      "speed": 4.1,
+      "direction": 80,
+      "description": "Gentle breeze"
+    },
+    "sun": {
+      "sunrise": "07:45 AM",
+      "sunset": "04:30 PM",
+      "dayLength": "8h 45m"
+    },
+    "alerts": [
+      {
+        "type": "temperature",
+        "level": "moderate",
+        "message": "Cold temperatures expected"
+      }
+    ],
+    "recommendations": {
+      "clothing": "Warm jacket or coat",
+      "activities": "Indoor activities preferred",
+      "transport": "Normal transport conditions",
+      "health": "Wear warm clothing"
+    },
+    "comfort": {
+      "index": 6.5,
+      "level": "cool"
+    }
+  }
+}
+```
+
+#### Enhanced Weather by Coordinates Endpoint
+
+**Request:**
+
+```bash
+GET http://localhost:4000/v1/weather-enhanced/coordinates/51.5074/-0.1276
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "body": {
+    "location": {
+      "city": "London",
+      "country": "GB",
+      "coordinates": {"lon": -0.1276, "lat": 51.5074},
+      "timezone": 0,
+      "localTime": "2024-01-15T14:30:00.000Z",
+      "isDaytime": true
+    },
+    "temperature": {
+      "kelvin": 280.32,
+      "celsius": 7.17,
+      "fahrenheit": 44.91,
+      "feels_like": {
+        "kelvin": 278.15,
+        "celsius": 5.0,
+        "fahrenheit": 41.0
+      }
+    },
+    "weather": {
+      "condition": "Drizzle",
+      "description": "light intensity drizzle",
+      "icon": "09d",
+      "severity": "light",
+      "recommendation": "Bring an umbrella or raincoat"
+    },
+    "atmosphere": {
+      "pressure": 1012,
+      "humidity": 81,
+      "visibility": 10000,
+      "clouds": 90
+    },
+    "wind": {
+      "speed": 4.1,
+      "direction": 80,
+      "description": "Gentle breeze"
+    },
+    "sun": {
+      "sunrise": "07:45 AM",
+      "sunset": "04:30 PM",
+      "dayLength": "8h 45m"
+    },
+    "alerts": [
+      {
+        "type": "temperature",
+        "level": "moderate",
+        "message": "Cold temperatures expected"
+      }
+    ],
+    "recommendations": {
+      "clothing": "Warm jacket or coat",
+      "activities": "Indoor activities preferred",
+      "transport": "Normal transport conditions",
+      "health": "Wear warm clothing"
+    },
+    "comfort": {
+      "index": 6.5,
+      "level": "cool"
+    }
+  }
+}
+```
+
 #### Basic Air Pollution Endpoint
 
 **Request:**
@@ -880,6 +1086,19 @@ curl http://localhost:4000/v1/weather-enhanced/location/Sydney
 curl http://localhost:4000/v1/weather-enhanced/location/Japan
 curl http://localhost:4000/v1/weather-enhanced/location/Australia
 
+# Test coordinates endpoints
+curl http://localhost:4000/v1/weather/coordinates/51.5074/-0.1276
+curl http://localhost:4000/v1/weather-enhanced/coordinates/40.7128/-74.0060
+
+# Test city ID endpoints
+curl http://localhost:4000/v1/weather/id/3435910
+curl http://localhost:4000/v1/weather-enhanced/id/2643743
+
+# Test city IDs search endpoints
+curl http://localhost:4000/v1/info/city-ids/London
+curl http://localhost:4000/v1/info/city-ids/Paris/FR
+curl http://localhost:4000/v1/info/city-ids/New%20York/US/3
+
 # Test air pollution endpoints
 curl http://localhost:4000/v1/air-pollution/location/Beijing
 curl http://localhost:4000/v1/air-pollution-enhanced/location/Delhi
@@ -895,11 +1114,39 @@ curl http://localhost:4000/v1/air-pollution-enhanced/location/Delhi
     *   Method: `GET`
     *   URL: `http://localhost:4000/v1/weather-enhanced/location/London`
 
-3.  **Basic Air Pollution:**
+3.  **Basic Weather by Coordinates:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/weather/coordinates/51.5074/-0.1276`
+
+4.  **Enhanced Weather by Coordinates:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/weather-enhanced/coordinates/40.7128/-74.0060`
+
+5.  **Basic Weather by City ID:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/weather/id/3435910`
+
+6.  **Enhanced Weather by City ID:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/weather-enhanced/id/2643743`
+
+7.  **Search City IDs:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/info/city-ids/London`
+
+8.  **Search City IDs with Country:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/info/city-ids/Paris/FR`
+
+9.  **Search City IDs with Limit:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/info/city-ids/New%20York/US/3`
+
+10. **Basic Air Pollution:**
     *   Method: `GET`
     *   URL: `http://localhost:4000/v1/air-pollution/location/London`
 
-4.  **Enhanced Air Pollution:**
+11. **Enhanced Air Pollution:**
     *   Method: `GET`
     *   URL: `http://localhost:4000/v1/air-pollution-enhanced/location/London`
 
@@ -1019,10 +1266,21 @@ curl http://localhost:4000/v1/weather/location/London
 # 2. Weather by GPS coordinates
 curl http://localhost:4000/v1/weather/coordinates/51.5074/-0.1276
 
+# 2.1. Enhanced weather by GPS coordinates
+curl http://localhost:4000/v1/weather-enhanced/coordinates/40.7128/-74.0060
+
 # 3. Weather by city ID (Buenos Aires = 3435910)
 curl http://localhost:4000/v1/weather/id/3435910
 
-# 4. Weather by zipcode with country
+# 3.1. Enhanced weather by city ID (London = 2643743)
+curl http://localhost:4000/v1/weather-enhanced/id/2643743
+
+# 4. Search city IDs
+curl http://localhost:4000/v1/info/city-ids/London
+curl http://localhost:4000/v1/info/city-ids/Paris/FR
+curl http://localhost:4000/v1/info/city-ids/New%20York/US/3
+
+# 5. Weather by zipcode with country
 curl http://localhost:4000/v1/weather/zipcode/10001/us
 
 # 5. Weather by zipcode (default country)

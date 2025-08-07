@@ -41,11 +41,27 @@ functions:
           method: get
           private: false
           
+  getWeatherByCoordinatesEnhanced:
+    handler: src/controllers/weather/get-by-coordinates-enhanced.handler
+    events:
+      - http:
+          path: /v1/weather-enhanced/coordinates/{lat}/{lon}
+          method: get
+          private: false
+          
   getWeatherById:
     handler: src/controllers/weather/get-by-id.handler
     events:
       - http:
           path: /v1/weather/id/{cityId}
+          method: get
+          private: false
+          
+  getWeatherByIdEnhanced:
+    handler: src/controllers/weather/get-by-id-enhanced.handler
+    events:
+      - http:
+          path: /v1/weather-enhanced/id/{cityId}
           method: get
           private: false
           
@@ -62,6 +78,30 @@ functions:
     events:
       - http:
           path: /v1/weather/zipcode/{zipcode}
+          method: get
+          private: false
+          
+  getCityIds:
+    handler: src/controllers/info/city-ids/get-city-ids.handler
+    events:
+      - http:
+          path: /v1/info/city-ids/{cityName}
+          method: get
+          private: false
+          
+  getCityIdsWithCountry:
+    handler: src/controllers/info/city-ids/get-city-ids.handler
+    events:
+      - http:
+          path: /v1/info/city-ids/{cityName}/{countryCode}
+          method: get
+          private: false
+          
+  getCityIdsWithLimit:
+    handler: src/controllers/info/city-ids/get-city-ids.handler
+    events:
+      - http:
+          path: /v1/info/city-ids/{cityName}/{countryCode}/{limit}
           method: get
           private: false
           
@@ -130,10 +170,10 @@ functions:
           private: false
           
   healthCheck:
-    handler: src/controllers/health/check.handler
+    handler: src/controllers/info/health/check.handler
     events:
       - http:
-          path: /health
+          path: /v1/info/health
           method: get
           private: false
           

@@ -1,0 +1,57 @@
+{
+    "location": {
+        "city": "BARRIO CANO",
+        "country": "AR",
+        "coordinates": {
+            "lon": -68.8167,
+            "lat": -32.8833
+        },
+        "timezone": -10800,
+        "localTime": "2025-08-08T02:06:56.094Z",
+        "isDaytime": false
+    },
+    "temperature": {
+        "kelvin": 284.02,
+        "celsius": 10.87,
+        "fahrenheit": 51.57,
+        "feels_like": {
+            "kelvin": 282.68,
+            "celsius": 9.53,
+            "fahrenheit": 49.15
+        }
+    },
+    "weather": {
+        "condition": "Clouds",
+        "description": "scattered clouds",
+        "icon": "03n",
+        "severity": "light",
+        "recommendation": "Enjoy the weather!"
+    },
+    "atmosphere": {
+        "pressure": 1030,
+        "humidity": 58,
+        "visibility": 10000,
+        "clouds": 40
+    },
+    "wind": {
+        "speed": 1.03,
+        "direction": 110,
+        "description": "Light air"
+    },
+    "sun": {
+        "sunrise": "08:20 AM",
+        "sunset": "07:01 PM",
+        "dayLength": "10h 41m"
+    },
+    "alerts": [],
+    "recommendations": {
+        "clothing": "Light jacket or sweater",
+        "activities": "Outdoor activities suitable",
+        "transport": "Normal transport conditions",
+        "health": "Comfortable conditions for outdoor activities"
+    },
+    "comfort": {
+        "index": 6.5,
+        "level": "cool"
+    }
+}

@@ -97,13 +97,17 @@ module.exports.handler = async (event) => {
     setCachedWeatherData('coordinates-enhanced', cacheKey, transformedData, 10 * 60 * 1000);
     console.log(`Cached enhanced data for coordinates: ${lat}, ${lon}`);
 
-    // Save enhanced data to JSON file asynchronously (don't wait for it)
-    createJson(FILE_PATH_WEATHER_COORDINATES_ENHANCED, transformedData).catch(error => {
-      console.log("Warning: Failed to save enhanced weather coordinates data to JSON:", error.message);
+    // Return the enriched weather data immediately
+    const response = await bodyResponse(OK_CODE, transformedData);
+
+    // Save enhanced data to JSON file asynchronously (fire and forget - don't wait for it)
+    process.nextTick(() => {
+      createJson(FILE_PATH_WEATHER_COORDINATES_ENHANCED, transformedData).catch(error => {
+        console.log("Warning: Failed to save enhanced weather coordinates data to JSON:", error.message);
+      });
     });
 
-    // Return the enriched weather data immediately
-    return await bodyResponse(OK_CODE, transformedData);
+    return response;
   } catch (error) {
     console.log("ERROR in enhanced weather coordinates handler:", error);
     return await bodyResponse(

@@ -1,45 +1,46 @@
 {
-  "coord": {
-    "lon": 139.6917,
-    "lat": 35.6895
-  },
-  "weather": [
-    {
-      "id": 800,
-      "main": "Clear",
-      "description": "cielo despejado",
-      "icon": "01d"
-    }
-  ],
-  "base": "stations",
-  "main": {
-    "temp": 22.5,
-    "feels_like": 21.8,
-    "temp_min": 20.2,
-    "temp_max": 24.8,
-    "pressure": 1013,
-    "humidity": 65,
-    "sea_level": 1013,
-    "grnd_level": 1012
-  },
-  "visibility": 10000,
-  "wind": {
-    "speed": 3.2,
-    "deg": 120
-  },
-  "clouds": {
-    "all": 0
-  },
-  "dt": 1753649002,
-  "sys": {
-    "type": 2,
-    "id": 268395,
-    "country": "JP",
-    "sunrise": 1753613455,
-    "sunset": 1753650532
-  },
-  "timezone": 32400,
-  "id": 1850144,
-  "name": "Tokyo",
-  "cod": 200
-} 
+    "coord": {
+        "lon": -58.3772,
+        "lat": -34.6132
+    },
+    "weather": [
+        {
+            "id": 803,
+            "main": "Clouds",
+            "description": "muy nuboso",
+            "icon": "04n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 8.78,
+        "feels_like": 8.78,
+        "temp_min": 8.4,
+        "temp_max": 9.41,
+        "pressure": 1028,
+        "humidity": 82,
+        "sea_level": 1028,
+        "grnd_level": 1027
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 0.45,
+        "deg": 113,
+        "gust": 3.13
+    },
+    "clouds": {
+        "all": 81
+    },
+    "dt": 1754619073,
+    "sys": {
+        "type": 2,
+        "id": 2020613,
+        "country": "AR",
+        "sunrise": 1754563299,
+        "sunset": 1754601414
+    },
+    "timezone": -10800,
+    "id": 3435910,
+    "name": "Buenos Aires",
+    "cod": 200
+}

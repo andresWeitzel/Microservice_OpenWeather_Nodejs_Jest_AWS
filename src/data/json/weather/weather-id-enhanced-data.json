@@ -7,51 +7,51 @@
             "lat": -34.6132
         },
         "timezone": -10800,
-        "localTime": "2025-08-07T01:51:39.414Z",
+        "localTime": "2025-08-08T01:32:27.269Z",
         "isDaytime": false
     },
     "temperature": {
-        "kelvin": 285.75,
-        "celsius": 12.6,
-        "fahrenheit": 54.68,
+        "kelvin": 282.1,
+        "celsius": 8.95,
+        "fahrenheit": 48.11,
         "feels_like": {
-            "kelvin": 285.02,
-            "celsius": 11.87,
-            "fahrenheit": 53.37
+            "kelvin": 280.06,
+            "celsius": 6.91,
+            "fahrenheit": 44.44
         }
     },
     "weather": {
-        "condition": "Clear",
-        "description": "clear sky",
-        "icon": "01n",
+        "condition": "Clouds",
+        "description": "broken clouds",
+        "icon": "04n",
         "severity": "light",
-        "recommendation": "Enjoy the weather!"
+        "recommendation": "Wear warm clothing"
     },
     "atmosphere": {
-        "pressure": 1022,
-        "humidity": 75,
+        "pressure": 1028,
+        "humidity": 82,
         "visibility": 10000,
-        "clouds": 0
+        "clouds": 75
     },
     "wind": {
-        "speed": 0.51,
-        "direction": 0,
-        "description": "Light air"
+        "speed": 3.6,
+        "direction": 180,
+        "description": "Gentle breeze"
     },
     "sun": {
-        "sunrise": "07:42 AM",
+        "sunrise": "07:41 AM",
         "sunset": "06:16 PM",
-        "dayLength": "10h 33m"
+        "dayLength": "10h 35m"
     },
     "alerts": [],
     "recommendations": {
-        "clothing": "Light jacket or sweater",
+        "clothing": "Warm jacket or coat",
         "activities": "Outdoor activities suitable",
         "transport": "Normal transport conditions",
-        "health": "Comfortable conditions for outdoor activities"
+        "health": "High humidity may cause discomfort"
     },
     "comfort": {
-        "index": 5,
-        "level": "cool"
+        "index": 4.5,
+        "level": "cold"
     }
 }

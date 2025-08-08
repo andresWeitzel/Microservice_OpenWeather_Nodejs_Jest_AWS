@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Path to the local city IDs database
-const CITY_IDS_DATABASE_PATH = path.join(__dirname, '../../../data/city-ids/city-ids-database.json');
+const CITY_IDS_DATABASE_PATH = path.join(__dirname, '../../../data/json/info/city-ids/city-ids-database.json');
 
 /**
  * Load the local city IDs database

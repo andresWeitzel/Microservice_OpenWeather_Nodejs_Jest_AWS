@@ -3,8 +3,9 @@
 //helpers
 const { sendGetRequest } = require("../../helpers/axios/request/get");
 const { statusCode } = require("../../enums/http/status-code");
-const { createJson } = require("../../helpers/file-system/create-json");
 const { bodyResponse } = require("../../helpers/http/body-response");
+const { transformWeatherData } = require("../../helpers/weather/transform-weather");
+const { createJson } = require("../../helpers/file-system/create-json");
 const { getCachedWeatherData, setCachedWeatherData, hasCachedWeatherData } = require("../../helpers/cache/simple-cache");
 
 //const
@@ -13,7 +14,7 @@ const API_KEY = process.env.API_KEY;
 const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
 const INTERNAL_SERVER_ERROR = statusCode.INTERNAL_SERVER_ERROR;
-const FILE_PATH_WEATHER_ZIPCODE = "../../../data/json/weather/weather-zipcode-data.json";
+const FILE_PATH_WEATHER_ZIPCODE_ENHANCED = "../../../data/json/weather/weather-zipcode-enhanced-data.json";
 
 //vars
 let eventPathParams;
@@ -21,6 +22,7 @@ let zipcodeParam;
 let countryCodeParam;
 let axiosConfig;
 let axiosResponse;
+let transformedData;
 
 module.exports.handler = async (event) => {
   try {
@@ -50,10 +52,10 @@ module.exports.handler = async (event) => {
     }
 
     // Create cache key using zipcode and country code
-    const cacheKey = `weather:zip:${zipcodeParam}:${countryCodeParam || 'default'}`;
-    if (hasCachedWeatherData('zipcode', cacheKey)) {
-      console.log(`Using cached data for zipcode: ${zipcodeParam}`);
-      const cachedData = getCachedWeatherData('zipcode', cacheKey);
+    const cacheKey = `weather-enhanced:zip:${zipcodeParam}:${countryCodeParam || 'default'}`;
+    if (hasCachedWeatherData('zipcode-enhanced', cacheKey)) {
+      console.log(`Using cached enhanced data for zipcode: ${zipcodeParam}`);
+      const cachedData = getCachedWeatherData('zipcode-enhanced', cacheKey);
       return await bodyResponse(OK_CODE, cachedData);
     }
 
@@ -65,7 +67,7 @@ module.exports.handler = async (event) => {
       URL = `${API_WEATHER_URL_BASE}zip=${zipcodeParam}&appid=${API_KEY}`;
     }
 
-    console.log(`Fetching weather data for zipcode: ${zipcodeParam}`);
+    console.log(`Enhanced Weather API - Requesting data for zipcode: ${zipcodeParam}`);
     console.log(URL);
 
     axiosConfig = {
@@ -79,30 +81,33 @@ module.exports.handler = async (event) => {
     if (axiosResponse == (null || undefined)) {
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        `Weather data could not be obtained for zipcode ${zipcodeParam}`
+        `Enhanced weather data could not be obtained for zipcode ${zipcodeParam}`
       );
     }
 
-    // Cache the successful response for 10 minutes
-    setCachedWeatherData('zipcode', cacheKey, axiosResponse, 10 * 60 * 1000);
-    console.log(`Cached data for zipcode: ${zipcodeParam}`);
+    // Transform the raw OpenWeather data into enriched format
+    transformedData = await transformWeatherData(axiosResponse);
 
-    // Return response immediately
-    const response = await bodyResponse(OK_CODE, axiosResponse);
+    // Cache the enhanced data for 10 minutes
+    setCachedWeatherData('zipcode-enhanced', cacheKey, transformedData, 10 * 60 * 1000);
+    console.log(`Cached enhanced data for zipcode: ${zipcodeParam}`);
 
-    // Save data to JSON file asynchronously (fire and forget - don't wait for it)
+    // Return the enriched weather data immediately
+    const response = await bodyResponse(OK_CODE, transformedData);
+
+    // Save enhanced data to JSON file asynchronously (fire and forget - don't wait for it)
     process.nextTick(() => {
-      createJson(FILE_PATH_WEATHER_ZIPCODE, axiosResponse).catch(error => {
-        console.log("Warning: Failed to save weather zipcode data to JSON:", error.message);
+      createJson(FILE_PATH_WEATHER_ZIPCODE_ENHANCED, transformedData).catch(error => {
+        console.log("Warning: Failed to save enhanced weather zipcode data to JSON:", error.message);
       });
     });
 
     return response;
   } catch (error) {
-    console.log("ERROR in weather by zipcode handler:", error);
+    console.log("ERROR in enhanced weather zipcode handler:", error);
     return await bodyResponse(
       INTERNAL_SERVER_ERROR,
-      `Error processing weather data for zipcode ${zipcodeParam}: ${error.message}`
+      `Error processing enhanced weather data for zipcode ${zipcodeParam}: ${error.message}`
     );
   }
 }; 

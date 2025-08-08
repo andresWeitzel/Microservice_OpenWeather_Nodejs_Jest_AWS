@@ -11,7 +11,7 @@ const { searchCityIds, getDatabaseMetadata } = require("../../../helpers/info/ci
 const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
 const INTERNAL_SERVER_ERROR = statusCode.INTERNAL_SERVER_ERROR;
-const FILE_PATH_CITY_IDS = "../../../data/json/city-ids/city-ids-data.json";
+const FILE_PATH_CITY_IDS = "../../../data/json/info/city-ids/city-ids-data.json";
 
 //vars
 let eventPathParams;

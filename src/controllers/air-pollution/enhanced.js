@@ -84,13 +84,17 @@ module.exports.handler = async (event) => {
     // Transform the raw OpenWeather air pollution data into enriched format
     transformedData = await transformAirPollutionData(enrichedResponse);
 
-    // Save enhanced data to JSON file asynchronously (don't wait for it)
-    createJson(FILE_PATH_AIR_POLLUTION_ENHANCED, transformedData).catch(error => {
-      console.log("Warning: Failed to save enhanced air pollution data to JSON:", error.message);
+    // Return the enriched air pollution data immediately
+    const response = await bodyResponse(OK_CODE, transformedData);
+
+    // Save enhanced data to JSON file asynchronously (fire and forget - don't wait for it)
+    process.nextTick(() => {
+      createJson(FILE_PATH_AIR_POLLUTION_ENHANCED, transformedData).catch(error => {
+        console.log("Warning: Failed to save enhanced air pollution data to JSON:", error.message);
+      });
     });
 
-    // Return the enriched air pollution data immediately
-    return await bodyResponse(OK_CODE, transformedData);
+    return response;
   } catch (error) {
     console.log("ERROR in enhanced air pollution handler:", error);
     return await bodyResponse(

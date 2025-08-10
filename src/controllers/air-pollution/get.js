@@ -80,12 +80,17 @@ module.exports.handler = async (event) => {
       }
     };
 
-    // Save data to JSON file asynchronously (don't wait for it)
-    createJson(FILE_PATH_AIR_POLLUTION, enrichedResponse).catch(error => {
-      console.log("Warning: Failed to save air pollution data to JSON:", error.message);
+    // Return response immediately
+    const response = await bodyResponse(OK_CODE, enrichedResponse);
+
+    // Save data to JSON file asynchronously (fire and forget - don't wait for it)
+    process.nextTick(() => {
+      createJson(FILE_PATH_AIR_POLLUTION, enrichedResponse).catch(error => {
+        console.log("Warning: Failed to save air pollution data to JSON:", error.message);
+      });
     });
 
-    return await bodyResponse(OK_CODE, enrichedResponse);
+    return response;
   } catch (error) {
     console.log("ERROR in air pollution handler:", error);
     return await bodyResponse(

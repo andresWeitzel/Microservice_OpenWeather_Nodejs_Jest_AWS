@@ -1,10 +1,10 @@
 "use strict";
 
 //helpers
-const { sendGetRequest } = require("../../helpers/axios/request/get");
-const { statusCode } = require("../../enums/http/status-code");
-const { bodyResponse } = require("../../helpers/http/body-response");
-const { cache } = require("../../helpers/cache/simple-cache");
+const { sendGetRequest } = require("../../../helpers/axios/request/get");
+const { statusCode } = require("../../../enums/http/status-code");
+const { bodyResponse } = require("../../../helpers/http/body-response");
+const { cache } = require("../../../helpers/cache/simple-cache");
 
 //const
 const API_KEY = process.env.API_KEY;

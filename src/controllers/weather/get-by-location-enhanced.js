@@ -49,13 +49,17 @@ module.exports.handler = async (event) => {
     // Transform the raw OpenWeather data into enriched format
     transformedData = await transformWeatherData(axiosResponse);
 
-    // Save enhanced data to JSON file asynchronously (don't wait for it)
-    createJson(FILE_PATH_WEATHER_ENHANCED, transformedData).catch(error => {
-      console.log("Warning: Failed to save enhanced weather data to JSON:", error.message);
+    // Return the enriched weather data immediately
+    const response = await bodyResponse(OK_CODE, transformedData);
+
+    // Save enhanced data to JSON file asynchronously (fire and forget - don't wait for it)
+    process.nextTick(() => {
+      createJson(FILE_PATH_WEATHER_ENHANCED, transformedData).catch(error => {
+        console.log("Warning: Failed to save enhanced weather data to JSON:", error.message);
+      });
     });
 
-    // Return the enriched weather data immediately
-    return await bodyResponse(OK_CODE, transformedData);
+    return response;
   } catch (error) {
     console.log("ERROR in enhanced weather handler:", error);
     return await bodyResponse(

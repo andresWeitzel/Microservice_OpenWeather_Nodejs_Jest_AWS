@@ -73,27 +73,11 @@ functions:
           method: get
           private: false
           
-  getWeatherByZipcodeDefault:
-    handler: src/controllers/weather/get-by-zipcode.handler
-    events:
-      - http:
-          path: /v1/weather/zipcode/{zipcode}
-          method: get
-          private: false
-          
   getWeatherByZipcodeEnhanced:
     handler: src/controllers/weather/get-by-zipcode-enhanced.handler
     events:
       - http:
           path: /v1/weather-enhanced/zipcode/{zipcode}/{countryCode}
-          method: get
-          private: false
-          
-  getWeatherByZipcodeEnhancedDefault:
-    handler: src/controllers/weather/get-by-zipcode-enhanced.handler
-    events:
-      - http:
-          path: /v1/weather-enhanced/zipcode/{zipcode}
           method: get
           private: false
           
@@ -110,14 +94,6 @@ functions:
     events:
       - http:
           path: /v1/info/city-ids/{cityName}/{countryCode}
-          method: get
-          private: false
-          
-  getCityIdsWithLimit:
-    handler: src/controllers/info/city-ids/get-city-ids.handler
-    events:
-      - http:
-          path: /v1/info/city-ids/{cityName}/{countryCode}/{limit}
           method: get
           private: false
           
@@ -145,27 +121,11 @@ functions:
           method: get
           private: false
           
-  getWeatherByCombinedOptional:
-    handler: src/controllers/weather/get-by-combined.handler
-    events:
-      - http:
-          path: /v1/weather/combined/{location}
-          method: get
-          private: false
-          
   getWeatherByCombinedEnhanced:
     handler: src/controllers/weather/get-by-combined-enhanced.handler
     events:
       - http:
           path: /v1/weather-enhanced/combined/{location}/{units}/{language}
-          method: get
-          private: false
-          
-  getWeatherByCombinedEnhancedOptional:
-    handler: src/controllers/weather/get-by-combined-enhanced.handler
-    events:
-      - http:
-          path: /v1/weather-enhanced/combined/{location}
           method: get
           private: false
           

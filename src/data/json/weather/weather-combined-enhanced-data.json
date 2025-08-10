@@ -1,47 +1,47 @@
 {
     "location": {
-        "city": "BARRIO CANO",
+        "city": "Buenos Aires",
         "country": "AR",
         "coordinates": {
-            "lon": -68.8167,
-            "lat": -32.8833
+            "lon": -58.3772,
+            "lat": -34.6132
         },
         "timezone": -10800,
-        "localTime": "2025-08-10T01:20:39.170Z",
+        "localTime": "2025-08-10T02:01:52.473Z",
         "isDaytime": false
     },
     "temperature": {
-        "kelvin": 283.02,
-        "celsius": 9.87,
-        "fahrenheit": 49.77,
+        "kelvin": 282.96,
+        "celsius": 9.81,
+        "fahrenheit": 49.66,
         "feels_like": {
-            "kelvin": 283.02,
-            "celsius": 9.87,
-            "fahrenheit": 49.77
+            "kelvin": 281.7,
+            "celsius": 8.55,
+            "fahrenheit": 47.39
         }
     },
     "weather": {
         "condition": "Clear",
-        "description": "clear sky",
+        "description": "ciel dégagé",
         "icon": "01n",
         "severity": "light",
         "recommendation": "Wear warm clothing"
     },
     "atmosphere": {
-        "pressure": 1017,
-        "humidity": 50,
-        "visibility": 10000,
+        "pressure": 1024,
+        "humidity": 76,
+        "visibility": 9000,
         "clouds": 0
     },
     "wind": {
-        "speed": 0,
-        "direction": 0,
-        "description": "Calm"
+        "speed": 2.57,
+        "direction": 80,
+        "description": "Light breeze"
     },
     "sun": {
-        "sunrise": "08:18 AM",
-        "sunset": "07:02 PM",
-        "dayLength": "10h 44m"
+        "sunrise": "07:39 AM",
+        "sunset": "06:18 PM",
+        "dayLength": "10h 38m"
     },
     "alerts": [],
     "recommendations": {
@@ -51,7 +51,7 @@
         "health": "Comfortable conditions for outdoor activities"
     },
     "comfort": {
-        "index": 6,
+        "index": 5.5,
         "level": "cold"
     }
 }

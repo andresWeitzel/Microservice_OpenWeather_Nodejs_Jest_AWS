@@ -463,7 +463,7 @@ If you continue to have issues:
 | `/v1/weather/units/{location}/{units}` | GET | **Weather with specific units** | **Weather data in metric/imperial/kelvin** |
 | `/v1/weather/language/{location}/{language}` | GET | **Weather with specific language** | **Weather data in different languages** |
 | `/v1/weather/combined/{location}/{units}/{language}` | GET | **Weather with all parameters** | **Weather data with units and language** |
-| `/v1/weather/combined/{location}` | GET | **Weather with default parameters** | **Weather data with default settings** |
+| `/v1/weather-enhanced/combined/{location}/{units}/{language}` | GET | **Enhanced weather with all parameters** | **Enriched weather data with units and language** |
 | `/v1/forecast/location/{location}` | GET | Raw OpenWeather forecast | Original OpenWeather forecast format |
 | `/v1/forecast-enhanced/location/{location}` | GET | **Enhanced forecast data** | **Enriched format with daily summaries, trends, and planning recommendations** |
 | `/v1/air-pollution/location/{location}` | GET | Raw OpenWeather air pollution | Original OpenWeather air pollution format |
@@ -1301,8 +1301,8 @@ curl http://localhost:4000/v1/weather/language/Paris/fr
 # 10. Weather with all parameters combined
 curl http://localhost:4000/v1/weather/combined/Tokyo/metric/es
 
-# 11. Weather with default parameters
-curl http://localhost:4000/v1/weather/combined/London
+# 11. Enhanced weather with all parameters combined
+curl http://localhost:4000/v1/weather-enhanced/combined/Tokyo/metric/es
 ```
 
 ### 🧪 Automated Testing

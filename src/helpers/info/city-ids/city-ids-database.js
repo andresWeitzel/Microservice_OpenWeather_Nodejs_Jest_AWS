@@ -36,6 +36,9 @@ function searchCityIds(cityName, countryCode = null, limit = 5) {
     // Normalize city name for case-insensitive search
     const normalizedCityName = cityName.toLowerCase().trim();
     
+    // Normalize country code to uppercase for case-insensitive search
+    const normalizedCountryCode = countryCode ? countryCode.toUpperCase().trim() : null;
+    
     // Find cities that match the search query
     const matchingCities = [];
     
@@ -47,9 +50,9 @@ function searchCityIds(cityName, countryCode = null, limit = 5) {
           normalizedCityName.includes(normalizedDbCityName)) {
         
         // If country code is specified, only return cities from that country
-        if (countryCode) {
-          if (countryData[countryCode]) {
-            matchingCities.push(...countryData[countryCode]);
+        if (normalizedCountryCode) {
+          if (countryData[normalizedCountryCode]) {
+            matchingCities.push(...countryData[normalizedCountryCode]);
           }
         } else {
           // Return cities from all countries

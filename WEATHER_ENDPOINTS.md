@@ -239,7 +239,7 @@ curl http://localhost:4000/v1/weather/language/Berlin/de
 **Nuevos Endpoints**
 
     GET /v1/weather/combined/{location}/{units}/{language}
-    GET /v1/weather/combined/{location}
+    GET /v1/weather-enhanced/combined/{location}/{units}/{language}
 
 **Descripción**: Obtiene datos meteorológicos con múltiples parámetros combinados
 **Parámetros**:
@@ -254,8 +254,8 @@ curl http://localhost:4000/v1/weather/language/Berlin/de
 # Todos los parámetros
 curl http://localhost:4000/v1/weather/combined/Tokyo/metric/es
 
-# Solo ubicación (usa valores por defecto)
-curl http://localhost:4000/v1/weather/combined/London
+# Enhanced con todos los parámetros
+curl http://localhost:4000/v1/weather-enhanced/combined/Tokyo/metric/es
 ```
 
 **URL OpenWeatherMap**: `https://api.openweathermap.org/data/2.5/weather?q={city}&units={units}&lang={lang}&appid={API_KEY}`
@@ -274,6 +274,7 @@ curl http://localhost:4000/v1/weather/combined/London
 | `/v1/weather/units/{location}/{units}` | Ciudad + Unidades | Preferencias de usuario | London, metric |
 | `/v1/weather/language/{location}/{language}` | Ciudad + Idioma | Internacionalización | Paris, es |
 | `/v1/weather/combined/{location}/{units}/{language}` | Todos | Configuración completa | Tokyo, metric, es |
+| `/v1/weather-enhanced/combined/{location}/{units}/{language}` | Todos | Configuración completa enriquecida | Tokyo, metric, es |
 
 ***
 

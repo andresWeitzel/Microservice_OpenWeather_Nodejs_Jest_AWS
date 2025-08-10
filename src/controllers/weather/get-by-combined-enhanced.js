@@ -45,31 +45,25 @@ module.exports.handler = async (event) => {
     const cleanedLocation = validateAndCleanLocation(locationParam);
     console.log(`Enhanced Weather combined API - Cleaned location: ${cleanedLocation}`);
 
-    // Validate units parameter (optional, default to kelvin)
+    // Validate units parameter (required)
     const validUnits = ['metric', 'imperial', 'kelvin'];
-    let units = 'kelvin'; // default
-    if (unitsParam) {
-      if (!validUnits.includes(unitsParam.toLowerCase())) {
-        return await bodyResponse(
-          BAD_REQUEST_CODE,
-          `Invalid units parameter. Must be one of: ${validUnits.join(', ')}`
-        );
-      }
-      units = unitsParam.toLowerCase();
+    if (!unitsParam || !validUnits.includes(unitsParam.toLowerCase())) {
+      return await bodyResponse(
+        BAD_REQUEST_CODE,
+        `Invalid units parameter. Must be one of: ${validUnits.join(', ')}`
+      );
     }
+    const units = unitsParam.toLowerCase();
 
-    // Validate language parameter (optional, default to english)
+    // Validate language parameter (required)
     const validLanguages = ['en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'ja', 'ko', 'zh_cn', 'zh_tw', 'ar', 'hi', 'th', 'tr', 'vi'];
-    let language = 'en'; // default
-    if (languageParam) {
-      if (!validLanguages.includes(languageParam.toLowerCase())) {
-        return await bodyResponse(
-          BAD_REQUEST_CODE,
-          `Invalid language parameter. Must be one of: ${validLanguages.join(', ')}`
-        );
-      }
-      language = languageParam.toLowerCase();
+    if (!languageParam || !validLanguages.includes(languageParam.toLowerCase())) {
+      return await bodyResponse(
+        BAD_REQUEST_CODE,
+        `Invalid language parameter. Must be one of: ${validLanguages.join(', ')}`
+      );
     }
+    const language = languageParam.toLowerCase();
 
     // Create cache key using all parameters
     const cacheKey = `weather-enhanced:combined:${cleanedLocation}:${units}:${language}`;

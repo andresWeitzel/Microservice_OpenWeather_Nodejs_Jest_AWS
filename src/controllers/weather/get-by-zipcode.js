@@ -44,26 +44,24 @@ module.exports.handler = async (event) => {
       );
     }
 
-    // Validate country code (optional but recommended)
+    // Validate country code (required)
     if (!countryCodeParam) {
-      console.log("Warning: No country code provided, using default");
+      return await bodyResponse(
+        BAD_REQUEST_CODE,
+        "Country code parameter is required"
+      );
     }
 
     // Create cache key using zipcode and country code
-    const cacheKey = `weather:zip:${zipcodeParam}:${countryCodeParam || 'default'}`;
+    const cacheKey = `weather:zip:${zipcodeParam}:${countryCodeParam}`;
     if (hasCachedWeatherData('zipcode', cacheKey)) {
       console.log(`Using cached data for zipcode: ${zipcodeParam}`);
       const cachedData = getCachedWeatherData('zipcode', cacheKey);
       return await bodyResponse(OK_CODE, cachedData);
     }
 
-    // Build URL with or without country code
-    let URL;
-    if (countryCodeParam) {
-      URL = `${API_WEATHER_URL_BASE}zip=${zipcodeParam},${countryCodeParam}&appid=${API_KEY}`;
-    } else {
-      URL = `${API_WEATHER_URL_BASE}zip=${zipcodeParam}&appid=${API_KEY}`;
-    }
+    // Build URL with country code
+    const URL = `${API_WEATHER_URL_BASE}zip=${zipcodeParam},${countryCodeParam}&appid=${API_KEY}`;
 
     console.log(`Fetching weather data for zipcode: ${zipcodeParam}`);
     console.log(URL);

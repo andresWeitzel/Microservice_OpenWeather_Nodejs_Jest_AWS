@@ -69,19 +69,13 @@ module.exports.handler = async (event) => {
             return bodyResponse(OK_CODE, cachedData);
         }
 
-        // Prepare axios configuration
-        axiosConfig = {
-            method: "GET",
-            url: `${API_FORECAST_URL_BASE}q=${encodeURIComponent(cleanedLocation)}&appid=${API_KEY}`,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        };
+        // Prepare the URL for the API request
+        const apiUrl = `${API_FORECAST_URL_BASE}q=${encodeURIComponent(cleanedLocation)}&appid=${API_KEY}`;
 
         // Make API request
-        axiosResponse = await sendGetRequest(axiosConfig);
+        axiosResponse = await sendGetRequest(apiUrl, null, {});
 
-        if (axiosResponse.status === OK_CODE && axiosResponse.data) {
+        if (axiosResponse && axiosResponse.status === OK_CODE && axiosResponse.data) {
             // Filter forecast data by interval
             const filteredData = filterForecastByInterval(axiosResponse.data, intervalParam);
             

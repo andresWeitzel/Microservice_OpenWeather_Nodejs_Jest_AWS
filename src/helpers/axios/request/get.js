@@ -51,7 +51,8 @@ const sendGetRequest = async (url, data, config, maxRetries = 3) => {
         console.log(`Success on attempt ${attempt} for URL: ${url}`);
       }
 
-      return axiosData;
+      // Return the full response object if config is provided, otherwise just the data
+      return config ? axiosResponse : axiosData;
     } catch (error) {
       lastError = error;
       

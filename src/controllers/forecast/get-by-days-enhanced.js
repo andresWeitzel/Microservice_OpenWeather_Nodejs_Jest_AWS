@@ -71,24 +71,18 @@ module.exports.handler = async (event) => {
             return bodyResponse(OK_CODE, cachedData);
         }
 
-        // Prepare axios configuration
-        axiosConfig = {
-            method: "GET",
-            url: `${API_FORECAST_URL_BASE}q=${encodeURIComponent(cleanedLocation)}&appid=${API_KEY}`,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        };
+        // Prepare the URL for the API request
+        const apiUrl = `${API_FORECAST_URL_BASE}q=${encodeURIComponent(cleanedLocation)}&appid=${API_KEY}`;
 
         // Make API request
-        axiosResponse = await sendGetRequest(axiosConfig);
+        axiosResponse = await sendGetRequest(apiUrl, null, {});
 
-        if (axiosResponse.status === OK_CODE && axiosResponse.data) {
+        if (axiosResponse && axiosResponse.status === OK_CODE && axiosResponse.data) {
+            // Transform the complete OpenWeather data first
+            transformedData = transformForecastData(axiosResponse.data);
+            
             // Filter forecast data by days
             const filteredData = filterForecastByDays(axiosResponse.data, days);
-            
-            // Transform the filtered data
-            transformedData = transformForecastData(filteredData);
             
             // Add days-specific analysis
             const enhancedData = {

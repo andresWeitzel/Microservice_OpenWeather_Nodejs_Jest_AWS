@@ -1,0 +1,61 @@
+{
+    "location": {
+        "id": 2643743,
+        "name": "London",
+        "coord": {
+            "lat": 51.5085,
+            "lon": -0.1257
+        },
+        "country": "GB",
+        "population": 1000000,
+        "timezone": 3600,
+        "sunrise": 1755233173,
+        "sunset": 1755285839
+    },
+    "interval": "3h",
+    "intervalHours": 3,
+    "filteredCount": 1,
+    "forecasts": [
+        {
+            "dt": 1755226800,
+            "main": {
+                "temp": 291.09,
+                "feels_like": 291.11,
+                "temp_min": 290.38,
+                "temp_max": 291.09,
+                "pressure": 1023,
+                "sea_level": 1023,
+                "grnd_level": 1019,
+                "humidity": 83,
+                "temp_kf": 0.71
+            },
+            "weather": [
+                {
+                    "id": 802,
+                    "main": "Clouds",
+                    "description": "scattered clouds",
+                    "icon": "03n"
+                }
+            ],
+            "clouds": {
+                "all": 41
+            },
+            "wind": {
+                "speed": 1.71,
+                "deg": 307,
+                "gust": 4.65
+            },
+            "visibility": 10000,
+            "pop": 0,
+            "sys": {
+                "pod": "n"
+            },
+            "dt_txt": "2025-08-15 03:00:00"
+        }
+    ],
+    "metadata": {
+        "originalCount": 40,
+        "filterApplied": "Forecasts within 3h from now",
+        "timestamp": "2025-08-15T02:46:33.257Z"
+    }
+}

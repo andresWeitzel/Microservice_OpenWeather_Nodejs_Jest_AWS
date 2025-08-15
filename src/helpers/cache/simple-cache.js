@@ -110,40 +110,56 @@ const cache = new SimpleCache();
  * @returns {string} Cache key
  */
 const generateWeatherCacheKey = (endpoint, location) => {
+  if (!endpoint || !location) {
+    throw new Error('Both endpoint and location parameters are required');
+  }
   return `weather:${endpoint}:${location.toLowerCase().replace(/\s+/g, '_')}`;
 };
 
 /**
  * @description Get cached weather data
- * @param {string} endpoint - API endpoint
- * @param {string} location - Location parameter
+ * @param {string} keyOrEndpoint - Cache key or API endpoint
+ * @param {string} location - Location parameter (optional if keyOrEndpoint is a full key)
  * @returns {any|null} Cached data or null
  */
-const getCachedWeatherData = (endpoint, location) => {
-  const key = generateWeatherCacheKey(endpoint, location);
+const getCachedWeatherData = (keyOrEndpoint, location) => {
+  const key = location ? generateWeatherCacheKey(keyOrEndpoint, location) : keyOrEndpoint;
   return cache.get(key);
 };
 
 /**
  * @description Set cached weather data
- * @param {string} endpoint - API endpoint
- * @param {string} location - Location parameter
- * @param {any} data - Data to cache
+ * @param {string} keyOrEndpoint - Cache key or API endpoint
+ * @param {string|any} locationOrData - Location parameter or data to cache
+ * @param {any} data - Data to cache (optional if locationOrData is the data)
  * @param {number} maxAge - Maximum age in milliseconds (optional)
  */
-const setCachedWeatherData = (endpoint, location, data, maxAge) => {
-  const key = generateWeatherCacheKey(endpoint, location);
-  cache.set(key, data, maxAge);
+const setCachedWeatherData = (keyOrEndpoint, locationOrData, data, maxAge) => {
+  let key, dataToCache, maxAgeToUse;
+  
+  if (typeof locationOrData === 'string') {
+    // Called with (endpoint, location, data, maxAge)
+    key = generateWeatherCacheKey(keyOrEndpoint, locationOrData);
+    dataToCache = data;
+    maxAgeToUse = maxAge;
+  } else {
+    // Called with (key, data, maxAge)
+    key = keyOrEndpoint;
+    dataToCache = locationOrData;
+    maxAgeToUse = data;
+  }
+  
+  cache.set(key, dataToCache, maxAgeToUse);
 };
 
 /**
  * @description Check if weather data is cached
- * @param {string} endpoint - API endpoint
- * @param {string} location - Location parameter
+ * @param {string} keyOrEndpoint - Cache key or API endpoint
+ * @param {string} location - Location parameter (optional if keyOrEndpoint is a full key)
  * @returns {boolean} True if data is cached
  */
-const hasCachedWeatherData = (endpoint, location) => {
-  const key = generateWeatherCacheKey(endpoint, location);
+const hasCachedWeatherData = (keyOrEndpoint, location) => {
+  const key = location ? generateWeatherCacheKey(keyOrEndpoint, location) : keyOrEndpoint;
   return cache.has(key);
 };
 

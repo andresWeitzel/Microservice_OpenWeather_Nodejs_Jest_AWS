@@ -1200,6 +1200,7 @@ The microservice automatically saves API responses to JSON files for backup, deb
     │   ├── forecast-days-data.json               # Forecast by days data
     │   ├── forecast-days-enhanced-data.json      # Enhanced forecast by days data
     │   ├── forecast-hourly-data.json             # Forecast by hourly periods data
+
 │   ├── forecast-hourly-enhanced-data.json    # Enhanced forecast by hourly periods data
 │   ├── forecast-weekly-data.json             # Forecast by weeks data
 │   ├── forecast-weekly-enhanced-data.json    # Enhanced forecast by weeks data
@@ -1207,11 +1208,11 @@ The microservice automatically saves API responses to JSON files for backup, deb
 │   ├── forecast-events-enhanced-data.json    # Enhanced forecast by events data
 │   ├── forecast-compare-data.json            # Forecast comparison data
 │   └── forecast-compare-enhanced-data.json   # Enhanced forecast comparison data
-    ├── air-pollution/
-    │   ├── air-pollution-data.json        # Basic air pollution data
-    │   └── air-pollution-enhanced-data.json  # Enhanced air pollution data
-    └── weather-condition/
-        └── (weather condition data)
+├── air-pollution/
+│   ├── air-pollution-data.json        # Basic air pollution data
+│   └── air-pollution-enhanced-data.json  # Enhanced air pollution data
+└── weather-condition/
+└── (weather condition data)
 
 #### How It Works
 

@@ -71,20 +71,11 @@ module.exports.handler = async (event) => {
             return bodyResponse(OK_CODE, cachedData);
         }
 
-        // Prepare API request
-        const encodedLocation = encodeURIComponent(cleanedLocation);
-        const apiUrl = `${API_FORECAST_URL_BASE}q=${encodedLocation}&appid=${API_KEY}&units=metric`;
-
-        axiosConfig = {
-            method: "GET",
-            url: apiUrl,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        };
+        // Prepare the URL for the API request
+        const apiUrl = `${API_FORECAST_URL_BASE}q=${encodeURIComponent(cleanedLocation)}&appid=${API_KEY}&units=metric`;
 
         // Make API request
-        axiosResponse = await sendGetRequest(axiosConfig);
+        axiosResponse = await sendGetRequest(apiUrl, null, {});
 
         if (!axiosResponse || !axiosResponse.data) {
             return bodyResponse(INTERNAL_SERVER_ERROR, {
@@ -93,6 +84,9 @@ module.exports.handler = async (event) => {
             });
         }
 
+        // Transform the complete OpenWeather data first
+        transformedData = transformForecastData(axiosResponse.data);
+        
         // Filter forecast data by hour
         const filteredData = filterForecastByHour(axiosResponse.data, hourParam.toLowerCase());
         
@@ -104,9 +98,6 @@ module.exports.handler = async (event) => {
                 hour: hourParam
             });
         }
-
-        // Transform the filtered data
-        transformedData = transformForecastData(filteredData);
         
         // Add hourly-specific analysis
         const hourlyAnalysis = analyzeHourlyData(filteredData, hourParam.toLowerCase());

@@ -1,0 +1,278 @@
+{
+    "location": "La Plata",
+    "eventType": "weekend",
+    "eventData": [
+        {
+            "dt": 1758942000,
+            "main": {
+                "temp": 15.9,
+                "feels_like": 15.61,
+                "temp_min": 15.9,
+                "temp_max": 15.9,
+                "pressure": 1017,
+                "sea_level": 1017,
+                "grnd_level": 1015,
+                "humidity": 79,
+                "temp_kf": 0
+            },
+            "weather": [
+                {
+                    "id": 804,
+                    "main": "Clouds",
+                    "description": "overcast clouds",
+                    "icon": "04n"
+                }
+            ],
+            "clouds": {
+                "all": 100
+            },
+            "wind": {
+                "speed": 5.44,
+                "deg": 52,
+                "gust": 12.53
+            },
+            "visibility": 10000,
+            "pop": 0,
+            "sys": {
+                "pod": "n"
+            },
+            "dt_txt": "2025-09-27 03:00:00",
+            "originalTime": "2025-09-27T03:00:00.000Z",
+            "eventType": "weekend"
+        },
+        {
+            "dt": 1758952800,
+            "main": {
+                "temp": 13.68,
+                "feels_like": 13.48,
+                "temp_min": 13.68,
+                "temp_max": 13.68,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1013,
+                "humidity": 91,
+                "temp_kf": 0
+            },
+            "weather": [
+                {
+                    "id": 500,
+                    "main": "Rain",
+                    "description": "light rain",
+                    "icon": "10n"
+                }
+            ],
+            "clouds": {
+                "all": 100
+            },
+            "wind": {
+                "speed": 7.38,
+                "deg": 61,
+                "gust": 14.27
+            },
+            "visibility": 10000,
+            "pop": 1,
+            "rain": {
+                "3h": 1.78
+            },
+            "sys": {
+                "pod": "n"
+            },
+            "dt_txt": "2025-09-27 06:00:00",
+            "originalTime": "2025-09-27T06:00:00.000Z",
+            "eventType": "weekend"
+        },
+        {
+            "dt": 1758963600,
+            "main": {
+                "temp": 13.9,
+                "feels_like": 13.7,
+                "temp_min": 13.9,
+                "temp_max": 13.9,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1012,
+                "humidity": 90,
+                "temp_kf": 0
+            },
+            "weather": [
+                {
+                    "id": 500,
+                    "main": "Rain",
+                    "description": "light rain",
+                    "icon": "10n"
+                }
+            ],
+            "clouds": {
+                "all": 99
+            },
+            "wind": {
+                "speed": 7.28,
+                "deg": 44,
+                "gust": 15.65
+            },
+            "visibility": 10000,
+            "pop": 0.25,
+            "rain": {
+                "3h": 0.21
+            },
+            "sys": {
+                "pod": "n"
+            },
+            "dt_txt": "2025-09-27 09:00:00",
+            "originalTime": "2025-09-27T09:00:00.000Z",
+            "eventType": "weekend"
+        },
+        {
+            "dt": 1758974400,
+            "main": {
+                "temp": 13.47,
+                "feels_like": 13.38,
+                "temp_min": 13.47,
+                "temp_max": 13.47,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1012,
+                "humidity": 96,
+                "temp_kf": 0
+            },
+            "weather": [
+                {
+                    "id": 501,
+                    "main": "Rain",
+                    "description": "moderate rain",
+                    "icon": "10d"
+                }
+            ],
+            "clouds": {
+                "all": 100
+            },
+            "wind": {
+                "speed": 7.03,
+                "deg": 30,
+                "gust": 15.05
+            },
+            "visibility": 8585,
+            "pop": 1,
+            "rain": {
+                "3h": 3.65
+            },
+            "sys": {
+                "pod": "d"
+            },
+            "dt_txt": "2025-09-27 12:00:00",
+            "originalTime": "2025-09-27T12:00:00.000Z",
+            "eventType": "weekend"
+        },
+        {
+            "dt": 1758985200,
+            "main": {
+                "temp": 14.28,
+                "feels_like": 14.27,
+                "temp_min": 14.28,
+                "temp_max": 14.28,
+                "pressure": 1010,
+                "sea_level": 1010,
+                "grnd_level": 1008,
+                "humidity": 96,
+                "temp_kf": 0
+            },
+            "weather": [
+                {
+                    "id": 500,
+                    "main": "Rain",
+                    "description": "light rain",
+                    "icon": "10d"
+                }
+            ],
+            "clouds": {
+                "all": 100
+            },
+            "wind": {
+                "speed": 6.89,
+                "deg": 15,
+                "gust": 15.08
+            },
+            "visibility": 6786,
+            "pop": 1,
+            "rain": {
+                "3h": 2.07
+            },
+            "sys": {
+                "pod": "d"
+            },
+            "dt_txt": "2025-09-27 15:00:00",
+            "originalTime": "2025-09-27T15:00:00.000Z",
+            "eventType": "weekend"
+        },
+        {
+            "dt": 1758996000,
+            "main": {
+                "temp": 15.7,
+                "feels_like": 15.83,
+                "temp_min": 15.7,
+                "temp_max": 15.7,
+                "pressure": 1006,
+                "sea_level": 1006,
+                "grnd_level": 1005,
+                "humidity": 96,
+                "temp_kf": 0
+            },
+            "weather": [
+                {
+                    "id": 500,
+                    "main": "Rain",
+                    "description": "light rain",
+                    "icon": "10d"
+                }
+            ],
+            "clouds": {
+                "all": 100
+            },
+            "wind": {
+                "speed": 8.36,
+                "deg": 354,
+                "gust": 12.99
+            },
+            "visibility": 10000,
+            "pop": 1,
+            "rain": {
+                "3h": 1.44
+            },
+            "sys": {
+                "pod": "d"
+            },
+            "dt_txt": "2025-09-27 18:00:00",
+            "originalTime": "2025-09-27T18:00:00.000Z",
+            "eventType": "weekend"
+        }
+    ],
+    "eventSummary": {
+        "eventType": "weekend",
+        "totalForecasts": 6,
+        "averageTemperature": 14.488333333333332,
+        "minTemperature": 13.47,
+        "maxTemperature": 15.9,
+        "averageHumidity": 91.33333333333333,
+        "averagePressure": 1012.5,
+        "averageWindSpeed": 7.0633333333333335,
+        "predominantCondition": "Rain",
+        "conditionDistribution": {
+            "Clouds": 1,
+            "Rain": 5
+        },
+        "eventAnalysis": {
+            "suitability": "good",
+            "recommendations": [],
+            "considerations": []
+        },
+        "suitability": 8
+    },
+    "metadata": {
+        "location": "La Plata",
+        "eventType": "weekend",
+        "totalForecasts": 6,
+        "generatedAt": "2025-09-22T20:11:39.533Z",
+        "source": "OpenWeatherMap API",
+        "endpoint": "forecast-events"
+    }
+}

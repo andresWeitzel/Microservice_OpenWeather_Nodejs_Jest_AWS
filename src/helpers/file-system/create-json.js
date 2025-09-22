@@ -13,9 +13,26 @@ let msgLog;
  */
 const createJson = async (filePath, data) => {
   try {
+    // Use a custom replacer function to handle circular references
+    const jsonString = JSON.stringify(data, (key, value) => {
+      // Skip circular references by replacing them with a placeholder
+      if (typeof value === 'object' && value !== null) {
+        if (value.constructor && value.constructor.name === 'ClientRequest') {
+          return '[ClientRequest Object]';
+        }
+        if (value.constructor && value.constructor.name === 'TLSSocket') {
+          return '[TLSSocket Object]';
+        }
+        if (value.constructor && value.constructor.name === 'IncomingMessage') {
+          return '[IncomingMessage Object]';
+        }
+      }
+      return value;
+    }, 4);
+    
     await fs.writeFile(
       path.join(__dirname + filePath),
-      JSON.stringify(data, null, 4)
+      jsonString
     );
     console.log("File has been created in " + filePath);
   } catch (error) {

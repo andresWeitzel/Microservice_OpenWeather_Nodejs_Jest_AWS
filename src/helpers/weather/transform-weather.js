@@ -7,8 +7,17 @@
  */
 const transformWeatherData = async (weatherData) => {
   try {
-    if (!weatherData || !weatherData.main) {
-      throw new Error("Invalid weather data");
+ 
+    if (!weatherData) {
+      throw new Error("Weather data is null or undefined");
+    }
+    
+    if (!weatherData.main) {
+      throw new Error(`Invalid weather data: missing 'main' property. Received keys: ${Object.keys(weatherData).join(', ')}`);
+    }
+    
+    if (!weatherData.weather || !Array.isArray(weatherData.weather) || weatherData.weather.length === 0) {
+      throw new Error("Invalid weather data: missing or empty 'weather' array");
     }
 
     const enrichedData = {

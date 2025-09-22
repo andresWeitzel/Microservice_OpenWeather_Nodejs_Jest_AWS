@@ -2,13 +2,13 @@
     "intervalAnalysis": {
         "interval": "3h",
         "summary": {
-            "averageTemperature": 291.19,
+            "averageTemperature": 284.52,
             "temperatureRange": {
-                "min": 291.19,
-                "max": 291.19
+                "min": 284.52,
+                "max": 284.52
             },
-            "averageHumidity": 81,
-            "averageWindSpeed": 2.23,
+            "averageHumidity": 55,
+            "averageWindSpeed": 2.84,
             "dominantWeatherCondition": "Clouds",
             "forecastCount": 1
         },
@@ -19,8 +19,7 @@
             "temperatureTrend": "stable"
         },
         "recommendations": [
-            "Stay hydrated and avoid prolonged sun exposure",
-            "High humidity - consider indoor activities"
+            "Stay hydrated and avoid prolonged sun exposure"
         ],
         "planningAdvice": {
             "suitableActivities": [
@@ -32,7 +31,7 @@
             "timeOfDay": {
                 "morning": "No morning forecasts",
                 "afternoon": "No afternoon forecasts",
-                "evening": "No evening forecasts"
+                "evening": "Evening forecasts available"
             }
         }
     }

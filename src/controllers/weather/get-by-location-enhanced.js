@@ -46,8 +46,28 @@ module.exports.handler = async (event) => {
       );
     }
 
+    // Extract the data from axios response
+    const weatherData = axiosResponse?.data || axiosResponse;
+
+    // Check if the response contains an error from OpenWeather API
+    if (weatherData.cod && weatherData.cod !== 200) {
+      console.log("OpenWeather API Error:", weatherData);
+      return await bodyResponse(
+        BAD_REQUEST_CODE,
+        `OpenWeather API error: ${weatherData.message || 'Unknown error'}`
+      );
+    }
+
     // Transform the raw OpenWeather data into enriched format
-    transformedData = await transformWeatherData(axiosResponse);
+    try {
+      transformedData = await transformWeatherData(weatherData);
+    } catch (transformError) {
+      console.log("Error transforming weather data:", transformError);
+      return await bodyResponse(
+        BAD_REQUEST_CODE,
+        `Failed to process weather data for location ${countryParam}: ${transformError.message}`
+      );
+    }
 
     // Return the enriched weather data immediately
     const response = await bodyResponse(OK_CODE, transformedData);

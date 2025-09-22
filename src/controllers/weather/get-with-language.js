@@ -73,6 +73,8 @@ module.exports.handler = async (event) => {
 
     axiosResponse = await sendGetRequest(URL, null, axiosConfig);
 
+    console.log("Raw OpenWeather API Response:", JSON.stringify(axiosResponse?.data || axiosResponse, null, 2));
+
     if (axiosResponse == (null || undefined)) {
       return await bodyResponse(
         BAD_REQUEST_CODE,
@@ -80,16 +82,28 @@ module.exports.handler = async (event) => {
       );
     }
 
+    // Extract the data from axios response
+    const weatherData = axiosResponse?.data || axiosResponse;
+
+    // Check if the response contains an error from OpenWeather API
+    if (weatherData.cod && weatherData.cod !== 200) {
+      console.log("OpenWeather API Error:", weatherData);
+      return await bodyResponse(
+        BAD_REQUEST_CODE,
+        `OpenWeather API error: ${weatherData.message || 'Unknown error'}`
+      );
+    }
+
     // Cache the successful response for 10 minutes
-    setCachedWeatherData('language', cacheKey, axiosResponse, 10 * 60 * 1000);
+    setCachedWeatherData('language', cacheKey, weatherData, 10 * 60 * 1000);
     console.log(`Cached data for location: ${cleanedLocation} with language: ${language}`);
 
     // Return response immediately
-    const response = await bodyResponse(OK_CODE, axiosResponse);
+    const response = await bodyResponse(OK_CODE, weatherData);
 
     // Save data to JSON file asynchronously (fire and forget - don't wait for it)
     process.nextTick(() => {
-      createJson(FILE_PATH_WEATHER_LANGUAGE, axiosResponse).catch(error => {
+      createJson(FILE_PATH_WEATHER_LANGUAGE, weatherData).catch(error => {
         console.log("Warning: Failed to save weather language data to JSON:", error.message);
       });
     });

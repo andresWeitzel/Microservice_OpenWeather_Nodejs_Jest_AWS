@@ -9,25 +9,25 @@
         "country": "GB",
         "population": 1000000,
         "timezone": 3600,
-        "sunrise": 1755233173,
-        "sunset": 1755285839
+        "sunrise": 1758519999,
+        "sunset": 1758563990
     },
     "interval": "3h",
     "intervalHours": 3,
     "filteredCount": 1,
     "forecasts": [
         {
-            "dt": 1755226800,
+            "dt": 1758574800,
             "main": {
-                "temp": 291.09,
-                "feels_like": 291.11,
-                "temp_min": 290.38,
-                "temp_max": 291.09,
-                "pressure": 1023,
-                "sea_level": 1023,
-                "grnd_level": 1019,
-                "humidity": 83,
-                "temp_kf": 0.71
+                "temp": 284.52,
+                "feels_like": 283.15,
+                "temp_min": 283.05,
+                "temp_max": 284.52,
+                "pressure": 1027,
+                "sea_level": 1027,
+                "grnd_level": 1024,
+                "humidity": 55,
+                "temp_kf": 1.47
             },
             "weather": [
                 {
@@ -38,24 +38,24 @@
                 }
             ],
             "clouds": {
-                "all": 41
+                "all": 50
             },
             "wind": {
-                "speed": 1.71,
-                "deg": 307,
-                "gust": 4.65
+                "speed": 2.84,
+                "deg": 35,
+                "gust": 6.81
             },
             "visibility": 10000,
             "pop": 0,
             "sys": {
                 "pod": "n"
             },
-            "dt_txt": "2025-08-15 03:00:00"
+            "dt_txt": "2025-09-22 21:00:00"
         }
     ],
     "metadata": {
         "originalCount": 40,
         "filterApplied": "Forecasts within 3h from now",
-        "timestamp": "2025-08-15T02:46:33.257Z"
+        "timestamp": "2025-09-22T19:23:32.279Z"
     }
 }

@@ -76,15 +76,13 @@ module.exports.handler = async (event) => {
         const apiUrl = `${API_FORECAST_URL_BASE}q=${encodedLocation}&appid=${API_KEY}&units=metric`;
 
         axiosConfig = {
-            method: "GET",
-            url: apiUrl,
             headers: {
                 "Content-Type": "application/json"
             }
         };
 
         // Make API request
-        axiosResponse = await sendGetRequest(axiosConfig);
+        axiosResponse = await sendGetRequest(apiUrl, null, axiosConfig);
 
         if (!axiosResponse || !axiosResponse.data) {
             return bodyResponse(INTERNAL_SERVER_ERROR, {
@@ -105,8 +103,13 @@ module.exports.handler = async (event) => {
             });
         }
 
-        // Transform the event data
-        transformedData = transformForecastData(eventData);
+        // Transform the event data: build minimal forecast object expected by transformer
+        const minimalForecast = {
+            city: axiosResponse.data.city,
+            list: eventData,
+            cnt: eventData.length
+        };
+        transformedData = await transformForecastData(minimalForecast);
         
         // Add event-specific analysis
         const eventAnalysis = analyzeEventData(eventData, eventTypeParam.toLowerCase());

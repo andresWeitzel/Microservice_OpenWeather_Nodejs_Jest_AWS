@@ -1,47 +1,48 @@
 {
     "location": {
-        "city": "San Nicolas",
+        "city": "Buenos Aires",
         "country": "AR",
         "coordinates": {
-            "lon": -58.3772,
-            "lat": -34.6132
+            "lon": -58.38,
+            "lat": -34.61
         },
         "timezone": -10800,
-        "localTime": "2025-08-07T01:35:37.738Z",
-        "isDaytime": false
+        "localTime": "2025-09-22T18:20:42.281Z",
+        "isDaytime": true
     },
     "temperature": {
-        "kelvin": 285.57,
-        "celsius": 12.42,
-        "fahrenheit": 54.36,
+        "kelvin": 292.83,
+        "celsius": 19.68,
+        "fahrenheit": 67.42,
         "feels_like": {
-            "kelvin": 284.88,
-            "celsius": 11.73,
-            "fahrenheit": 53.11
+            "kelvin": 292.11,
+            "celsius": 18.96,
+            "fahrenheit": 66.13
         }
     },
     "weather": {
         "condition": "Clear",
         "description": "clear sky",
-        "icon": "01n",
+        "icon": "01d",
         "severity": "light",
         "recommendation": "Enjoy the weather!"
     },
     "atmosphere": {
-        "pressure": 1022,
-        "humidity": 77,
+        "pressure": 1010,
+        "humidity": 48,
         "visibility": 10000,
         "clouds": 0
     },
     "wind": {
-        "speed": 0.51,
-        "direction": 0,
-        "description": "Light air"
+        "speed": 0.45,
+        "direction": 90,
+        "gust": 3.13,
+        "description": "Calm"
     },
     "sun": {
-        "sunrise": "07:42 AM",
-        "sunset": "06:16 PM",
-        "dayLength": "10h 33m"
+        "sunrise": "06:42 AM",
+        "sunset": "06:49 PM",
+        "dayLength": "12h 7m"
     },
     "alerts": [],
     "recommendations": {
@@ -51,7 +52,7 @@
         "health": "Comfortable conditions for outdoor activities"
     },
     "comfort": {
-        "index": 5,
+        "index": 9,
         "level": "cool"
     }
 }

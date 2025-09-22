@@ -129,19 +129,101 @@ functions:
           method: get
           private: false
           
-  getForecast:
-    handler: src/controllers/forecast/get.handler
+  # NEW: Different Forecast Endpoints (not following weather patterns)
+  getForecastByInterval:
+    handler: src/controllers/forecast/get-by-interval.handler
     events:
       - http:
-          path: /v1/forecast/location/{location}
+          path: /v1/forecast/interval/{location}/{interval}
           method: get
           private: false
           
-  getEnhancedForecast:
-    handler: src/controllers/forecast/enhanced.handler
+  getForecastByIntervalEnhanced:
+    handler: src/controllers/forecast/get-by-interval-enhanced.handler
     events:
       - http:
-          path: /v1/forecast-enhanced/location/{location}
+          path: /v1/forecast-enhanced/interval/{location}/{interval}
+          method: get
+          private: false
+          
+  getForecastByDays:
+    handler: src/controllers/forecast/get-by-days.handler
+    events:
+      - http:
+          path: /v1/forecast/days/{location}/{days}
+          method: get
+          private: false
+          
+  getForecastByDaysEnhanced:
+    handler: src/controllers/forecast/get-by-days-enhanced.handler
+    events:
+      - http:
+          path: /v1/forecast-enhanced/days/{location}/{days}
+          method: get
+          private: false
+          
+  getForecastByHourly:
+    handler: src/controllers/forecast/get-by-hourly.handler
+    events:
+      - http:
+          path: /v1/forecast/hourly/{location}/{hour}
+          method: get
+          private: false
+          
+  getForecastByHourlyEnhanced:
+    handler: src/controllers/forecast/get-by-hourly-enhanced.handler
+    events:
+      - http:
+          path: /v1/forecast-enhanced/hourly/{location}/{hour}
+          method: get
+          private: false
+          
+  # NEW: Additional Different Forecast Endpoints
+  getForecastByWeekly:
+    handler: src/controllers/forecast/get-by-weekly.handler
+    events:
+      - http:
+          path: /v1/forecast/weekly/{location}/{weeks}
+          method: get
+          private: false
+          
+  getForecastByWeeklyEnhanced:
+    handler: src/controllers/forecast/get-by-weekly-enhanced.handler
+    events:
+      - http:
+          path: /v1/forecast-enhanced/weekly/{location}/{weeks}
+          method: get
+          private: false
+          
+  getForecastByEvents:
+    handler: src/controllers/forecast/get-by-events.handler
+    events:
+      - http:
+          path: /v1/forecast/events/{location}/{eventType}
+          method: get
+          private: false
+          
+  getForecastByEventsEnhanced:
+    handler: src/controllers/forecast/get-by-events-enhanced.handler
+    events:
+      - http:
+          path: /v1/forecast-enhanced/events/{location}/{eventType}
+          method: get
+          private: false
+          
+  getForecastByCompare:
+    handler: src/controllers/forecast/get-by-compare.handler
+    events:
+      - http:
+          path: /v1/forecast/compare/{location}/{period1}/{period2}
+          method: get
+          private: false
+          
+  getForecastByCompareEnhanced:
+    handler: src/controllers/forecast/get-by-compare-enhanced.handler
+    events:
+      - http:
+          path: /v1/forecast-enhanced/compare/{location}/{period1}/{period2}
           method: get
           private: false
           
@@ -158,6 +240,54 @@ functions:
     events:
       - http:
           path: /v1/air-pollution-enhanced/location/{location}
+          method: get
+          private: false
+          
+  getAirPollutionByCoordinates:
+    handler: src/controllers/air-pollution/get-by-coordinates.handler
+    events:
+      - http:
+          path: /v1/air-pollution/coordinates/{lat}/{lon}
+          method: get
+          private: false
+          
+  getEnhancedAirPollutionByCoordinates:
+    handler: src/controllers/air-pollution/get-by-coordinates-enhanced.handler
+    events:
+      - http:
+          path: /v1/air-pollution-enhanced/coordinates/{lat}/{lon}
+          method: get
+          private: false
+          
+  getAirPollutionForecast:
+    handler: src/controllers/air-pollution/get-forecast.handler
+    events:
+      - http:
+          path: /v1/air-pollution/forecast/{location}
+          method: get
+          private: false
+          
+  getEnhancedAirPollutionForecast:
+    handler: src/controllers/air-pollution/get-forecast-enhanced.handler
+    events:
+      - http:
+          path: /v1/air-pollution-enhanced/forecast/{location}
+          method: get
+          private: false
+          
+  compareAirPollutionCities:
+    handler: src/controllers/air-pollution/compare-cities.handler
+    events:
+      - http:
+          path: /v1/air-pollution/compare/{city1}/{city2}
+          method: get
+          private: false
+          
+  compareEnhancedAirPollutionCities:
+    handler: src/controllers/air-pollution/compare-cities-enhanced.handler
+    events:
+      - http:
+          path: /v1/air-pollution-enhanced/compare/{city1}/{city2}
           method: get
           private: false
           

@@ -7,51 +7,52 @@
             "lat": -34.6132
         },
         "timezone": -10800,
-        "localTime": "2025-08-08T01:32:27.269Z",
-        "isDaytime": false
+        "localTime": "2025-09-22T18:23:24.687Z",
+        "isDaytime": true
     },
     "temperature": {
-        "kelvin": 282.1,
-        "celsius": 8.95,
-        "fahrenheit": 48.11,
+        "kelvin": 292.88,
+        "celsius": 19.73,
+        "fahrenheit": 67.51,
         "feels_like": {
-            "kelvin": 280.06,
-            "celsius": 6.91,
-            "fahrenheit": 44.44
+            "kelvin": 292.16,
+            "celsius": 19.01,
+            "fahrenheit": 66.22
         }
     },
     "weather": {
-        "condition": "Clouds",
-        "description": "broken clouds",
-        "icon": "04n",
+        "condition": "Clear",
+        "description": "clear sky",
+        "icon": "01d",
         "severity": "light",
-        "recommendation": "Wear warm clothing"
+        "recommendation": "Enjoy the weather!"
     },
     "atmosphere": {
-        "pressure": 1028,
-        "humidity": 82,
+        "pressure": 1010,
+        "humidity": 48,
         "visibility": 10000,
-        "clouds": 75
+        "clouds": 0
     },
     "wind": {
-        "speed": 3.6,
-        "direction": 180,
-        "description": "Gentle breeze"
+        "speed": 0.45,
+        "direction": 90,
+        "gust": 3.13,
+        "description": "Calm"
     },
     "sun": {
-        "sunrise": "07:41 AM",
-        "sunset": "06:16 PM",
-        "dayLength": "10h 35m"
+        "sunrise": "06:42 AM",
+        "sunset": "06:49 PM",
+        "dayLength": "12h 7m"
     },
     "alerts": [],
     "recommendations": {
-        "clothing": "Warm jacket or coat",
+        "clothing": "Light jacket or sweater",
         "activities": "Outdoor activities suitable",
         "transport": "Normal transport conditions",
-        "health": "High humidity may cause discomfort"
+        "health": "Comfortable conditions for outdoor activities"
     },
     "comfort": {
-        "index": 4.5,
-        "level": "cold"
+        "index": 9,
+        "level": "cool"
     }
 }

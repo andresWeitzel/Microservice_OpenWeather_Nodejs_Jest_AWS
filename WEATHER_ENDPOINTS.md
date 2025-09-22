@@ -174,6 +174,9 @@ curl http://localhost:4000/v1/weather/units/New%20York/imperial
 
 # Temperatura en Kelvin (por defecto)
 curl http://localhost:4000/v1/weather/units/Tokyo/kelvin
+
+# Enhanced con unidades
+curl http://localhost:4000/v1/weather-enhanced/combined/Madrid/metric/es
 ```
 
 **URL OpenWeatherMap**: `https://api.openweathermap.org/data/2.5/weather?q={city}&units={units}&appid={API_KEY}`
@@ -183,6 +186,10 @@ curl http://localhost:4000/v1/weather/units/Tokyo/kelvin
 *   `metric`: Celsius, m/s, hPa
 *   `imperial`: Fahrenheit, mph, hPa
 *   `kelvin`: Kelvin, m/s, hPa (por defecto)
+
+**Notas**
+- Si se omiten unidades en endpoints combinados, por defecto se usa Kelvin.
+- Respuestas incluyen el payload de OpenWeather sin modificaciones, salvo en los endpoints `enhanced` que agregan métricas y recomendaciones.
 
 ***
 
@@ -209,6 +216,9 @@ curl http://localhost:4000/v1/weather/language/London/fr
 
 # Alemán
 curl http://localhost:4000/v1/weather/language/Berlin/de
+
+# Enhanced con idioma y unidades
+curl http://localhost:4000/v1/weather-enhanced/combined/Buenos%20Aires/metric/es
 ```
 
 **URL OpenWeatherMap**: `https://api.openweathermap.org/data/2.5/weather?q={city}&lang={lang}&appid={API_KEY}`
@@ -231,6 +241,10 @@ curl http://localhost:4000/v1/weather/language/Berlin/de
 *   `th`: Tailandés
 *   `tr`: Turco
 *   `vi`: Vietnamita
+
+**Notas**
+- Si el idioma no es válido, OpenWeather responde en inglés por defecto.
+- Para maximizar aciertos, usar nombres de ciudades en inglés o incluir país: `Santiago, CL`.
 
 ***
 

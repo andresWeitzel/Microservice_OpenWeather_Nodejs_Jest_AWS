@@ -1,0 +1,38 @@
+{
+    "intervalAnalysis": {
+        "interval": "3h",
+        "summary": {
+            "averageTemperature": 284.52,
+            "temperatureRange": {
+                "min": 284.52,
+                "max": 284.52
+            },
+            "averageHumidity": 55,
+            "averageWindSpeed": 2.84,
+            "dominantWeatherCondition": "Clouds",
+            "forecastCount": 1
+        },
+        "weatherPatterns": {
+            "conditionBreakdown": {
+                "Clouds": 1
+            },
+            "temperatureTrend": "stable"
+        },
+        "recommendations": [
+            "Stay hydrated and avoid prolonged sun exposure"
+        ],
+        "planningAdvice": {
+            "suitableActivities": [
+                "Light outdoor activities",
+                "Shopping",
+                "Café visits"
+            ],
+            "travelAdvice": "Normal travel conditions expected",
+            "timeOfDay": {
+                "morning": "No morning forecasts",
+                "afternoon": "No afternoon forecasts",
+                "evening": "Evening forecasts available"
+            }
+        }
+    }
+}

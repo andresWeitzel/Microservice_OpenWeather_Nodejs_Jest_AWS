@@ -99,11 +99,11 @@ module.exports.handler = async (event) => {
     }
 
     // Cache the successful response for 10 minutes
-    setCachedWeatherData('combined', cacheKey, axiosResponse, 10 * 60 * 1000);
+    setCachedWeatherData('combined', cacheKey, axiosResponse.data, 10 * 60 * 1000);
     console.log(`Cached data for location: ${cleanedLocation} with units: ${units} and language: ${language}`);
 
     // Return response immediately
-    const response = await bodyResponse(OK_CODE, axiosResponse);
+    const response = await bodyResponse(OK_CODE, axiosResponse.data);
 
     // Save data to JSON file asynchronously (fire and forget - don't wait for it)
     process.nextTick(() => {

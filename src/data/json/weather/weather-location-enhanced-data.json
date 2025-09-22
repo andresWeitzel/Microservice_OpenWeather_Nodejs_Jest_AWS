@@ -7,42 +7,41 @@
             "lat": -34.6132
         },
         "timezone": -10800,
-        "localTime": "2025-08-07T01:22:02.002Z",
-        "isDaytime": false
+        "localTime": "2025-09-22T18:13:26.481Z",
+        "isDaytime": true
     },
     "temperature": {
-        "kelvin": 286.22,
-        "celsius": 13.07,
-        "fahrenheit": 55.53,
+        "kelvin": 292.75,
+        "celsius": 19.6,
+        "fahrenheit": 67.28,
         "feels_like": {
-            "kelvin": 285.57,
-            "celsius": 12.42,
-            "fahrenheit": 54.36
+            "kelvin": 291.99,
+            "celsius": 18.84,
+            "fahrenheit": 65.91
         }
     },
     "weather": {
-        "condition": "Clouds",
-        "description": "overcast clouds",
-        "icon": "04n",
+        "condition": "Clear",
+        "description": "clear sky",
+        "icon": "01d",
         "severity": "light",
         "recommendation": "Enjoy the weather!"
     },
     "atmosphere": {
-        "pressure": 1022,
-        "humidity": 76,
+        "pressure": 1010,
+        "humidity": 47,
         "visibility": 10000,
-        "clouds": 100
+        "clouds": 0
     },
     "wind": {
-        "speed": 1.32,
-        "direction": 154,
-        "gust": 1.45,
-        "description": "Light air"
+        "speed": 3.09,
+        "direction": 230,
+        "description": "Light breeze"
     },
     "sun": {
-        "sunrise": "07:42 AM",
-        "sunset": "06:16 PM",
-        "dayLength": "10h 33m"
+        "sunrise": "06:42 AM",
+        "sunset": "06:49 PM",
+        "dayLength": "12h 7m"
     },
     "alerts": [],
     "recommendations": {
@@ -52,7 +51,7 @@
         "health": "Comfortable conditions for outdoor activities"
     },
     "comfort": {
-        "index": 5.5,
+        "index": 9.5,
         "level": "cool"
     }
 }

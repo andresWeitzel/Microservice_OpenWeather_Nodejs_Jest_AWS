@@ -1,0 +1,72 @@
+{
+    "daysAnalysis": {
+        "requestedDays": 3,
+        "actualDays": 3,
+        "summary": {
+            "averageTemperature": 285.32,
+            "temperatureRange": {
+                "min": 283.42,
+                "max": 286.85
+            },
+            "averageHumidity": 59,
+            "averageWindSpeed": 3.29,
+            "dominantWeatherCondition": "Clouds",
+            "temperatureTrend": "warming"
+        },
+        "weatherPatterns": {
+            "conditionBreakdown": {
+                "Clouds": 3
+            },
+            "dailyVariations": [
+                {
+                    "day": "Monday",
+                    "temperature": 283.42,
+                    "condition": "Clouds",
+                    "humidity": 57
+                },
+                {
+                    "day": "Tuesday",
+                    "temperature": 285.69,
+                    "condition": "Clouds",
+                    "humidity": 60
+                },
+                {
+                    "day": "Wednesday",
+                    "temperature": 286.85,
+                    "condition": "Clouds",
+                    "humidity": 60
+                }
+            ]
+        },
+        "recommendations": [
+            "Prepare for warm weather - bring sunscreen and stay hydrated",
+            "Temperatures are trending upward - plan accordingly"
+        ],
+        "planningAdvice": {
+            "bestDayForOutdoorActivities": {
+                "day": "Monday",
+                "date": "2025-09-22",
+                "score": 50,
+                "reason": "hot temperatures"
+            },
+            "worstDayForOutdoorActivities": {
+                "day": "Monday",
+                "date": "2025-09-22",
+                "score": 50,
+                "reason": "hot temperatures"
+            },
+            "clothingRecommendations": [
+                "Light, breathable clothing",
+                "Sunscreen essential",
+                "Hat for sun protection",
+                "Prepare for warming trend - layer clothing"
+            ],
+            "activitySuggestions": [
+                "Light outdoor activities",
+                "Walking tours",
+                "Café visits",
+                "Shopping"
+            ]
+        }
+    }
+}

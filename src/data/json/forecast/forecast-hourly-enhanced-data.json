@@ -1,0 +1,64 @@
+{
+    "hourlyAnalysis": {
+        "summary": {
+            "period": "morning",
+            "totalForecasts": 10,
+            "averageTemperature": 10.469999999999999,
+            "minTemperature": 6.99,
+            "maxTemperature": 13.9,
+            "averageHumidity": 74.6,
+            "averagePressure": 1025.2,
+            "averageWindSpeed": 5.015000000000001,
+            "timeRange": {
+                "start": 6,
+                "end": 12,
+                "description": "6:00 AM - 12:00 PM"
+            }
+        },
+        "conditions": {
+            "Clear": 2,
+            "Clouds": 6,
+            "Rain": 2
+        },
+        "comfort": {
+            "level": "comfortable",
+            "description": "Pleasant conditions for this time of day",
+            "temperature": 10.469999999999999,
+            "humidity": 74.6
+        },
+        "recommendations": {
+            "activities": [
+                "Indoor activities recommended",
+                "Indoor activities preferred",
+                "Good conditions for outdoor activities",
+                "Excellent conditions for outdoor activities"
+            ],
+            "precautions": [
+                "High humidity in the morning",
+                "Bring umbrella or rain gear"
+            ],
+            "clothing": [
+                "Wear warm clothing"
+            ]
+        },
+        "period": "morning",
+        "timeRange": {
+            "start": 6,
+            "end": 12,
+            "description": "6:00 AM - 12:00 PM"
+        }
+    },
+    "metadata": {
+        "location": "La Plata",
+        "hour": "morning",
+        "totalForecasts": 10,
+        "timeRange": {
+            "start": 6,
+            "end": 12,
+            "description": "6:00 AM - 12:00 PM"
+        },
+        "generatedAt": "2025-09-22T20:36:21.598Z",
+        "source": "OpenWeatherMap API",
+        "endpoint": "forecast-enhanced-hourly"
+    }
+}

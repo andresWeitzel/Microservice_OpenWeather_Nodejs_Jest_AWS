@@ -58,15 +58,15 @@ module.exports.handler = async (event) => {
     }
 
     // Cache the successful response for 10 minutes using the cleaned location
-    setCachedWeatherData('current', cleanedLocation, axiosResponse, 10 * 60 * 1000);
+    setCachedWeatherData('current', cleanedLocation, axiosResponse.data, 10 * 60 * 1000);
     console.log(`Cached data for: ${cleanedLocation}`);
 
     // Return response immediately
-    const response = await bodyResponse(OK_CODE, axiosResponse);
+    const response = await bodyResponse(OK_CODE, axiosResponse.data);
 
     // Save data to JSON file asynchronously (fire and forget - don't wait for it)
     process.nextTick(() => {
-      createJson(FILE_PATH_WEATHER_CONDITION, axiosResponse).catch(error => {
+      createJson(FILE_PATH_WEATHER_CONDITION, axiosResponse.data).catch(error => {
         console.log("Warning: Failed to save weather data to JSON:", error.message);
       });
     });

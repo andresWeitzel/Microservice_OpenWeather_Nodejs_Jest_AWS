@@ -464,8 +464,18 @@ If you continue to have issues:
 | `/v1/weather/language/{location}/{language}` | GET | **Weather with specific language** | **Weather data in different languages** |
 | `/v1/weather/combined/{location}/{units}/{language}` | GET | **Weather with all parameters** | **Weather data with units and language** |
 | `/v1/weather-enhanced/combined/{location}/{units}/{language}` | GET | **Enhanced weather with all parameters** | **Enriched weather data with units and language** |
-| `/v1/forecast/location/{location}` | GET | Raw OpenWeather forecast | Original OpenWeather forecast format |
-| `/v1/forecast-enhanced/location/{location}` | GET | **Enhanced forecast data** | **Enriched format with daily summaries, trends, and planning recommendations** |
+| `/v1/forecast/interval/{location}/{interval}` | GET | **Forecast by time intervals** | **Forecast data for 3h, 6h, 12h, 24h intervals** |
+| `/v1/forecast-enhanced/interval/{location}/{interval}` | GET | **Enhanced forecast by intervals** | **Enhanced forecast data for time intervals** |
+| `/v1/forecast/days/{location}/{days}` | GET | **Forecast by specific days** | **Forecast data for 1-5 days** |
+| `/v1/forecast-enhanced/days/{location}/{days}` | GET | **Enhanced forecast by days** | **Enhanced forecast data for specific days** |
+| `/v1/forecast/hourly/{location}/{hour}` | GET | **Forecast by time periods** | **Forecast data for morning, afternoon, evening, night** |
+| `/v1/forecast-enhanced/hourly/{location}/{hour}` | GET | **Enhanced forecast by hours** | **Enhanced forecast data for time periods** |
+| `/v1/forecast/weekly/{location}/{weeks}` | GET | **Forecast by weeks** | **Forecast data grouped by weeks (1-4)** |
+| `/v1/forecast-enhanced/weekly/{location}/{weeks}` | GET | **Enhanced forecast by weeks** | **Enhanced forecast data grouped by weeks** |
+| `/v1/forecast/events/{location}/{eventType}` | GET | **Forecast by events** | **Forecast data for specific events (weekend, holiday, etc.)** |
+| `/v1/forecast-enhanced/events/{location}/{eventType}` | GET | **Enhanced forecast by events** | **Enhanced forecast data for specific events** |
+| `/v1/forecast/compare/{location}/{period1}/{period2}` | GET | **Forecast comparison** | **Compare forecast data between two periods** |
+| `/v1/forecast-enhanced/compare/{location}/{period1}/{period2}` | GET | **Enhanced forecast comparison** | **Enhanced comparison between two periods** |
 | `/v1/air-pollution/location/{location}` | GET | Raw OpenWeather air pollution | Original OpenWeather air pollution format |
 | `/v1/air-pollution-enhanced/location/{location}` | GET | **Enhanced air pollution data** | **Enriched format with health recommendations, alerts, and detailed analysis** |
 | `/v1/info/health` | GET | **System health check** | **API connectivity, cache status, and system metrics** |
@@ -1102,6 +1112,19 @@ curl http://localhost:4000/v1/info/city-ids/New%20York/US/3
 # Test air pollution endpoints
 curl http://localhost:4000/v1/air-pollution/location/Beijing
 curl http://localhost:4000/v1/air-pollution-enhanced/location/Delhi
+
+# NEW: Test different forecast endpoints (not following weather patterns)
+# Test forecast by time intervals
+curl http://localhost:4000/v1/forecast/interval/London/6h
+curl http://localhost:4000/v1/forecast-enhanced/interval/London/12h
+
+# Test forecast by specific days
+curl http://localhost:4000/v1/forecast/days/Paris/3
+curl http://localhost:4000/v1/forecast-enhanced/days/Paris/5
+
+# Test forecast by time periods
+curl http://localhost:4000/v1/forecast/hourly/Tokyo/morning
+curl http://localhost:4000/v1/forecast-enhanced/hourly/Tokyo/afternoon
 ```
 
 #### Testing with Postman
@@ -1172,13 +1195,24 @@ The microservice automatically saves API responses to JSON files for backup, deb
     │   ├── weather-data.json              # Basic weather data
     │   └── weather-enhanced-data.json     # Enhanced weather data
     ├── forecast/
-    │   ├── forecast-data.json             # Basic forecast data
-    │   └── forecast-enhanced-data.json    # Enhanced forecast data
-    ├── air-pollution/
-    │   ├── air-pollution-data.json        # Basic air pollution data
-    │   └── air-pollution-enhanced-data.json  # Enhanced air pollution data
-    └── weather-condition/
-        └── (weather condition data)
+    │   ├── forecast-interval-data.json           # Forecast by intervals data
+    │   ├── forecast-interval-enhanced-data.json  # Enhanced forecast by intervals data
+    │   ├── forecast-days-data.json               # Forecast by days data
+    │   ├── forecast-days-enhanced-data.json      # Enhanced forecast by days data
+    │   ├── forecast-hourly-data.json             # Forecast by hourly periods data
+
+│   ├── forecast-hourly-enhanced-data.json    # Enhanced forecast by hourly periods data
+│   ├── forecast-weekly-data.json             # Forecast by weeks data
+│   ├── forecast-weekly-enhanced-data.json    # Enhanced forecast by weeks data
+│   ├── forecast-events-data.json             # Forecast by events data
+│   ├── forecast-events-enhanced-data.json    # Enhanced forecast by events data
+│   ├── forecast-compare-data.json            # Forecast comparison data
+│   └── forecast-compare-enhanced-data.json   # Enhanced forecast comparison data
+├── air-pollution/
+│   ├── air-pollution-data.json        # Basic air pollution data
+│   └── air-pollution-enhanced-data.json  # Enhanced air pollution data
+└── weather-condition/
+└── (weather condition data)
 
 #### How It Works
 
@@ -1303,6 +1337,42 @@ curl http://localhost:4000/v1/weather/combined/Tokyo/metric/es
 
 # 11. Enhanced weather with all parameters combined
 curl http://localhost:4000/v1/weather-enhanced/combined/Tokyo/metric/es
+
+# 12. Forecast by time intervals (6 hours)
+curl http://localhost:4000/v1/forecast/interval/London/6h
+
+# 13. Enhanced forecast by time intervals (12 hours)
+curl http://localhost:4000/v1/forecast-enhanced/interval/Paris/12h
+
+# 14. Forecast by specific days (3 days)
+curl http://localhost:4000/v1/forecast/days/Tokyo/3
+
+# 15. Enhanced forecast by specific days (5 days)
+curl http://localhost:4000/v1/forecast-enhanced/days/New%20York/5
+
+# 16. Forecast by time periods (morning)
+curl http://localhost:4000/v1/forecast/hourly/Madrid/morning
+
+# 17. Enhanced forecast by time periods (afternoon)
+curl http://localhost:4000/v1/forecast-enhanced/hourly/Berlin/afternoon
+
+# 18. Forecast by weeks (2 weeks)
+curl http://localhost:4000/v1/forecast/weekly/London/2
+
+# 19. Enhanced forecast by weeks (3 weeks)
+curl http://localhost:4000/v1/forecast-enhanced/weekly/Paris/3
+
+# 20. Forecast by events (weekend)
+curl http://localhost:4000/v1/forecast/events/Tokyo/weekend
+
+# 21. Enhanced forecast by events (holiday)
+curl http://localhost:4000/v1/forecast-enhanced/events/New%20York/holiday
+
+# 22. Forecast comparison (today vs tomorrow)
+curl http://localhost:4000/v1/forecast/compare/Madrid/today/tomorrow
+
+# 23. Enhanced forecast comparison (weekend vs next_week)
+curl http://localhost:4000/v1/forecast-enhanced/compare/Berlin/weekend/next_week
 ```
 
 ### 🧪 Automated Testing

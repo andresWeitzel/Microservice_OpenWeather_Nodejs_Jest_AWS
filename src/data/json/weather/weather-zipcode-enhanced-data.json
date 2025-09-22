@@ -7,51 +7,51 @@
             "lat": -32.8833
         },
         "timezone": -10800,
-        "localTime": "2025-08-10T01:20:39.170Z",
-        "isDaytime": false
+        "localTime": "2025-09-22T18:37:43.776Z",
+        "isDaytime": true
     },
     "temperature": {
-        "kelvin": 283.02,
-        "celsius": 9.87,
-        "fahrenheit": 49.77,
+        "kelvin": 294.02,
+        "celsius": 20.87,
+        "fahrenheit": 69.57,
         "feels_like": {
-            "kelvin": 283.02,
-            "celsius": 9.87,
-            "fahrenheit": 49.77
+            "kelvin": 292.71,
+            "celsius": 19.56,
+            "fahrenheit": 67.21
         }
     },
     "weather": {
         "condition": "Clear",
         "description": "clear sky",
-        "icon": "01n",
+        "icon": "01d",
         "severity": "light",
-        "recommendation": "Wear warm clothing"
+        "recommendation": "Enjoy the weather!"
     },
     "atmosphere": {
-        "pressure": 1017,
-        "humidity": 50,
+        "pressure": 1012,
+        "humidity": 21,
         "visibility": 10000,
         "clouds": 0
     },
     "wind": {
-        "speed": 0,
-        "direction": 0,
-        "description": "Calm"
+        "speed": 3.09,
+        "direction": 360,
+        "description": "Light breeze"
     },
     "sun": {
-        "sunrise": "08:18 AM",
-        "sunset": "07:02 PM",
-        "dayLength": "10h 44m"
+        "sunrise": "07:24 AM",
+        "sunset": "07:31 PM",
+        "dayLength": "12h 7m"
     },
     "alerts": [],
     "recommendations": {
-        "clothing": "Warm jacket or coat",
+        "clothing": "Light clothing",
         "activities": "Outdoor activities suitable",
         "transport": "Normal transport conditions",
         "health": "Comfortable conditions for outdoor activities"
     },
     "comfort": {
-        "index": 6,
-        "level": "cold"
+        "index": 8.5,
+        "level": "comfortable"
     }
 }

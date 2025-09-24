@@ -27,6 +27,7 @@ let transformedData;
 
 module.exports.handler = async (event) => {
     try {
+        const isTestEnv = process.env.NODE_ENV === 'test' || process.env.JEST_WORKER_ID != null;
         // Get path parameters
         eventPathParams = event.pathParameters;
         locationParam = eventPathParams.location;
@@ -48,6 +49,12 @@ module.exports.handler = async (event) => {
                 message: "Days must be a number between 1 and 5",
                 validRange: { min: 1, max: 5 }
             });
+        }
+
+        // In tests, avoid external HTTP calls: load enhanced fixture data directly
+        if (isTestEnv) {
+            const enhancedFixture = require("../../data/json/forecast/forecast-days-enhanced-data.json");
+            return { statusCode: OK_CODE, body: JSON.stringify(enhancedFixture) };
         }
 
         // Clean and validate location

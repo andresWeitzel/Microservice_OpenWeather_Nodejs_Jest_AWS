@@ -13,12 +13,15 @@ const INTERNAL_SERVER_ERROR = statusCode.INTERNAL_SERVER_ERROR;
 
 module.exports.handler = async (event) => {
   try {
+    const isTestEnv = process.env.NODE_ENV === 'test' || process.env.JEST_WORKER_ID != null;
     const startTime = Date.now();
     
     // Test OpenWeather API connectivity
     const testURL = `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${API_KEY}`;
     
-    console.log("Health Check - Testing OpenWeather API connectivity");
+    if (!isTestEnv) {
+      console.log("Health Check - Testing OpenWeather API connectivity");
+    }
     
     const axiosConfig = {
       headers: {
@@ -69,7 +72,9 @@ module.exports.handler = async (event) => {
 
     return await bodyResponse(statusCode, healthStatus);
   } catch (error) {
-    console.log("ERROR in health check handler:", error);
+    if (!isTestEnv) {
+      console.log("ERROR in health check handler:", error);
+    }
     
     const errorStatus = {
       status: "unhealthy",

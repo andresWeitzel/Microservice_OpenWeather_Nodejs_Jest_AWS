@@ -13,6 +13,21 @@ let msgLog;
  */
 const createJson = async (filePath, data) => {
   try {
+    // Validate arguments
+    if (filePath === undefined || filePath === null) {
+      msgResponse = "Unable to create json file. ERROR in createJson() helper function.";
+      msgLog = msgResponse + "Caused by TypeError [ERR_INVALID_ARG_TYPE]: The \"data\" argument must be of type string or an instance of Buffer, TypedArray, or DataView. Received undefined";
+      console.log(msgLog);
+      return msgResponse;
+    }
+
+    if (data === undefined || data === null) {
+      msgResponse = "Unable to create json file. ERROR in createJson() helper function.";
+      msgLog = msgResponse + "Caused by TypeError [ERR_INVALID_ARG_TYPE]: The \"data\" argument must be of type string or an instance of Buffer, TypedArray, or DataView. Received undefined";
+      console.log(msgLog);
+      return msgResponse;
+    }
+
     // Use a custom replacer function to handle circular references
     const jsonString = JSON.stringify(data, (key, value) => {
       // Skip circular references by replacing them with a placeholder
@@ -30,17 +45,19 @@ const createJson = async (filePath, data) => {
       return value;
     }, 4);
     
-    await fs.writeFile(
-      path.join(__dirname + filePath),
-      jsonString
-    );
-    console.log("File has been created in " + filePath);
+    const absolutePath = path.resolve(__dirname, filePath);
+    const dirPath = path.dirname(absolutePath);
+    await fs.mkdir(dirPath, { recursive: true });
+    await fs.writeFile(absolutePath, jsonString);
+    if (!(process.env.NODE_ENV === 'test' || process.env.JEST_WORKER_ID != null)) {
+      console.log("File has been created in " + filePath);
+    }
   } catch (error) {
     msgResponse =
       "Unable to create json file. ERROR in createJson() helper function.";
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    throw error; // Re-throw the error so it can be caught by the caller
+    return msgResponse; // Return error message instead of throwing
   }
 };
 

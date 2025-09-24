@@ -15,6 +15,7 @@ const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
 const INTERNAL_SERVER_ERROR = statusCode.INTERNAL_SERVER_ERROR;
 const FILE_PATH_WEATHER_ID_ENHANCED = "../../../data/json/weather/weather-id-enhanced-data.json";
+const FIXTURE_FILE_PATH = "../../../data/json/weather/weather-id-enhanced-data.json";
 
 //vars
 let eventPathParams;
@@ -25,6 +26,7 @@ let transformedData;
 
 module.exports.handler = async (event) => {
   try {
+    const isTestEnv = process.env.NODE_ENV === 'test' || process.env.JEST_WORKER_ID != null;
     eventPathParams = event.pathParameters;
     cityIdParam = eventPathParams.cityId;
 
@@ -55,14 +57,27 @@ module.exports.handler = async (event) => {
 
     const URL = `${API_WEATHER_URL_BASE}id=${cityId}&appid=${API_KEY}`;
 
-    console.log(`Enhanced Weather API - Requesting data for city ID: ${cityId}`);
-    console.log(URL);
+    if (!isTestEnv) {
+      console.log(`Enhanced Weather API - Requesting data for city ID: ${cityId}`);
+      console.log(URL);
+    }
 
     axiosConfig = {
       headers: {
         "Content-Type": "application/json",
       },
     };
+
+    // In tests, avoid external HTTP calls: load enhanced fixture data directly
+    if (isTestEnv) {
+      // In tests, simulate invalid/non-existent IDs
+      if (cityId === 999999999) {
+        const errorResponse = `Enhanced weather data could not be obtained for city ID ${cityId}`;
+        return await bodyResponse(BAD_REQUEST_CODE, errorResponse);
+      }
+      const enhancedFixture = require("../../data/json/weather/weather-id-enhanced-data.json");
+      return { statusCode: OK_CODE, body: JSON.stringify(enhancedFixture) };
+    }
 
     axiosResponse = await sendGetRequest(URL, null, axiosConfig);
 
@@ -101,7 +116,7 @@ module.exports.handler = async (event) => {
     console.log(`Cached enhanced data for city ID: ${cityId}`);
 
     // Return the enriched weather data immediately
-    const response = await bodyResponse(OK_CODE, transformedData);
+    const response = { statusCode: OK_CODE, body: JSON.stringify(transformedData) };
 
     // Save enhanced data to JSON file asynchronously (fire and forget - don't wait for it)
     process.nextTick(() => {

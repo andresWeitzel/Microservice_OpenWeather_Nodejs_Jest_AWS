@@ -476,8 +476,6 @@ If you continue to have issues:
 | `/v1/forecast-enhanced/events/{location}/{eventType}` | GET | **Enhanced forecast by events** | **Enhanced forecast data for specific events** |
 | `/v1/forecast/compare/{location}/{period1}/{period2}` | GET | **Forecast comparison** | **Compare forecast data between two periods** |
 | `/v1/forecast-enhanced/compare/{location}/{period1}/{period2}` | GET | **Enhanced forecast comparison** | **Enhanced comparison between two periods** |
-| `/v1/air-pollution/location/{location}` | GET | Raw OpenWeather air pollution | Original OpenWeather air pollution format |
-| `/v1/air-pollution-enhanced/location/{location}` | GET | **Enhanced air pollution data** | **Enriched format with health recommendations, alerts, and detailed analysis** |
 | `/v1/info/health` | GET | **System health check** | **API connectivity, cache status, and system metrics** |
 
 > **🆕 NEW**: We've implemented all OpenWeatherMap weather API variants! See [WEATHER\_ENDPOINTS.md](./WEATHER_ENDPOINTS.md) for complete documentation.
@@ -923,161 +921,6 @@ GET http://localhost:4000/v1/weather-enhanced/coordinates/51.5074/-0.1276
 }
 ```
 
-#### Basic Air Pollution Endpoint
-
-**Request:**
-
-```bash
-GET http://localhost:4000/v1/air-pollution/location/London
-```
-
-**Response:**
-
-```json
-{
-  "statusCode": 200,
-  "body": {
-    "coord": {"lon": -0.1276, "lat": 51.5074},
-    "list": [
-      {
-        "dt": 1640995200,
-        "main": {"aqi": 2},
-        "components": {
-          "co": 447.21,
-          "no": 0.18,
-          "no2": 0.71,
-          "o3": 68.04,
-          "so2": 0.64,
-          "pm2_5": 4.67,
-          "pm10": 6.04,
-          "nh3": 0.92
-        }
-      }
-    ],
-    "location": {
-      "city": "London",
-      "country": "GB",
-      "state": "England",
-      "coordinates": {
-        "lat": 51.5074,
-        "lon": -0.1276
-      }
-    }
-  }
-}
-```
-
-#### Enhanced Air Pollution Endpoint
-
-**Request:**
-
-```bash
-GET http://localhost:4000/v1/air-pollution-enhanced/location/London
-```
-
-**Response:**
-
-```json
-{
-  "statusCode": 200,
-  "body": {
-    "location": {
-      "city": "London",
-      "country": "GB",
-      "state": "England",
-      "coordinates": {"lon": -0.1276, "lat": 51.5074},
-      "timestamp": "2022-01-01T12:00:00.000Z"
-    },
-    "airQuality": {
-      "index": 2,
-      "level": "Fair",
-      "description": "Air quality is acceptable, however some pollutants may be a concern for a small number of people",
-      "color": "#ffde33",
-      "healthImplications": "Minor health implications for sensitive individuals"
-    },
-    "pollutants": {
-      "carbonMonoxide": {
-        "value": 447.21,
-        "unit": "μg/m³",
-        "level": "High",
-        "description": "Carbon monoxide - a colorless, odorless gas that can be harmful when inhaled"
-      },
-      "nitrogenOxide": {
-        "value": 0.18,
-        "unit": "μg/m³",
-        "level": "Low",
-        "description": "Nitric oxide - a gas that contributes to air pollution"
-      },
-      "nitrogenDioxide": {
-        "value": 0.71,
-        "unit": "μg/m³",
-        "level": "Low",
-        "description": "Nitrogen dioxide - a gas that can irritate the lungs"
-      },
-      "ozone": {
-        "value": 68.04,
-        "unit": "μg/m³",
-        "level": "Moderate",
-        "description": "Ozone - a gas that can cause respiratory problems"
-      },
-      "sulfurDioxide": {
-        "value": 0.64,
-        "unit": "μg/m³",
-        "level": "Low",
-        "description": "Sulfur dioxide - a gas that can irritate the respiratory system"
-      },
-      "particulateMatter25": {
-        "value": 4.67,
-        "unit": "μg/m³",
-        "level": "Low",
-        "description": "Fine particulate matter - tiny particles that can penetrate deep into the lungs"
-      },
-      "particulateMatter10": {
-        "value": 6.04,
-        "unit": "μg/m³",
-        "level": "Low",
-        "description": "Coarse particulate matter - larger particles that can irritate the respiratory system"
-      },
-      "ammonia": {
-        "value": 0.92,
-        "unit": "μg/m³",
-        "level": "Moderate",
-        "description": "Ammonia - a gas that can contribute to air pollution"
-      }
-    },
-    "alerts": [
-      {
-        "type": "carbon_monoxide",
-        "level": "moderate",
-        "message": "Elevated carbon monoxide levels detected"
-      }
-    ],
-    "recommendations": {
-      "general": "Air quality is acceptable, however some pollutants may be a concern for a small number of people",
-      "outdoor": "Outdoor activities are generally safe",
-      "indoor": "Normal indoor activities",
-      "health": "Monitor symptoms if you have respiratory conditions",
-      "transportation": "Normal transportation methods"
-    },
-    "health": {
-      "riskLevel": "Low to Moderate",
-      "vulnerableGroups": [
-        "Children",
-        "Elderly",
-        "People with respiratory conditions"
-      ],
-      "symptoms": ["None expected"],
-      "prevention": ["Monitor air quality regularly"]
-    },
-    "activities": {
-      "outdoor": "Safe for all outdoor activities",
-      "exercise": "Outdoor exercise is safe",
-      "ventilation": "Normal ventilation is fine",
-      "transportation": "All transportation methods are fine"
-    }
-  }
-}
-```
 
 #### Testing with curl
 
@@ -1109,9 +952,6 @@ curl http://localhost:4000/v1/info/city-ids/London
 curl http://localhost:4000/v1/info/city-ids/Paris/FR
 curl http://localhost:4000/v1/info/city-ids/New%20York/US/3
 
-# Test air pollution endpoints
-curl http://localhost:4000/v1/air-pollution/location/Beijing
-curl http://localhost:4000/v1/air-pollution-enhanced/location/Delhi
 
 # NEW: Test different forecast endpoints (not following weather patterns)
 # Test forecast by time intervals
@@ -1165,13 +1005,6 @@ curl http://localhost:4000/v1/forecast-enhanced/hourly/Tokyo/afternoon
     *   Method: `GET`
     *   URL: `http://localhost:4000/v1/info/city-ids/New%20York/US/3`
 
-10. **Basic Air Pollution:**
-    *   Method: `GET`
-    *   URL: `http://localhost:4000/v1/air-pollution/location/London`
-
-11. **Enhanced Air Pollution:**
-    *   Method: `GET`
-    *   URL: `http://localhost:4000/v1/air-pollution-enhanced/location/London`
 
 </details>
 
@@ -1208,9 +1041,6 @@ The microservice automatically saves API responses to JSON files for backup, deb
 │   ├── forecast-events-enhanced-data.json    # Enhanced forecast by events data
 │   ├── forecast-compare-data.json            # Forecast comparison data
 │   └── forecast-compare-enhanced-data.json   # Enhanced forecast comparison data
-├── air-pollution/
-│   ├── air-pollution-data.json        # Basic air pollution data
-│   └── air-pollution-enhanced-data.json  # Enhanced air pollution data
 └── weather-condition/
 └── (weather condition data)
 

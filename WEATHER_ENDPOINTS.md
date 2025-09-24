@@ -188,8 +188,9 @@ curl http://localhost:4000/v1/weather-enhanced/combined/Madrid/metric/es
 *   `kelvin`: Kelvin, m/s, hPa (por defecto)
 
 **Notas**
-- Si se omiten unidades en endpoints combinados, por defecto se usa Kelvin.
-- Respuestas incluyen el payload de OpenWeather sin modificaciones, salvo en los endpoints `enhanced` que agregan métricas y recomendaciones.
+
+*   Si se omiten unidades en endpoints combinados, por defecto se usa Kelvin.
+*   Respuestas incluyen el payload de OpenWeather sin modificaciones, salvo en los endpoints `enhanced` que agregan métricas y recomendaciones.
 
 ***
 
@@ -243,8 +244,9 @@ curl http://localhost:4000/v1/weather-enhanced/combined/Buenos%20Aires/metric/es
 *   `vi`: Vietnamita
 
 **Notas**
-- Si el idioma no es válido, OpenWeather responde en inglés por defecto.
-- Para maximizar aciertos, usar nombres de ciudades en inglés o incluir país: `Santiago, CL`.
+
+*   Si el idioma no es válido, OpenWeather responde en inglés por defecto.
+*   Para maximizar aciertos, usar nombres de ciudades en inglés o incluir país: `Santiago, CL`.
 
 ***
 

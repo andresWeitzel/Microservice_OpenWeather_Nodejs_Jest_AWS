@@ -1,0 +1,1210 @@
+openapi: 3.0.3
+info:
+  title: OpenWeather Microservice API
+  description: |
+    A comprehensive microservice for weather data retrieval and forecasting.
+    This API provides real-time weather information, forecasts, and city data
+    with enhanced features like caching, validation, and professional error handling.
+    
+    ## Features
+    - Real-time weather data
+    - 5-day weather forecasts
+    - City information and search
+    - Enhanced data with additional metrics
+    - Caching and performance optimization
+    - Input validation and sanitization
+    
+    ## Authentication
+    This API requires an API key for all requests. Include your API key in the
+    `X-API-Key` header or as a query parameter.
+    
+    ## Rate Limiting
+    - 1000 requests per hour per API key
+    - 100 requests per minute per IP address
+    
+    ## Error Handling
+    All errors follow a consistent format with appropriate HTTP status codes
+    and detailed error messages.
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@openweather-microservice.com
+    url: https://github.com/your-org/openweather-microservice
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://your-domain.com/terms
+
+servers:
+  - url: https://api.openweather-microservice.com/v1
+    description: Production server
+  - url: https://staging-api.openweather-microservice.com/v1
+    description: Staging server
+  - url: http://localhost:4000/v1
+    description: Development server
+
+security:
+  - ApiKeyAuth: []
+  - BearerAuth: []
+
+paths:
+  # Health Check
+  /health:
+    get:
+      tags:
+        - System
+      summary: Health Check
+      description: Check the health status of the microservice
+      operationId: healthCheck
+      security: []
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '500':
+          description: Service is unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # Weather Endpoints
+  /weather/current/{cityId}:
+    get:
+      tags:
+        - Weather
+      summary: Get current weather by city ID
+      description: Retrieve current weather information for a specific city
+      operationId: getWeatherById
+      parameters:
+        - name: cityId
+          in: path
+          required: true
+          description: OpenWeatherMap city ID
+          schema:
+            type: integer
+            minimum: 1
+            example: 2643743
+        - name: units
+          in: query
+          description: Temperature units
+          schema:
+            type: string
+            enum: [metric, imperial, kelvin]
+            default: metric
+        - name: lang
+          in: query
+          description: Language for weather descriptions
+          schema:
+            type: string
+            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
+            default: en
+      responses:
+        '200':
+          description: Current weather data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+        '400':
+          description: Invalid city ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: City not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /weather/current/coordinates:
+    get:
+      tags:
+        - Weather
+      summary: Get current weather by coordinates
+      description: Retrieve current weather information using latitude and longitude
+      operationId: getWeatherByCoordinates
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          description: Latitude coordinate
+          schema:
+            type: number
+            format: float
+            minimum: -90
+            maximum: 90
+            example: 51.5074
+        - name: lon
+          in: query
+          required: true
+          description: Longitude coordinate
+          schema:
+            type: number
+            format: float
+            minimum: -180
+            maximum: 180
+            example: -0.1278
+        - name: units
+          in: query
+          description: Temperature units
+          schema:
+            type: string
+            enum: [metric, imperial, kelvin]
+            default: metric
+        - name: lang
+          in: query
+          description: Language for weather descriptions
+          schema:
+            type: string
+            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
+            default: en
+      responses:
+        '200':
+          description: Current weather data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+        '400':
+          description: Invalid coordinates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /weather/current/location:
+    get:
+      tags:
+        - Weather
+      summary: Get current weather by location
+      description: Retrieve current weather information using city name and country code
+      operationId: getWeatherByLocation
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: City name and country code (e.g., "London,GB")
+          schema:
+            type: string
+            pattern: '^[a-zA-Z\s]+,[A-Z]{2}$'
+            example: "London,GB"
+        - name: units
+          in: query
+          description: Temperature units
+          schema:
+            type: string
+            enum: [metric, imperial, kelvin]
+            default: metric
+        - name: lang
+          in: query
+          description: Language for weather descriptions
+          schema:
+            type: string
+            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
+            default: en
+      responses:
+        '200':
+          description: Current weather data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+        '400':
+          description: Invalid location format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /weather/current/zipcode:
+    get:
+      tags:
+        - Weather
+      summary: Get current weather by zipcode
+      description: Retrieve current weather information using zipcode and country code
+      operationId: getWeatherByZipcode
+      parameters:
+        - name: zip
+          in: query
+          required: true
+          description: Zipcode
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9\s\-\.\,]+$'
+            example: "10001"
+        - name: country
+          in: query
+          required: true
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+            pattern: '^[A-Z]{2}$'
+            example: "US"
+        - name: units
+          in: query
+          description: Temperature units
+          schema:
+            type: string
+            enum: [metric, imperial, kelvin]
+            default: metric
+        - name: lang
+          in: query
+          description: Language for weather descriptions
+          schema:
+            type: string
+            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
+            default: en
+      responses:
+        '200':
+          description: Current weather data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+        '400':
+          description: Invalid zipcode or country code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Zipcode not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # Forecast Endpoints
+  /forecast/days:
+    get:
+      tags:
+        - Forecast
+      summary: Get weather forecast by days
+      description: Retrieve weather forecast for a specific number of days
+      operationId: getForecastByDays
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: City name and country code (e.g., "London,GB")
+          schema:
+            type: string
+            pattern: '^[a-zA-Z\s]+,[A-Z]{2}$'
+            example: "London,GB"
+        - name: days
+          in: query
+          required: true
+          description: Number of forecast days (1-5)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+            default: 5
+        - name: units
+          in: query
+          description: Temperature units
+          schema:
+            type: string
+            enum: [metric, imperial, kelvin]
+            default: metric
+        - name: lang
+          in: query
+          description: Language for weather descriptions
+          schema:
+            type: string
+            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
+            default: en
+      responses:
+        '200':
+          description: Weather forecast data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForecastResponse'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # Info Endpoints
+  /info/cities:
+    get:
+      tags:
+        - Information
+      summary: Search cities
+      description: Search for cities by name and country code
+      operationId: searchCities
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: Search query (city name)
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 100
+            example: "London"
+        - name: country
+          in: query
+          description: Country code filter (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+            pattern: '^[A-Z]{2}$'
+            example: "GB"
+        - name: limit
+          in: query
+          description: Maximum number of results
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        '200':
+          description: List of matching cities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CitySearchResponse'
+        '400':
+          description: Invalid search parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # Enhanced Endpoints
+  /weather/current/{cityId}/enhanced:
+    get:
+      tags:
+        - Weather Enhanced
+      summary: Get enhanced current weather by city ID
+      description: Retrieve current weather information with additional metrics and analysis
+      operationId: getEnhancedWeatherById
+      parameters:
+        - name: cityId
+          in: path
+          required: true
+          description: OpenWeatherMap city ID
+          schema:
+            type: integer
+            minimum: 1
+            example: 2643743
+        - name: units
+          in: query
+          description: Temperature units
+          schema:
+            type: string
+            enum: [metric, imperial, kelvin]
+            default: metric
+        - name: lang
+          in: query
+          description: Language for weather descriptions
+          schema:
+            type: string
+            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
+            default: en
+      responses:
+        '200':
+          description: Enhanced current weather data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedWeatherResponse'
+        '400':
+          description: Invalid city ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: City not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /forecast/days/enhanced:
+    get:
+      tags:
+        - Forecast Enhanced
+      summary: Get enhanced weather forecast by days
+      description: Retrieve weather forecast with additional analysis and insights
+      operationId: getEnhancedForecastByDays
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: City name and country code (e.g., "London,GB")
+          schema:
+            type: string
+            pattern: '^[a-zA-Z\s]+,[A-Z]{2}$'
+            example: "London,GB"
+        - name: days
+          in: query
+          required: true
+          description: Number of forecast days (1-5)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+            default: 5
+        - name: units
+          in: query
+          description: Temperature units
+          schema:
+            type: string
+            enum: [metric, imperial, kelvin]
+            default: metric
+        - name: lang
+          in: query
+          description: Language for weather descriptions
+          schema:
+            type: string
+            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
+            default: en
+      responses:
+        '200':
+          description: Enhanced weather forecast data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedForecastResponse'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token for authentication
+
+  schemas:
+    # Base Schemas
+    WeatherResponse:
+      type: object
+      required:
+        - location
+        - current
+        - timestamp
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+        current:
+          $ref: '#/components/schemas/CurrentWeather'
+        timestamp:
+          type: string
+          format: date-time
+          description: Response timestamp
+        source:
+          type: string
+          description: Data source
+          example: "OpenWeatherMap"
+
+    EnhancedWeatherResponse:
+      type: object
+      required:
+        - location
+        - current
+        - enhanced
+        - timestamp
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+        current:
+          $ref: '#/components/schemas/CurrentWeather'
+        enhanced:
+          $ref: '#/components/schemas/EnhancedData'
+        timestamp:
+          type: string
+          format: date-time
+          description: Response timestamp
+        source:
+          type: string
+          description: Data source
+          example: "OpenWeatherMap"
+
+    ForecastResponse:
+      type: object
+      required:
+        - location
+        - forecast
+        - timestamp
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+        forecast:
+          type: array
+          items:
+            $ref: '#/components/schemas/ForecastDay'
+        timestamp:
+          type: string
+          format: date-time
+          description: Response timestamp
+        source:
+          type: string
+          description: Data source
+          example: "OpenWeatherMap"
+
+    EnhancedForecastResponse:
+      type: object
+      required:
+        - location
+        - forecast
+        - enhanced
+        - timestamp
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+        forecast:
+          type: array
+          items:
+            $ref: '#/components/schemas/ForecastDay'
+        enhanced:
+          $ref: '#/components/schemas/EnhancedForecastData'
+        timestamp:
+          type: string
+          format: date-time
+          description: Response timestamp
+        source:
+          type: string
+          description: Data source
+          example: "OpenWeatherMap"
+
+    CitySearchResponse:
+      type: object
+      required:
+        - searchQuery
+        - countryCode
+        - limit
+        - totalResults
+        - cities
+      properties:
+        searchQuery:
+          type: string
+          description: Original search query
+          example: "London"
+        countryCode:
+          type: string
+          description: Country code filter
+          example: "GB"
+        limit:
+          type: integer
+          description: Maximum results requested
+          example: 10
+        totalResults:
+          type: integer
+          description: Total number of matching cities
+          example: 5
+        cities:
+          type: array
+          items:
+            $ref: '#/components/schemas/City'
+        source:
+          type: string
+          description: Data source
+          example: "OpenWeatherMap"
+        databaseInfo:
+          type: object
+          properties:
+            lastUpdated:
+              type: string
+              format: date-time
+            totalCities:
+              type: integer
+
+    HealthResponse:
+      type: object
+      required:
+        - status
+        - timestamp
+        - uptime
+        - version
+      properties:
+        status:
+          type: string
+          enum: [healthy, unhealthy, degraded]
+          description: Overall health status
+        timestamp:
+          type: string
+          format: date-time
+          description: Health check timestamp
+        uptime:
+          type: number
+          description: Service uptime in seconds
+        version:
+          type: string
+          description: API version
+          example: "1.0.0"
+        services:
+          type: object
+          properties:
+            database:
+              type: string
+              enum: [healthy, unhealthy]
+            cache:
+              type: string
+              enum: [healthy, unhealthy]
+            externalApi:
+              type: string
+              enum: [healthy, unhealthy]
+        metrics:
+          type: object
+          properties:
+            totalRequests:
+              type: integer
+            errorRate:
+              type: number
+              format: float
+            averageResponseTime:
+              type: number
+              format: float
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+        - timestamp
+      properties:
+        error:
+          type: string
+          description: Error type
+          example: "VALIDATION_ERROR"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "Invalid city ID provided"
+        timestamp:
+          type: string
+          format: date-time
+          description: Error timestamp
+        details:
+          type: object
+          description: Additional error details
+        requestId:
+          type: string
+          description: Unique request identifier
+          example: "req_123456789"
+
+    # Detailed Schemas
+    Location:
+      type: object
+      required:
+        - name
+        - country
+        - coordinates
+      properties:
+        name:
+          type: string
+          description: City name
+          example: "London"
+        country:
+          type: string
+          description: Country name
+          example: "United Kingdom"
+        countryCode:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: "GB"
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        timezone:
+          type: string
+          description: Timezone identifier
+          example: "Europe/London"
+        population:
+          type: integer
+          description: City population
+          example: 8982000
+
+    Coordinates:
+      type: object
+      required:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          format: float
+          minimum: -90
+          maximum: 90
+          example: 51.5074
+        longitude:
+          type: number
+          format: float
+          minimum: -180
+          maximum: 180
+          example: -0.1278
+
+    CurrentWeather:
+      type: object
+      required:
+        - temperature
+        - feelsLike
+        - humidity
+        - pressure
+        - visibility
+        - wind
+        - weather
+        - timestamp
+      properties:
+        temperature:
+          $ref: '#/components/schemas/Temperature'
+        feelsLike:
+          $ref: '#/components/schemas/Temperature'
+        humidity:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Humidity percentage
+          example: 65
+        pressure:
+          type: number
+          format: float
+          description: Atmospheric pressure in hPa
+          example: 1013.25
+        visibility:
+          type: number
+          format: float
+          description: Visibility in meters
+          example: 10000
+        wind:
+          $ref: '#/components/schemas/Wind'
+        weather:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherCondition'
+        timestamp:
+          type: string
+          format: date-time
+          description: Weather data timestamp
+
+    Temperature:
+      type: object
+      required:
+        - value
+        - unit
+      properties:
+        value:
+          type: number
+          format: float
+          description: Temperature value
+          example: 15.5
+        unit:
+          type: string
+          enum: [celsius, fahrenheit, kelvin]
+          description: Temperature unit
+          example: "celsius"
+
+    Wind:
+      type: object
+      required:
+        - speed
+        - direction
+      properties:
+        speed:
+          type: number
+          format: float
+          description: Wind speed
+          example: 3.5
+        direction:
+          type: integer
+          minimum: 0
+          maximum: 360
+          description: Wind direction in degrees
+          example: 180
+        gust:
+          type: number
+          format: float
+          description: Wind gust speed
+          example: 5.2
+
+    WeatherCondition:
+      type: object
+      required:
+        - id
+        - main
+        - description
+        - icon
+      properties:
+        id:
+          type: integer
+          description: Weather condition ID
+          example: 800
+        main:
+          type: string
+          description: Main weather condition
+          example: "Clear"
+        description:
+          type: string
+          description: Weather condition description
+          example: "clear sky"
+        icon:
+          type: string
+          description: Weather icon code
+          example: "01d"
+
+    ForecastDay:
+      type: object
+      required:
+        - date
+        - temperature
+        - weather
+        - wind
+      properties:
+        date:
+          type: string
+          format: date
+          description: Forecast date
+          example: "2024-01-15"
+        temperature:
+          $ref: '#/components/schemas/TemperatureRange'
+        weather:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherCondition'
+        wind:
+          $ref: '#/components/schemas/Wind'
+        humidity:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Humidity percentage
+          example: 70
+        pressure:
+          type: number
+          format: float
+          description: Atmospheric pressure in hPa
+          example: 1015.5
+        visibility:
+          type: number
+          format: float
+          description: Visibility in meters
+          example: 8000
+
+    TemperatureRange:
+      type: object
+      required:
+        - min
+        - max
+        - unit
+      properties:
+        min:
+          type: number
+          format: float
+          description: Minimum temperature
+          example: 12.0
+        max:
+          type: number
+          format: float
+          description: Maximum temperature
+          example: 18.5
+        unit:
+          type: string
+          enum: [celsius, fahrenheit, kelvin]
+          description: Temperature unit
+          example: "celsius"
+
+    City:
+      type: object
+      required:
+        - id
+        - name
+        - country
+        - coordinates
+      properties:
+        id:
+          type: integer
+          description: OpenWeatherMap city ID
+          example: 2643743
+        name:
+          type: string
+          description: City name
+          example: "London"
+        country:
+          type: string
+          description: Country name
+          example: "United Kingdom"
+        countryCode:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: "GB"
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        state:
+          type: string
+          description: State or province
+          example: "England"
+
+    EnhancedData:
+      type: object
+      required:
+        - analysis
+        - recommendations
+        - alerts
+      properties:
+        analysis:
+          type: object
+          properties:
+            comfortIndex:
+              type: number
+              format: float
+              minimum: 0
+              maximum: 10
+              description: Comfort index (0-10)
+              example: 7.5
+            uvIndex:
+              type: number
+              format: float
+              minimum: 0
+              maximum: 11
+              description: UV index
+              example: 3.2
+            airQuality:
+              type: string
+              enum: [excellent, good, moderate, poor, very_poor, hazardous]
+              description: Air quality rating
+              example: "good"
+        recommendations:
+          type: array
+          items:
+            type: string
+          description: Weather-based recommendations
+          example: ["Perfect weather for outdoor activities", "Consider light clothing"]
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherAlert'
+          description: Weather alerts and warnings
+
+    EnhancedForecastData:
+      type: object
+      required:
+        - summary
+        - trends
+        - recommendations
+      properties:
+        summary:
+          type: object
+          properties:
+            overallTrend:
+              type: string
+              enum: [improving, stable, deteriorating]
+              description: Overall weather trend
+              example: "stable"
+            averageTemperature:
+              type: number
+              format: float
+              description: Average temperature over forecast period
+              example: 16.2
+            precipitationChance:
+              type: number
+              format: float
+              minimum: 0
+              maximum: 100
+              description: Average precipitation chance
+              example: 25.5
+        trends:
+          type: object
+          properties:
+            temperature:
+              type: string
+              enum: [rising, stable, falling]
+              description: Temperature trend
+              example: "stable"
+            humidity:
+              type: string
+              enum: [rising, stable, falling]
+              description: Humidity trend
+              example: "rising"
+            wind:
+              type: string
+              enum: [increasing, stable, decreasing]
+              description: Wind trend
+              example: "stable"
+        recommendations:
+          type: array
+          items:
+            type: string
+          description: Forecast-based recommendations
+          example: ["Great week for outdoor activities", "Consider umbrella for weekend"]
+
+    WeatherAlert:
+      type: object
+      required:
+        - type
+        - severity
+        - message
+        - validFrom
+        - validTo
+      properties:
+        type:
+          type: string
+          enum: [weather_warning, weather_watch, weather_advisory]
+          description: Alert type
+          example: "weather_warning"
+        severity:
+          type: string
+          enum: [low, moderate, high, extreme]
+          description: Alert severity
+          example: "moderate"
+        message:
+          type: string
+          description: Alert message
+          example: "Heavy rain expected in the afternoon"
+        validFrom:
+          type: string
+          format: date-time
+          description: Alert valid from
+        validTo:
+          type: string
+          format: date-time
+          description: Alert valid until
+
+tags:
+  - name: System
+    description: System health and status endpoints
+  - name: Weather
+    description: Current weather data endpoints
+  - name: Weather Enhanced
+    description: Enhanced current weather data with additional analysis
+  - name: Forecast
+    description: Weather forecast endpoints
+  - name: Forecast Enhanced
+    description: Enhanced weather forecast with additional insights
+  - name: Information
+    description: City and location information endpoints

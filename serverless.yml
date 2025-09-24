@@ -17,19 +17,21 @@ plugins:
   - serverless-offline
 
 functions:
-  getWeatherByLocation:
-    handler: src/controllers/weather/get-by-location.handler
+  # Health Check
+  healthCheck:
+    handler: src/controllers/info/health/check.handler
     events:
       - http:
-          path: /v1/weather/location/{location}
+          path: /v1/health
           method: get
           private: false
-          
-  getWeatherByLocationEnhanced:
-    handler: src/controllers/weather/get-by-location-enhanced.handler
+
+  # Weather Endpoints
+  getWeatherById:
+    handler: src/controllers/weather/get-by-id.handler
     events:
       - http:
-          path: /v1/weather-enhanced/location/{location}
+          path: /v1/weather/current/{cityId}
           method: get
           private: false
           
@@ -37,31 +39,15 @@ functions:
     handler: src/controllers/weather/get-by-coordinates.handler
     events:
       - http:
-          path: /v1/weather/coordinates/{lat}/{lon}
+          path: /v1/weather/current/coordinates
           method: get
           private: false
           
-  getWeatherByCoordinatesEnhanced:
-    handler: src/controllers/weather/get-by-coordinates-enhanced.handler
+  getWeatherByLocation:
+    handler: src/controllers/weather/get-by-location.handler
     events:
       - http:
-          path: /v1/weather-enhanced/coordinates/{lat}/{lon}
-          method: get
-          private: false
-          
-  getWeatherById:
-    handler: src/controllers/weather/get-by-id.handler
-    events:
-      - http:
-          path: /v1/weather/id/{cityId}
-          method: get
-          private: false
-          
-  getWeatherByIdEnhanced:
-    handler: src/controllers/weather/get-by-id-enhanced.handler
-    events:
-      - http:
-          path: /v1/weather-enhanced/id/{cityId}
+          path: /v1/weather/current/location
           method: get
           private: false
           
@@ -69,7 +55,32 @@ functions:
     handler: src/controllers/weather/get-by-zipcode.handler
     events:
       - http:
-          path: /v1/weather/zipcode/{zipcode}/{countryCode}
+          path: /v1/weather/current/zipcode
+          method: get
+          private: false
+
+  # Enhanced Weather Endpoints
+  getWeatherByIdEnhanced:
+    handler: src/controllers/weather/get-by-id-enhanced.handler
+    events:
+      - http:
+          path: /v1/weather/current/{cityId}/enhanced
+          method: get
+          private: false
+          
+  getWeatherByCoordinatesEnhanced:
+    handler: src/controllers/weather/get-by-coordinates-enhanced.handler
+    events:
+      - http:
+          path: /v1/weather/current/coordinates/enhanced
+          method: get
+          private: false
+          
+  getWeatherByLocationEnhanced:
+    handler: src/controllers/weather/get-by-location-enhanced.handler
+    events:
+      - http:
+          path: /v1/weather/current/location/enhanced
           method: get
           private: false
           
@@ -77,80 +88,16 @@ functions:
     handler: src/controllers/weather/get-by-zipcode-enhanced.handler
     events:
       - http:
-          path: /v1/weather-enhanced/zipcode/{zipcode}/{countryCode}
+          path: /v1/weather/current/zipcode/enhanced
           method: get
           private: false
           
-  getCityIds:
-    handler: src/controllers/info/city-ids/get-city-ids.handler
-    events:
-      - http:
-          path: /v1/info/city-ids/{cityName}
-          method: get
-          private: false
-          
-  getCityIdsWithCountry:
-    handler: src/controllers/info/city-ids/get-city-ids.handler
-    events:
-      - http:
-          path: /v1/info/city-ids/{cityName}/{countryCode}
-          method: get
-          private: false
-          
-  getWeatherWithUnits:
-    handler: src/controllers/weather/get-with-units.handler
-    events:
-      - http:
-          path: /v1/weather/units/{location}/{units}
-          method: get
-          private: false
-          
-  getWeatherWithLanguage:
-    handler: src/controllers/weather/get-with-language.handler
-    events:
-      - http:
-          path: /v1/weather/language/{location}/{language}
-          method: get
-          private: false
-          
-  getWeatherByCombined:
-    handler: src/controllers/weather/get-by-combined.handler
-    events:
-      - http:
-          path: /v1/weather/combined/{location}/{units}/{language}
-          method: get
-          private: false
-          
-  getWeatherByCombinedEnhanced:
-    handler: src/controllers/weather/get-by-combined-enhanced.handler
-    events:
-      - http:
-          path: /v1/weather-enhanced/combined/{location}/{units}/{language}
-          method: get
-          private: false
-          
-  # NEW: Different Forecast Endpoints (not following weather patterns)
-  getForecastByInterval:
-    handler: src/controllers/forecast/get-by-interval.handler
-    events:
-      - http:
-          path: /v1/forecast/interval/{location}/{interval}
-          method: get
-          private: false
-          
-  getForecastByIntervalEnhanced:
-    handler: src/controllers/forecast/get-by-interval-enhanced.handler
-    events:
-      - http:
-          path: /v1/forecast-enhanced/interval/{location}/{interval}
-          method: get
-          private: false
-          
+  # Forecast Endpoints
   getForecastByDays:
     handler: src/controllers/forecast/get-by-days.handler
     events:
       - http:
-          path: /v1/forecast/days/{location}/{days}
+          path: /v1/forecast/days
           method: get
           private: false
           
@@ -158,80 +105,50 @@ functions:
     handler: src/controllers/forecast/get-by-days-enhanced.handler
     events:
       - http:
-          path: /v1/forecast-enhanced/days/{location}/{days}
+          path: /v1/forecast/days/enhanced
+          method: get
+          private: false
+
+  # Info Endpoints
+  getCityIds:
+    handler: src/controllers/info/city-ids/get-city-ids.handler
+    events:
+      - http:
+          path: /v1/info/cities
           method: get
           private: false
           
-  getForecastByHourly:
-    handler: src/controllers/forecast/get-by-hourly.handler
+          
+  # API Documentation and Metrics
+  getSwagger:
+    handler: src/controllers/docs/get-swagger.handler
     events:
       - http:
-          path: /v1/forecast/hourly/{location}/{hour}
+          path: /v1/docs
           method: get
           private: false
           
-  getForecastByHourlyEnhanced:
-    handler: src/controllers/forecast/get-by-hourly-enhanced.handler
+  getSwaggerUI:
+    handler: src/controllers/docs/swagger-ui.handler
     events:
       - http:
-          path: /v1/forecast-enhanced/hourly/{location}/{hour}
+          path: /v1/swagger-ui
           method: get
           private: false
           
-  # NEW: Additional Different Forecast Endpoints
-  getForecastByWeekly:
-    handler: src/controllers/forecast/get-by-weekly.handler
+  getOpenAPI:
+    handler: src/controllers/docs/get-openapi.handler
     events:
       - http:
-          path: /v1/forecast/weekly/{location}/{weeks}
+          path: /v1/openapi.yaml
           method: get
           private: false
           
-  getForecastByWeeklyEnhanced:
-    handler: src/controllers/forecast/get-by-weekly-enhanced.handler
+  getMetrics:
+    handler: src/controllers/metrics/get-metrics.handler
     events:
       - http:
-          path: /v1/forecast-enhanced/weekly/{location}/{weeks}
-          method: get
-          private: false
-          
-  getForecastByEvents:
-    handler: src/controllers/forecast/get-by-events.handler
-    events:
-      - http:
-          path: /v1/forecast/events/{location}/{eventType}
-          method: get
-          private: false
-          
-  getForecastByEventsEnhanced:
-    handler: src/controllers/forecast/get-by-events-enhanced.handler
-    events:
-      - http:
-          path: /v1/forecast-enhanced/events/{location}/{eventType}
-          method: get
-          private: false
-          
-  getForecastByCompare:
-    handler: src/controllers/forecast/get-by-compare.handler
-    events:
-      - http:
-          path: /v1/forecast/compare/{location}/{period1}/{period2}
-          method: get
-          private: false
-          
-  getForecastByCompareEnhanced:
-    handler: src/controllers/forecast/get-by-compare-enhanced.handler
-    events:
-      - http:
-          path: /v1/forecast-enhanced/compare/{location}/{period1}/{period2}
-          method: get
-          private: false
-          
-  healthCheck:
-    handler: src/controllers/info/health/check.handler
-    events:
-      - http:
-          path: /v1/info/health
+          path: /v1/metrics
           method: get
           private: false
           

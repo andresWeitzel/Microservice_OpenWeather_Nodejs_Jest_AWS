@@ -921,7 +921,6 @@ GET http://localhost:4000/v1/weather-enhanced/coordinates/51.5074/-0.1276
 }
 ```
 
-
 #### Testing with curl
 
 ```bash
@@ -1004,7 +1003,6 @@ curl http://localhost:4000/v1/forecast-enhanced/hourly/Tokyo/afternoon
 9.  **Search City IDs with Limit:**
     *   Method: `GET`
     *   URL: `http://localhost:4000/v1/info/city-ids/New%20York/US/3`
-
 
 </details>
 

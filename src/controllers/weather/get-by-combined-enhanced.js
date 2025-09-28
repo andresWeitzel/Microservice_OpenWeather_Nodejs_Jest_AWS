@@ -87,7 +87,6 @@ module.exports.handler = async (event) => {
 
     axiosResponse = await sendGetRequest(URL, null, axiosConfig);
 
-    console.log("Raw OpenWeather API Response:", JSON.stringify(axiosResponse?.data || axiosResponse, null, 2));
 
     if (axiosResponse == (null || undefined)) {
       return await bodyResponse(

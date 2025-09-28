@@ -163,20 +163,6 @@ GET /forecast/days/enhanced?q=London,GB&days=5&units=metric&lang=en
 
 Returns forecast data with additional analysis and insights.
 
-### Information Endpoints
-
-#### Search Cities
-
-```http
-GET /info/cities?q=London&country=GB&limit=10
-```
-
-**Parameters:**
-
-*   `q` (query): Search query (city name)
-*   `country` (query): Country code filter (optional)
-*   `limit` (query): Maximum number of results (1-100)
-
 ## 🔐 Authentication
 
 The API requires an API key for all requests. Include your API key in one of these ways:

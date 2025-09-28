@@ -36,12 +36,8 @@ info:
   termsOfService: https://your-domain.com/terms
 
 servers:
-  - url: https://api.openweather-microservice.com/v1
-    description: Production server
-  - url: https://staging-api.openweather-microservice.com/v1
-    description: Staging server
-  - url: http://localhost:4000/v1
-    description: Development server
+  - url: http://localhost:4000/dev/v1
+    description: Development server (serverless-offline)
 
 security:
   - ApiKeyAuth: []
@@ -72,7 +68,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 
   # Weather Endpoints
-  /weather/current/{cityId}:
+  /weather/id/{cityId}:
     get:
       tags:
         - Weather
@@ -134,7 +130,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /weather/current/coordinates:
+  /weather/coordinates/{lat}/{lon}:
     get:
       tags:
         - Weather
@@ -143,39 +139,25 @@ paths:
       operationId: getWeatherByCoordinates
       parameters:
         - name: lat
-          in: query
+          in: path
           required: true
-          description: Latitude coordinate
+          description: Latitude coordinate (-90 to 90)
           schema:
             type: number
             format: float
             minimum: -90
             maximum: 90
-            example: 51.5074
+            example: -34.6132
         - name: lon
-          in: query
+          in: path
           required: true
-          description: Longitude coordinate
+          description: Longitude coordinate (-180 to 180)
           schema:
             type: number
             format: float
             minimum: -180
             maximum: 180
-            example: -0.1278
-        - name: units
-          in: query
-          description: Temperature units
-          schema:
-            type: string
-            enum: [metric, imperial, kelvin]
-            default: metric
-        - name: lang
-          in: query
-          description: Language for weather descriptions
-          schema:
-            type: string
-            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
-            default: en
+            example: -58.3772
       responses:
         '200':
           description: Current weather data
@@ -183,12 +165,90 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WeatherResponse'
+              examples:
+                buenos_aires_coordinates:
+                  summary: Buenos Aires coordinates weather data
+                  value:
+                    location:
+                      name: "Buenos Aires"
+                      country: "AR"
+                      coordinates:
+                        lat: -34.6132
+                        lon: -58.3772
+                    current:
+                      temperature: 28.5
+                      feels_like: 30.1
+                      humidity: 72
+                      pressure: 1010
+                      description: "Partly cloudy"
+                      icon: "02d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                london_coordinates:
+                  summary: London coordinates weather data
+                  value:
+                    location:
+                      name: "London"
+                      country: "GB"
+                      coordinates:
+                        lat: 51.5074
+                        lon: -0.1278
+                    current:
+                      temperature: 15.2
+                      feels_like: 14.8
+                      humidity: 65
+                      pressure: 1013
+                      description: "Cloudy"
+                      icon: "04d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                new_york_coordinates:
+                  summary: New York coordinates weather data
+                  value:
+                    location:
+                      name: "New York"
+                      country: "US"
+                      coordinates:
+                        lat: 40.7128
+                        lon: -74.0060
+                    current:
+                      temperature: 22.3
+                      feels_like: 24.1
+                      humidity: 68
+                      pressure: 1015
+                      description: "Clear sky"
+                      icon: "01d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                tokyo_coordinates:
+                  summary: Tokyo coordinates weather data
+                  value:
+                    location:
+                      name: "Tokyo"
+                      country: "JP"
+                      coordinates:
+                        lat: 35.6762
+                        lon: 139.6503
+                    current:
+                      temperature: 18.7
+                      feels_like: 19.2
+                      humidity: 75
+                      pressure: 1008
+                      description: "Light rain"
+                      icon: "10d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
         '400':
           description: Invalid coordinates
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_coordinates:
+                  summary: Invalid coordinates
+                  value:
+                    message: "Both latitude and longitude parameters are required"
         '401':
           description: Invalid API key
           content:
@@ -202,36 +262,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /weather/current/location:
+  /weather/location/{location}:
     get:
       tags:
         - Weather
       summary: Get current weather by location
-      description: Retrieve current weather information using city name and country code
+      description: Retrieve current weather information using city name
       operationId: getWeatherByLocation
       parameters:
-        - name: q
-          in: query
+        - name: location
+          in: path
           required: true
-          description: City name and country code (e.g., "London,GB")
+          description: City name (e.g., "London", "Buenos Aires", "New York")
           schema:
             type: string
-            pattern: '^[a-zA-Z\s]+,[A-Z]{2}$'
-            example: "London,GB"
-        - name: units
-          in: query
-          description: Temperature units
-          schema:
-            type: string
-            enum: [metric, imperial, kelvin]
-            default: metric
-        - name: lang
-          in: query
-          description: Language for weather descriptions
-          schema:
-            type: string
-            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
-            default: en
+            minLength: 2
+            maxLength: 100
+            example: "London"
       responses:
         '200':
           description: Current weather data
@@ -239,12 +286,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WeatherResponse'
+              examples:
+                london_weather:
+                  summary: London weather data
+                  value:
+                    location:
+                      name: "London"
+                      country: "GB"
+                      coordinates:
+                        lat: 51.5074
+                        lon: -0.1278
+                    current:
+                      temperature: 15.2
+                      feels_like: 14.8
+                      humidity: 65
+                      pressure: 1013
+                      description: "Cloudy"
+                      icon: "04d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                buenos_aires_weather:
+                  summary: Buenos Aires weather data
+                  value:
+                    location:
+                      name: "Buenos Aires"
+                      country: "AR"
+                      coordinates:
+                        lat: -34.6132
+                        lon: -58.3772
+                    current:
+                      temperature: 28.5
+                      feels_like: 30.1
+                      humidity: 72
+                      pressure: 1010
+                      description: "Partly cloudy"
+                      icon: "02d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
         '400':
           description: Invalid location format
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_location:
+                  summary: Invalid location parameter
+                  value:
+                    message: "Location parameter is required"
         '401':
           description: Invalid API key
           content:
@@ -264,7 +353,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /weather/current/zipcode:
+  /weather/zipcode/{zipcode}/{countryCode}:
     get:
       tags:
         - Weather
@@ -272,36 +361,22 @@ paths:
       description: Retrieve current weather information using zipcode and country code
       operationId: getWeatherByZipcode
       parameters:
-        - name: zip
-          in: query
+        - name: zipcode
+          in: path
           required: true
           description: Zipcode
           schema:
             type: string
             pattern: '^[A-Za-z0-9\s\-\.\,]+$'
             example: "10001"
-        - name: country
-          in: query
+        - name: countryCode
+          in: path
           required: true
           description: Country code (ISO 3166-1 alpha-2)
           schema:
             type: string
             pattern: '^[A-Z]{2}$'
             example: "US"
-        - name: units
-          in: query
-          description: Temperature units
-          schema:
-            type: string
-            enum: [metric, imperial, kelvin]
-            default: metric
-        - name: lang
-          in: query
-          description: Language for weather descriptions
-          schema:
-            type: string
-            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
-            default: en
       responses:
         '200':
           description: Current weather data
@@ -309,12 +384,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WeatherResponse'
+              examples:
+                new_york_zipcode:
+                  summary: New York weather data by zipcode
+                  value:
+                    location:
+                      name: "New York"
+                      country: "US"
+                      coordinates:
+                        lat: 40.7128
+                        lon: -74.0060
+                    current:
+                      temperature: 22.3
+                      feels_like: 24.1
+                      humidity: 68
+                      pressure: 1015
+                      description: "Clear sky"
+                      icon: "01d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                buenos_aires_zipcode:
+                  summary: Buenos Aires weather data by zipcode
+                  value:
+                    location:
+                      name: "Buenos Aires"
+                      country: "AR"
+                      coordinates:
+                        lat: -34.6132
+                        lon: -58.3772
+                    current:
+                      temperature: 28.5
+                      feels_like: 30.1
+                      humidity: 72
+                      pressure: 1010
+                      description: "Partly cloudy"
+                      icon: "02d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
         '400':
           description: Invalid zipcode or country code
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_zipcode:
+                  summary: Invalid zipcode format
+                  value:
+                    message: "Invalid zipcode format. Please provide a valid zipcode (2-20 characters, letters, numbers, spaces, hyphens, dots, and commas allowed)"
+                missing_country_code:
+                  summary: Missing country code
+                  value:
+                    message: "Country code parameter is required"
         '401':
           description: Invalid API key
           content:
@@ -334,8 +455,329 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
+  /weather/units/{location}/{units}:
+    get:
+      tags:
+        - Weather
+      summary: Get current weather with specific units
+      description: Retrieve current weather information with temperature units (metric, imperial, kelvin)
+      operationId: getWeatherWithUnits
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (e.g., "London", "Buenos Aires", "New York")
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 100
+            example: "London"
+        - name: units
+          in: path
+          required: true
+          description: Temperature units
+          schema:
+            type: string
+            enum: [metric, imperial, kelvin]
+            example: "metric"
+      responses:
+        '200':
+          description: Current weather data with specific units
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+              examples:
+                london_metric:
+                  summary: London weather data in metric units
+                  value:
+                    location:
+                      name: "London"
+                      country: "GB"
+                      coordinates:
+                        lat: 51.5074
+                        lon: -0.1278
+                    current:
+                      temperature: 15.2
+                      feels_like: 14.8
+                      humidity: 65
+                      pressure: 1013
+                      description: "Cloudy"
+                      icon: "04d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                buenos_aires_imperial:
+                  summary: Buenos Aires weather data in imperial units
+                  value:
+                    location:
+                      name: "Buenos Aires"
+                      country: "AR"
+                      coordinates:
+                        lat: -34.6132
+                        lon: -58.3772
+                    current:
+                      temperature: 83.3
+                      feels_like: 86.2
+                      humidity: 72
+                      pressure: 1010
+                      description: "Partly cloudy"
+                      icon: "02d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+        '400':
+          description: Invalid location or units parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_location:
+                  summary: Invalid location parameter
+                  value:
+                    message: "Location parameter is required"
+                invalid_units:
+                  summary: Invalid units parameter
+                  value:
+                    message: "Invalid units parameter. Must be one of: metric, imperial, kelvin"
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /weather/language/{location}/{language}:
+    get:
+      tags:
+        - Weather
+      summary: Get current weather with specific language
+      description: Retrieve current weather information with descriptions in specific language
+      operationId: getWeatherWithLanguage
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (e.g., "London", "São Paulo", "Madrid")
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 100
+            example: "São Paulo"
+        - name: language
+          in: path
+          required: true
+          description: Language code for weather descriptions
+          schema:
+            type: string
+            enum: [en, es, fr, de, it, pt, ru, ja, ko, zh_cn, zh_tw, ar, hi, th, tr, vi]
+            example: "pt"
+      responses:
+        '200':
+          description: Current weather data with specific language
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+              examples:
+                sao_paulo_portuguese:
+                  summary: São Paulo weather data in Portuguese
+                  value:
+                    location:
+                      name: "São Paulo"
+                      country: "BR"
+                      coordinates:
+                        lat: -23.5505
+                        lon: -46.6333
+                    current:
+                      temperature: 25.8
+                      feels_like: 27.2
+                      humidity: 68
+                      pressure: 1012
+                      description: "Parcialmente nublado"
+                      icon: "02d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                madrid_spanish:
+                  summary: Madrid weather data in Spanish
+                  value:
+                    location:
+                      name: "Madrid"
+                      country: "ES"
+                      coordinates:
+                        lat: 40.4168
+                        lon: -3.7038
+                    current:
+                      temperature: 18.5
+                      feels_like: 17.8
+                      humidity: 55
+                      pressure: 1020
+                      description: "Despejado"
+                      icon: "01d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+        '400':
+          description: Invalid location or language parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_location:
+                  summary: Invalid location parameter
+                  value:
+                    message: "Location parameter is required"
+                invalid_language:
+                  summary: Invalid language parameter
+                  value:
+                    message: "Invalid language parameter. Must be one of: en, es, fr, de, it, pt, ru, ja, ko, zh_cn, zh_tw, ar, hi, th, tr, vi"
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /weather/combined/{location}/{units}/{language}:
+    get:
+      tags:
+        - Weather
+      summary: Get current weather with all parameters combined
+      description: Retrieve current weather information with specific units and language
+      operationId: getWeatherByCombined
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (e.g., "Buenos Aires", "London", "Tokyo")
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 100
+            example: "Buenos Aires"
+        - name: units
+          in: path
+          required: true
+          description: Temperature units
+          schema:
+            type: string
+            enum: [metric, imperial, kelvin]
+            example: "Kelvin"
+        - name: language
+          in: path
+          required: true
+          description: Language code for weather descriptions
+          schema:
+            type: string
+            enum: [en, es, fr, de, it, pt, ru, ja, ko, zh_cn, zh_tw, ar, hi, th, tr, vi]
+            example: "fr"
+      responses:
+        '200':
+          description: Current weather data with specific units and language
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+              examples:
+                buenos_aires_kelvin_french:
+                  summary: Buenos Aires weather data in Kelvin with French descriptions
+                  value:
+                    location:
+                      name: "Buenos Aires"
+                      country: "AR"
+                      coordinates:
+                        lat: -34.6132
+                        lon: -58.3772
+                    current:
+                      temperature: 301.5
+                      feels_like: 303.1
+                      humidity: 72
+                      pressure: 1010
+                      description: "Partiellement nuageux"
+                      icon: "02d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                tokyo_metric_spanish:
+                  summary: Tokyo weather data in metric units with Spanish descriptions
+                  value:
+                    location:
+                      name: "Tokyo"
+                      country: "JP"
+                      coordinates:
+                        lat: 35.6762
+                        lon: 139.6503
+                    current:
+                      temperature: 18.7
+                      feels_like: 19.2
+                      humidity: 75
+                      pressure: 1008
+                      description: "Lluvia ligera"
+                      icon: "10d"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_location:
+                  summary: Invalid location parameter
+                  value:
+                    message: "Location parameter is required"
+                invalid_units:
+                  summary: Invalid units parameter
+                  value:
+                    message: "Invalid units parameter. Must be one of: metric, imperial, kelvin"
+                invalid_language:
+                  summary: Invalid language parameter
+                  value:
+                    message: "Invalid language parameter. Must be one of: en, es, fr, de, it, pt, ru, ja, ko, zh_cn, zh_tw, ar, hi, th, tr, vi"
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   # Forecast Endpoints
-  /forecast/days:
+  /forecast/days/{days}:
     get:
       tags:
         - Forecast
@@ -343,6 +785,15 @@ paths:
       description: Retrieve weather forecast for a specific number of days
       operationId: getForecastByDays
       parameters:
+        - name: days
+          in: path
+          required: true
+          description: Number of forecast days (1-5)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+            example: 5
         - name: q
           in: query
           required: true
@@ -351,15 +802,6 @@ paths:
             type: string
             pattern: '^[a-zA-Z\s]+,[A-Z]{2}$'
             example: "London,GB"
-        - name: days
-          in: query
-          required: true
-          description: Number of forecast days (1-5)
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 5
-            default: 5
         - name: units
           in: query
           description: Temperature units
@@ -406,52 +848,64 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  # Info Endpoints
-  /info/cities:
+  # City IDs Endpoints
+  /cities/{cityName}:
     get:
       tags:
         - Information
-      summary: Search cities
-      description: Search for cities by name and country code
-      operationId: searchCities
+      summary: Get city IDs by name
+      description: Find city IDs by name from local database
+      operationId: getCityIdsByName
       parameters:
-        - name: q
-          in: query
+        - name: cityName
+          in: path
           required: true
-          description: Search query (city name)
+          description: City name to search for
           schema:
             type: string
             minLength: 2
             maxLength: 100
-            example: "London"
-        - name: country
-          in: query
-          description: Country code filter (ISO 3166-1 alpha-2)
-          schema:
-            type: string
-            pattern: '^[A-Z]{2}$'
-            example: "GB"
-        - name: limit
-          in: query
-          description: Maximum number of results
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
-            default: 10
+            example: "Buenos Aires"
       responses:
         '200':
-          description: List of matching cities
+          description: City IDs found successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CitySearchResponse'
+                $ref: '#/components/schemas/CityIdsResponse'
+              examples:
+                buenos_aires:
+                  summary: Buenos Aires search
+                  value:
+                    searchQuery: "Buenos Aires"
+                    countryCode: ""
+                    limit: 5
+                    totalResults: 1
+                    cities:
+                      - id: 3435910
+                        name: "Buenos Aires"
+                        state: "Buenos Aires"
+                        country: "AR"
+                        coordinates: ""
+                        displayName: "Buenos Aires, Buenos Aires, AR"
+                    source: "local_database"
+                    databaseInfo:
+                      description: "Local database of OpenWeather city IDs organized by city name and country"
+                      version: "1.0.0"
+                      lastUpdated: "2024-01-15"
+                      totalCities: 150
+                      source: "OpenWeather Geocoding API"
         '400':
-          description: Invalid search parameters
+          description: Invalid city name parameter
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_city:
+                  summary: Invalid city name
+                  value:
+                    message: "City name parameter is required"
         '401':
           description: Invalid API key
           content:
@@ -465,8 +919,590 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  # Enhanced Endpoints
-  /weather/current/{cityId}/enhanced:
+  /cities/{cityName}/{countryCode}:
+    get:
+      tags:
+        - Information
+      summary: Get city IDs by name and country
+      description: Find city IDs by name and country code from local database
+      operationId: getCityIdsByNameAndCountry
+      parameters:
+        - name: cityName
+          in: path
+          required: true
+          description: City name to search for
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 100
+            example: "Buenos Aires"
+        - name: countryCode
+          in: path
+          required: true
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+            pattern: '^[A-Z]{2}$'
+            example: "AR"
+      responses:
+        '200':
+          description: City IDs found successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityIdsResponse'
+              examples:
+                buenos_aires_ar:
+                  summary: Buenos Aires in Argentina
+                  value:
+                    searchQuery: "Buenos Aires"
+                    countryCode: "AR"
+                    limit: 5
+                    totalResults: 1
+                    cities:
+                      - id: 3435910
+                        name: "Buenos Aires"
+                        state: "Buenos Aires"
+                        country: "AR"
+                        coordinates: ""
+                        displayName: "Buenos Aires, Buenos Aires, AR"
+                    source: "local_database"
+                    databaseInfo:
+                      description: "Local database of OpenWeather city IDs organized by city name and country"
+                      version: "1.0.0"
+                      lastUpdated: "2024-01-15"
+                      totalCities: 150
+                      source: "OpenWeather Geocoding API"
+                london_gb:
+                  summary: London in United Kingdom
+                  value:
+                    searchQuery: "London"
+                    countryCode: "GB"
+                    limit: 5
+                    totalResults: 1
+                    cities:
+                      - id: 2643743
+                        name: "London"
+                        state: "England"
+                        country: "GB"
+                        coordinates: ""
+                        displayName: "London, England, GB"
+                    source: "local_database"
+                    databaseInfo:
+                      description: "Local database of OpenWeather city IDs organized by city name and country"
+                      version: "1.0.0"
+                      lastUpdated: "2024-01-15"
+                      totalCities: 150
+                      source: "OpenWeather Geocoding API"
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_country_code:
+                  summary: Invalid country code
+                  value:
+                    message: "Country code must be a valid 2-letter ISO code (e.g., 'AR', 'US', 'BR')"
+                missing_city:
+                  summary: Missing city name
+                  value:
+                    message: "City name parameter is required"
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # Documentation Endpoints
+  /docs:
+    get:
+      tags:
+        - Documentation
+      summary: Get API documentation
+      description: Get Swagger documentation
+      operationId: getDocs
+      security: []
+      responses:
+        '200':
+          description: API documentation
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /swagger-ui:
+    get:
+      tags:
+        - Documentation
+      summary: Get Swagger UI
+      description: Get interactive Swagger UI interface
+      operationId: getSwaggerUI
+      security: []
+      responses:
+        '200':
+          description: Swagger UI interface
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /openapi.yaml:
+    get:
+      tags:
+        - Documentation
+      summary: Get OpenAPI specification
+      description: Get OpenAPI YAML specification
+      operationId: getOpenAPI
+      security: []
+      responses:
+        '200':
+          description: OpenAPI specification
+          content:
+            application/x-yaml:
+              schema:
+                type: string
+
+  # Metrics Endpoint
+  /metrics:
+    get:
+      tags:
+        - System
+      summary: Get system metrics
+      description: Get system performance metrics
+      operationId: getMetrics
+      security: []
+      responses:
+        '200':
+          description: System metrics
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # Enhanced Weather Endpoints
+  /weather-enhanced/coordinates/{lat}/{lon}:
+    get:
+      tags:
+        - Weather Enhanced
+      summary: Get enhanced current weather by coordinates
+      description: Retrieve current weather information with additional metrics and analysis using coordinates
+      operationId: getEnhancedWeatherByCoordinates
+      parameters:
+        - name: lat
+          in: path
+          required: true
+          description: Latitude coordinate (-90 to 90)
+          schema:
+            type: number
+            format: float
+            minimum: -90
+            maximum: 90
+            example: -34.6132
+        - name: lon
+          in: path
+          required: true
+          description: Longitude coordinate (-180 to 180)
+          schema:
+            type: number
+            format: float
+            minimum: -180
+            maximum: 180
+            example: -58.3772
+      responses:
+        '200':
+          description: Enhanced current weather data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedWeatherResponse'
+              examples:
+                buenos_aires_coordinates_enhanced:
+                  summary: Buenos Aires coordinates enhanced weather data
+                  value:
+                    location:
+                      name: "Buenos Aires"
+                      country: "AR"
+                      coordinates:
+                        lat: -34.6132
+                        lon: -58.3772
+                    current:
+                      temperature: 28.5
+                      feels_like: 30.1
+                      humidity: 72
+                      pressure: 1010
+                      description: "Partly cloudy"
+                      icon: "02d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 8.2
+                        uvRisk: "High"
+                        visibility: "Excellent"
+                      recommendations:
+                        clothing: "Light clothing and sunscreen recommended"
+                        activities: "Great weather for outdoor activities"
+                      alerts:
+                        - type: "UV"
+                          message: "High UV index - use sunscreen"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                london_coordinates_enhanced:
+                  summary: London coordinates enhanced weather data
+                  value:
+                    location:
+                      name: "London"
+                      country: "GB"
+                      coordinates:
+                        lat: 51.5074
+                        lon: -0.1278
+                    current:
+                      temperature: 15.2
+                      feels_like: 14.8
+                      humidity: 65
+                      pressure: 1013
+                      description: "Cloudy"
+                      icon: "04d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 7.5
+                        uvRisk: "Moderate"
+                        visibility: "Good"
+                      recommendations:
+                        clothing: "Light jacket recommended"
+                        activities: "Indoor activities preferred"
+                      alerts:
+                        - type: "Weather"
+                          message: "Cloudy conditions expected throughout the day"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                new_york_coordinates_enhanced:
+                  summary: New York coordinates enhanced weather data
+                  value:
+                    location:
+                      name: "New York"
+                      country: "US"
+                      coordinates:
+                        lat: 40.7128
+                        lon: -74.0060
+                    current:
+                      temperature: 22.3
+                      feels_like: 24.1
+                      humidity: 68
+                      pressure: 1015
+                      description: "Clear sky"
+                      icon: "01d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 8.5
+                        uvRisk: "Moderate"
+                        visibility: "Excellent"
+                      recommendations:
+                        clothing: "Light clothing recommended"
+                        activities: "Perfect weather for outdoor activities"
+                      alerts:
+                        - type: "UV"
+                          message: "Moderate UV index - use sunscreen if staying outside"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                tokyo_coordinates_enhanced:
+                  summary: Tokyo coordinates enhanced weather data
+                  value:
+                    location:
+                      name: "Tokyo"
+                      country: "JP"
+                      coordinates:
+                        lat: 35.6762
+                        lon: 139.6503
+                    current:
+                      temperature: 18.7
+                      feels_like: 19.2
+                      humidity: 75
+                      pressure: 1008
+                      description: "Light rain"
+                      icon: "10d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 6.8
+                        uvRisk: "Low"
+                        visibility: "Fair"
+                      recommendations:
+                        clothing: "Rain jacket and umbrella recommended"
+                        activities: "Indoor activities preferred due to rain"
+                      alerts:
+                        - type: "Weather"
+                          message: "Light rain expected - carry an umbrella"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+        '400':
+          description: Invalid coordinates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_coordinates:
+                  summary: Invalid coordinates
+                  value:
+                    message: "Both latitude and longitude parameters are required"
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /weather-enhanced/location/{location}:
+    get:
+      tags:
+        - Weather Enhanced
+      summary: Get enhanced current weather by location
+      description: Retrieve current weather information with additional metrics and analysis using location
+      operationId: getEnhancedWeatherByLocation
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (e.g., "London", "Buenos Aires", "New York")
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 100
+            example: "London"
+      responses:
+        '200':
+          description: Enhanced current weather data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedWeatherResponse'
+              examples:
+                london_enhanced:
+                  summary: London enhanced weather data
+                  value:
+                    location:
+                      name: "London"
+                      country: "GB"
+                      coordinates:
+                        lat: 51.5074
+                        lon: -0.1278
+                    current:
+                      temperature: 15.2
+                      feels_like: 14.8
+                      humidity: 65
+                      pressure: 1013
+                      description: "Cloudy"
+                      icon: "04d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 7.5
+                        uvRisk: "Moderate"
+                        visibility: "Good"
+                      recommendations:
+                        clothing: "Light jacket recommended"
+                        activities: "Indoor activities preferred"
+                      alerts:
+                        - type: "Weather"
+                          message: "Cloudy conditions expected throughout the day"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                buenos_aires_enhanced:
+                  summary: Buenos Aires enhanced weather data
+                  value:
+                    location:
+                      name: "Buenos Aires"
+                      country: "AR"
+                      coordinates:
+                        lat: -34.6132
+                        lon: -58.3772
+                    current:
+                      temperature: 28.5
+                      feels_like: 30.1
+                      humidity: 72
+                      pressure: 1010
+                      description: "Partly cloudy"
+                      icon: "02d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 8.2
+                        uvRisk: "High"
+                        visibility: "Excellent"
+                      recommendations:
+                        clothing: "Light clothing and sunscreen recommended"
+                        activities: "Great weather for outdoor activities"
+                      alerts:
+                        - type: "UV"
+                          message: "High UV index - use sunscreen"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+        '400':
+          description: Invalid location format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_location:
+                  summary: Invalid location parameter
+                  value:
+                    message: "Location parameter is required"
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /weather-enhanced/zipcode/{zipcode}/{countryCode}:
+    get:
+      tags:
+        - Weather Enhanced
+      summary: Get enhanced current weather by zipcode
+      description: Retrieve current weather information with additional metrics and analysis using zipcode
+      operationId: getEnhancedWeatherByZipcode
+      parameters:
+        - name: zipcode
+          in: path
+          required: true
+          description: Zipcode
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9\s\-\.\,]+$'
+            example: "10001"
+        - name: countryCode
+          in: path
+          required: true
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+            pattern: '^[A-Z]{2}$'
+            example: "US"
+      responses:
+        '200':
+          description: Enhanced current weather data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedWeatherResponse'
+              examples:
+                new_york_zipcode_enhanced:
+                  summary: New York enhanced weather data by zipcode
+                  value:
+                    location:
+                      name: "New York"
+                      country: "US"
+                      coordinates:
+                        lat: 40.7128
+                        lon: -74.0060
+                    current:
+                      temperature: 22.3
+                      feels_like: 24.1
+                      humidity: 68
+                      pressure: 1015
+                      description: "Clear sky"
+                      icon: "01d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 8.5
+                        uvRisk: "Moderate"
+                        visibility: "Excellent"
+                      recommendations:
+                        clothing: "Light clothing recommended"
+                        activities: "Perfect weather for outdoor activities"
+                      alerts:
+                        - type: "UV"
+                          message: "Moderate UV index - use sunscreen if staying outside"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                buenos_aires_zipcode_enhanced:
+                  summary: Buenos Aires enhanced weather data by zipcode
+                  value:
+                    location:
+                      name: "Buenos Aires"
+                      country: "AR"
+                      coordinates:
+                        lat: -34.6132
+                        lon: -58.3772
+                    current:
+                      temperature: 28.5
+                      feels_like: 30.1
+                      humidity: 72
+                      pressure: 1010
+                      description: "Partly cloudy"
+                      icon: "02d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 8.2
+                        uvRisk: "High"
+                        visibility: "Excellent"
+                      recommendations:
+                        clothing: "Light clothing and sunscreen recommended"
+                        activities: "Great weather for outdoor activities"
+                      alerts:
+                        - type: "UV"
+                          message: "High UV index - use sunscreen"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+        '400':
+          description: Invalid zipcode or country code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_zipcode:
+                  summary: Invalid zipcode format
+                  value:
+                    message: "Invalid zipcode format. Please provide a valid zipcode (2-20 characters, letters, numbers, spaces, hyphens, dots, and commas allowed)"
+                missing_country_code:
+                  summary: Missing country code
+                  value:
+                    message: "Country code parameter is required"
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Zipcode not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /weather-enhanced/id/{cityId}:
     get:
       tags:
         - Weather Enhanced
@@ -482,20 +1518,6 @@ paths:
             type: integer
             minimum: 1
             example: 2643743
-        - name: units
-          in: query
-          description: Temperature units
-          schema:
-            type: string
-            enum: [metric, imperial, kelvin]
-            default: metric
-        - name: lang
-          in: query
-          description: Language for weather descriptions
-          schema:
-            type: string
-            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
-            default: en
       responses:
         '200':
           description: Enhanced current weather data
@@ -503,12 +1525,76 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnhancedWeatherResponse'
+              examples:
+                london_enhanced:
+                  summary: London enhanced weather data by ID
+                  value:
+                    location:
+                      name: "London"
+                      country: "GB"
+                      coordinates:
+                        lat: 51.5074
+                        lon: -0.1278
+                    current:
+                      temperature: 15.2
+                      feels_like: 14.8
+                      humidity: 65
+                      pressure: 1013
+                      description: "Cloudy"
+                      icon: "04d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 7.5
+                        uvRisk: "Moderate"
+                        visibility: "Good"
+                      recommendations:
+                        clothing: "Light jacket recommended"
+                        activities: "Indoor activities preferred"
+                      alerts:
+                        - type: "Weather"
+                          message: "Cloudy conditions expected throughout the day"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                buenos_aires_enhanced:
+                  summary: Buenos Aires enhanced weather data by ID
+                  value:
+                    location:
+                      name: "Buenos Aires"
+                      country: "AR"
+                      coordinates:
+                        lat: -34.6132
+                        lon: -58.3772
+                    current:
+                      temperature: 28.5
+                      feels_like: 30.1
+                      humidity: 72
+                      pressure: 1010
+                      description: "Partly cloudy"
+                      icon: "02d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 8.2
+                        uvRisk: "High"
+                        visibility: "Excellent"
+                      recommendations:
+                        clothing: "Light clothing and sunscreen recommended"
+                        activities: "Great weather for outdoor activities"
+                      alerts:
+                        - type: "UV"
+                          message: "High UV index - use sunscreen"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
         '400':
           description: Invalid city ID
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_city_id:
+                  summary: Invalid city ID
+                  value:
+                    message: "City ID parameter is required"
         '401':
           description: Invalid API key
           content:
@@ -528,7 +1614,144 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /forecast/days/enhanced:
+  /weather-enhanced/combined/{location}/{units}/{language}:
+    get:
+      tags:
+        - Weather Enhanced
+      summary: Get enhanced current weather with all parameters combined
+      description: Retrieve enhanced current weather information with specific units and language, including additional analysis
+      operationId: getEnhancedWeatherByCombined
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (e.g., "Buenos Aires", "London", "Tokyo")
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 100
+            example: "Buenos Aires"
+        - name: units
+          in: path
+          required: true
+          description: Temperature units
+          schema:
+            type: string
+            enum: [metric, imperial, kelvin]
+            example: "Kelvin"
+        - name: language
+          in: path
+          required: true
+          description: Language code for weather descriptions
+          schema:
+            type: string
+            enum: [en, es, fr, de, it, pt, ru, ja, ko, zh_cn, zh_tw, ar, hi, th, tr, vi]
+            example: "fr"
+      responses:
+        '200':
+          description: Enhanced current weather data with specific units and language
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedWeatherResponse'
+              examples:
+                buenos_aires_kelvin_french_enhanced:
+                  summary: Buenos Aires enhanced weather data in Kelvin with French descriptions
+                  value:
+                    location:
+                      name: "Buenos Aires"
+                      country: "AR"
+                      coordinates:
+                        lat: -34.6132
+                        lon: -58.3772
+                    current:
+                      temperature: 301.5
+                      feels_like: 303.1
+                      humidity: 72
+                      pressure: 1010
+                      description: "Partiellement nuageux"
+                      icon: "02d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 8.2
+                        uvRisk: "High"
+                        visibility: "Excellent"
+                      recommendations:
+                        clothing: "Light clothing and sunscreen recommended"
+                        activities: "Great weather for outdoor activities"
+                      alerts:
+                        - type: "UV"
+                          message: "High UV index - use sunscreen"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+                tokyo_metric_spanish_enhanced:
+                  summary: Tokyo enhanced weather data in metric units with Spanish descriptions
+                  value:
+                    location:
+                      name: "Tokyo"
+                      country: "JP"
+                      coordinates:
+                        lat: 35.6762
+                        lon: 139.6503
+                    current:
+                      temperature: 18.7
+                      feels_like: 19.2
+                      humidity: 75
+                      pressure: 1008
+                      description: "Lluvia ligera"
+                      icon: "10d"
+                    enhanced:
+                      analysis:
+                        comfortIndex: 6.8
+                        uvRisk: "Low"
+                        visibility: "Fair"
+                      recommendations:
+                        clothing: "Rain jacket and umbrella recommended"
+                        activities: "Indoor activities preferred due to rain"
+                      alerts:
+                        - type: "Weather"
+                          message: "Light rain expected - carry an umbrella"
+                    timestamp: "2024-01-15T10:30:00Z"
+                    source: "OpenWeatherMap"
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_location:
+                  summary: Invalid location parameter
+                  value:
+                    message: "Location parameter is required"
+                invalid_units:
+                  summary: Invalid units parameter
+                  value:
+                    message: "Invalid units parameter. Must be one of: metric, imperial, kelvin"
+                invalid_language:
+                  summary: Invalid language parameter
+                  value:
+                    message: "Invalid language parameter. Must be one of: en, es, fr, de, it, pt, ru, ja, ko, zh_cn, zh_tw, ar, hi, th, tr, vi"
+        '401':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /forecast/days/{days}/enhanced:
     get:
       tags:
         - Forecast Enhanced
@@ -536,6 +1759,15 @@ paths:
       description: Retrieve weather forecast with additional analysis and insights
       operationId: getEnhancedForecastByDays
       parameters:
+        - name: days
+          in: path
+          required: true
+          description: Number of forecast days (1-5)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+            example: 5
         - name: q
           in: query
           required: true
@@ -544,15 +1776,6 @@ paths:
             type: string
             pattern: '^[a-zA-Z\s]+,[A-Z]{2}$'
             example: "London,GB"
-        - name: days
-          in: query
-          required: true
-          description: Number of forecast days (1-5)
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 5
-            default: 5
         - name: units
           in: query
           description: Temperature units
@@ -594,6 +1817,217 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '429':
           description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # Additional Forecast Endpoints
+  /forecast/compare:
+    get:
+      tags:
+        - Forecast
+      summary: Get weather forecast comparison
+      description: Compare weather forecast data between different locations or time periods
+      operationId: getForecastByCompare
+      responses:
+        '200':
+          description: Weather forecast comparison data
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /forecast/compare/enhanced:
+    get:
+      tags:
+        - Forecast Enhanced
+      summary: Get enhanced weather forecast comparison
+      description: Enhanced comparison of weather forecast data
+      operationId: getEnhancedForecastByCompare
+      responses:
+        '200':
+          description: Enhanced weather forecast comparison data
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /forecast/events:
+    get:
+      tags:
+        - Forecast
+      summary: Get weather forecast events
+      description: Get weather events and alerts forecast
+      operationId: getForecastByEvents
+      responses:
+        '200':
+          description: Weather events forecast data
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /forecast/events/enhanced:
+    get:
+      tags:
+        - Forecast Enhanced
+      summary: Get enhanced weather forecast events
+      description: Enhanced weather events and alerts forecast
+      operationId: getEnhancedForecastByEvents
+      responses:
+        '200':
+          description: Enhanced weather events forecast data
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /forecast/hourly:
+    get:
+      tags:
+        - Forecast
+      summary: Get hourly weather forecast
+      description: Get detailed hourly weather forecast
+      operationId: getForecastByHourly
+      responses:
+        '200':
+          description: Hourly weather forecast data
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /forecast/hourly/enhanced:
+    get:
+      tags:
+        - Forecast Enhanced
+      summary: Get enhanced hourly weather forecast
+      description: Enhanced detailed hourly weather forecast
+      operationId: getEnhancedForecastByHourly
+      responses:
+        '200':
+          description: Enhanced hourly weather forecast data
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /forecast/interval:
+    get:
+      tags:
+        - Forecast
+      summary: Get weather forecast by interval
+      description: Get weather forecast for specific time intervals
+      operationId: getForecastByInterval
+      responses:
+        '200':
+          description: Interval weather forecast data
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /forecast/interval/enhanced:
+    get:
+      tags:
+        - Forecast Enhanced
+      summary: Get enhanced weather forecast by interval
+      description: Enhanced weather forecast for specific time intervals
+      operationId: getEnhancedForecastByInterval
+      responses:
+        '200':
+          description: Enhanced interval weather forecast data
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /forecast/weekly:
+    get:
+      tags:
+        - Forecast
+      summary: Get weekly weather forecast
+      description: Get weekly weather forecast overview
+      operationId: getForecastByWeekly
+      responses:
+        '200':
+          description: Weekly weather forecast data
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /forecast/weekly/enhanced:
+    get:
+      tags:
+        - Forecast Enhanced
+      summary: Get enhanced weekly weather forecast
+      description: Enhanced weekly weather forecast overview
+      operationId: getEnhancedForecastByWeekly
+      responses:
+        '200':
+          description: Enhanced weekly weather forecast data
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
           content:
             application/json:
               schema:
@@ -704,7 +2138,7 @@ components:
           description: Data source
           example: "OpenWeatherMap"
 
-    CitySearchResponse:
+    CityIdsResponse:
       type: object
       required:
         - searchQuery
@@ -712,39 +2146,58 @@ components:
         - limit
         - totalResults
         - cities
+        - source
+        - databaseInfo
       properties:
         searchQuery:
           type: string
-          description: Original search query
-          example: "London"
+          description: Cleaned search query
+          example: "Buenos Aires"
         countryCode:
           type: string
-          description: Country code filter
-          example: "GB"
+          description: Country code filter (empty if not specified)
+          example: "AR"
         limit:
           type: integer
           description: Maximum results requested
-          example: 10
+          example: 5
         totalResults:
           type: integer
           description: Total number of matching cities
-          example: 5
+          example: 1
         cities:
           type: array
           items:
-            $ref: '#/components/schemas/City'
+            $ref: '#/components/schemas/CityInfo'
         source:
           type: string
           description: Data source
-          example: "OpenWeatherMap"
+          example: "local_database"
         databaseInfo:
           type: object
+          required:
+            - description
+            - version
+            - lastUpdated
+            - totalCities
+            - source
           properties:
+            description:
+              type: string
+              example: "Local database of OpenWeather city IDs organized by city name and country"
+            version:
+              type: string
+              example: "1.0.0"
             lastUpdated:
               type: string
-              format: date-time
+              format: date
+              example: "2024-01-15"
             totalCities:
               type: integer
+              example: 150
+            source:
+              type: string
+              example: "OpenWeather Geocoding API"
 
     HealthResponse:
       type: object
@@ -1070,6 +2523,41 @@ components:
           description: State or province
           example: "England"
 
+    CityInfo:
+      type: object
+      required:
+        - id
+        - name
+        - state
+        - country
+        - coordinates
+        - displayName
+      properties:
+        id:
+          type: integer
+          description: OpenWeatherMap city ID
+          example: 3435910
+        name:
+          type: string
+          description: City name
+          example: "Buenos Aires"
+        state:
+          type: string
+          description: State or province
+          example: "Buenos Aires"
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: "AR"
+        coordinates:
+          type: string
+          description: Coordinates (may be empty in local database)
+          example: ""
+        displayName:
+          type: string
+          description: Full display name with location hierarchy
+          example: "Buenos Aires, Buenos Aires, AR"
+
     EnhancedData:
       type: object
       required:
@@ -1208,3 +2696,5 @@ tags:
     description: Enhanced weather forecast with additional insights
   - name: Information
     description: City and location information endpoints
+  - name: Documentation
+    description: API documentation and specification endpoints

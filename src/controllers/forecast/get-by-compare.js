@@ -9,7 +9,7 @@ const { getCachedWeatherData, setCachedWeatherData, hasCachedWeatherData } = req
 const { validateAndCleanLocation } = require("../../helpers/weather/validate-location");
 
 //const
-const API_FORECAST_URL_BASE = "https://api.openweathermap.org/data/2.5/forecast?";
+const API_FORECAST_URL_BASE = process.env.API_FORECAST_URL_BASE;
 const API_KEY = process.env.API_KEY;
 const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
@@ -73,6 +73,14 @@ module.exports.handler = async (event) => {
             return bodyResponse(OK_CODE, cachedData);
         }
 
+        // Validate environment variables
+        if (!API_FORECAST_URL_BASE || !API_KEY) {
+            return bodyResponse(INTERNAL_SERVER_ERROR, {
+                error: "Configuration error",
+                message: "API configuration is missing. Please check environment variables."
+            });
+        }
+
         // Prepare API request
         const encodedLocation = encodeURIComponent(cleanedLocation);
         const apiUrl = `${API_FORECAST_URL_BASE}q=${encodedLocation}&appid=${API_KEY}&units=metric`;
@@ -85,6 +93,16 @@ module.exports.handler = async (event) => {
 
         // Make API request
         axiosResponse = await sendGetRequest(apiUrl, null, axiosConfig);
+
+        // Check if the response is an error string from the axios helper
+        if (typeof axiosResponse === 'string' && axiosResponse.startsWith('ERROR:')) {
+            console.error("OpenWeather API request failed:", axiosResponse);
+            return bodyResponse(INTERNAL_SERVER_ERROR, {
+                error: "Failed to fetch forecast data",
+                message: "Unable to retrieve forecast information from OpenWeather API",
+                details: axiosResponse
+            });
+        }
 
         if (!axiosResponse || !axiosResponse.data) {
             return bodyResponse(INTERNAL_SERVER_ERROR, {

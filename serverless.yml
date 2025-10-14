@@ -17,6 +17,16 @@ plugins:
   - serverless-offline
 
 functions:
+  # CORS OPTIONS Handler
+  corsOptions:
+    handler: src/controllers/cors-options.handler
+    events:
+      - http:
+          path: /v1/health
+          method: options
+          private: false
+          cors: true
+
   # Health Check
   healthCheck:
     handler: src/controllers/info/health/check.handler
@@ -25,98 +35,241 @@ functions:
           path: /v1/health
           method: get
           private: false
+          cors: true
 
   # Weather Endpoints
   getWeatherById:
     handler: src/controllers/weather/get-by-id.handler
     events:
       - http:
-          path: /v1/weather/current/{cityId}
+          path: /v1/weather/id/{cityId}
           method: get
           private: false
+          cors: true
           
   getWeatherByCoordinates:
     handler: src/controllers/weather/get-by-coordinates.handler
     events:
       - http:
-          path: /v1/weather/current/coordinates
+          path: /v1/weather/coordinates/{lat}/{lon}
           method: get
           private: false
+          cors: true
           
   getWeatherByLocation:
     handler: src/controllers/weather/get-by-location.handler
     events:
       - http:
-          path: /v1/weather/current/location
+          path: /v1/weather/location/{location}
           method: get
           private: false
+          cors: true
           
   getWeatherByZipcode:
     handler: src/controllers/weather/get-by-zipcode.handler
     events:
       - http:
-          path: /v1/weather/current/zipcode
+          path: /v1/weather/zipcode/{zipcode}/{countryCode}
           method: get
           private: false
+          cors: true
+          
+  getWeatherWithUnits:
+    handler: src/controllers/weather/get-with-units.handler
+    events:
+      - http:
+          path: /v1/weather/units/{location}/{units}
+          method: get
+          private: false
+          cors: true
+          
+  getWeatherWithLanguage:
+    handler: src/controllers/weather/get-with-language.handler
+    events:
+      - http:
+          path: /v1/weather/language/{location}/{language}
+          method: get
+          private: false
+          cors: true
+          
+  getWeatherByCombined:
+    handler: src/controllers/weather/get-by-combined.handler
+    events:
+      - http:
+          path: /v1/weather/combined/{location}/{units}/{language}
+          method: get
+          private: false
+          cors: true
 
   # Enhanced Weather Endpoints
   getWeatherByIdEnhanced:
     handler: src/controllers/weather/get-by-id-enhanced.handler
     events:
       - http:
-          path: /v1/weather/current/{cityId}/enhanced
+          path: /v1/weather-enhanced/id/{cityId}
           method: get
           private: false
+          cors: true
           
   getWeatherByCoordinatesEnhanced:
     handler: src/controllers/weather/get-by-coordinates-enhanced.handler
     events:
       - http:
-          path: /v1/weather/current/coordinates/enhanced
+          path: /v1/weather-enhanced/coordinates/{lat}/{lon}
           method: get
           private: false
+          cors: true
           
   getWeatherByLocationEnhanced:
     handler: src/controllers/weather/get-by-location-enhanced.handler
     events:
       - http:
-          path: /v1/weather/current/location/enhanced
+          path: /v1/weather-enhanced/location/{location}
           method: get
           private: false
+          cors: true
           
   getWeatherByZipcodeEnhanced:
     handler: src/controllers/weather/get-by-zipcode-enhanced.handler
     events:
       - http:
-          path: /v1/weather/current/zipcode/enhanced
+          path: /v1/weather-enhanced/zipcode/{zipcode}/{countryCode}
           method: get
           private: false
+          cors: true
+          
+  getWeatherByCombinedEnhanced:
+    handler: src/controllers/weather/get-by-combined-enhanced.handler
+    events:
+      - http:
+          path: /v1/weather-enhanced/combined/{location}/{units}/{language}
+          method: get
+          private: false
+          cors: true
           
   # Forecast Endpoints
   getForecastByDays:
     handler: src/controllers/forecast/get-by-days.handler
     events:
       - http:
-          path: /v1/forecast/days
+          path: /v1/forecast/days/{location}/{days}
           method: get
           private: false
+          cors: true
           
   getForecastByDaysEnhanced:
     handler: src/controllers/forecast/get-by-days-enhanced.handler
     events:
       - http:
-          path: /v1/forecast/days/enhanced
+          path: /v1/forecast-enhanced/days/{location}/{days}
           method: get
           private: false
+          cors: true
+
+  getForecastByCompare:
+    handler: src/controllers/forecast/get-by-compare.handler
+    events:
+      - http:
+          path: /v1/forecast/compare/{location}/{period1}/{period2}
+          method: get
+          private: false
+          cors: true
+          
+  getForecastByCompareEnhanced:
+    handler: src/controllers/forecast/get-by-compare-enhanced.handler
+    events:
+      - http:
+          path: /v1/forecast-enhanced/compare/{location}/{period1}/{period2}
+          method: get
+          private: false
+          cors: true
+
+  getForecastByEvents:
+    handler: src/controllers/forecast/get-by-events.handler
+    events:
+      - http:
+          path: /v1/forecast/events/{location}/{eventType}
+          method: get
+          private: false
+          cors: true
+          
+  getForecastByEventsEnhanced:
+    handler: src/controllers/forecast/get-by-events-enhanced.handler
+    events:
+      - http:
+          path: /v1/forecast-enhanced/events/{location}/{eventType}
+          method: get
+          private: false
+          cors: true
+
+  getForecastByHourly:
+    handler: src/controllers/forecast/get-by-hourly.handler
+    events:
+      - http:
+          path: /v1/forecast/hourly/{location}/{hour}
+          method: get
+          private: false
+          cors: true
+          
+  getForecastByHourlyEnhanced:
+    handler: src/controllers/forecast/get-by-hourly-enhanced.handler
+    events:
+      - http:
+          path: /v1/forecast-enhanced/hourly/{location}/{hour}
+          method: get
+          private: false
+          cors: true
+
+  getForecastByInterval:
+    handler: src/controllers/forecast/get-by-interval.handler
+    events:
+      - http:
+          path: /v1/forecast/interval/{location}/{interval}
+          method: get
+          private: false
+          cors: true
+          
+  getForecastByIntervalEnhanced:
+    handler: src/controllers/forecast/get-by-interval-enhanced.handler
+    events:
+      - http:
+          path: /v1/forecast-enhanced/interval/{location}/{interval}
+          method: get
+          private: false
+          cors: true
+
+  getForecastByWeekly:
+    handler: src/controllers/forecast/get-by-weekly.handler
+    events:
+      - http:
+          path: /v1/forecast/weekly/{location}/{weeks}
+          method: get
+          private: false
+          cors: true
+          
+  getForecastByWeeklyEnhanced:
+    handler: src/controllers/forecast/get-by-weekly-enhanced.handler
+    events:
+      - http:
+          path: /v1/forecast-enhanced/weekly/{location}/{weeks}
+          method: get
+          private: false
+          cors: true
 
   # Info Endpoints
   getCityIds:
     handler: src/controllers/info/city-ids/get-city-ids.handler
     events:
       - http:
-          path: /v1/info/cities
+          path: /v1/cities/{cityName}
           method: get
           private: false
+          cors: true
+      - http:
+          path: /v1/cities/{cityName}/{countryCode}
+          method: get
+          private: false
+          cors: true
           
           
   # API Documentation and Metrics
@@ -127,6 +280,7 @@ functions:
           path: /v1/docs
           method: get
           private: false
+          cors: true
           
   getSwaggerUI:
     handler: src/controllers/docs/swagger-ui.handler
@@ -135,6 +289,7 @@ functions:
           path: /v1/swagger-ui
           method: get
           private: false
+          cors: true
           
   getOpenAPI:
     handler: src/controllers/docs/get-openapi.handler
@@ -143,6 +298,7 @@ functions:
           path: /v1/openapi.yaml
           method: get
           private: false
+          cors: true
           
   getMetrics:
     handler: src/controllers/metrics/get-metrics.handler
@@ -151,6 +307,7 @@ functions:
           path: /v1/metrics
           method: get
           private: false
+          cors: true
           
 custom:
   serverless-offline:

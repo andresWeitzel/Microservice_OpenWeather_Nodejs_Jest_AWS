@@ -123,27 +123,6 @@ const VALIDATION_SCHEMAS = {
         default: 'en'
       }
     }
-  },
-  
-  '/info/cities': {
-    queryParameters: {
-      q: {
-        type: 'string',
-        minLength: 2,
-        maxLength: 100,
-        required: true
-      },
-      country: {
-        type: 'string',
-        pattern: '^[A-Z]{2}$'
-      },
-      limit: {
-        type: 'integer',
-        minimum: 1,
-        maximum: 100,
-        default: 10
-      }
-    }
   }
 };
 

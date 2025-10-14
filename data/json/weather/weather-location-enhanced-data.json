@@ -1,0 +1,57 @@
+{
+    "location": {
+        "city": "London",
+        "country": "GB",
+        "coordinates": {
+            "lon": -0.1257,
+            "lat": 51.5085
+        },
+        "timezone": 3600,
+        "localTime": "2025-09-28T00:41:04.710Z",
+        "isDaytime": false
+    },
+    "temperature": {
+        "kelvin": 283.91,
+        "celsius": 10.76,
+        "fahrenheit": 51.37,
+        "feels_like": {
+            "kelvin": 283.37,
+            "celsius": 10.22,
+            "fahrenheit": 50.4
+        }
+    },
+    "weather": {
+        "condition": "Clouds",
+        "description": "scattered clouds",
+        "icon": "03n",
+        "severity": "light",
+        "recommendation": "Enjoy the weather!"
+    },
+    "atmosphere": {
+        "pressure": 1019,
+        "humidity": 89,
+        "visibility": 10000,
+        "clouds": 28
+    },
+    "wind": {
+        "speed": 1.54,
+        "direction": 30,
+        "description": "Light breeze"
+    },
+    "sun": {
+        "sunrise": "02:56 AM",
+        "sunset": "02:45 PM",
+        "dayLength": "11h 49m"
+    },
+    "alerts": [],
+    "recommendations": {
+        "clothing": "Light jacket or sweater",
+        "activities": "Outdoor activities suitable",
+        "transport": "Normal transport conditions",
+        "health": "High humidity may cause discomfort"
+    },
+    "comfort": {
+        "index": 4.5,
+        "level": "cool"
+    }
+}

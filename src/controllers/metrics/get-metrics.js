@@ -227,5 +227,6 @@ const resetMetrics = () => {
 module.exports = { 
   getMetrics, 
   recordMetric, 
-  resetMetrics 
+  resetMetrics,
+  handler: getMetrics
 };

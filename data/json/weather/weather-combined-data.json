@@ -1,0 +1,91 @@
+{
+    "status": 200,
+    "statusText": "OK",
+    "headers": {
+        "date": "Mon, 13 Oct 2025 20:44:04 GMT",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "507",
+        "connection": "close",
+        "x-cache-key": "/data/2.5/weather?lang=fr&q=buenos%20aires&units=kelvin",
+        "access-control-allow-origin": "*",
+        "access-control-allow-credentials": "true",
+        "access-control-allow-methods": "GET, POST"
+    },
+    "config": {
+        "transitional": {
+            "silentJSONParsing": true,
+            "forcedJSONParsing": true,
+            "clarifyTimeoutError": false
+        },
+        "adapter": [
+            "xhr",
+            "http"
+        ],
+        "transformRequest": [
+            null
+        ],
+        "transformResponse": [
+            null
+        ],
+        "timeout": 5000,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "maxBodyLength": -1,
+        "env": {},
+        "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            "User-Agent": "axios/1.6.0",
+            "Accept-Encoding": "gzip, compress, deflate, br"
+        },
+        "method": "get",
+        "url": "https://api.openweathermap.org/data/2.5/weather?q=Buenos%20Aires&units=kelvin&lang=fr&appid=858923c0cff4df1c4415f2493500ad37"
+    },
+    "request": "[ClientRequest Object]",
+    "data": {
+        "coord": {
+            "lon": -58.3772,
+            "lat": -34.6132
+        },
+        "weather": [
+            {
+                "id": 800,
+                "main": "Clear",
+                "description": "ciel dégagé",
+                "icon": "01d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 297.59,
+            "feels_like": 297,
+            "temp_min": 296.97,
+            "temp_max": 298,
+            "pressure": 1009,
+            "humidity": 35,
+            "sea_level": 1009,
+            "grnd_level": 1008
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 3.6,
+            "deg": 0
+        },
+        "clouds": {
+            "all": 0
+        },
+        "dt": 1760388197,
+        "sys": {
+            "type": 1,
+            "id": 8224,
+            "country": "AR",
+            "sunrise": 1760346807,
+            "sunset": 1760393135
+        },
+        "timezone": -10800,
+        "id": 3435910,
+        "name": "Buenos Aires",
+        "cod": 200
+    }
+}

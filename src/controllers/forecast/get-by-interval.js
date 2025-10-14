@@ -9,7 +9,7 @@ const { getCachedWeatherData, setCachedWeatherData, hasCachedWeatherData } = req
 const { validateAndCleanLocation } = require("../../helpers/weather/validate-location");
 
 //const
-const API_FORECAST_URL_BASE = "https://api.openweathermap.org/data/2.5/forecast?";
+const API_FORECAST_URL_BASE = process.env.API_FORECAST_URL_BASE;
 const API_KEY = process.env.API_KEY;
 const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
@@ -69,11 +69,29 @@ module.exports.handler = async (event) => {
             return bodyResponse(OK_CODE, cachedData);
         }
 
+        // Validate environment variables
+        if (!API_FORECAST_URL_BASE || !API_KEY) {
+            return bodyResponse(INTERNAL_SERVER_ERROR, {
+                error: "Configuration error",
+                message: "API configuration is missing. Please check environment variables."
+            });
+        }
+
         // Prepare the URL for the API request
         const apiUrl = `${API_FORECAST_URL_BASE}q=${encodeURIComponent(cleanedLocation)}&appid=${API_KEY}`;
 
         // Make API request
         axiosResponse = await sendGetRequest(apiUrl, null, {});
+
+        // Check if the response is an error string from the axios helper
+        if (typeof axiosResponse === 'string' && axiosResponse.startsWith('ERROR:')) {
+            console.error("OpenWeather API request failed:", axiosResponse);
+            return bodyResponse(INTERNAL_SERVER_ERROR, {
+                error: "Failed to fetch forecast data",
+                message: "Unable to retrieve forecast information from OpenWeather API",
+                details: axiosResponse
+            });
+        }
 
         if (axiosResponse && axiosResponse.status === OK_CODE && axiosResponse.data) {
             // Filter forecast data by interval
@@ -87,9 +105,11 @@ module.exports.handler = async (event) => {
             
             return bodyResponse(OK_CODE, filteredData);
         } else {
+            console.error("Invalid response from OpenWeather API:", axiosResponse);
             return bodyResponse(INTERNAL_SERVER_ERROR, {
                 error: "Failed to fetch forecast data",
-                message: "Unable to retrieve forecast information from OpenWeather API"
+                message: "Unable to retrieve forecast information from OpenWeather API",
+                response: axiosResponse
             });
         }
 

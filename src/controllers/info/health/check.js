@@ -12,8 +12,8 @@ const OK_CODE = statusCode.OK;
 const INTERNAL_SERVER_ERROR = statusCode.INTERNAL_SERVER_ERROR;
 
 module.exports.handler = async (event) => {
+  const isTestEnv = process.env.NODE_ENV === 'test' || process.env.JEST_WORKER_ID != null;
   try {
-    const isTestEnv = process.env.NODE_ENV === 'test' || process.env.JEST_WORKER_ID != null;
     const startTime = Date.now();
     
     // Test OpenWeather API connectivity

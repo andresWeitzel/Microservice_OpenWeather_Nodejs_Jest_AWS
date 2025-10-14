@@ -1,0 +1,680 @@
+{
+    "location": {
+        "city": "La Plata",
+        "country": "AR",
+        "coordinates": {
+            "lat": -34.9215,
+            "lon": -57.9545
+        },
+        "timezone": -10800,
+        "population": 694167
+    },
+    "forecast": {
+        "totalPeriods": 7,
+        "daily": [
+            {
+                "date": "2025-10-18",
+                "dayName": "Saturday",
+                "periods": [
+                    {
+                        "timestamp": 1760756400,
+                        "datetime": "2025-10-18 03:00:00",
+                        "time": "12:00 AM",
+                        "isDaytime": false,
+                        "temperature": {
+                            "kelvin": 12.63,
+                            "celsius": -260.5,
+                            "fahrenheit": -436.9,
+                            "feels_like": {
+                                "kelvin": 11.49,
+                                "celsius": -261.7,
+                                "fahrenheit": -439
+                            }
+                        },
+                        "weather": {
+                            "condition": "Clouds",
+                            "description": "broken clouds",
+                            "icon": "04n",
+                            "severity": "light"
+                        },
+                        "atmosphere": {
+                            "pressure": 1024,
+                            "humidity": 59,
+                            "clouds": 62
+                        },
+                        "wind": {
+                            "speed": 4.26,
+                            "direction": 101,
+                            "description": "Gentle breeze"
+                        },
+                        "precipitation": {
+                            "rain": 0,
+                            "snow": 0
+                        }
+                    },
+                    {
+                        "timestamp": 1760767200,
+                        "datetime": "2025-10-18 06:00:00",
+                        "time": "03:00 AM",
+                        "isDaytime": false,
+                        "temperature": {
+                            "kelvin": 11.27,
+                            "celsius": -261.9,
+                            "fahrenheit": -439.4,
+                            "feels_like": {
+                                "kelvin": 10.12,
+                                "celsius": -263,
+                                "fahrenheit": -441.5
+                            }
+                        },
+                        "weather": {
+                            "condition": "Clouds",
+                            "description": "scattered clouds",
+                            "icon": "03n",
+                            "severity": "light"
+                        },
+                        "atmosphere": {
+                            "pressure": 1024,
+                            "humidity": 64,
+                            "clouds": 31
+                        },
+                        "wind": {
+                            "speed": 3.33,
+                            "direction": 108,
+                            "description": "Gentle breeze"
+                        },
+                        "precipitation": {
+                            "rain": 0,
+                            "snow": 0
+                        }
+                    },
+                    {
+                        "timestamp": 1760778000,
+                        "datetime": "2025-10-18 09:00:00",
+                        "time": "06:00 AM",
+                        "isDaytime": false,
+                        "temperature": {
+                            "kelvin": 10.88,
+                            "celsius": -262.3,
+                            "fahrenheit": -440.1,
+                            "feels_like": {
+                                "kelvin": 9.75,
+                                "celsius": -263.4,
+                                "fahrenheit": -442.1
+                            }
+                        },
+                        "weather": {
+                            "condition": "Clear",
+                            "description": "clear sky",
+                            "icon": "01n",
+                            "severity": "light"
+                        },
+                        "atmosphere": {
+                            "pressure": 1025,
+                            "humidity": 66,
+                            "clouds": 0
+                        },
+                        "wind": {
+                            "speed": 2.86,
+                            "direction": 102,
+                            "description": "Light breeze"
+                        },
+                        "precipitation": {
+                            "rain": 0,
+                            "snow": 0
+                        }
+                    },
+                    {
+                        "timestamp": 1760788800,
+                        "datetime": "2025-10-18 12:00:00",
+                        "time": "09:00 AM",
+                        "isDaytime": true,
+                        "temperature": {
+                            "kelvin": 17.33,
+                            "celsius": -255.8,
+                            "fahrenheit": -428.5,
+                            "feels_like": {
+                                "kelvin": 16.32,
+                                "celsius": -256.8,
+                                "fahrenheit": -430.3
+                            }
+                        },
+                        "weather": {
+                            "condition": "Clear",
+                            "description": "clear sky",
+                            "icon": "01d",
+                            "severity": "light"
+                        },
+                        "atmosphere": {
+                            "pressure": 1026,
+                            "humidity": 46,
+                            "clouds": 0
+                        },
+                        "wind": {
+                            "speed": 4.52,
+                            "direction": 60,
+                            "description": "Gentle breeze"
+                        },
+                        "precipitation": {
+                            "rain": 0,
+                            "snow": 0
+                        }
+                    },
+                    {
+                        "timestamp": 1760799600,
+                        "datetime": "2025-10-18 15:00:00",
+                        "time": "12:00 PM",
+                        "isDaytime": true,
+                        "temperature": {
+                            "kelvin": 19.36,
+                            "celsius": -253.8,
+                            "fahrenheit": -424.8,
+                            "feels_like": {
+                                "kelvin": 18.29,
+                                "celsius": -254.9,
+                                "fahrenheit": -426.7
+                            }
+                        },
+                        "weather": {
+                            "condition": "Clear",
+                            "description": "clear sky",
+                            "icon": "01d",
+                            "severity": "light"
+                        },
+                        "atmosphere": {
+                            "pressure": 1026,
+                            "humidity": 36,
+                            "clouds": 0
+                        },
+                        "wind": {
+                            "speed": 4.47,
+                            "direction": 64,
+                            "description": "Gentle breeze"
+                        },
+                        "precipitation": {
+                            "rain": 0,
+                            "snow": 0
+                        }
+                    },
+                    {
+                        "timestamp": 1760810400,
+                        "datetime": "2025-10-18 18:00:00",
+                        "time": "03:00 PM",
+                        "isDaytime": true,
+                        "temperature": {
+                            "kelvin": 21.01,
+                            "celsius": -252.1,
+                            "fahrenheit": -421.9,
+                            "feels_like": {
+                                "kelvin": 19.92,
+                                "celsius": -253.2,
+                                "fahrenheit": -423.8
+                            }
+                        },
+                        "weather": {
+                            "condition": "Clear",
+                            "description": "clear sky",
+                            "icon": "01d",
+                            "severity": "light"
+                        },
+                        "atmosphere": {
+                            "pressure": 1024,
+                            "humidity": 29,
+                            "clouds": 0
+                        },
+                        "wind": {
+                            "speed": 4.23,
+                            "direction": 87,
+                            "description": "Gentle breeze"
+                        },
+                        "precipitation": {
+                            "rain": 0,
+                            "snow": 0
+                        }
+                    },
+                    {
+                        "timestamp": 1760821200,
+                        "datetime": "2025-10-18 21:00:00",
+                        "time": "06:00 PM",
+                        "isDaytime": true,
+                        "temperature": {
+                            "kelvin": 17.83,
+                            "celsius": -255.3,
+                            "fahrenheit": -427.6,
+                            "feels_like": {
+                                "kelvin": 16.9,
+                                "celsius": -256.2,
+                                "fahrenheit": -429.2
+                            }
+                        },
+                        "weather": {
+                            "condition": "Clear",
+                            "description": "clear sky",
+                            "icon": "01d",
+                            "severity": "light"
+                        },
+                        "atmosphere": {
+                            "pressure": 1024,
+                            "humidity": 47,
+                            "clouds": 3
+                        },
+                        "wind": {
+                            "speed": 5.06,
+                            "direction": 103,
+                            "description": "Gentle breeze"
+                        },
+                        "precipitation": {
+                            "rain": 0,
+                            "snow": 0
+                        }
+                    }
+                ],
+                "summary": {
+                    "temp_min": 10.88,
+                    "temp_max": 21.01,
+                    "humidity_avg": 50,
+                    "pressure_avg": 1025,
+                    "wind_speed_avg": 4.1,
+                    "rain_total": 0,
+                    "snow_total": 0,
+                    "conditions": [
+                        "Clouds",
+                        "Clear"
+                    ],
+                    "temp_min_celsius": -262.3,
+                    "temp_max_celsius": -252.1
+                }
+            }
+        ],
+        "hourly": [
+            {
+                "timestamp": 1760756400,
+                "datetime": "2025-10-18 03:00:00",
+                "time": "12:00 AM",
+                "isDaytime": false,
+                "temperature": {
+                    "kelvin": 12.63,
+                    "celsius": -260.5,
+                    "fahrenheit": -436.9,
+                    "feels_like": {
+                        "kelvin": 11.49,
+                        "celsius": -261.7,
+                        "fahrenheit": -439
+                    }
+                },
+                "weather": {
+                    "condition": "Clouds",
+                    "description": "broken clouds",
+                    "icon": "04n",
+                    "severity": "light"
+                },
+                "atmosphere": {
+                    "pressure": 1024,
+                    "humidity": 59,
+                    "clouds": 62
+                },
+                "wind": {
+                    "speed": 4.26,
+                    "direction": 101,
+                    "description": "Gentle breeze"
+                },
+                "precipitation": {
+                    "rain": 0,
+                    "snow": 0
+                }
+            },
+            {
+                "timestamp": 1760767200,
+                "datetime": "2025-10-18 06:00:00",
+                "time": "03:00 AM",
+                "isDaytime": false,
+                "temperature": {
+                    "kelvin": 11.27,
+                    "celsius": -261.9,
+                    "fahrenheit": -439.4,
+                    "feels_like": {
+                        "kelvin": 10.12,
+                        "celsius": -263,
+                        "fahrenheit": -441.5
+                    }
+                },
+                "weather": {
+                    "condition": "Clouds",
+                    "description": "scattered clouds",
+                    "icon": "03n",
+                    "severity": "light"
+                },
+                "atmosphere": {
+                    "pressure": 1024,
+                    "humidity": 64,
+                    "clouds": 31
+                },
+                "wind": {
+                    "speed": 3.33,
+                    "direction": 108,
+                    "description": "Gentle breeze"
+                },
+                "precipitation": {
+                    "rain": 0,
+                    "snow": 0
+                }
+            },
+            {
+                "timestamp": 1760778000,
+                "datetime": "2025-10-18 09:00:00",
+                "time": "06:00 AM",
+                "isDaytime": false,
+                "temperature": {
+                    "kelvin": 10.88,
+                    "celsius": -262.3,
+                    "fahrenheit": -440.1,
+                    "feels_like": {
+                        "kelvin": 9.75,
+                        "celsius": -263.4,
+                        "fahrenheit": -442.1
+                    }
+                },
+                "weather": {
+                    "condition": "Clear",
+                    "description": "clear sky",
+                    "icon": "01n",
+                    "severity": "light"
+                },
+                "atmosphere": {
+                    "pressure": 1025,
+                    "humidity": 66,
+                    "clouds": 0
+                },
+                "wind": {
+                    "speed": 2.86,
+                    "direction": 102,
+                    "description": "Light breeze"
+                },
+                "precipitation": {
+                    "rain": 0,
+                    "snow": 0
+                }
+            },
+            {
+                "timestamp": 1760788800,
+                "datetime": "2025-10-18 12:00:00",
+                "time": "09:00 AM",
+                "isDaytime": true,
+                "temperature": {
+                    "kelvin": 17.33,
+                    "celsius": -255.8,
+                    "fahrenheit": -428.5,
+                    "feels_like": {
+                        "kelvin": 16.32,
+                        "celsius": -256.8,
+                        "fahrenheit": -430.3
+                    }
+                },
+                "weather": {
+                    "condition": "Clear",
+                    "description": "clear sky",
+                    "icon": "01d",
+                    "severity": "light"
+                },
+                "atmosphere": {
+                    "pressure": 1026,
+                    "humidity": 46,
+                    "clouds": 0
+                },
+                "wind": {
+                    "speed": 4.52,
+                    "direction": 60,
+                    "description": "Gentle breeze"
+                },
+                "precipitation": {
+                    "rain": 0,
+                    "snow": 0
+                }
+            },
+            {
+                "timestamp": 1760799600,
+                "datetime": "2025-10-18 15:00:00",
+                "time": "12:00 PM",
+                "isDaytime": true,
+                "temperature": {
+                    "kelvin": 19.36,
+                    "celsius": -253.8,
+                    "fahrenheit": -424.8,
+                    "feels_like": {
+                        "kelvin": 18.29,
+                        "celsius": -254.9,
+                        "fahrenheit": -426.7
+                    }
+                },
+                "weather": {
+                    "condition": "Clear",
+                    "description": "clear sky",
+                    "icon": "01d",
+                    "severity": "light"
+                },
+                "atmosphere": {
+                    "pressure": 1026,
+                    "humidity": 36,
+                    "clouds": 0
+                },
+                "wind": {
+                    "speed": 4.47,
+                    "direction": 64,
+                    "description": "Gentle breeze"
+                },
+                "precipitation": {
+                    "rain": 0,
+                    "snow": 0
+                }
+            },
+            {
+                "timestamp": 1760810400,
+                "datetime": "2025-10-18 18:00:00",
+                "time": "03:00 PM",
+                "isDaytime": true,
+                "temperature": {
+                    "kelvin": 21.01,
+                    "celsius": -252.1,
+                    "fahrenheit": -421.9,
+                    "feels_like": {
+                        "kelvin": 19.92,
+                        "celsius": -253.2,
+                        "fahrenheit": -423.8
+                    }
+                },
+                "weather": {
+                    "condition": "Clear",
+                    "description": "clear sky",
+                    "icon": "01d",
+                    "severity": "light"
+                },
+                "atmosphere": {
+                    "pressure": 1024,
+                    "humidity": 29,
+                    "clouds": 0
+                },
+                "wind": {
+                    "speed": 4.23,
+                    "direction": 87,
+                    "description": "Gentle breeze"
+                },
+                "precipitation": {
+                    "rain": 0,
+                    "snow": 0
+                }
+            },
+            {
+                "timestamp": 1760821200,
+                "datetime": "2025-10-18 21:00:00",
+                "time": "06:00 PM",
+                "isDaytime": true,
+                "temperature": {
+                    "kelvin": 17.83,
+                    "celsius": -255.3,
+                    "fahrenheit": -427.6,
+                    "feels_like": {
+                        "kelvin": 16.9,
+                        "celsius": -256.2,
+                        "fahrenheit": -429.2
+                    }
+                },
+                "weather": {
+                    "condition": "Clear",
+                    "description": "clear sky",
+                    "icon": "01d",
+                    "severity": "light"
+                },
+                "atmosphere": {
+                    "pressure": 1024,
+                    "humidity": 47,
+                    "clouds": 3
+                },
+                "wind": {
+                    "speed": 5.06,
+                    "direction": 103,
+                    "description": "Gentle breeze"
+                },
+                "precipitation": {
+                    "rain": 0,
+                    "snow": 0
+                }
+            }
+        ],
+        "summary": {
+            "temperature": {
+                "average": -257.4,
+                "min": -262.3,
+                "max": -252.1,
+                "range": 10.1
+            },
+            "humidity": {
+                "average": 50,
+                "min": 29,
+                "max": 66
+            },
+            "wind": {
+                "average": 4.1,
+                "max": 5.1
+            },
+            "precipitation": {
+                "total_rain": 0,
+                "total_snow": 0,
+                "rainy_periods": 0,
+                "snowy_periods": 0
+            }
+        },
+        "trends": {
+            "temperature": {
+                "trend": "warming",
+                "change": 7.3,
+                "description": "Temperatures warming by 7.3°C"
+            },
+            "weather": {
+                "conditions": [
+                    "Clouds",
+                    "Clear"
+                ],
+                "precipitation": "dry"
+            }
+        },
+        "alerts": [
+            {
+                "type": "temperature",
+                "level": "moderate",
+                "message": "Freezing temperatures expected"
+            }
+        ],
+        "recommendations": {
+            "clothing": "Warm jacket or coat",
+            "activities": "Outdoor activities suitable",
+            "planning": "Weather suitable for most activities",
+            "health": "Protect against cold-related illnesses"
+        }
+    },
+    "eventAnalysis": {
+        "summary": {
+            "eventType": "weekend",
+            "totalForecasts": 7,
+            "averageTemperature": 15.758571428571429,
+            "minTemperature": 10.88,
+            "maxTemperature": 21.01,
+            "averageHumidity": 49.57142857142857,
+            "averagePressure": 1024.7142857142858,
+            "averageWindSpeed": 4.104285714285714,
+            "predominantCondition": "Clear",
+            "conditionDistribution": {
+                "Clouds": 2,
+                "Clear": 5
+            },
+            "suitability": 10
+        },
+        "detailedAnalysis": {
+            "timing": {
+                "bestTime": "18/10/2025 at 0:00",
+                "worstTime": "18/10/2025 at 0:00",
+                "duration": 21,
+                "timeRange": {
+                    "start": "2025-10-18T03:00:00.000Z",
+                    "end": "2025-10-18T21:00:00.000Z",
+                    "duration": 21
+                }
+            },
+            "conditions": {
+                "temperatureRange": 10.13,
+                "temperatureTrend": "warming",
+                "weatherStability": "stable",
+                "windConditions": {
+                    "average": 4.104285714285714,
+                    "maximum": 5.06,
+                    "condition": "calm"
+                }
+            },
+            "recommendations": {
+                "clothing": [],
+                "equipment": [],
+                "timing": [],
+                "activities": []
+            },
+            "considerations": {
+                "health": [],
+                "safety": [],
+                "comfort": [],
+                "logistics": []
+            }
+        },
+        "planningInsights": {
+            "preparation": [],
+            "timing": [
+                "Best time for weekend: 18/10/2025 at 0:00"
+            ],
+            "logistics": [],
+            "backup": []
+        },
+        "riskAssessment": {
+            "high": [],
+            "medium": [],
+            "low": [],
+            "overall": "low"
+        },
+        "alternatives": {
+            "indoor": [],
+            "outdoor": [],
+            "timing": [
+                "Reschedule to 18/10/2025 at 0:00 for better conditions"
+            ],
+            "location": [
+                "Consider nearby indoor venues",
+                "Check for covered outdoor areas"
+            ]
+        },
+        "eventType": "weekend"
+    },
+    "metadata": {
+        "location": "La Plata",
+        "eventType": "weekend",
+        "totalForecasts": 7,
+        "generatedAt": "2025-10-13T21:10:29.322Z",
+        "source": "OpenWeatherMap API",
+        "endpoint": "forecast-enhanced-events"
+    }
+}

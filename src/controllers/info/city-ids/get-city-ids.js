@@ -6,6 +6,7 @@ const { createJson } = require("../../../helpers/file-system/create-json");
 const { bodyResponse } = require("../../../helpers/http/body-response");
 const { getCachedWeatherData, setCachedWeatherData, hasCachedWeatherData } = require("../../../helpers/cache/simple-cache");
 const { searchCityIds, getDatabaseMetadata } = require("../../../helpers/info/city-ids/city-ids-database");
+const { validateAndCleanLocation } = require("../../../helpers/weather/validate-location");
 
 //const
 const OK_CODE = statusCode.OK;
@@ -35,6 +36,24 @@ module.exports.handler = async (event) => {
       );
     }
 
+    // Validate and clean the city name
+    const cleanedCityName = validateAndCleanLocation(cityNameParam);
+    if (!isTestEnv) console.log(`City IDs API - Cleaned city name: ${cleanedCityName}`);
+
+    // Validate country code if provided
+    if (countryCodeParam) {
+      // Clean and validate country code (should be 2 letters, uppercase)
+      const cleanedCountryCode = countryCodeParam.trim().toUpperCase();
+      if (!/^[A-Z]{2}$/.test(cleanedCountryCode)) {
+        return await bodyResponse(
+          BAD_REQUEST_CODE,
+          "Country code must be a valid 2-letter ISO code (e.g., 'AR', 'US', 'BR')"
+        );
+      }
+      countryCodeParam = cleanedCountryCode;
+      if (!isTestEnv) console.log(`City IDs API - Country code: ${countryCodeParam}`);
+    }
+
     // Validate limit parameter
     const limit = parseInt(limitParam);
     if (isNaN(limit) || limit < 1 || limit > 10) {
@@ -45,24 +64,24 @@ module.exports.handler = async (event) => {
     }
 
     // Create cache key using city name, country code and limit
-    const cacheKey = `city-ids:${cityNameParam}:${countryCodeParam || 'any'}:${limit}`;
+    const cacheKey = `city-ids:${cleanedCityName}:${countryCodeParam || 'any'}:${limit}`;
     if (hasCachedWeatherData('cityIds', cacheKey)) {
-      if (!isTestEnv) console.log(`Using cached data for city search: ${cityNameParam}`);
+      if (!isTestEnv) console.log(`Using cached data for city search: ${cleanedCityName}`);
       const cachedData = getCachedWeatherData('cityIds', cacheKey);
       return { statusCode: OK_CODE, body: JSON.stringify(cachedData) };
     }
 
-    if (!isTestEnv) console.log(`Searching local database for city IDs: ${cityNameParam}`);
+    if (!isTestEnv) console.log(`Searching local database for city IDs: ${cleanedCityName}`);
 
     // Search in local database
-    const matchingCities = searchCityIds(cityNameParam, countryCodeParam, limit);
+    const matchingCities = searchCityIds(cleanedCityName, countryCodeParam, limit);
 
     // Get database metadata
     const metadata = getDatabaseMetadata();
 
     // Build full response structure expected by tests
     const responseBody = {
-      searchQuery: cityNameParam,
+      searchQuery: cleanedCityName,
       countryCode: countryCodeParam ? String(countryCodeParam) : "",
       limit: limit,
       totalResults: matchingCities.length,
@@ -73,7 +92,7 @@ module.exports.handler = async (event) => {
 
     // Cache the response for 60 minutes (local data doesn't change often)
     setCachedWeatherData('cityIds', cacheKey, responseBody, 60 * 60 * 1000);
-    if (!isTestEnv) console.log(`Cached city IDs data for: ${cityNameParam}`);
+    if (!isTestEnv) console.log(`Cached city IDs data for: ${cleanedCityName}`);
 
     // Return response immediately
     const response = { statusCode: OK_CODE, body: JSON.stringify(responseBody) };
@@ -94,7 +113,7 @@ module.exports.handler = async (event) => {
     }
     return await bodyResponse(
       INTERNAL_SERVER_ERROR,
-      `Error processing city data for ${cityNameParam}: ${error.message}`
+      `Error processing city data for ${cityNameParam || 'unknown'}: ${error.message}`
     );
   }
 }; 

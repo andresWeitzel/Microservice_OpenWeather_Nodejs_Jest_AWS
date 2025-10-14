@@ -1,0 +1,27 @@
+{
+    "searchQuery": "Buenos Aires",
+    "countryCode": "",
+    "limit": 5,
+    "totalResults": 1,
+    "cities": [
+        {
+            "id": 3435910,
+            "name": "Buenos Aires",
+            "state": "Buenos Aires",
+            "country": "AR",
+            "coordinates": {
+                "lat": -34.6132,
+                "lon": -58.3772
+            },
+            "displayName": "Buenos Aires, Buenos Aires, AR"
+        }
+    ],
+    "source": "local_database",
+    "databaseInfo": {
+        "description": "Local database of OpenWeather city IDs organized by city name and country",
+        "version": "1.0.0",
+        "lastUpdated": "2024-01-15",
+        "totalCities": 150,
+        "source": "OpenWeather Geocoding API"
+    }
+}

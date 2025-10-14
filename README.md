@@ -63,9 +63,13 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 
 ### Sección 2) Endpoints and Examples
 
-*   [2.0) Endpoints and resources.](#20-endpoints-and-resources-)
-*   [2.1) Examples.](#21-examples-)
+*   [2.0) Weather Endpoints.](#20-weather-endpoints-)
+*   [2.1) Endpoints and resources.](#21-endpoints-and-resources-)
+*   [2.2) Examples.](#22-examples-)
+*   [2.3) Forecast Endpoints.](#23-forecast-endpoints-)
+*   [2.4) Forecast Examples.](#24-forecast-examples-)
 *   [2.5) Data Persistence and Storage.](#25-data-persistence-and-storage-)
+*   [2.6) Quick Examples - All Weather Endpoints.](#26-quick-examples---all-weather-endpoints-)
 
 ### Sección 3) Functionality test and references
 
@@ -142,6 +146,7 @@ This microservice integrates with the OpenWeather API to retrieve weather inform
     ```yaml
     # Environment variables for the OpenWeather API microservice
     API_WEATHER_URL_BASE: "https://api.openweathermap.org/data/2.5/weather?q="
+    API_FORECAST_URL_BASE: "https://api.openweathermap.org/data/2.5/forecast?"
     API_KEY: "YOUR_ACTUAL_API_KEY_HERE"
     ```
 
@@ -427,191 +432,510 @@ If you continue to have issues:
 
 ## Sección 2) Endpoints and Examples.
 
-### 2.0) Endpoints and resources [🔝](#index-)
+### 2.0) Weather Endpoints [🔝](#index-)
 
 <details>
   <summary>See</summary>
 
 <br>
 
-#### Available Endpoints
+This section describes all weather endpoints implemented in the microservice, each corresponding to a different variant of the OpenWeatherMap API.
 
-> **📝 Note**: All endpoints accept both **cities** and **countries** as location parameters. The API uses OpenWeather's geocoding service to resolve any location name to coordinates.
 
-**🔍 Location Search Examples:**
+***
 
-*   **Cities**: `London`, `New York`, `Tokyo`, `Paris`, `Buenos Aires`
-*   **Countries**: `Japan`, `Australia`, `Brazil`, `Germany`, `Argentina`
-*   **States/Provinces**: `California`, `Ontario`, `Bavaria`
-*   **Special cases**: For large countries, the API will return data for the capital or a major city
+## 📊 Endpoint Comparison
 
-**💾 Data Persistence**: After successfully retrieving data from OpenWeather API, the microservice automatically saves the response to JSON files in the `src/data/json/` directory for backup and reference purposes.
+| Endpoint | Parameters | Use Case | Example |
+|----------|------------|----------|---------|
+| `/v1/weather/location/{location}` | City | Search by name | Buenos Aires |
+| `/v1/weather-enhanced/location/{location}` | City | Enriched data | Buenos Aires |
+| `/v1/weather/coordinates/{lat}/{lon}` | Coordinates | GPS applications | -34.6132, -58.3772 |
+| `/v1/weather-enhanced/coordinates/{lat}/{lon}` | Coordinates | Enriched GPS data | -34.6132, -58.3772 |
+| `/v1/weather/id/{cityId}` | ID | Fast search | 3435910 |
+| `/v1/weather-enhanced/id/{cityId}` | ID | Enriched ID data | 3435910 |
+| `/v1/weather/zipcode/{zipcode}/{countryCode}` | Postal + Country | Local search | 10001, us |
+| `/v1/weather-enhanced/zipcode/{zipcode}/{countryCode}` | Postal + Country | Enriched postal data | 10001, us |
+| `/v1/weather/units/{location}/{units}` | City + Units | User preferences | London, metric |
+| `/v1/weather/language/{location}/{language}` | City + Language | Internationalization | Paris, es |
+| `/v1/weather/combined/{location}/{units}/{language}` | All (optional) | Complete configuration | Tokyo, metric, es |
+| `/v1/weather-enhanced/combined/{location}/{units}/{language}` | All (required) | Complete enriched configuration | Tokyo, metric, es |
 
-| **Endpoint** | **Method** | **Description** | **Response** |
-|-------------|------------|-----------------|--------------|
-| `/v1/weather/location/{location}` | GET | Raw OpenWeather data | Original OpenWeather format |
-| `/v1/weather-enhanced/location/{location}` | GET | **Enhanced weather data** | **Enriched format with conversions, recommendations, and alerts** |
-| `/v1/weather/coordinates/{lat}/{lon}` | GET | **Weather by coordinates** | **Weather data for GPS coordinates** |
-| `/v1/weather-enhanced/coordinates/{lat}/{lon}` | GET | **Enhanced weather by coordinates** | **Enhanced weather data for GPS coordinates** |
-| `/v1/weather/id/{cityId}` | GET | **Weather by city ID** | **Weather data using OpenWeather city ID** |
-| `/v1/weather-enhanced/id/{cityId}` | GET | **Enhanced weather by city ID** | **Enhanced weather data using OpenWeather city ID** |
-| `/v1/info/city-ids/{cityName}` | GET | **Search city IDs** | **Find city IDs by name from local database (default limit: 5)** |
-| `/v1/info/city-ids/{cityName}/{countryCode}` | GET | **Search city IDs with country** | **Find city IDs by name and country from local database (default limit: 5)** |
-| `/v1/info/city-ids/{cityName}/{countryCode}/{limit}` | GET | **Search city IDs with limit** | **Find city IDs by name, country and custom limit from local database (1-10)** |
-| `/v1/weather/zipcode/{zipcode}/{countryCode}` | GET | **Weather by zipcode** | **Weather data for postal code** |
-| `/v1/weather/zipcode/{zipcode}` | GET | **Weather by zipcode (default country)** | **Weather data for postal code** |
-| `/v1/weather/units/{location}/{units}` | GET | **Weather with specific units** | **Weather data in metric/imperial/kelvin** |
-| `/v1/weather/language/{location}/{language}` | GET | **Weather with specific language** | **Weather data in different languages** |
-| `/v1/weather/combined/{location}/{units}/{language}` | GET | **Weather with all parameters** | **Weather data with units and language** |
-| `/v1/weather-enhanced/combined/{location}/{units}/{language}` | GET | **Enhanced weather with all parameters** | **Enriched weather data with units and language** |
-| `/v1/forecast/interval/{location}/{interval}` | GET | **Forecast by time intervals** | **Forecast data for 3h, 6h, 12h, 24h intervals** |
-| `/v1/forecast-enhanced/interval/{location}/{interval}` | GET | **Enhanced forecast by intervals** | **Enhanced forecast data for time intervals** |
-| `/v1/forecast/days/{location}/{days}` | GET | **Forecast by specific days** | **Forecast data for 1-5 days** |
-| `/v1/forecast-enhanced/days/{location}/{days}` | GET | **Enhanced forecast by days** | **Enhanced forecast data for specific days** |
-| `/v1/forecast/hourly/{location}/{hour}` | GET | **Forecast by time periods** | **Forecast data for morning, afternoon, evening, night** |
-| `/v1/forecast-enhanced/hourly/{location}/{hour}` | GET | **Enhanced forecast by hours** | **Enhanced forecast data for time periods** |
-| `/v1/forecast/weekly/{location}/{weeks}` | GET | **Forecast by weeks** | **Forecast data grouped by weeks (1-4)** |
-| `/v1/forecast-enhanced/weekly/{location}/{weeks}` | GET | **Enhanced forecast by weeks** | **Enhanced forecast data grouped by weeks** |
-| `/v1/forecast/events/{location}/{eventType}` | GET | **Forecast by events** | **Forecast data for specific events (weekend, holiday, etc.)** |
-| `/v1/forecast-enhanced/events/{location}/{eventType}` | GET | **Enhanced forecast by events** | **Enhanced forecast data for specific events** |
-| `/v1/forecast/compare/{location}/{period1}/{period2}` | GET | **Forecast comparison** | **Compare forecast data between two periods** |
-| `/v1/forecast-enhanced/compare/{location}/{period1}/{period2}` | GET | **Enhanced forecast comparison** | **Enhanced comparison between two periods** |
-| `/v1/info/health` | GET | **System health check** | **API connectivity, cache status, and system metrics** |
 
-> **🆕 NEW**: We've implemented all OpenWeatherMap weather API variants! See [WEATHER\_ENDPOINTS.md](./WEATHER_ENDPOINTS.md) for complete documentation.
 
-#### Enhanced Weather Features
+## 1. By City Name
 
-The enhanced endpoint provides the following additional features:
+**Original Endpoint** (renamed for consistency)
 
-**🌡️ Temperature Conversions**
+    GET /v1/weather/location/{location}
 
-*   Kelvin, Celsius, and Fahrenheit in one response
-*   "Feels like" temperature in all units
+**Description**: Get weather data by city name
+**Parameters**:
 
-**📍 Location Context**
+*   `location`: City name (e.g., "Buenos Aires", "London")
 
-*   City and country information
-*   Coordinates and timezone
-*   Local time and daytime status
+**Example**:
 
-**🌤️ Weather Intelligence**
+```bash
+curl http://localhost:4000/v1/weather/location/Buenos%20Aires
+```
 
-*   Weather severity classification (light, moderate, heavy)
-*   Personalized recommendations based on conditions
-*   Wind descriptions (Calm, Light breeze, etc.)
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}`
 
-**⚠️ Smart Alerts**
+**Controller**: `get-by-location.js`
 
-*   Temperature warnings (freezing, extreme heat)
-*   Wind alerts for strong conditions
-*   Visibility warnings
+### 1.1. Enhanced Weather by City Name
 
-**👕 Personalized Recommendations**
+**Enhanced Endpoint**
 
-*   Clothing suggestions based on temperature
-*   Activity recommendations (indoor/outdoor)
-*   Transport advice
-*   Health recommendations
+    GET /v1/weather-enhanced/location/{location}
 
-**😌 Comfort Analysis**
+**Description**: Get enriched weather data by city name
+**Parameters**:
 
-*   Comfort index (0-10 scale)
-*   Comfort level classification
-*   Based on temperature, humidity, and wind
+*   `location`: City name (e.g., "Buenos Aires", "London")
 
-**☀️ Sun Information**
+**Example**:
 
-*   Sunrise and sunset times (formatted)
-*   Day length calculation
-*   Daytime status
+```bash
+curl http://localhost:4000/v1/weather-enhanced/location/Buenos%20Aires
+```
 
-#### Enhanced Forecast Features
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}`
 
-The enhanced forecast endpoint provides the following additional features:
+**Controller**: `get-by-location-enhanced.js`
 
-**📅 Daily Summaries**
+**Additional Features**:
 
-*   Grouped forecast data by day
-*   Daily temperature ranges (min/max)
-*   Average humidity, pressure, and wind
-*   Total precipitation per day
+*   Temperature conversions (Kelvin, Celsius, Fahrenheit)
+*   Personalized recommendations
+*   Smart alerts
+*   Comfort analysis
+*   Sun information
 
-**📊 Trend Analysis**
+***
 
-*   Temperature trends (warming/cooling/stable)
-*   Weather condition changes
-*   Precipitation patterns
+## 2. By Coordinates
 
-**⚠️ Forecast Alerts**
+**New Endpoint**
 
-*   Extreme temperature warnings
-*   Strong wind alerts
-*   Heavy precipitation warnings
+    GET /v1/weather/coordinates/{lat}/{lon}
 
-**🎯 Planning Recommendations**
+**Description**: Get weather data by geographical coordinates
+**Parameters**:
 
-*   Best days for outdoor activities
-*   Clothing recommendations for the period
-*   Health and safety advice
-*   Activity planning suggestions
+*   `lat`: Latitude (-90 to 90)
+*   `lon`: Longitude (-180 to 180)
 
-**📈 Statistical Summary**
+**Example**:
 
-*   Average temperatures for the period
-*   Total precipitation amounts
-*   Wind speed analysis
-*   Weather condition frequency
+```bash
+curl http://localhost:4000/v1/weather/coordinates/-34.6132/-58.3772
+```
 
-#### Enhanced Air Pollution Features
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_KEY}`
 
-The enhanced air pollution endpoint provides the following additional features:
+**Controller**: `get-by-coordinates.js`
 
-**🌬️ Air Quality Intelligence**
+**Validations**:
 
-*   Air Quality Index (AQI) with color coding
-*   Detailed pollutant analysis (CO, NO2, O3, PM2.5, PM10, etc.)
-*   Health implications for each AQI level
-*   Real-time air quality assessment
+*   Latitude must be between -90 and 90
+*   Longitude must be between -180 and 180
+*   Both parameters must be valid numbers
 
-**🏥 Health & Safety Analysis**
+### 2.1. Enhanced Weather by Coordinates
 
-*   Health risk level assessment
-*   Vulnerable groups identification
-*   Potential health symptoms
-*   Prevention measures and recommendations
+**Enhanced Endpoint**
 
-**⚠️ Smart Air Pollution Alerts**
+    GET /v1/weather-enhanced/coordinates/{lat}/{lon}
 
-*   High pollutant level warnings
-*   AQI-based alerts
-*   Specific pollutant alerts (PM2.5, Ozone, etc.)
-*   Health risk notifications
+**Description**: Get enriched weather data by geographical coordinates
+**Parameters**:
 
-**🎯 Personalized Recommendations**
+*   `lat`: Latitude (-90 to 90)
+*   `lon`: Longitude (-180 to 180)
 
-*   Outdoor activity recommendations
-*   Exercise guidelines based on air quality
-*   Ventilation recommendations
-*   Transportation suggestions
+**Example**:
 
-**📊 Detailed Pollutant Analysis**
+```bash
+curl http://localhost:4000/v1/weather-enhanced/coordinates/-34.6132/-58.3772
+```
 
-*   Individual pollutant levels and descriptions
-*   Carbon monoxide, nitrogen oxides, ozone
-*   Particulate matter (PM2.5, PM10)
-*   Sulfur dioxide and ammonia levels
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_KEY}`
 
-**🏃 Activity Guidelines**
+**Controller**: `get-by-coordinates-enhanced.js`
 
-*   Safe outdoor activity recommendations
-*   Exercise intensity guidelines
-*   Indoor air quality management
-*   Transportation mode suggestions
+**Additional Features**:
+
+*   Temperature conversions (Kelvin, Celsius, Fahrenheit)
+*   Personalized recommendations
+*   Smart alerts
+*   Comfort analysis
+*   Sun information
+
+***
+
+## 3. By City ID
+
+**New Endpoint**
+
+    GET /v1/weather/id/{cityId}
+
+**Description**: Get weather data by unique city ID
+**Parameters**:
+
+*   `cityId`: Numerical city ID (e.g., 3435910 for Buenos Aires)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/weather/id/3435910
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?id={city_id}&appid={API_KEY}`
+
+**Controller**: `get-by-id.js`
+
+**Validations**:
+
+*   ID must be a positive number
+*   ID must be a valid integer
+
+### 3.1. Enhanced Weather by City ID
+
+**Enhanced Endpoint**
+
+    GET /v1/weather-enhanced/id/{cityId}
+
+**Description**: Get enriched weather data by unique city ID
+**Parameters**:
+
+*   `cityId`: Numerical city ID (e.g., 3435910 for Buenos Aires)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/weather-enhanced/id/3435910
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?id={city_id}&appid={API_KEY}`
+
+**Controller**: `get-by-id-enhanced.js`
+
+**Additional Features**:
+
+*   Temperature conversions (Kelvin, Celsius, Fahrenheit)
+*   Personalized recommendations
+*   Smart alerts
+*   Comfort analysis
+*   Sun information
+
+***
+
+## 4. By Postal Code
+
+**Endpoint**
+
+    GET /v1/weather/zipcode/{zipcode}/{countryCode}
+
+**Description**: Get weather data by postal code
+**Parameters**:
+
+*   `zipcode`: Postal code (e.g., "10001", "SW1A 1AA")
+*   `countryCode`: Country code (required, e.g., "us", "gb")
+
+**Example**:
+
+```bash
+# With country code
+curl http://localhost:4000/v1/weather/zipcode/10001/us
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?zip={zip},{country}&appid={API_KEY}`
+
+**Controller**: `get-by-zipcode.js`
+
+**Validations**:
+
+*   Zipcode must have valid format (2-20 characters, letters, numbers, spaces, hyphens, dots and commas)
+*   Country code is required
+*   Zipcode must be alphanumeric with allowed special characters
+
+### 4.1. Enhanced Weather by Postal Code
+
+**Enhanced Endpoint**
+
+    GET /v1/weather-enhanced/zipcode/{zipcode}/{countryCode}
+
+**Description**: Get enriched weather data by postal code
+**Parameters**:
+
+*   `zipcode`: Postal code (e.g., "10001", "SW1A 1AA")
+*   `countryCode`: Country code (required, e.g., "us", "gb")
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/weather-enhanced/zipcode/10001/us
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?zip={zip},{country}&appid={API_KEY}`
+
+**Controller**: `get-by-zipcode-enhanced.js`
+
+**Additional Features**:
+
+*   Temperature conversions (Kelvin, Celsius, Fahrenheit)
+*   Personalized recommendations
+*   Smart alerts
+*   Comfort analysis
+*   Sun information
+
+***
+
+## 5. With Specific Units
+
+**New Endpoint**
+
+    GET /v1/weather/units/{location}/{units}
+
+**Description**: Get weather data with specific units
+**Parameters**:
+
+*   `location`: City name
+*   `units`: Unit type (`metric`, `imperial`, `kelvin`)
+
+**Examples**:
+
+```bash
+# Temperature in Celsius
+curl http://localhost:4000/v1/weather/units/London/metric
+
+# Temperature in Fahrenheit
+curl http://localhost:4000/v1/weather/units/New%20York/imperial
+
+# Temperature in Kelvin (default)
+curl http://localhost:4000/v1/weather/units/Tokyo/kelvin
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?q={city}&units={units}&appid={API_KEY}`
+
+**Controller**: `get-with-units.js`
+
+**Available Units**:
+
+*   `metric`: Celsius, m/s, hPa
+*   `imperial`: Fahrenheit, mph, hPa
+*   `kelvin`: Kelvin, m/s, hPa (default)
+
+***
+
+## 6. With Specific Language
+
+**New Endpoint**
+
+    GET /v1/weather/language/{location}/{language}
+
+**Description**: Get weather data with descriptions in specific language
+**Parameters**:
+
+*   `location`: City name
+*   `language`: Language code
+
+**Examples**:
+
+```bash
+# Spanish
+curl http://localhost:4000/v1/weather/language/Paris/es
+
+# French
+curl http://localhost:4000/v1/weather/language/London/fr
+
+# German
+curl http://localhost:4000/v1/weather/language/Berlin/de
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?q={city}&lang={lang}&appid={API_KEY}`
+
+**Controller**: `get-with-language.js`
+
+**Available Languages**:
+
+*   `en`: English (default)
+*   `es`: Spanish
+*   `fr`: French
+*   `de`: German
+*   `it`: Italian
+*   `pt`: Portuguese
+*   `ru`: Russian
+*   `ja`: Japanese
+*   `ko`: Korean
+*   `zh_cn`: Simplified Chinese
+*   `zh_tw`: Traditional Chinese
+*   `ar`: Arabic
+*   `hi`: Hindi
+*   `th`: Thai
+*   `tr`: Turkish
+*   `vi`: Vietnamese
+
+***
+
+## 7. With Combined Parameters
+
+**Endpoint**
+
+    GET /v1/weather/combined/{location}/{units}/{language}
+
+**Description**: Get weather data with multiple combined parameters
+**Parameters**:
+
+*   `location`: City name (required)
+*   `units`: Unit type (optional, default: kelvin)
+*   `language`: Language code (optional, default: en)
+
+**Example**:
+
+```bash
+# All parameters
+curl http://localhost:4000/v1/weather/combined/Tokyo/metric/es
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?q={city}&units={units}&lang={lang}&appid={API_KEY}`
+
+**Controller**: `get-by-combined.js`
+
+### 7.1. Enhanced Weather with Combined Parameters
+
+**Enhanced Endpoint**
+
+    GET /v1/weather-enhanced/combined/{location}/{units}/{language}
+
+**Description**: Get enriched weather data with multiple combined parameters
+**Parameters**:
+
+*   `location`: City name (required)
+*   `units`: Unit type (required)
+*   `language`: Language code (required)
+
+**Example**:
+
+```bash
+# Enhanced with all parameters (all required)
+curl http://localhost:4000/v1/weather-enhanced/combined/Tokyo/metric/es
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/weather?q={city}&units={units}&lang={lang}&appid={API_KEY}`
+
+**Controller**: `get-by-combined-enhanced.js`
+
+**Additional Features**:
+
+*   Temperature conversions (Kelvin, Celsius, Fahrenheit)
+*   Personalized recommendations
+*   Smart alerts
+*   Comfort analysis
+*   Sun information
+
+**Note**: In the enhanced endpoint, all parameters are required.
+
+***
+
+## 🔧 Common Features
+
+All implemented endpoints include:
+
+### ✅ Parameter Validation
+
+*   Data type validation
+*   Allowed ranges for coordinates
+*   Valid language codes
+*   Valid units
+
+### ✅ Cache System
+
+*   10-minute cache
+*   Unique keys per endpoint type
+*   Reduced OpenWeatherMap calls
+
+### ✅ Data Storage
+
+*   Automatic JSON file saving
+*   Organized structure by endpoint type
+*   Persistence for later analysis
+
+### ✅ Error Handling
+
+*   Appropriate HTTP responses
+*   Descriptive error messages
+*   Detailed logging
+
+### ✅ Logging
+
+*   Generated URL logging
+*   Cache usage information
+*   Errors and warnings
+
+***
+
+## 🚀 Complete Usage Examples
+
+### Example 1: GPS Application
+
+```bash
+# Get weather by GPS coordinates
+curl http://localhost:4000/v1/weather/coordinates/40.7128/-74.0060
+```
+
+### Example 2: Multilingual Application
+
+```bash
+# Weather in Spanish for Spanish-speaking users
+curl http://localhost:4000/v1/weather/language/Madrid/es
+```
+
+### Example 3: Application with User Preferences
+
+```bash
+# Weather in Celsius for European user
+curl http://localhost:4000/v1/weather/units/Paris/metric
+```
+
+### Example 4: Complete Configuration
+
+```bash
+# Complete weather with all preferences
+curl http://localhost:4000/v1/weather/combined/Tokyo/metric/es
+```
+
+### Example 5: Enhanced Weather with Rich Data
+
+```bash
+# Enhanced weather with additional analysis
+curl http://localhost:4000/v1/weather-enhanced/combined/Madrid/metric/es
+```
+
+***
+
+## 📝 Important Notes
+
+1.  **API Key**: All endpoints require a valid OpenWeatherMap API key
+2.  **Rate Limits**: Respect API limits (1000 calls/day on free plan)
+3.  **Activation**: New API keys take up to 2 hours to activate
+4.  **Cache**: Data is cached for 10 minutes to optimize performance
+5.  **Storage**: Data is automatically saved to JSON files
+
+***
+
+## 🔗 References
+
+*   [OpenWeatherMap API Documentation](https://openweathermap.org/api)
+*   [Weather API Endpoints](https://openweathermap.org/api/weather-data)
+*   [Supported Languages](https://openweathermap.org/current#multi)
+*   [Units Format](https://openweathermap.org/current#data)
 
 </details>
 
-### 2.1) Examples [🔝](#index-)
+### 2.2) Weather Endpoint Examples [🔝](#index-)
 
 <details>
   <summary>See</summary>
@@ -1006,6 +1330,997 @@ curl http://localhost:4000/v1/forecast-enhanced/hourly/Tokyo/afternoon
 
 </details>
 
+
+### 2.3) Forecast Endpoints [🔝](#index-)
+
+<details>
+  <summary>See</summary>
+
+<br>
+
+This section describes all forecast endpoints implemented in the microservice, including valid values, validations, usage examples, and unique characteristics for meteorological forecasts.
+
+***
+
+## 📊 Endpoint Comparison
+
+| Endpoint | Parameters | Use Case | Example |
+|----------|------------|----------|---------|
+| `/v1/forecast/interval/{location}/{interval}` | City + Interval | Forecast by specific intervals | London, 6h |
+| `/v1/forecast-enhanced/interval/{location}/{interval}` | City + Interval | Enhanced forecast by intervals | London, 12h |
+| `/v1/forecast/days/{location}/{days}` | City + Days | Forecast for specific days | Paris, 3 |
+| `/v1/forecast-enhanced/days/{location}/{days}` | City + Days | Enhanced forecast by days | Paris, 5 |
+| `/v1/forecast/hourly/{location}/{hour}` | City + Period | Forecast by day periods | Tokyo, morning |
+| `/v1/forecast-enhanced/hourly/{location}/{hour}` | City + Period | Enhanced forecast by periods | Tokyo, afternoon |
+| `/v1/forecast/events/{location}/{eventType}` | City + Event | Forecast by event types | Madrid, weekend |
+| `/v1/forecast-enhanced/events/{location}/{eventType}` | City + Event | Enhanced forecast by events | Madrid, vacation |
+| `/v1/forecast/compare/{location}/{period1}/{period2}` | City + Periods | Comparison between periods | London, today/tomorrow |
+| `/v1/forecast-enhanced/compare/{location}/{period1}/{period2}` | City + Periods | Enhanced comparison between periods | London, afternoon/night |
+| `/v1/forecast/weekly/{location}/{weeks}` | City + Weeks | Forecast grouped by weeks | Paris, 2 |
+| `/v1/forecast-enhanced/weekly/{location}/{weeks}` | City + Weeks | Enhanced forecast by weeks | Madrid, 1 |
+
+
+## 1. By Time Intervals
+
+**Basic Endpoint**
+
+    GET /v1/forecast/interval/{location}/{interval}
+
+**Description**: Get forecast data filtered by specific time intervals
+**Parameters**:
+
+*   `location`: City name (e.g., "London", "Buenos Aires")
+*   `interval`: Time interval (`3h`, `6h`, `12h`, `24h`)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast/interval/London/6h
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}`
+
+**Controller**: `get-by-interval.js`
+
+**Unique Features**:
+
+*   Filters forecast data by specific intervals
+*   Reduces the amount of data returned according to the requested interval
+*   Provides trend analysis by interval
+
+### 1.1. Enhanced by Time Intervals
+
+**Enhanced Endpoint**
+
+    GET /v1/forecast-enhanced/interval/{location}/{interval}
+
+**Description**: Get enriched forecast data by specific time intervals
+**Parameters**:
+
+*   `location`: City name (e.g., "London", "Buenos Aires")
+*   `interval`: Time interval (`3h`, `6h`, `12h`, `24h`)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast-enhanced/interval/London/12h
+```
+
+**Controller**: `get-by-interval-enhanced.js`
+
+**Additional Features**:
+
+*   Trend analysis by interval
+*   Specific recommendations per period
+*   Statistical summary of the interval
+*   Temperature and unit conversions
+
+***
+
+## 2. By Specific Days
+
+**Basic Endpoint**
+
+    GET /v1/forecast/days/{location}/{days}
+
+**Description**: Get forecast data for a specific number of days
+**Parameters**:
+
+*   `location`: City name (e.g., "Paris", "Tokyo")
+*   `days`: Number of days (1-5)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast/days/Paris/3
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}`
+
+**Controller**: `get-by-days.js`
+
+**Unique Features**:
+
+*   Filters forecast by specific number of days
+*   Generates daily summary with averages
+*   Identifies predominant conditions per day
+*   Calculates daily temperature ranges
+
+### 2.1. Enhanced by Specific Days
+
+**Enhanced Endpoint**
+
+    GET /v1/forecast-enhanced/days/{location}/{days}
+
+**Description**: Get enriched forecast data for specific days
+**Parameters**:
+
+*   `location`: City name (e.g., "Paris", "Tokyo")
+*   `days`: Number of days (1-5)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast-enhanced/days/Paris/5
+```
+
+**Controller**: `get-by-days-enhanced.js`
+
+**Additional Features**:
+
+*   Day-to-day variation analysis
+*   Recommendations for extended periods
+*   Long-term temperature trends
+*   Activity planning per day
+
+***
+
+## 3. By Time Periods
+
+**Basic Endpoint**
+
+    GET /v1/forecast/hourly/{location}/{hour}
+
+**Description**: Get forecast data filtered by specific time periods
+**Parameters**:
+
+*   `location`: City name (e.g., "Tokyo", "New York")
+*   `hour`: Time period (`morning`, `afternoon`, `evening`, `night`)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast/hourly/Tokyo/morning
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}`
+
+**Controller**: `get-by-hourly.js`
+
+**Unique Features**:
+
+*   Filters forecast by day periods
+*   Morning: 06:00-11:59
+*   Afternoon: 12:00-17:59
+*   Evening: 18:00-21:59
+*   Night: 22:00-05:59
+*   Specific recommendations per period
+
+### 3.1. Enhanced by Time Periods
+
+**Enhanced Endpoint**
+
+    GET /v1/forecast-enhanced/hourly/{location}/{hour}
+
+**Description**: Get enriched forecast data by time periods
+**Parameters**:
+
+*   `location`: City name (e.g., "Tokyo", "New York")
+*   `hour`: Time period (`morning`, `afternoon`, `evening`, `night`)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast-enhanced/hourly/Tokyo/afternoon
+```
+
+**Controller**: `get-by-hourly-enhanced.js`
+
+**Additional Features**:
+
+*   Specific analysis by day period
+*   Personalized recommendations per hour
+*   Wind and humidity analysis by period
+*   Activity suggestions by time of day
+
+***
+
+## 4. By Events
+
+**Basic Endpoint**
+
+    GET /v1/forecast/events/{location}/{eventType}
+
+**Description**: Get forecast data filtered by specific event types
+**Parameters**:
+
+*   `location`: City name (e.g., "Madrid", "Buenos Aires")
+*   `eventType`: Event type (`weekend`, `holiday`, `workday`, `vacation`, `party`, `sports`)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast/events/Madrid/weekend
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}`
+
+**Controller**: `get-by-events.js`
+
+**Unique Features**:
+
+*   Filters forecast according to specific event types
+*   Weekend: Saturdays and Sundays
+*   Holiday: holidays
+*   Workday: work days
+*   Vacation: vacation periods
+*   Party: social events
+*   Sports: sporting events
+
+### 4.1. Enhanced by Events
+
+**Enhanced Endpoint**
+
+    GET /v1/forecast-enhanced/events/{location}/{eventType}
+
+**Description**: Get enriched forecast data by event types
+**Parameters**:
+
+*   `location`: City name (e.g., "Madrid", "Buenos Aires")
+*   `eventType`: Event type (`weekend`, `holiday`, `workday`, `vacation`, `party`, `sports`)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast-enhanced/events/Madrid/vacation
+```
+
+**Controller**: `get-by-events-enhanced.js`
+
+**Additional Features**:
+
+*   Specific analysis by event type
+*   Personalized recommendations according to the event
+*   Activity planning by event type
+*   Clothing and equipment suggestions
+
+***
+
+## 5. Period Comparison
+
+**Basic Endpoint**
+
+    GET /v1/forecast/compare/{location}/{period1}/{period2}
+
+**Description**: Compare forecast data between two specific periods
+**Parameters**:
+
+*   `location`: City name (e.g., "London", "Buenos Aires")
+*   `period1`, `period2`: Periods to compare (`today`, `tomorrow`, `weekend`, `next_week`, `morning`, `afternoon`, `evening`, `night`)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast/compare/London/today/tomorrow
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}`
+
+**Controller**: `get-by-compare.js`
+
+**Unique Features**:
+
+*   Compares forecasts between specific periods
+*   Temperature difference analysis
+*   Meteorological condition comparison
+*   Trend identification between periods
+
+### 5.1. Enhanced Period Comparison
+
+**Enhanced Endpoint**
+
+    GET /v1/forecast-enhanced/compare/{location}/{period1}/{period2}
+
+**Description**: Compare enriched forecast data between specific periods
+**Parameters**:
+
+*   `location`: City name (e.g., "London", "Buenos Aires")
+*   `period1`, `period2`: Periods to compare (`today`, `tomorrow`, `weekend`, `next_week`, `morning`, `afternoon`, `evening`, `night`)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast-enhanced/compare/London/afternoon/night
+```
+
+**Controller**: `get-by-compare-enhanced.js`
+
+**Additional Features**:
+
+*   Detailed analysis of differences between periods
+*   Recommendations based on comparisons
+*   Change trends between periods
+*   Strategic planning based on comparisons
+
+***
+
+## 6. By Weeks
+
+**Basic Endpoint**
+
+    GET /v1/forecast/weekly/{location}/{weeks}
+
+**Description**: Get forecast data grouped by weeks
+**Parameters**:
+
+*   `location`: City name (e.g., "Paris", "Madrid")
+*   `weeks`: Number of weeks (1-4) - Note: the base API provides up to 5 days; the endpoint groups by weekly windows over that data
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast/weekly/Paris/2
+```
+
+**OpenWeatherMap URL**: `https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}`
+
+**Controller**: `get-by-weekly.js`
+
+**Unique Features**:
+
+*   Groups forecasts by weekly windows
+*   Weekly trend analysis
+*   Weekly condition summary
+*   Medium-term planning
+
+### 6.1. Enhanced by Weeks
+
+**Enhanced Endpoint**
+
+    GET /v1/forecast-enhanced/weekly/{location}/{weeks}
+
+**Description**: Get enriched forecast data grouped by weeks
+**Parameters**:
+
+*   `location`: City name (e.g., "Paris", "Madrid")
+*   `weeks`: Number of weeks (1-4)
+
+**Example**:
+
+```bash
+curl http://localhost:4000/v1/forecast-enhanced/weekly/Madrid/1
+```
+
+**Controller**: `get-by-weekly-enhanced.js`
+
+**Additional Features**:
+
+*   Advanced weekly trend analysis
+*   Weekly planning recommendations
+*   Inter-week comparison
+*   Medium-term planning strategies
+
+
+***
+
+## 🔧 Common Features
+
+All forecast endpoints include:
+
+### ✅ Parameter Validation
+
+*   City name validation
+*   Valid interval validation (`3h`, `6h`, `12h`, `24h`)
+*   Days validation (1-5)
+*   Time period validation (`morning`, `afternoon`, `evening`, `night`)
+*   Event type validation (`weekend`, `holiday`, `workday`, `vacation`, `party`, `sports`)
+*   Comparison period validation
+*   Weeks validation (1-4)
+
+### 💾 Smart Caching
+
+*   10-minute cache to reduce API calls
+*   Specific cache keys per endpoint type
+*   Automatic cache invalidation
+
+### 📁 Data Persistence
+
+*   Automatic JSON file saving
+*   Organized structure by endpoint type
+*   Backup data for analysis
+
+### 🔄 Asynchronous Processing
+
+*   Immediate response to user
+*   Background data saving
+*   Robust error handling
+
+***
+
+## 🎯 Specific Use Cases
+
+### Time Intervals
+
+*   **Planning applications**: For events that require forecasts every 6 or 12 hours
+*   **Industrial monitoring**: For processes that need data every 3 hours
+*   **Agriculture**: For irrigation and crop care every 24 hours
+
+### Specific Days
+
+*   **Travel planning**: To know the weather for the next 3 days
+*   **Sporting events**: To prepare outdoor activities
+*   **Construction**: To plan work according to expected weather
+
+### Time Periods
+
+*   **Commuters**: To know the morning weather before leaving
+*   **Recreational activities**: To plan activities according to the time of day
+*   **Commerce**: To adjust inventories according to expected weather
+
+### Events
+
+*   **Event planning**: To know the weather during weekends or vacations
+*   **Sports**: To plan sporting activities according to conditions
+*   **Tourism**: To optimize tourist activities
+
+### Comparisons
+
+*   **Decision making**: To compare conditions between periods
+*   **Strategic planning**: To choose the best time for activities
+*   **Trend analysis**: To identify weather patterns
+
+### Weeks
+
+*   **Medium-term planning**: For activities that require several days
+*   **Project management**: To plan work according to weekly weather
+*   **Trend analysis**: To identify weekly weather patterns
+
+***
+
+## 🚀 Response Examples
+
+### 6-hour interval
+
+```json
+{
+  "forecast": {
+    "interval": "6h",
+    "filteredData": [...],
+    "totalEntries": 8,
+    "originalEntries": 40,
+    "intervalAnalysis": {
+      "summary": "6h forecast analysis for 8 periods",
+      "averageTemperature": "15.2",
+      "trends": [...],
+      "recommendations": [...]
+    }
+  }
+}
+```
+
+### 3 specific days
+
+```json
+{
+  "forecast": {
+    "days": 3,
+    "dailySummary": [
+      {
+        "day": 1,
+        "date": "2024-01-15",
+        "averageTemperature": "12.5",
+        "predominantCondition": "Clouds"
+      }
+    ]
+  }
+}
+```
+
+### Morning period
+
+```json
+{
+  "forecast": {
+    "hour": "morning",
+    "hourlySummary": {
+      "summary": "morning forecast summary",
+      "averageTemperature": "8.3",
+      "timeRange": {"start": "06:00", "end": "11:59"}
+    }
+  }
+}
+```
+
+### Period comparison
+
+```json
+{
+  "forecast": {
+    "comparison": {
+      "period1": "today",
+      "period2": "tomorrow",
+      "temperatureDifference": "+2.3",
+      "conditionComparison": "Similar conditions expected",
+      "recommendations": [...]
+    }
+  }
+}
+```
+***
+
+## 📝 Important Notes
+
+1.  **API Key**: All endpoints require a valid OpenWeatherMap API key
+2.  **Rate Limits**: Respect API limits (1000 calls/day on free plan)
+3.  **Activation**: New API keys take up to 2 hours to activate
+4.  **Cache**: Data is cached for 10 minutes to optimize performance
+5.  **Storage**: Data is automatically saved to JSON files
+6.  **URL-encoding**: Encode spaces/accents, for example `La%20Plata`
+7.  **Errors**: If there's no data for the requested range/period, returns 400 with details
+8.  **Enhanced**: Adds summaries, trends, recommendations and metadata
+9.  **Source**: OpenWeather `data/2.5/forecast` (5 days, 3h intervals)
+10. **Units**: Default Kelvin; several endpoints use `metric`
+
+***
+
+## 🔗 References
+
+*   [OpenWeatherMap API Documentation](https://openweathermap.org/api)
+*   [5-day/3-hour Forecast API](https://openweathermap.org/forecast5)
+*   [Weather API Endpoints](https://openweathermap.org/api/weather-data)
+*   [Forecast Data Format](https://openweathermap.org/forecast5#data)
+
+</details>
+
+
+
+### 2.4) Forecast Examples [🔝](#index-)
+
+<details>
+  <summary>See</summary>
+<br>
+
+#### Basic Forecast by Time Intervals
+
+**Request:**
+
+```bash
+GET http://localhost:4000/v1/forecast/interval/London/6h
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "body": {
+    "forecast": {
+      "interval": "6h",
+      "location": "London",
+      "filteredData": [
+        {
+          "dt": 1705320000,
+          "main": {
+            "temp": 275.15,
+            "feels_like": 272.84,
+            "pressure": 1013,
+            "humidity": 85
+          },
+          "weather": [
+            {
+              "id": 500,
+              "main": "Rain",
+              "description": "light rain"
+            }
+          ],
+          "dt_txt": "2024-01-15 12:00:00"
+        }
+      ],
+      "totalEntries": 8,
+      "originalEntries": 40,
+      "intervalAnalysis": {
+        "summary": "6h forecast analysis for 8 periods",
+        "averageTemperature": "15.2",
+        "trends": ["increasing", "stable"],
+        "recommendations": ["Bring an umbrella", "Wear warm clothing"]
+      }
+    }
+  }
+}
+```
+
+#### Enhanced Forecast by Time Intervals
+
+**Request:**
+
+```bash
+GET http://localhost:4000/v1/forecast-enhanced/interval/London/12h
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "body": {
+    "forecast": {
+      "interval": "12h",
+      "location": "London",
+      "filteredData": [...],
+      "totalEntries": 4,
+      "originalEntries": 40,
+      "intervalAnalysis": {
+        "summary": "12h forecast analysis for 4 periods",
+        "averageTemperature": "12.8",
+        "temperatureRange": {"min": 8.5, "max": 17.2},
+        "trends": ["gradual warming", "stable conditions"],
+        "recommendations": ["Perfect for outdoor activities", "Light jacket recommended"],
+        "statistics": {
+          "temperatureVariance": 8.7,
+          "humidityAverage": 78,
+          "pressureTrend": "stable"
+        }
+      },
+      "enhancedFeatures": {
+        "temperatureConversions": {
+          "kelvin": 285.95,
+          "celsius": 12.8,
+          "fahrenheit": 55.04
+        },
+        "comfortAnalysis": {
+          "index": 7.2,
+          "level": "comfortable"
+        },
+        "activityRecommendations": {
+          "morning": "Great for jogging",
+          "afternoon": "Perfect for picnics",
+          "evening": "Ideal for outdoor dining"
+        }
+      }
+    }
+  }
+}
+```
+
+#### Forecast by Specific Days
+
+**Request:**
+
+```bash
+GET http://localhost:4000/v1/forecast/days/Paris/3
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "body": {
+    "forecast": {
+      "days": 3,
+      "location": "Paris",
+      "dailySummary": [
+        {
+          "day": 1,
+          "date": "2024-01-15",
+          "averageTemperature": "12.5",
+          "temperatureRange": {"min": 8.2, "max": 16.8},
+          "predominantCondition": "Clouds",
+          "humidity": 75,
+          "windSpeed": 3.2,
+          "recommendation": "Light jacket recommended"
+        },
+        {
+          "day": 2,
+          "date": "2024-01-16",
+          "averageTemperature": "14.1",
+          "temperatureRange": {"min": 10.5, "max": 18.3},
+          "predominantCondition": "Clear",
+          "humidity": 68,
+          "windSpeed": 2.8,
+          "recommendation": "Perfect weather for outdoor activities"
+        },
+        {
+          "day": 3,
+          "date": "2024-01-17",
+          "averageTemperature": "11.8",
+          "temperatureRange": {"min": 7.9, "max": 15.6},
+          "predominantCondition": "Rain",
+          "humidity": 82,
+          "windSpeed": 4.1,
+          "recommendation": "Bring an umbrella and raincoat"
+        }
+      ],
+      "overallTrend": "Slightly cooling trend with increasing humidity"
+    }
+  }
+}
+```
+
+#### Forecast by Time Periods (Morning)
+
+**Request:**
+
+```bash
+GET http://localhost:4000/v1/forecast/hourly/Tokyo/morning
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "body": {
+    "forecast": {
+      "hour": "morning",
+      "location": "Tokyo",
+      "hourlySummary": {
+        "summary": "morning forecast summary",
+        "averageTemperature": "8.3",
+        "temperatureRange": {"min": 6.1, "max": 11.2},
+        "timeRange": {"start": "06:00", "end": "11:59"},
+        "predominantCondition": "Clear",
+        "humidity": 65,
+        "windSpeed": 2.5,
+        "visibility": 10000,
+        "recommendations": ["Perfect for morning jogging", "Light layers recommended"]
+      },
+      "morningActivities": {
+        "outdoor": "Excellent conditions",
+        "commute": "Clear visibility, comfortable temperature",
+        "exercise": "Ideal for outdoor workouts"
+      }
+    }
+  }
+}
+```
+
+#### Forecast by Events (Weekend)
+
+**Request:**
+
+```bash
+GET http://localhost:4000/v1/forecast/events/Madrid/weekend
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "body": {
+    "forecast": {
+      "eventType": "weekend",
+      "location": "Madrid",
+      "eventSummary": {
+        "summary": "Weekend forecast for Madrid",
+        "dateRange": "2024-01-13 to 2024-01-14",
+        "averageTemperature": "16.5",
+        "temperatureRange": {"min": 12.3, "max": 20.8},
+        "predominantCondition": "Partly Cloudy",
+        "humidity": 58,
+        "windSpeed": 3.7,
+        "recommendation": "Great weekend weather for outdoor activities"
+      },
+      "weekendActivities": {
+        "saturday": {
+          "morning": "Perfect for brunch outdoors",
+          "afternoon": "Ideal for park visits",
+          "evening": "Great for outdoor dining"
+        },
+        "sunday": {
+          "morning": "Excellent for family walks",
+          "afternoon": "Perfect for outdoor sports",
+          "evening": "Comfortable for evening strolls"
+        }
+      },
+      "eventRecommendations": [
+        "Visit Retiro Park",
+        "Outdoor dining in Plaza Mayor",
+        "Walking tour of historic center",
+        "Picnic in Casa de Campo"
+      ]
+    }
+  }
+}
+```
+
+#### Forecast Period Comparison
+
+**Request:**
+
+```bash
+GET http://localhost:4000/v1/forecast/compare/London/today/tomorrow
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "body": {
+    "forecast": {
+      "comparison": {
+        "period1": "today",
+        "period2": "tomorrow",
+        "location": "London",
+        "temperatureDifference": "+2.3",
+        "humidityDifference": "-8",
+        "windDifference": "+1.2",
+        "conditionComparison": "Similar conditions expected",
+        "detailedComparison": {
+          "today": {
+            "averageTemp": 8.5,
+            "humidity": 78,
+            "windSpeed": 3.2,
+            "condition": "Cloudy",
+            "precipitation": "20%"
+          },
+          "tomorrow": {
+            "averageTemp": 10.8,
+            "humidity": 70,
+            "windSpeed": 4.4,
+            "condition": "Partly Cloudy",
+            "precipitation": "15%"
+          }
+        },
+        "recommendations": [
+          "Tomorrow will be slightly warmer",
+          "Lower humidity makes it more comfortable",
+          "Slightly windier conditions expected",
+          "Better visibility tomorrow"
+        ],
+        "trendAnalysis": "Improving conditions with warming trend"
+      }
+    }
+  }
+}
+```
+
+#### Forecast by Weeks
+
+**Request:**
+
+```bash
+GET http://localhost:4000/v1/forecast/weekly/Paris/2
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "body": {
+    "forecast": {
+      "weeks": 2,
+      "location": "Paris",
+      "weeklySummary": [
+        {
+          "week": 1,
+          "dateRange": "2024-01-15 to 2024-01-19",
+          "averageTemperature": "13.2",
+          "temperatureRange": {"min": 9.1, "max": 17.8},
+          "predominantCondition": "Partly Cloudy",
+          "precipitationChance": "25%",
+          "humidity": 72,
+          "windSpeed": 3.8,
+          "recommendation": "Good week for outdoor activities"
+        },
+        {
+          "week": 2,
+          "dateRange": "2024-01-22 to 2024-01-26",
+          "averageTemperature": "11.8",
+          "temperatureRange": {"min": 7.5, "max": 16.2},
+          "predominantCondition": "Rain",
+          "precipitationChance": "45%",
+          "humidity": 78,
+          "windSpeed": 4.2,
+          "recommendation": "Prepare for wetter conditions"
+        }
+      ],
+      "interWeekComparison": {
+        "temperatureTrend": "Cooling trend",
+        "humidityTrend": "Increasing",
+        "precipitationTrend": "Higher chance of rain",
+        "overallAssessment": "Weather becoming more unsettled"
+      },
+      "weeklyPlanning": {
+        "week1": "Ideal for outdoor activities and sightseeing",
+        "week2": "Plan indoor activities and bring rain gear"
+      }
+    }
+  }
+}
+```
+
+#### Testing with curl
+
+```bash
+# Test basic forecast endpoints
+curl http://localhost:4000/v1/forecast/interval/London/6h
+curl http://localhost:4000/v1/forecast/days/Paris/3
+curl http://localhost:4000/v1/forecast/hourly/Tokyo/morning
+
+# Test enhanced forecast endpoints
+curl http://localhost:4000/v1/forecast-enhanced/interval/London/12h
+curl http://localhost:4000/v1/forecast-enhanced/days/Paris/5
+curl http://localhost:4000/v1/forecast-enhanced/hourly/Tokyo/afternoon
+
+# Test forecast by events
+curl http://localhost:4000/v1/forecast/events/Madrid/weekend
+curl http://localhost:4000/v1/forecast-enhanced/events/New%20York/vacation
+
+# Test forecast comparisons
+curl http://localhost:4000/v1/forecast/compare/London/today/tomorrow
+curl http://localhost:4000/v1/forecast-enhanced/compare/Berlin/morning/evening
+
+# Test forecast by weeks
+curl http://localhost:4000/v1/forecast/weekly/Paris/2
+curl http://localhost:4000/v1/forecast-enhanced/weekly/Madrid/1
+```
+
+#### Testing with Postman
+
+1.  **Basic Forecast by Intervals:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast/interval/London/6h`
+
+2.  **Enhanced Forecast by Intervals:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast-enhanced/interval/London/12h`
+
+3.  **Basic Forecast by Days:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast/days/Paris/3`
+
+4.  **Enhanced Forecast by Days:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast-enhanced/days/Paris/5`
+
+5.  **Basic Forecast by Time Periods:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast/hourly/Tokyo/morning`
+
+6.  **Enhanced Forecast by Time Periods:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast-enhanced/hourly/Tokyo/afternoon`
+
+7.  **Basic Forecast by Events:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast/events/Madrid/weekend`
+
+8.  **Enhanced Forecast by Events:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast-enhanced/events/New%20York/vacation`
+
+9.  **Basic Forecast Comparison:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast/compare/London/today/tomorrow`
+
+10. **Enhanced Forecast Comparison:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast-enhanced/compare/Berlin/morning/evening`
+
+11. **Basic Forecast by Weeks:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast/weekly/Paris/2`
+
+12. **Enhanced Forecast by Weeks:**
+    *   Method: `GET`
+    *   URL: `http://localhost:4000/v1/forecast-enhanced/weekly/Madrid/1`
+
+</details>
+
 <br>
 
 ## Section 2.5) Data Persistence and Storage [🔝](#index-)
@@ -1110,7 +2425,7 @@ The microservice implements a **dual-layer caching strategy**:
 
 <br>
 
-## Section 2.5) Quick Examples - All Weather Endpoints [🔝](#index-)
+## Section 2.6) Quick Examples - All Weather Endpoints [🔝](#index-)
 
 <details>
   <summary>See</summary>

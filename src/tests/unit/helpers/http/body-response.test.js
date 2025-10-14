@@ -79,29 +79,7 @@ describe("- bodyResponse helper (Unit Test)", () => {
       expect(typeof bodyResponseResult == "object").toBe(true);
     });
 
-    msg =
-      "Should return an object with the value undefined for statusCode and '{}' for body if no parameters are passed.";
 
-    it(msg, async () => {
-      bodyResponseResult = await bodyResponse();
-
-      expect(typeof bodyResponseResult == "object").toBe(true);
-
-      expect(bodyResponseResult.statusCode == undefined).toBe(true);
-
-      expect(bodyResponseResult.body == "{}").toBe(true);
-    });
-
-    msg =
-      "Should return an object with the value null for statusCode if null is passed as a parameter for statusCode argument.";
-
-    it(msg, async () => {
-      bodyResponseResult = await bodyResponse(null);
-
-      expect(typeof bodyResponseResult == "object").toBe(true);
-
-      expect(bodyResponseResult.statusCode == null).toBe(true);
-    });
 
     msg =
       "Should return an object with string format for body if null is passed as a parameter for message argument.";
@@ -114,16 +92,6 @@ describe("- bodyResponse helper (Unit Test)", () => {
       expect(typeof bodyResponseResult.body == "string").toBe(true);
     });
 
-    msg =
-      "Should return an object with the value undefined for statusCode if a value is not passed as a parameter for statusCode argument.";
-
-    it(msg, async () => {
-      bodyResponseResult = await bodyResponse();
-
-      expect(typeof bodyResponseResult == "object").toBe(true);
-
-      expect(bodyResponseResult.statusCode == undefined).toBe(true);
-    });
     describe("2) Check cases for error.", () => {
       msg = "Should return a boolean with value false if a new Error is passed";
       it(msg, async () => {

@@ -152,7 +152,7 @@ functions:
     handler: src/controllers/forecast/get-by-days.handler
     events:
       - http:
-          path: /v1/forecast/days/{days}
+          path: /v1/forecast/days/{location}/{days}
           method: get
           private: false
           cors: true
@@ -161,7 +161,7 @@ functions:
     handler: src/controllers/forecast/get-by-days-enhanced.handler
     events:
       - http:
-          path: /v1/forecast/days/{days}/enhanced
+          path: /v1/forecast-enhanced/days/{location}/{days}
           method: get
           private: false
           cors: true
@@ -170,7 +170,7 @@ functions:
     handler: src/controllers/forecast/get-by-compare.handler
     events:
       - http:
-          path: /v1/forecast/compare
+          path: /v1/forecast/compare/{location}/{period1}/{period2}
           method: get
           private: false
           cors: true
@@ -179,7 +179,7 @@ functions:
     handler: src/controllers/forecast/get-by-compare-enhanced.handler
     events:
       - http:
-          path: /v1/forecast/compare/enhanced
+          path: /v1/forecast-enhanced/compare/{location}/{period1}/{period2}
           method: get
           private: false
           cors: true
@@ -188,7 +188,7 @@ functions:
     handler: src/controllers/forecast/get-by-events.handler
     events:
       - http:
-          path: /v1/forecast/events
+          path: /v1/forecast/events/{location}/{eventType}
           method: get
           private: false
           cors: true
@@ -197,7 +197,7 @@ functions:
     handler: src/controllers/forecast/get-by-events-enhanced.handler
     events:
       - http:
-          path: /v1/forecast/events/enhanced
+          path: /v1/forecast-enhanced/events/{location}/{eventType}
           method: get
           private: false
           cors: true
@@ -206,7 +206,7 @@ functions:
     handler: src/controllers/forecast/get-by-hourly.handler
     events:
       - http:
-          path: /v1/forecast/hourly
+          path: /v1/forecast/hourly/{location}/{hour}
           method: get
           private: false
           cors: true
@@ -215,7 +215,7 @@ functions:
     handler: src/controllers/forecast/get-by-hourly-enhanced.handler
     events:
       - http:
-          path: /v1/forecast/hourly/enhanced
+          path: /v1/forecast-enhanced/hourly/{location}/{hour}
           method: get
           private: false
           cors: true
@@ -224,7 +224,7 @@ functions:
     handler: src/controllers/forecast/get-by-interval.handler
     events:
       - http:
-          path: /v1/forecast/interval
+          path: /v1/forecast/interval/{location}/{interval}
           method: get
           private: false
           cors: true
@@ -233,7 +233,7 @@ functions:
     handler: src/controllers/forecast/get-by-interval-enhanced.handler
     events:
       - http:
-          path: /v1/forecast/interval/enhanced
+          path: /v1/forecast-enhanced/interval/{location}/{interval}
           method: get
           private: false
           cors: true
@@ -242,7 +242,7 @@ functions:
     handler: src/controllers/forecast/get-by-weekly.handler
     events:
       - http:
-          path: /v1/forecast/weekly
+          path: /v1/forecast/weekly/{location}/{weeks}
           method: get
           private: false
           cors: true
@@ -251,7 +251,7 @@ functions:
     handler: src/controllers/forecast/get-by-weekly-enhanced.handler
     events:
       - http:
-          path: /v1/forecast/weekly/enhanced
+          path: /v1/forecast-enhanced/weekly/{location}/{weeks}
           method: get
           private: false
           cors: true

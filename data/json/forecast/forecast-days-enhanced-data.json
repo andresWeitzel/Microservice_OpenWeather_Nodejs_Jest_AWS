@@ -1,0 +1,70 @@
+{
+    "daysAnalysis": {
+        "requestedDays": 3,
+        "actualDays": 3,
+        "summary": {
+            "averageTemperature": 286.92,
+            "temperatureRange": {
+                "min": 286.74,
+                "max": 287.24
+            },
+            "averageHumidity": 67,
+            "averageWindSpeed": 3.2,
+            "dominantWeatherCondition": "Clouds",
+            "temperatureTrend": "stable"
+        },
+        "weatherPatterns": {
+            "conditionBreakdown": {
+                "Clouds": 3
+            },
+            "dailyVariations": [
+                {
+                    "day": "Monday",
+                    "temperature": 286.79,
+                    "condition": "Clouds",
+                    "humidity": 72
+                },
+                {
+                    "day": "Tuesday",
+                    "temperature": 286.74,
+                    "condition": "Clouds",
+                    "humidity": 67
+                },
+                {
+                    "day": "Wednesday",
+                    "temperature": 287.24,
+                    "condition": "Clouds",
+                    "humidity": 63
+                }
+            ]
+        },
+        "recommendations": [
+            "Prepare for warm weather - bring sunscreen and stay hydrated"
+        ],
+        "planningAdvice": {
+            "bestDayForOutdoorActivities": {
+                "day": "Monday",
+                "date": "2025-10-13",
+                "score": 50,
+                "reason": "hot temperatures"
+            },
+            "worstDayForOutdoorActivities": {
+                "day": "Monday",
+                "date": "2025-10-13",
+                "score": 50,
+                "reason": "hot temperatures"
+            },
+            "clothingRecommendations": [
+                "Light, breathable clothing",
+                "Sunscreen essential",
+                "Hat for sun protection"
+            ],
+            "activitySuggestions": [
+                "Light outdoor activities",
+                "Walking tours",
+                "Café visits",
+                "Shopping"
+            ]
+        }
+    }
+}

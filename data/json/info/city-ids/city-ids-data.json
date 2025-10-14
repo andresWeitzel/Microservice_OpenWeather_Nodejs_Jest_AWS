@@ -1,6 +1,6 @@
 {
     "searchQuery": "Buenos Aires",
-    "countryCode": "AR",
+    "countryCode": "",
     "limit": 5,
     "totalResults": 1,
     "cities": [

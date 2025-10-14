@@ -6,7 +6,7 @@
   "scripts": {
     "serverless-offline": "sls offline start",
     "start": "npm run format-md && npm run serverless-offline",
-    "start:dev": "nodemon -e js,ts,yml --exec \"sls offline start\"",
+    "start:dev": "nodemon -e js,ts,yml,yaml --exec \"sls offline start\"",
     "format-prettier": "prettier --write \"{src}/**/*.{js,ts}\"",
     "check": "remark . --quiet --frail",
     "format-remark": "remark . --quiet --frail --output",

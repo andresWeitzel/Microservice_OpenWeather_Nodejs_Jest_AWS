@@ -777,7 +777,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 
   # Forecast Endpoints
-  /forecast/days/{days}:
+  /forecast/days/{location}/{days}:
     get:
       tags:
         - Forecast
@@ -785,6 +785,15 @@ paths:
       description: Retrieve weather forecast for a specific number of days
       operationId: getForecastByDays
       parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
         - name: days
           in: path
           required: true
@@ -794,28 +803,6 @@ paths:
             minimum: 1
             maximum: 5
             example: 5
-        - name: q
-          in: query
-          required: true
-          description: City name and country code (e.g., "London,GB")
-          schema:
-            type: string
-            pattern: '^[a-zA-Z\s]+,[A-Z]{2}$'
-            example: "London,GB"
-        - name: units
-          in: query
-          description: Temperature units
-          schema:
-            type: string
-            enum: [metric, imperial, kelvin]
-            default: metric
-        - name: lang
-          in: query
-          description: Language for weather descriptions
-          schema:
-            type: string
-            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
-            default: en
       responses:
         '200':
           description: Weather forecast data
@@ -1751,7 +1738,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /forecast/days/{days}/enhanced:
+  /forecast-enhanced/days/{location}/{days}:
     get:
       tags:
         - Forecast Enhanced
@@ -1759,6 +1746,15 @@ paths:
       description: Retrieve weather forecast with additional analysis and insights
       operationId: getEnhancedForecastByDays
       parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
         - name: days
           in: path
           required: true
@@ -1768,28 +1764,6 @@ paths:
             minimum: 1
             maximum: 5
             example: 5
-        - name: q
-          in: query
-          required: true
-          description: City name and country code (e.g., "London,GB")
-          schema:
-            type: string
-            pattern: '^[a-zA-Z\s]+,[A-Z]{2}$'
-            example: "London,GB"
-        - name: units
-          in: query
-          description: Temperature units
-          schema:
-            type: string
-            enum: [metric, imperial, kelvin]
-            default: metric
-        - name: lang
-          in: query
-          description: Language for weather descriptions
-          schema:
-            type: string
-            enum: [en, es, fr, de, it, pt, ru, zh, ja, ko]
-            default: en
       responses:
         '200':
           description: Enhanced weather forecast data
@@ -1823,13 +1797,39 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 
   # Additional Forecast Endpoints
-  /forecast/compare:
+  /forecast/compare/{location}/{period1}/{period2}:
     get:
       tags:
         - Forecast
       summary: Get weather forecast comparison
-      description: Compare weather forecast data between different locations or time periods
+      description: Compare weather forecast data between different time periods for a specific location
       operationId: getForecastByCompare
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
+        - name: period1
+          in: path
+          required: true
+          description: First period to compare
+          schema:
+            type: string
+            enum: ["today", "tomorrow", "weekend", "next_week", "morning", "afternoon", "evening", "night"]
+            example: "today"
+        - name: period2
+          in: path
+          required: true
+          description: Second period to compare
+          schema:
+            type: string
+            enum: ["today", "tomorrow", "weekend", "next_week", "morning", "afternoon", "evening", "night"]
+            example: "tomorrow"
       responses:
         '200':
           description: Weather forecast comparison data
@@ -1837,20 +1837,94 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  location:
+                    type: string
+                    example: "London"
+                  comparison:
+                    type: object
+                    properties:
+                      period1:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: "today"
+                          data:
+                            type: array
+                            items:
+                              type: object
+                          summary:
+                            type: object
+                      period2:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: "tomorrow"
+                          data:
+                            type: array
+                            items:
+                              type: object
+                          summary:
+                            type: object
+                      analysis:
+                        type: object
+                        properties:
+                          temperatureDifference:
+                            type: object
+                          weatherComparison:
+                            type: object
+                          recommendations:
+                            type: array
+                            items:
+                              type: string
         '400':
           description: Invalid parameters
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /forecast/compare/enhanced:
+  /forecast-enhanced/compare/{location}/{period1}/{period2}:
     get:
       tags:
         - Forecast Enhanced
       summary: Get enhanced weather forecast comparison
-      description: Enhanced comparison of weather forecast data
+      description: Enhanced comparison of weather forecast data between different time periods with additional analysis and recommendations
       operationId: getEnhancedForecastByCompare
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
+        - name: period1
+          in: path
+          required: true
+          description: First period to compare
+          schema:
+            type: string
+            enum: ["today", "tomorrow", "weekend", "next_week", "morning", "afternoon", "evening", "night"]
+            example: "today"
+        - name: period2
+          in: path
+          required: true
+          description: Second period to compare
+          schema:
+            type: string
+            enum: ["today", "tomorrow", "weekend", "next_week", "morning", "afternoon", "evening", "night"]
+            example: "tomorrow"
       responses:
         '200':
           description: Enhanced weather forecast comparison data
@@ -1858,20 +1932,97 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  location:
+                    type: string
+                    example: "London"
+                  comparison:
+                    type: object
+                    properties:
+                      period1:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: "today"
+                          data:
+                            type: array
+                            items:
+                              type: object
+                          summary:
+                            type: object
+                      period2:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: "tomorrow"
+                          data:
+                            type: array
+                            items:
+                              type: object
+                          summary:
+                            type: object
+                      analysis:
+                        type: object
+                        properties:
+                          temperatureDifference:
+                            type: object
+                          weatherComparison:
+                            type: object
+                          recommendations:
+                            type: array
+                            items:
+                              type: string
+                      enhanced:
+                        type: object
+                        properties:
+                          trends:
+                            type: object
+                          alerts:
+                            type: array
+                            items:
+                              type: string
+                          comfortAnalysis:
+                            type: object
         '400':
           description: Invalid parameters
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /forecast/events:
+  /forecast/events/{location}/{eventType}:
     get:
       tags:
         - Forecast
       summary: Get weather forecast events
-      description: Get weather events and alerts forecast
+      description: Get weather forecast data filtered by specific event types for a location
       operationId: getForecastByEvents
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
+        - name: eventType
+          in: path
+          required: true
+          description: Type of event to filter forecast data
+          schema:
+            type: string
+            enum: ["weekend", "holiday", "workday", "vacation", "party", "sports"]
+            example: "weekend"
       responses:
         '200':
           description: Weather events forecast data
@@ -1879,20 +2030,86 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  location:
+                    type: string
+                    example: "London"
+                  eventType:
+                    type: string
+                    example: "weekend"
+                  eventData:
+                    type: array
+                    items:
+                      type: object
+                  eventSummary:
+                    type: object
+                    properties:
+                      averageTemp:
+                        type: number
+                        example: 22.5
+                      weatherCondition:
+                        type: string
+                        example: "Clear"
+                      recommendations:
+                        type: array
+                        items:
+                          type: string
+                  metadata:
+                    type: object
+                    properties:
+                      location:
+                        type: string
+                      eventType:
+                        type: string
+                      totalForecasts:
+                        type: number
+                      generatedAt:
+                        type: string
+                        format: date-time
+                      source:
+                        type: string
+                        example: "OpenWeatherMap API"
+                      endpoint:
+                        type: string
+                        example: "forecast-events"
         '400':
           description: Invalid parameters
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /forecast/events/enhanced:
+  /forecast-enhanced/events/{location}/{eventType}:
     get:
       tags:
         - Forecast Enhanced
       summary: Get enhanced weather forecast events
-      description: Enhanced weather events and alerts forecast
+      description: Enhanced weather forecast data filtered by specific event types with additional analysis and recommendations
       operationId: getEnhancedForecastByEvents
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
+        - name: eventType
+          in: path
+          required: true
+          description: Type of event to filter forecast data
+          schema:
+            type: string
+            enum: ["weekend", "holiday", "workday", "vacation", "party", "sports"]
+            example: "weekend"
       responses:
         '200':
           description: Enhanced weather events forecast data
@@ -1900,20 +2117,114 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  location:
+                    type: string
+                    example: "London"
+                  eventType:
+                    type: string
+                    example: "weekend"
+                  eventData:
+                    type: array
+                    items:
+                      type: object
+                  eventSummary:
+                    type: object
+                    properties:
+                      averageTemp:
+                        type: number
+                        example: 22.5
+                      weatherCondition:
+                        type: string
+                        example: "Clear"
+                      recommendations:
+                        type: array
+                        items:
+                          type: string
+                  eventAnalysis:
+                    type: object
+                    properties:
+                      temperatureTrend:
+                        type: string
+                        example: "increasing"
+                      comfortLevel:
+                        type: string
+                        example: "high"
+                      activityRecommendations:
+                        type: array
+                        items:
+                          type: string
+                      alerts:
+                        type: array
+                        items:
+                          type: string
+                  enhanced:
+                    type: object
+                    properties:
+                      trends:
+                        type: object
+                      alerts:
+                        type: array
+                        items:
+                          type: string
+                      comfortAnalysis:
+                        type: object
+                  metadata:
+                    type: object
+                    properties:
+                      location:
+                        type: string
+                      eventType:
+                        type: string
+                      totalForecasts:
+                        type: number
+                      generatedAt:
+                        type: string
+                        format: date-time
+                      source:
+                        type: string
+                        example: "OpenWeatherMap API"
+                      endpoint:
+                        type: string
+                        example: "forecast-events-enhanced"
         '400':
           description: Invalid parameters
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /forecast/hourly:
+  /forecast/hourly/{location}/{hour}:
     get:
       tags:
         - Forecast
       summary: Get hourly weather forecast
-      description: Get detailed hourly weather forecast
+      description: Get weather forecast data filtered by specific time periods of the day for a location
       operationId: getForecastByHourly
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
+        - name: hour
+          in: path
+          required: true
+          description: Time period of the day to filter forecast data
+          schema:
+            type: string
+            enum: ["morning", "afternoon", "evening", "night"]
+            example: "morning"
       responses:
         '200':
           description: Hourly weather forecast data
@@ -1921,20 +2232,89 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  location:
+                    type: string
+                    example: "London"
+                  hour:
+                    type: string
+                    example: "morning"
+                  hourlyData:
+                    type: array
+                    items:
+                      type: object
+                  periodSummary:
+                    type: object
+                    properties:
+                      averageTemp:
+                        type: number
+                        example: 18.5
+                      weatherCondition:
+                        type: string
+                        example: "Clear"
+                      timeRange:
+                        type: string
+                        example: "06:00-11:59"
+                  recommendations:
+                    type: array
+                    items:
+                      type: string
+                  metadata:
+                    type: object
+                    properties:
+                      location:
+                        type: string
+                      hour:
+                        type: string
+                      totalForecasts:
+                        type: number
+                      generatedAt:
+                        type: string
+                        format: date-time
+                      source:
+                        type: string
+                        example: "OpenWeatherMap API"
+                      endpoint:
+                        type: string
+                        example: "forecast-hourly"
         '400':
           description: Invalid parameters
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /forecast/hourly/enhanced:
+  /forecast-enhanced/hourly/{location}/{hour}:
     get:
       tags:
         - Forecast Enhanced
       summary: Get enhanced hourly weather forecast
-      description: Enhanced detailed hourly weather forecast
+      description: Enhanced weather forecast data filtered by specific time periods with additional analysis and recommendations
       operationId: getEnhancedForecastByHourly
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
+        - name: hour
+          in: path
+          required: true
+          description: Time period of the day to filter forecast data
+          schema:
+            type: string
+            enum: ["morning", "afternoon", "evening", "night"]
+            example: "morning"
       responses:
         '200':
           description: Enhanced hourly weather forecast data
@@ -1942,20 +2322,110 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  location:
+                    type: string
+                    example: "London"
+                  hour:
+                    type: string
+                    example: "morning"
+                  hourlyData:
+                    type: array
+                    items:
+                      type: object
+                  periodSummary:
+                    type: object
+                    properties:
+                      averageTemp:
+                        type: number
+                        example: 18.5
+                      weatherCondition:
+                        type: string
+                        example: "Clear"
+                      timeRange:
+                        type: string
+                        example: "06:00-11:59"
+                  recommendations:
+                    type: array
+                    items:
+                      type: string
+                  enhanced:
+                    type: object
+                    properties:
+                      temperatureTrend:
+                        type: string
+                        example: "rising"
+                      comfortLevel:
+                        type: string
+                        example: "high"
+                      activityRecommendations:
+                        type: array
+                        items:
+                          type: string
+                      windAnalysis:
+                        type: object
+                      humidityAnalysis:
+                        type: object
+                      alerts:
+                        type: array
+                        items:
+                          type: string
+                  metadata:
+                    type: object
+                    properties:
+                      location:
+                        type: string
+                      hour:
+                        type: string
+                      totalForecasts:
+                        type: number
+                      generatedAt:
+                        type: string
+                        format: date-time
+                      source:
+                        type: string
+                        example: "OpenWeatherMap API"
+                      endpoint:
+                        type: string
+                        example: "forecast-hourly-enhanced"
         '400':
           description: Invalid parameters
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /forecast/interval:
+  /forecast/interval/{location}/{interval}:
     get:
       tags:
         - Forecast
       summary: Get weather forecast by interval
       description: Get weather forecast for specific time intervals
       operationId: getForecastByInterval
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
+        - name: interval
+          in: path
+          required: true
+          description: Time interval (3h, 6h, 12h, 24h)
+          schema:
+            type: string
+            enum: ["3h", "6h", "12h", "24h"]
+            example: "6h"
       responses:
         '200':
           description: Interval weather forecast data
@@ -1970,13 +2440,31 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /forecast/interval/enhanced:
+  /forecast-enhanced/interval/{location}/{interval}:
     get:
       tags:
         - Forecast Enhanced
       summary: Get enhanced weather forecast by interval
       description: Enhanced weather forecast for specific time intervals
       operationId: getEnhancedForecastByInterval
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
+        - name: interval
+          in: path
+          required: true
+          description: Time interval (3h, 6h, 12h, 24h)
+          schema:
+            type: string
+            enum: ["3h", "6h", "12h", "24h"]
+            example: "12h"
       responses:
         '200':
           description: Enhanced interval weather forecast data
@@ -1991,13 +2479,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /forecast/weekly:
+  /forecast/weekly/{location}/{weeks}:
     get:
       tags:
         - Forecast
       summary: Get weekly weather forecast
-      description: Get weekly weather forecast overview
+      description: Get weather forecast data grouped by weeks for a specific location
       operationId: getForecastByWeekly
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
+        - name: weeks
+          in: path
+          required: true
+          description: Number of weeks to forecast (1-4)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 4
+            example: 2
       responses:
         '200':
           description: Weekly weather forecast data
@@ -2005,20 +2512,110 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  location:
+                    type: string
+                    example: "London"
+                  weeks:
+                    type: integer
+                    example: 2
+                  weeklyData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        week:
+                          type: integer
+                          example: 1
+                        startDate:
+                          type: string
+                          example: "2024-01-15"
+                        endDate:
+                          type: string
+                          example: "2024-01-21"
+                        averageTemp:
+                          type: number
+                          example: 15.5
+                        weatherCondition:
+                          type: string
+                          example: "Partly Cloudy"
+                        dailyForecasts:
+                          type: array
+                          items:
+                            type: object
+                  summary:
+                    type: object
+                    properties:
+                      totalWeeks:
+                        type: integer
+                        example: 2
+                      averageTemperature:
+                        type: number
+                        example: 16.2
+                      dominantWeather:
+                        type: string
+                        example: "Clear"
+                      recommendations:
+                        type: array
+                        items:
+                          type: string
+                  metadata:
+                    type: object
+                    properties:
+                      location:
+                        type: string
+                      weeks:
+                        type: integer
+                      totalForecasts:
+                        type: number
+                      generatedAt:
+                        type: string
+                        format: date-time
+                      source:
+                        type: string
+                        example: "OpenWeatherMap API"
+                      endpoint:
+                        type: string
+                        example: "forecast-weekly"
         '400':
           description: Invalid parameters
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /forecast/weekly/enhanced:
+  /forecast-enhanced/weekly/{location}/{weeks}:
     get:
       tags:
         - Forecast Enhanced
       summary: Get enhanced weekly weather forecast
-      description: Enhanced weekly weather forecast overview
+      description: Enhanced weather forecast data grouped by weeks with additional analysis and recommendations
       operationId: getEnhancedForecastByWeekly
+      parameters:
+        - name: location
+          in: path
+          required: true
+          description: City name (use URL encoding for spaces)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+            example: "London"
+        - name: weeks
+          in: path
+          required: true
+          description: Number of weeks to forecast (1-4)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 4
+            example: 2
       responses:
         '200':
           description: Enhanced weekly weather forecast data
@@ -2026,12 +2623,103 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  location:
+                    type: string
+                    example: "London"
+                  weeks:
+                    type: integer
+                    example: 2
+                  weeklyData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        week:
+                          type: integer
+                          example: 1
+                        startDate:
+                          type: string
+                          example: "2024-01-15"
+                        endDate:
+                          type: string
+                          example: "2024-01-21"
+                        averageTemp:
+                          type: number
+                          example: 15.5
+                        weatherCondition:
+                          type: string
+                          example: "Partly Cloudy"
+                        dailyForecasts:
+                          type: array
+                          items:
+                            type: object
+                  summary:
+                    type: object
+                    properties:
+                      totalWeeks:
+                        type: integer
+                        example: 2
+                      averageTemperature:
+                        type: number
+                        example: 16.2
+                      dominantWeather:
+                        type: string
+                        example: "Clear"
+                      recommendations:
+                        type: array
+                        items:
+                          type: string
+                  enhanced:
+                    type: object
+                    properties:
+                      temperatureTrend:
+                        type: string
+                        example: "stable"
+                      weatherPattern:
+                        type: string
+                        example: "mixed"
+                      comfortAnalysis:
+                        type: object
+                      activityRecommendations:
+                        type: array
+                        items:
+                          type: string
+                      alerts:
+                        type: array
+                        items:
+                          type: string
+                  metadata:
+                    type: object
+                    properties:
+                      location:
+                        type: string
+                      weeks:
+                        type: integer
+                      totalForecasts:
+                        type: number
+                      generatedAt:
+                        type: string
+                        format: date-time
+                      source:
+                        type: string
+                        example: "OpenWeatherMap API"
+                      endpoint:
+                        type: string
+                        example: "forecast-weekly-enhanced"
         '400':
           description: Invalid parameters
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
 
 components:
   securitySchemes:

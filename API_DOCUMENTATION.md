@@ -145,20 +145,20 @@ Returns weather data with additional analysis, recommendations, and alerts.
 #### Get Weather Forecast
 
 ```http
-GET /forecast/days?q=London,GB&days=5&units=metric&lang=en
+GET /forecast/days/{location}/{days}?units=metric&lang=en
 ```
 
 **Parameters:**
 
-*   `q` (query): City name and country code
-*   `days` (query): Number of forecast days (1-5)
+*   `location` (path): City name (use URL encoding for spaces)
+*   `days` (path): Number of forecast days (1-5)
 *   `units` (query): Temperature units
 *   `lang` (query): Language for descriptions
 
 #### Get Enhanced Weather Forecast
 
 ```http
-GET /forecast/days/enhanced?q=London,GB&days=5&units=metric&lang=en
+GET /forecast-enhanced/days/{location}/{days}?units=metric&lang=en
 ```
 
 Returns forecast data with additional analysis and insights.

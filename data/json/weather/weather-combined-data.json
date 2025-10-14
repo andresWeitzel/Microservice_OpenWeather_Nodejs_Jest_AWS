@@ -2,9 +2,9 @@
     "status": 200,
     "statusText": "OK",
     "headers": {
-        "date": "Sun, 28 Sep 2025 01:38:09 GMT",
+        "date": "Mon, 13 Oct 2025 20:44:04 GMT",
         "content-type": "application/json; charset=utf-8",
-        "content-length": "512",
+        "content-length": "507",
         "connection": "close",
         "x-cache-key": "/data/2.5/weather?lang=fr&q=buenos%20aires&units=kelvin",
         "access-control-allow-origin": "*",
@@ -27,7 +27,7 @@
         "transformResponse": [
             null
         ],
-        "timeout": 3000,
+        "timeout": 5000,
         "xsrfCookieName": "XSRF-TOKEN",
         "xsrfHeaderName": "X-XSRF-TOKEN",
         "maxContentLength": -1,
@@ -50,38 +50,38 @@
         },
         "weather": [
             {
-                "id": 804,
-                "main": "Clouds",
-                "description": "couvert",
-                "icon": "04n"
+                "id": 800,
+                "main": "Clear",
+                "description": "ciel dégagé",
+                "icon": "01d"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 287.59,
-            "feels_like": 287.23,
-            "temp_min": 286.44,
-            "temp_max": 288.06,
-            "pressure": 1014,
-            "humidity": 82,
-            "sea_level": 1014,
-            "grnd_level": 1013
+            "temp": 297.59,
+            "feels_like": 297,
+            "temp_min": 296.97,
+            "temp_max": 298,
+            "pressure": 1009,
+            "humidity": 35,
+            "sea_level": 1009,
+            "grnd_level": 1008
         },
         "visibility": 10000,
         "wind": {
             "speed": 3.6,
-            "deg": 230
+            "deg": 0
         },
         "clouds": {
-            "all": 100
+            "all": 0
         },
-        "dt": 1759023403,
+        "dt": 1760388197,
         "sys": {
             "type": 1,
             "id": 8224,
             "country": "AR",
-            "sunrise": 1758965729,
-            "sunset": 1759009998
+            "sunrise": 1760346807,
+            "sunset": 1760393135
         },
         "timezone": -10800,
         "id": 3435910,

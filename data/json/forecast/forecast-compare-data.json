@@ -1,0 +1,368 @@
+{
+    "location": "London",
+    "period1": "today",
+    "period2": "next_week",
+    "comparisonData": {
+        "period1Data": [
+            {
+                "dt": 1760389200,
+                "main": {
+                    "temp": 14.57,
+                    "feels_like": 14.25,
+                    "temp_min": 13.26,
+                    "temp_max": 14.57,
+                    "pressure": 1029,
+                    "sea_level": 1029,
+                    "grnd_level": 1025,
+                    "humidity": 83,
+                    "temp_kf": 1.31
+                },
+                "weather": [
+                    {
+                        "id": 804,
+                        "main": "Clouds",
+                        "description": "overcast clouds",
+                        "icon": "04n"
+                    }
+                ],
+                "clouds": {
+                    "all": 100
+                },
+                "wind": {
+                    "speed": 2.67,
+                    "deg": 53,
+                    "gust": 7.13
+                },
+                "visibility": 10000,
+                "pop": 0,
+                "sys": {
+                    "pod": "n"
+                },
+                "dt_txt": "2025-10-13 21:00:00",
+                "originalTime": "2025-10-13T21:00:00.000Z",
+                "period": "today"
+            },
+            {
+                "dt": 1760400000,
+                "main": {
+                    "temp": 13.41,
+                    "feels_like": 13,
+                    "temp_min": 11.1,
+                    "temp_max": 13.41,
+                    "pressure": 1029,
+                    "sea_level": 1029,
+                    "grnd_level": 1025,
+                    "humidity": 84,
+                    "temp_kf": 2.31
+                },
+                "weather": [
+                    {
+                        "id": 803,
+                        "main": "Clouds",
+                        "description": "broken clouds",
+                        "icon": "04n"
+                    }
+                ],
+                "clouds": {
+                    "all": 83
+                },
+                "wind": {
+                    "speed": 2.59,
+                    "deg": 44,
+                    "gust": 6.83
+                },
+                "visibility": 10000,
+                "pop": 0,
+                "sys": {
+                    "pod": "n"
+                },
+                "dt_txt": "2025-10-14 00:00:00",
+                "originalTime": "2025-10-14T00:00:00.000Z",
+                "period": "today"
+            },
+            {
+                "dt": 1760410800,
+                "main": {
+                    "temp": 11.69,
+                    "feels_like": 11.06,
+                    "temp_min": 10.25,
+                    "temp_max": 11.69,
+                    "pressure": 1029,
+                    "sea_level": 1029,
+                    "grnd_level": 1025,
+                    "humidity": 82,
+                    "temp_kf": 1.44
+                },
+                "weather": [
+                    {
+                        "id": 803,
+                        "main": "Clouds",
+                        "description": "broken clouds",
+                        "icon": "04n"
+                    }
+                ],
+                "clouds": {
+                    "all": 71
+                },
+                "wind": {
+                    "speed": 2.21,
+                    "deg": 29,
+                    "gust": 5.85
+                },
+                "visibility": 10000,
+                "pop": 0,
+                "sys": {
+                    "pod": "n"
+                },
+                "dt_txt": "2025-10-14 03:00:00",
+                "originalTime": "2025-10-14T03:00:00.000Z",
+                "period": "today"
+            },
+            {
+                "dt": 1760421600,
+                "main": {
+                    "temp": 10.92,
+                    "feels_like": 10.16,
+                    "temp_min": 10.92,
+                    "temp_max": 10.92,
+                    "pressure": 1029,
+                    "sea_level": 1029,
+                    "grnd_level": 1025,
+                    "humidity": 80,
+                    "temp_kf": 0
+                },
+                "weather": [
+                    {
+                        "id": 803,
+                        "main": "Clouds",
+                        "description": "broken clouds",
+                        "icon": "04n"
+                    }
+                ],
+                "clouds": {
+                    "all": 78
+                },
+                "wind": {
+                    "speed": 2.68,
+                    "deg": 23,
+                    "gust": 6.18
+                },
+                "visibility": 10000,
+                "pop": 0,
+                "sys": {
+                    "pod": "n"
+                },
+                "dt_txt": "2025-10-14 06:00:00",
+                "originalTime": "2025-10-14T06:00:00.000Z",
+                "period": "today"
+            },
+            {
+                "dt": 1760432400,
+                "main": {
+                    "temp": 13.19,
+                    "feels_like": 12.44,
+                    "temp_min": 13.19,
+                    "temp_max": 13.19,
+                    "pressure": 1030,
+                    "sea_level": 1030,
+                    "grnd_level": 1026,
+                    "humidity": 72,
+                    "temp_kf": 0
+                },
+                "weather": [
+                    {
+                        "id": 804,
+                        "main": "Clouds",
+                        "description": "overcast clouds",
+                        "icon": "04d"
+                    }
+                ],
+                "clouds": {
+                    "all": 94
+                },
+                "wind": {
+                    "speed": 3.5,
+                    "deg": 40,
+                    "gust": 5.95
+                },
+                "visibility": 10000,
+                "pop": 0,
+                "sys": {
+                    "pod": "d"
+                },
+                "dt_txt": "2025-10-14 09:00:00",
+                "originalTime": "2025-10-14T09:00:00.000Z",
+                "period": "today"
+            },
+            {
+                "dt": 1760443200,
+                "main": {
+                    "temp": 11.69,
+                    "feels_like": 10.66,
+                    "temp_min": 11.69,
+                    "temp_max": 11.69,
+                    "pressure": 1030,
+                    "sea_level": 1030,
+                    "grnd_level": 1026,
+                    "humidity": 67,
+                    "temp_kf": 0
+                },
+                "weather": [
+                    {
+                        "id": 804,
+                        "main": "Clouds",
+                        "description": "overcast clouds",
+                        "icon": "04d"
+                    }
+                ],
+                "clouds": {
+                    "all": 97
+                },
+                "wind": {
+                    "speed": 3.28,
+                    "deg": 39,
+                    "gust": 4.77
+                },
+                "visibility": 10000,
+                "pop": 0,
+                "sys": {
+                    "pod": "d"
+                },
+                "dt_txt": "2025-10-14 12:00:00",
+                "originalTime": "2025-10-14T12:00:00.000Z",
+                "period": "today"
+            },
+            {
+                "dt": 1760454000,
+                "main": {
+                    "temp": 15.33,
+                    "feels_like": 14.59,
+                    "temp_min": 15.33,
+                    "temp_max": 15.33,
+                    "pressure": 1029,
+                    "sea_level": 1029,
+                    "grnd_level": 1025,
+                    "humidity": 64,
+                    "temp_kf": 0
+                },
+                "weather": [
+                    {
+                        "id": 804,
+                        "main": "Clouds",
+                        "description": "overcast clouds",
+                        "icon": "04d"
+                    }
+                ],
+                "clouds": {
+                    "all": 100
+                },
+                "wind": {
+                    "speed": 3.65,
+                    "deg": 29,
+                    "gust": 4.7
+                },
+                "visibility": 10000,
+                "pop": 0,
+                "sys": {
+                    "pod": "d"
+                },
+                "dt_txt": "2025-10-14 15:00:00",
+                "originalTime": "2025-10-14T15:00:00.000Z",
+                "period": "today"
+            },
+            {
+                "dt": 1760464800,
+                "main": {
+                    "temp": 14.39,
+                    "feels_like": 13.58,
+                    "temp_min": 14.39,
+                    "temp_max": 14.39,
+                    "pressure": 1030,
+                    "sea_level": 1030,
+                    "grnd_level": 1025,
+                    "humidity": 65,
+                    "temp_kf": 0
+                },
+                "weather": [
+                    {
+                        "id": 804,
+                        "main": "Clouds",
+                        "description": "overcast clouds",
+                        "icon": "04n"
+                    }
+                ],
+                "clouds": {
+                    "all": 100
+                },
+                "wind": {
+                    "speed": 3.55,
+                    "deg": 36,
+                    "gust": 5.5
+                },
+                "visibility": 10000,
+                "pop": 0,
+                "sys": {
+                    "pod": "n"
+                },
+                "dt_txt": "2025-10-14 18:00:00",
+                "originalTime": "2025-10-14T18:00:00.000Z",
+                "period": "today"
+            }
+        ],
+        "period2Data": [],
+        "period1": "today",
+        "period2": "next_week"
+    },
+    "comparisonAnalysis": {
+        "period1Summary": {
+            "period": "today",
+            "totalForecasts": 8,
+            "averageTemperature": 13.14875,
+            "minTemperature": 10.92,
+            "maxTemperature": 15.33,
+            "averageHumidity": 74.625,
+            "averagePressure": 1029.375,
+            "averageWindSpeed": 3.01625,
+            "predominantCondition": "Clouds",
+            "conditionDistribution": {
+                "Clouds": 8
+            },
+            "temperatureRange": 4.41,
+            "comfortScore": 8
+        },
+        "period2Summary": {
+            "period": "next_week",
+            "totalForecasts": 0,
+            "message": "No forecast data available for next_week"
+        },
+        "differences": {
+            "message": "Cannot calculate differences - insufficient data"
+        },
+        "insights": {
+            "temperature": [],
+            "conditions": [
+                "Weather conditions will change from Clouds to undefined"
+            ],
+            "activities": [],
+            "planning": []
+        },
+        "betterPeriod": {
+            "period": "similar",
+            "reason": "Both periods have similar conditions",
+            "difference": null
+        },
+        "recommendation": {
+            "action": "consider",
+            "message": "Both periods have similar conditions - choose based on your schedule",
+            "priority": "low"
+        }
+    },
+    "metadata": {
+        "location": "London",
+        "period1": "today",
+        "period2": "next_week",
+        "generatedAt": "2025-10-13T20:58:44.670Z",
+        "source": "OpenWeatherMap API",
+        "endpoint": "forecast-compare"
+    }
+}

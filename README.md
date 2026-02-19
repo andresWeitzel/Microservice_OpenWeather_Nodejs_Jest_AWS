@@ -42,7 +42,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 ## Index 📜
 
 <details>
- <summary> See </summary>
+ <summary> View details </summary>
 
 <div align="right">
 
@@ -94,7 +94,7 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 ### 1.0) Description [🔝](#index-)
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 
  <br>
 
@@ -207,7 +207,7 @@ The microservice implements a **layered architecture** with clear separation of 
 ### 1.1) Project execution [🔝](#index-)
 
 <details>
-  <summary>Ver</summary>
+  <summary>View details</summary>
 
  <br>
 
@@ -482,7 +482,7 @@ If you continue to have issues:
 ### 1.2) Technologies [🔝](#index-)
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 
  <br>
 
@@ -620,7 +620,7 @@ If you continue to have issues:
 ### 2.1) Weather Endpoints [🔝](#index-)
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 
 <br>
 
@@ -1123,7 +1123,7 @@ curl http://localhost:4000/v1/weather-enhanced/combined/Madrid/metric/es
 ### 2.3) Weather Endpoint Examples [🔝](#index-)
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 <br>
 
 #### Basic Weather Endpoint
@@ -1519,7 +1519,7 @@ curl http://localhost:4000/v1/forecast-enhanced/hourly/Tokyo/afternoon
 ### 2.4) Forecast Endpoints [🔝](#index-)
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 
 <br>
 
@@ -2072,7 +2072,7 @@ All forecast endpoints include:
 ### 2.5) Forecast Examples [🔝](#index-)
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 <br>
 
 #### Basic Forecast by Time Intervals
@@ -2513,7 +2513,7 @@ curl http://localhost:4000/v1/forecast-enhanced/weekly/Madrid/1
 ### 3.1) Storage Architecture & Structure [🔝](#index-)
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 
 <br>
 
@@ -2607,7 +2607,7 @@ The microservice implements a **dual-layer caching strategy**:
 ### 3.2) Advanced Features & Performance [🔝](#index-)
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 
 <br>
 
@@ -2669,7 +2669,7 @@ The storage system includes comprehensive analytics capabilities:
 ### 3.3) Best Practices & Future Roadmap [🔝](#index-)
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 
 <br>
 
@@ -2723,7 +2723,7 @@ The storage system includes comprehensive analytics capabilities:
 ### 4.1) Functionality test [🔝](#index-)
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 
 <br>
 
@@ -2732,7 +2732,7 @@ The storage system includes comprehensive analytics capabilities:
 ### 4.2) References [🔝](#index-)
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 
  <br>
 

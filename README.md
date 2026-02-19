@@ -44,7 +44,11 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 <details>
  <summary> See </summary>
 
- <br>
+<div align="right">
+
+`Latest update: 19/02/26` 
+
+</div>
 
 ### Sección 1) Description, configuration and technologies.
 

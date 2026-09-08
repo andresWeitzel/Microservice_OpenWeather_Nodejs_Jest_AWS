@@ -1,13 +1,14 @@
-![Index app](./doc/assets/img/open-weather.jpg)
-
+<div align="center">
+<img src="./doc/assets/img/open-weather.jpg" alt="Index app" />
 <div align="right">
-  <img width="25" height="25" src="./doc/assets/icons/devops/png/aws.png" />
-  <img width="25" height="25" src="./doc/assets/icons/aws/png/lambda.png" />
-  <img width="27" height="27" src="./doc/assets/icons/devops/png/postman.png" />
-  <img width="29" height="27" src="./doc/assets/icons/devops/png/git.png" />
-  <img width="28" height="27" src="./doc/assets/icons/aws/png/api-gateway.png" />
-  <img width="27" height="25" src="./doc/assets/icons/aws/png/parameter-store.png" />
-  <img width="27" height="27" src="./doc/assets/icons/backend/javascript-typescript/png/nodejs.png" />
+<img width="16" height="16" src="./doc/assets/icons/devops/png/aws.png" alt="AWS" />
+<img width="16" height="16" src="./doc/assets/icons/aws/png/lambda.png" alt="Lambda" />
+<img width="16" height="16" src="./doc/assets/icons/devops/png/postman.png" alt="Postman" />
+<img width="16" height="16" src="./doc/assets/icons/devops/png/git.png" alt="Git" />
+<img width="16" height="16" src="./doc/assets/icons/aws/png/api-gateway.png" alt="API Gateway" />
+<img width="16" height="16" src="./doc/assets/icons/aws/png/parameter-store.png" alt="Parameter Store" />
+<img width="16" height="16" src="./doc/assets/icons/backend/javascript-typescript/png/nodejs.png" alt="Node.js" />
+</div>
 </div>
 
 <br>
@@ -15,12 +16,12 @@
 <br>
 
 <div align="right">
-    <a href="./README.md" target="_blank">
-      <img src="./doc/assets/translation/arg-flag.jpg" width="10%" height="10%" />
-  </a> 
-   <a href="./README.md" target="_blank">
-      <img src="./doc/assets/translation/eeuu-flag.jpg" width="10%" height="10%" />
-  </a>
+ <a href="./README.md" title="Español">
+ <img src="./doc/assets/translation/arg-flag.jpg" width="64" height="40" alt="Español" title="Español" />
+ </a>
+ <a href="./doc/assets/translation/README.en.md" title="Inglés">
+ <img src="./doc/assets/translation/eeuu-flag.jpg" width="64" height="40" alt="Inglés" title="Inglés" />
+ </a>
 </div>
 
 <br>
@@ -29,59 +30,63 @@
 
 # Microservice OpenWeather AWS ![(status-completed)](./doc/assets/icons/badges/status-completed.svg)
 
-</div>  
+</div>
 
-Microservice for the integration of the Open Weather API with focus on unit and integration tests implementing Nodejs, Jest, Serverless-framework, aws-lambda, api gateway, git, others.  AWS services are tested locally. The project code and its documentation (less technical doc) have been developed in English.
+Una API lista para que tu plataforma muestre el clima de cualquier lugar del mundo con la misma fuente que OpenWeather. Reúne condiciones actuales, pronósticos a 5 días y búsquedas por ciudad, coordenadas, ID o código postal, con unidades e idioma a medida y datos enriquecidos (recomendaciones, alertas y análisis), para que esa información quede cacheada, resiliente y lista para integrarse con el resto de tus servicios.
 
-*   [Open Weather Guide](https://openweathermap.org/guide)
-*   [Open Weather Api keys](https://home.openweathermap.org/api_keys)
-*   [Playlist functionality test](https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y) <a href="https://www.youtube.com/watch?v=oLSrmqMq0Zs\&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y" target="_blank"> <img src="./doc/assets/social-networks/yt.png" width="5%" height="5%" /> </a>
+<div align="left">
+<a href="https://openweathermap.org/guide" target="_blank" rel="noopener noreferrer" title="API Doc"><img src="./doc/assets/icons/detail-actions/api-doc-pill.svg" alt="API Doc" width="100" height="30" border="0" /></a>
+<br>
+<a href="./postman/Microservice_OpenWeather_Nodejs_Jest_AWS.postman_collection.json" target="_blank" rel="noopener noreferrer" title="Colección de Postman"><img src="./doc/assets/icons/detail-actions/postman-pill.svg" alt="Postman" width="100" height="30" border="0" /></a>
+<br>
+<a href="https://www.youtube.com/watch?v=oLSrmqMq0Zs&list=PLCl11UFjHurB9JzGtm5e8-yp52IcZDs5y" target="_blank" rel="noopener noreferrer" title="Playlist"><img src="./doc/assets/icons/detail-actions/playlist-pill.svg" alt="Playlist" width="100" height="30" border="0" /></a>
+</div>
 
 <br>
 
-## Index 📜
+## Índice 📜
 
 <details>
- <summary> View details </summary>
+ <summary>Ver detalles</summary>
 
 <div align="right">
 
-`Latest update: 19/02/26` 
+`Última actualización: 07/09/26` 
 
 </div>
 
-### Section 1) Description, configuration and technologies.
+### Sección 1) Descripción, configuración y tecnologías.
 
-*   [1.0) Project description.](#10-description-)
-*   [1.1) Project execution.](#12-project-execution-)
-    *   [1.1.1) OpenWeather API Configuration](#111-openweather-api-configuration)
-*   [1.1.2) Project Configuration File Setup](#112-project-configuration-file-setup)
-*   [1.1.3) API Key Security Best Practices](#113-api-key-security-best-practices)
-*   [1.1.4) OpenWeather API Endpoints Used](#114-openweather-api-endpoints-used)
-*   [1.1.5) Rate Limits and Pricing](#115-rate-limits-and-pricing)
-*   [1.1.6) Troubleshooting](#116-troubleshooting)
-*   [1.1.7) Additional Resources](#117-additional-resources)
-*   [1.1.8) Support](#118-support)
-*   [1.2) Technologies.](#12-technologies-)
+* [1.0) Descripción del proyecto.](#10-descripción-)
+* [1.1) Ejecución del proyecto.](#11-ejecución-del-proyecto-)
+    * [1.1.1) Configuración de la API de OpenWeather](#111-configuración-de-la-api-de-openweather)
+* [1.1.2) Configuración del archivo del proyecto](#112-configuración-del-archivo-del-proyecto)
+* [1.1.3) Buenas prácticas de seguridad de la API Key](#113-buenas-prácticas-de-seguridad-de-la-api-key)
+* [1.1.4) Endpoints de OpenWeather utilizados](#114-endpoints-de-openweather-utilizados)
+* [1.1.5) Límites de uso y precios](#115-límites-de-uso-y-precios)
+* [1.1.6) Resolución de problemas](#116-resolución-de-problemas)
+* [1.1.7) Recursos adicionales](#117-recursos-adicionales)
+* [1.1.8) Soporte](#118-soporte)
+* [1.2) Tecnologías.](#12-tecnologías-)
 
-### Section 2) Endpoints and Examples
+### Sección 2) Endpoints y ejemplos
 
-*   [2.1) Weather Endpoints.](#21-weather-endpoints-)
-*   [2.2) Endpoints and resources.](#22-endpoints-and-resources-)
-*   [2.3) Examples.](#23-examples-)
-*   [2.4) Forecast Endpoints.](#24-forecast-endpoints-)
-*   [2.5) Forecast Examples.](#25-forecast-examples-)
+* [2.1) Endpoints de clima.](#21-endpoints-de-clima-)
+* [2.2) Endpoints y recursos.](#22-endpoints-y-recursos-)
+* [2.3) Ejemplos.](#23-ejemplos-de-endpoints-de-clima-)
+* [2.4) Endpoints de pronóstico.](#24-endpoints-de-pronóstico-)
+* [2.5) Ejemplos de pronóstico.](#25-ejemplos-de-pronóstico-)
 
-### Section 3) Data Persistence and Storage
+### Sección 3) Persistencia y almacenamiento de datos
 
-*   [3.1) Storage Architecture & Structure.](#31-storage-architecture--structure-)
-*   [3.2) Advanced Features & Performance.](#32-advanced-features--performance-)
-*   [3.3) Best Practices & Future Roadmap.](#33-best-practices--future-roadmap-)
+* [3.1) Arquitectura y estructura de almacenamiento.](#31-arquitectura-y-estructura-de-almacenamiento-)
+* [3.2) Funciones avanzadas y rendimiento.](#32-funciones-avanzadas-y-rendimiento-)
+* [3.3) Buenas prácticas y hoja de ruta.](#33-buenas-prácticas-y-hoja-de-ruta-)
 
-### Section 4) Functionality test and references
+### Sección 4) Prueba de funcionalidad y referencias
 
-*   [4.1) Functionality test.](#41-functionality-test-and-references-)
-*   [4.2) References.](#42-references-)
+* [4.1) Prueba de funcionalidad.](#41-prueba-de-funcionalidad-)
+* [4.2) Referencias.](#42-referencias-)
 
 <br>
 
@@ -89,52 +94,52 @@ Microservice for the integration of the Open Weather API with focus on unit and 
 
 <br>
 
-## Section 1) Description, configuration and technologies.
+## Sección 1) Descripción, configuración y tecnologías.
 
-### 1.0) Description [🔝](#index-)
+### 1.0) Descripción [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 
  <br>
 
-### 1.0.0) General description
+### 1.0.0) Descripción general
 
-This microservice provides a comprehensive **REST API for weather information** using the **OpenWeatherMap API**. It's built with **Node.js**, **Jest** for testing, **Serverless Framework**, and **AWS Lambda** for serverless deployment.
+Este microservicio ofrece una **API REST de información climática** usando la **API de OpenWeatherMap**. Está construido con **Node.js**, **Jest** para pruebas, **Serverless Framework** y **AWS Lambda** para el despliegue serverless.
 
-#### 🌟 Key Features
+#### 🌟 Características principales
 
-*   **🌤️ Complete Weather Data**: Current weather conditions for any location worldwide
-*   **📊 Advanced Forecasts**: 5-day weather forecasts with multiple filtering options
-*   **🔍 Multiple Search Methods**: Search by city name, coordinates, city ID, or postal code
-*   **🌍 Internationalization**: Support for multiple languages and units
-*   **⚡ Enhanced Endpoints**: Rich data with recommendations, alerts, and analysis
-*   **🛡️ Robust Architecture**: Circuit breaker, rate limiting, and caching
-*   **📝 Comprehensive Testing**: Unit and integration tests with Jest
-*   **☁️ AWS Ready**: Serverless deployment with Lambda and API Gateway
+* **🌤️ Datos climáticos completos**: condiciones actuales para cualquier ubicación del mundo
+* **📊 Pronósticos avanzados**: pronóstico a 5 días con múltiples filtros
+* **🔍 Varios métodos de búsqueda**: por nombre de ciudad, coordenadas, ID de ciudad o código postal
+* **🌍 Internacionalización**: soporte para varios idiomas y unidades
+* **⚡ Endpoints enriquecidos**: datos con recomendaciones, alertas y análisis
+* **🛡️ Arquitectura robusta**: circuit breaker, rate limiting y caché
+* **📝 Pruebas completas**: unitarias y de integración con Jest
+* **☁️ Listo para AWS**: despliegue serverless con Lambda y API Gateway
 
-#### 🎯 Target Use Cases
+#### 🎯 Casos de uso
 
-*   **Weather Applications**: Mobile and web weather apps
-*   **IoT Projects**: Smart home and environmental monitoring
-*   **Travel Planning**: Tourism and travel applications
-*   **Business Intelligence**: Weather-dependent business decisions
-*   **Educational Projects**: Learning serverless architecture and API integration
+* **Aplicaciones del clima**: apps móviles y web
+* **Proyectos IoT**: hogar inteligente y monitoreo ambiental
+* **Planificación de viajes**: turismo y aplicaciones de viaje
+* **Business Intelligence**: decisiones de negocio dependientes del clima
+* **Proyectos educativos**: aprendizaje de arquitectura serverless e integración de APIs
 
-#### 🏗️ Architecture Overview
+#### 🏗️ Visión general de la arquitectura
 
-The microservice follows a **microservices architecture** pattern with:
-- **Serverless Functions**: AWS Lambda for scalable, cost-effective execution
-- **API Gateway**: RESTful API management and routing
-- **Parameter Store**: Secure environment variable management
-- **Caching Layer**: In-memory and file-based caching for performance
-- **Circuit Breaker**: Fault tolerance and resilience patterns
+El microservicio sigue un patrón de **arquitectura de microservicios** con:
+- **Funciones serverless**: AWS Lambda para una ejecución escalable y económica
+- **API Gateway**: gestión y enrutamiento de la API REST
+- **Parameter Store**: gestión segura de variables de entorno
+- **Capa de caché**: caché en memoria y en archivos para rendimiento
+- **Circuit Breaker**: tolerancia a fallos y patrones de resiliencia
 
-### 1.0.1) Description Architecture and Operation
+### 1.0.1) Descripción de arquitectura y funcionamiento
 
-#### 🏛️ System Architecture
+#### 🏛️ Arquitectura del sistema
 
-The microservice implements a **layered architecture** with clear separation of concerns:
+El microservicio implementa una **arquitectura en capas** con separación clara de responsabilidades:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -166,78 +171,78 @@ The microservice implements a **layered architecture** with clear separation of 
 └─────────────────────────────────────────────────────────────┘
 ```
 
-#### 🔄 Request Flow
+#### 🔄 Flujo de la solicitud
 
-1. **API Gateway**: Receives HTTP requests and routes to appropriate Lambda function
-2. **Controller Layer**: Validates parameters and orchestrates business logic
-3. **Middleware**: Applies cross-cutting concerns (rate limiting, circuit breaker, metrics)
-4. **Service Layer**: Processes data, applies transformations, and manages caching
-5. **External APIs**: Fetches data from OpenWeatherMap API
-6. **Response**: Returns formatted data with appropriate HTTP status codes
+1. **API Gateway**: recibe las solicitudes HTTP y las enruta a la Lambda correspondiente
+2. **Capa de controller**: valida parámetros y orquesta la lógica de negocio
+3. **Middleware**: aplica aspectos transversales (rate limiting, circuit breaker, métricas)
+4. **Capa de servicio**: procesa datos, aplica transformaciones y gestiona el caché
+5. **APIs externas**: obtiene datos de la API de OpenWeatherMap
+6. **Respuesta**: devuelve los datos formateados con el código HTTP correspondiente
 
-#### 🛡️ Resilience Patterns
+#### 🛡️ Patrones de resiliencia
 
-*   **Circuit Breaker**: Prevents cascade failures when external APIs are down
-*   **Rate Limiting**: Protects against abuse and respects API quotas
-*   **Caching**: Reduces API calls and improves response times
-*   **Retry Logic**: Handles temporary failures gracefully
-*   **Fallback Responses**: Provides cached data when external services fail
+* **Circuit Breaker**: evita fallos en cascada cuando las APIs externas no responden
+* **Rate Limiting**: protege contra abuso y respeta las cuotas de la API
+* **Caché**: reduce llamadas a la API y mejora los tiempos de respuesta
+* **Reintentos**: maneja fallos temporales de forma controlada
+* **Respuestas de fallback**: entrega datos en caché si fallan los servicios externos
 
-#### 📊 Data Flow
+#### 📊 Flujo de datos
 
-1. **Input Validation**: Parameters are validated against schemas
-2. **Cache Check**: System checks for cached data first
-3. **API Call**: If not cached, calls OpenWeatherMap API
-4. **Data Transformation**: Applies business logic and enhancements
-5. **Storage**: Saves data to cache and JSON files
-6. **Response**: Returns formatted data to client
+1. **Validación de entrada**: los parámetros se validan contra esquemas
+2. **Consulta de caché**: el sistema busca primero datos en caché
+3. **Llamada a la API**: si no hay caché, llama a OpenWeatherMap
+4. **Transformación de datos**: aplica lógica de negocio y enriquecimiento
+5. **Almacenamiento**: guarda datos en caché y en archivos JSON
+6. **Respuesta**: devuelve los datos formateados al cliente
 
-#### 🔧 Technical Components
+#### 🔧 Componentes técnicos
 
-*   **AWS Lambda**: Serverless compute for handling requests
-*   **API Gateway**: HTTP API management and routing
-*   **Parameter Store**: Secure configuration management
-*   **Jest**: Comprehensive testing framework
-*   **Serverless Framework**: Infrastructure as Code
-*   **Node.js**: Runtime environment for JavaScript execution
+* **AWS Lambda**: cómputo serverless para atender solicitudes
+* **API Gateway**: gestión y enrutamiento de la API HTTP
+* **Parameter Store**: gestión segura de configuración
+* **Jest**: framework de pruebas
+* **Serverless Framework**: infraestructura como código
+* **Node.js**: entorno de ejecución de JavaScript
 
 </details>
 
 
-### 1.1) Project execution [🔝](#index-)
+### 1.1) Ejecución del proyecto [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 
  <br>
 
-#### 1.1.1) OpenWeather API Configuration
+#### 1.1.1) Configuración de la API de OpenWeather
 
-This microservice integrates with the OpenWeather API to retrieve weather information. Follow these detailed steps to configure your API access:
+Este microservicio se integra con la API de OpenWeather para obtener información climática. Seguí estos pasos para configurar el acceso:
 
-##### Step 1: Account Creation
+##### Paso 1: Creación de la cuenta
 
-1.  **Visit OpenWeatherMap**: Go to <https://openweathermap.org/>
-2.  **Sign Up**: Click "Sign In" → "Sign Up" in the top right corner
-3.  **Complete Registration**:
-    *   Enter your email address
-    *   Create a strong password
-    *   Accept terms and conditions
-    *   Click "Create Account"
-4.  **Email Verification**: Check your inbox and click the verification link
+1.  **Visitar OpenWeatherMap**: ir a <https://openweathermap.org/>
+2.  **Registrarse**: clic en "Sign In" → "Sign Up" en la esquina superior derecha
+3.  **Completar el registro**:
+    *   Ingresá tu email
+    *   Creá una contraseña segura
+    *   Aceptá los términos y condiciones
+    *   Clic en "Create Account"
+4.  **Verificación de email**: revisá la bandeja de entrada y hacé clic en el enlace de verificación
 
-##### Step 2: API Key Generation
+##### Paso 2: Generación de la API Key
 
-1.  **Login**: Sign in to your OpenWeather account
-2.  **Navigate to API Keys**: Go to <https://home.openweathermap.org/api_keys>
-3.  **Default Key**: You'll see a default API key automatically generated
-4.  **⚠️ CRITICAL - Activation Time**: New API keys take **up to 2 hours to activate**
-5.  **Do NOT test immediately** - you'll get 401 "Invalid API key" errors until activation is complete
+1.  **Login**: iniciá sesión en tu cuenta de OpenWeather
+2.  **Ir a API Keys**: <https://home.openweathermap.org/api_keys>
+3.  **Key por defecto**: vas a ver una API Key generada automáticamente
+4.  **⚠️ CRÍTICO - tiempo de activación**: las API Keys nuevas tardan **hasta 2 horas en activarse**
+5.  **No pruebes de inmediato**: vas a recibir 401 "Invalid API key" hasta que la activación termine
 
-##### Step 3: Configure the Project
+##### Paso 3: Configurar el proyecto
 
-1.  **Open Configuration File**: Open the file `serverless-ssm.yml` in the project root
-2.  **Update API Key**: Replace the placeholder value with your actual API key:
+1.  **Abrir el archivo de configuración**: abrí `serverless-ssm.yml` en la raíz del proyecto
+2.  **Actualizar la API Key**: reemplazá el placeholder por tu API Key real:
     ```yaml
     # Environment variables for the OpenWeather API microservice
     API_WEATHER_URL_BASE: "https://api.openweathermap.org/data/2.5/weather?q="
@@ -245,18 +250,18 @@ This microservice integrates with the OpenWeather API to retrieve weather inform
     API_KEY: "YOUR_ACTUAL_API_KEY_HERE"
     ```
 
-##### Step 4: Test Your Configuration
+##### Paso 4: Probar la configuración
 
-**⚠️ IMPORTANT: Wait for API Key Activation**
+**⚠️ IMPORTANTE: esperá la activación de la API Key**
 
-**Before testing, ensure your API key has been active for at least 2 hours.** If you just created it, wait before proceeding.
+**Antes de probar, asegurate de que la API Key esté activa desde hace al menos 2 horas.** Si la acabás de crear, esperá antes de continuar.
 
-1.  **Start the Application**:
+1.  **Levantar la aplicación**:
     ```bash
     npm start
     ```
 
-2.  **Test the Endpoint**: Use your preferred HTTP client (Postman, curl, etc.):
+2.  **Probar el endpoint**: usá tu cliente HTTP preferido (Postman, curl, etc.):
     ```bash
     # Test with curl
     curl http://localhost:4000/v1/weather/country/London
@@ -268,7 +273,7 @@ GET http://localhost:4000/v1/weather/country/New%20York
 
 ````
 
-3. **Expected Response**: A successful response should look like:
+3. **Respuesta esperada**: una respuesta exitosa debería verse así:
 ```json
 {
   "statusCode": 200,
@@ -302,17 +307,17 @@ GET http://localhost:4000/v1/weather/country/New%20York
 }
 ````
 
-#### 1.1.2) Project Configuration File Setup
+#### 1.1.2) Configuración del archivo del proyecto
 
-**⚠️ CRITICAL: Create the Configuration File (if it does not exist)**
+**⚠️ CRÍTICO: crear el archivo de configuración (si no existe)**
 
-Before running the project, you **MUST** create the `serverless-ssm.yml` file in the project root directory. This file contains the environment variables needed for the microservice to function properly.
+Antes de ejecutar el proyecto **tenés que** crear el archivo `serverless-ssm.yml` en la raíz. Ese archivo tiene las variables de entorno que el microservicio necesita para funcionar.
 
-##### Step 1: Create the Configuration File
+##### Paso 1: Crear el archivo de configuración
 
-1.  **Navigate to Project Root**: Go to the main project directory
-2.  **Create New File**: Create a new file named `serverless-ssm.yml`
-3.  **Add Configuration**: Copy and paste the following content:
+1.  **Ir a la raíz del proyecto**: directorio principal del repo
+2.  **Crear el archivo**: `serverless-ssm.yml`
+3.  **Agregar la configuración**: copiá y pegá lo siguiente:
 
 ```yaml
 # Environment variables for the OpenWeather API microservice
@@ -321,9 +326,9 @@ Before running the project, you **MUST** create the `serverless-ssm.yml` file in
     API_KEY: "YOUR_ACTUAL_API_KEY_HERE"
 ```
 
-##### Step 2: Update with Your API Key
+##### Paso 2: Actualizar con tu API Key
 
-Replace `"YOUR_ACTUAL_API_KEY_HERE"` with the API key you obtained from OpenWeather:
+Reemplazá `"YOUR_ACTUAL_API_KEY_HERE"` por la API Key que obtuviste en OpenWeather:
 
 ```yaml
 # Environment variables for the OpenWeather API microservice
@@ -332,9 +337,9 @@ Replace `"YOUR_ACTUAL_API_KEY_HERE"` with the API key you obtained from OpenWeat
     API_KEY: "858923c0cff4df1c4415f2493500ad37"  # Replace with your actual API key
 ```
 
-##### Step 3: Verify File Location
+##### Paso 3: Verificar la ubicación del archivo
 
-Ensure the file is in the correct location:
+Asegurate de que el archivo esté en la ubicación correcta:
 
     Microservice_OpenWeather_Nodejs_Jest_AWS/
     ├── serverless-ssm.yml          # ← This file must exist here
@@ -343,32 +348,32 @@ Ensure the file is in the correct location:
     ├── src/
     └── ...
 
-##### Step 4: Security Considerations
+##### Paso 4: Consideraciones de seguridad
 
-*   ✅ **Add to .gitignore** - Ensure `serverless-ssm.yml` is in your `.gitignore` file
-*   ✅ **Keep private** - Never commit this file to version control
-*   ✅ **Backup safely** - Store your API key in a secure location
-*   ❌ **Don't share** - Never share your API key publicly
-*   ❌ **Don't commit** - Avoid accidentally committing to git
+*   ✅ **Agregalo al .gitignore** - `serverless-ssm.yml` tiene que estar en tu `.gitignore`
+*   ✅ **Mantenelo privado** - nunca lo subas al control de versiones
+*   ✅ **Backup seguro** - guardá la API Key en un lugar seguro
+*   ❌ **No la compartas** - nunca publiques tu API Key
+*   ❌ **No hagas commit** - evitá subirla a git por accidente
 
-**Example .gitignore entry:**
+**Ejemplo de entrada en .gitignore:**
 
     # Configuration files with sensitive data
     serverless-ssm.yml
     *.env
 
-#### 1.1.3) API Key Security Best Practices
+#### 1.1.3) Buenas prácticas de seguridad de la API Key
 
-*   ✅ **Wait for activation** - New keys take up to 2 hours to activate
-*   ✅ **Keep your API key private** - Never share it publicly
-*   ✅ **Use environment variables** - Don't hardcode in source code
-*   ✅ **Monitor usage** - Stay within free tier limits (1,000 calls/day)
-*   ✅ **Rotate keys** - Create new keys if compromised
-*   ❌ **Don't test immediately** - You'll get 401 errors until activation
-*   ❌ **Don't commit to git** - Add config files to .gitignore
-*   ❌ **Don't share in logs** - Avoid logging API keys
+*   ✅ **Esperá la activación** - las keys nuevas tardan hasta 2 horas
+*   ✅ **Mantené la API Key privada** - nunca la compartas en público
+*   ✅ **Usá variables de entorno** - no la hardcodees en el código
+*   ✅ **Monitoreá el uso** - respetá el límite del plan free (1.000 calls/día)
+*   ✅ **Rotá las keys** - creá una nueva si se comprometió
+*   ❌ **No pruebes de inmediato** - vas a recibir 401 hasta que se active
+*   ❌ **No la subas a git** - agregá los archivos de config al .gitignore
+*   ❌ **No la dejes en logs** - evitá loguear API Keys
 
-#### 1.1.4) OpenWeather API Endpoints Used
+#### 1.1.4) Endpoints de OpenWeather utilizados
 
 This microservice uses the **Current Weather Data** endpoint:
 
@@ -379,7 +384,7 @@ This microservice uses the **Current Weather Data** endpoint:
     *   `appid`: Your API key
 *   **Response**: JSON with weather data including temperature, humidity, wind, etc.
 
-#### 1.1.5) Rate Limits and Pricing
+#### 1.1.5) Límites de uso y precios
 
 | Plan | Calls/Day | Features |
 |------|-----------|----------|
@@ -390,7 +395,7 @@ This microservice uses the **Current Weather Data** endpoint:
 *   **Response Time**: Usually under 200ms
 *   **Data Update**: Every 10 minutes
 
-#### 1.1.6) Troubleshooting
+#### 1.1.6) Resolución de problemas
 
 ##### ⚠️ IMPORTANT: API Key Activation Time
 
@@ -459,14 +464,14 @@ Test your API key directly with OpenWeather:
 curl "https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY"
 ```
 
-#### 1.1.7) Additional Resources
+#### 1.1.7) Recursos adicionales
 
 *   [OpenWeather API Documentation](https://openweathermap.org/api)
 *   [API Key Management](https://home.openweathermap.org/api_keys)
 *   [Weather Conditions Codes](https://openweathermap.org/weather-conditions)
 *   [Support Forum](https://openweathermap.org/forum)
 
-#### 1.1.8) Support
+#### 1.1.8) Soporte
 
 If you continue to have issues:
 
@@ -479,14 +484,14 @@ If you continue to have issues:
 
 </details>
 
-### 1.2) Technologies [🔝](#index-)
+### 1.2) Tecnologías [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 
  <br>
 
-#### 🏗️ Core Technologies
+#### 🏗️ Tecnologías principales
 
 | **Technology** | **Version** | **Purpose** | **Role in Project** |
 | ------------- | ------------- | ------------- | ------------- |
@@ -496,7 +501,7 @@ If you continue to have issues:
 | [AWS API Gateway](https://aws.amazon.com/api-gateway/) | 2.0 | API Management | HTTP API routing and management |
 | [AWS Systems Manager](https://aws.amazon.com/systems-manager/) | 3.0 | Parameter Store | Secure environment variable management |
 
-#### 🧪 Testing & Quality
+#### 🧪 Pruebas y calidad
 
 | **Technology** | **Version** | **Purpose** | **Role in Project** |
 | ------------- | ------------- | ------------- | ------------- |
@@ -505,7 +510,7 @@ If you continue to have issues:
 | [ESLint](https://eslint.org/) | Latest | Code Linting | Code quality and style enforcement |
 | [Prettier](https://prettier.io/) | Latest | Code Formatting | Consistent code formatting |
 
-#### 🔌 Serverless Plugins
+#### 🔌 Plugins de Serverless
 
 | **Plugin** | **Version** | **Purpose** | **Configuration** |
 | ------------- | ------------- | ------------- | ------------- |
@@ -513,7 +518,7 @@ If you continue to have issues:
 | [serverless-offline-ssm](https://www.npmjs.com/package/serverless-offline-ssm) | Latest | Parameter Store Simulation | Local SSM parameter simulation |
 | [serverless-auto-swagger](https://www.npmjs.com/package/serverless-auto-swagger) | Latest | API Documentation | Automatic OpenAPI documentation |
 
-#### 🛠️ Development Tools
+#### 🛠️ Herramientas de desarrollo
 
 | **Tool** | **Version** | **Purpose** | **Usage** |
 | ------------- | ------------- | ------------- | ------------- |
@@ -522,7 +527,7 @@ If you continue to have issues:
 | [Git](https://git-scm.com/) | 2.29.1+ | Version Control | Source code management |
 | [npm](https://www.npmjs.com/) | 6.14+ | Package Manager | Dependency management |
 
-#### 📦 Key Dependencies
+#### 📦 Dependencias principales
 
 | **Package** | **Version** | **Purpose** | **Usage** |
 | ------------- | ------------- | ------------- | ------------- |
@@ -531,7 +536,7 @@ If you continue to have issues:
 | [moment](https://momentjs.com/) | Latest | Date/Time Library | Date formatting and manipulation |
 | [joi](https://joi.dev/) | Latest | Validation Library | Input parameter validation |
 
-#### 🏗️ Architecture Components
+#### 🏗️ Componentes de arquitectura
 
 | **Component** | **Technology** | **Purpose** | **Implementation** |
 | ------------- | ------------- | ------------- | ------------- |
@@ -542,14 +547,14 @@ If you continue to have issues:
 | **Circuit Breaker** | Custom Implementation | Fault Tolerance | External API failure protection |
 | **Rate Limiting** | Custom Implementation | API Protection | Request throttling and abuse prevention |
 
-#### 🌐 External APIs
+#### 🌐 APIs externas
 
 | **Service** | **Purpose** | **Integration** | **Data Format** |
 | ------------- | ------------- | ------------- | ------------- |
 | [OpenWeatherMap API](https://openweathermap.org/api) | Weather Data Source | REST API Integration | JSON |
 | [OpenWeatherMap Forecast API](https://openweathermap.org/forecast5) | Weather Forecast Data | REST API Integration | JSON |
 
-#### 🔧 Development Extensions (VSCode)
+#### 🔧 Extensiones de desarrollo (VS Code)
 
 | **Extension** | **Purpose** | **Benefits** |
 | ------------- | ------------- | ------------- |
@@ -561,7 +566,7 @@ If you continue to have issues:
 | **Thunder Client** | API Testing | Built-in HTTP client |
 | **GitLens** | Git Integration | Enhanced Git functionality |
 
-#### 📊 Monitoring & Observability
+#### 📊 Monitoreo y observabilidad
 
 | **Component** | **Purpose** | **Implementation** |
 | ------------- | ------------- | ------------- |
@@ -570,7 +575,7 @@ If you continue to have issues:
 | **Health Checks** | Service Status | Dedicated health endpoint |
 | **Error Tracking** | Issue Detection | Comprehensive error handling |
 
-#### 🚀 Deployment & DevOps
+#### 🚀 Despliegue y DevOps
 
 | **Tool/Service** | **Purpose** | **Configuration** |
 | ------------- | ------------- | ------------- |
@@ -581,7 +586,7 @@ If you continue to have issues:
 
 <br>
 
-#### 🔄 Technology Stack Flow
+#### 🔄 Flujo del stack tecnológico
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -615,12 +620,12 @@ If you continue to have issues:
 
 <br>
 
-## Section 2) Endpoints and Examples.
+## Sección 2) Endpoints y ejemplos.
 
-### 2.1) Weather Endpoints [🔝](#index-)
+### 2.1) Endpoints de clima [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 
 <br>
 
@@ -1120,10 +1125,10 @@ curl http://localhost:4000/v1/weather-enhanced/combined/Madrid/metric/es
 
 </details>
 
-### 2.3) Weather Endpoint Examples [🔝](#index-)
+### 2.3) Ejemplos de endpoints de clima [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 <br>
 
 #### Basic Weather Endpoint
@@ -1516,10 +1521,10 @@ curl http://localhost:4000/v1/forecast-enhanced/hourly/Tokyo/afternoon
 </details>
 
 
-### 2.4) Forecast Endpoints [🔝](#index-)
+### 2.4) Endpoints de pronóstico [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 
 <br>
 
@@ -2069,10 +2074,10 @@ All forecast endpoints include:
 
 
 
-### 2.5) Forecast Examples [🔝](#index-)
+### 2.5) Ejemplos de pronóstico [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 <br>
 
 #### Basic Forecast by Time Intervals
@@ -2508,12 +2513,12 @@ curl http://localhost:4000/v1/forecast-enhanced/weekly/Madrid/1
 
 <br>
 
-## Section 3) Data Persistence and Storage [🔝](#index-)
+## Sección 3) Persistencia y almacenamiento de datos [🔝](#índice-)
 
-### 3.1) Storage Architecture & Structure [🔝](#index-)
+### 3.1) Arquitectura y estructura de almacenamiento [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 
 <br>
 
@@ -2604,10 +2609,10 @@ The microservice implements a **dual-layer caching strategy**:
 
 </details>
 
-### 3.2) Advanced Features & Performance [🔝](#index-)
+### 3.2) Funciones avanzadas y rendimiento [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 
 <br>
 
@@ -2666,10 +2671,10 @@ The storage system includes comprehensive analytics capabilities:
 
 </details>
 
-### 3.3) Best Practices & Future Roadmap [🔝](#index-)
+### 3.3) Buenas prácticas y hoja de ruta [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 
 <br>
 
@@ -2718,21 +2723,21 @@ The storage system includes comprehensive analytics capabilities:
 <br>
 
 
-## Section 4) Functionality Testing and References [🔝](#index-)
+## Sección 4) Prueba de funcionalidad y referencias [🔝](#índice-)
 
-### 4.1) Functionality test [🔝](#index-)
+### 4.1) Prueba de funcionalidad [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 
 <br>
 
 </details>
 
-### 4.2) References [🔝](#index-)
+### 4.2) Referencias [🔝](#índice-)
 
 <details>
-  <summary>View details</summary>
+  <summary>Ver detalles</summary>
 
  <br>
 
